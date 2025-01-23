@@ -1,3 +1,3 @@
-public class Enemy : CombatEntity
+public class Enemy : Entity
 {
 }

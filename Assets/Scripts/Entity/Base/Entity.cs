@@ -4,8 +4,6 @@ public abstract class Entity : MonoBehaviour
 {
     public string id;
     public string entityName;
-    public float maxHealth;
-    public float currentHealth;
     public Animator animator;
     public Collider collider;
 

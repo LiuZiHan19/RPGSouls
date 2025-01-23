@@ -6,22 +6,40 @@ public class Logger
 {
     private static string logFilePath = Application.persistentDataPath + "/GameLog.txt";
 
-    public static void Info(string message, bool enableFileLogging = true, bool enableConsoleLogging = true)
+    /// <summary>
+    /// 调试日志
+    /// </summary>
+    /// <param name="message">打印信息</param>
+    /// <param name="enableFileLogging">是否存储本地 => 默认不存储</param>
+    /// <param name="enableConsoleLogging">是否打印到控制台 => 默认打印</param>
+    public static void Info(string message, bool enableFileLogging = false, bool enableConsoleLogging = true)
     {
-        Log(message, E_LogLevel.Info, E_LogColor.White, enableFileLogging, enableConsoleLogging);
+        Log(message, LogLevel.Info, LogColor.White, enableFileLogging, enableConsoleLogging);
     }
 
-    public static void Warning(string message, bool enableFileLogging = true, bool enableConsoleLogging = true)
+    /// <summary>
+    /// 警告日志
+    /// </summary>
+    /// <param name="message">打印信息</param>
+    /// <param name="enableFileLogging">是否存储本地 => 默认不存储</param>
+    /// <param name="enableConsoleLogging">是否打印到控制台 => 默认打印</param>
+    public static void Warning(string message, bool enableFileLogging = false, bool enableConsoleLogging = true)
     {
-        Log(message, E_LogLevel.Warning, E_LogColor.Yellow, enableFileLogging, enableConsoleLogging);
+        Log(message, LogLevel.Warning, LogColor.Yellow, enableFileLogging, enableConsoleLogging);
     }
 
+    /// <summary>
+    /// 错误日志
+    /// </summary>
+    /// <param name="message">打印信息</param>
+    /// <param name="enableFileLogging">是否存储本地 => 默认存储</param>
+    /// <param name="enableConsoleLogging">是否打印到控制台 => 默认打印</param>
     public static void Error(string message, bool enableFileLogging = true, bool enableConsoleLogging = true)
     {
-        Log(message, E_LogLevel.Error, E_LogColor.Red, enableFileLogging, enableConsoleLogging);
+        Log(message, LogLevel.Error, LogColor.Red, enableFileLogging, enableConsoleLogging);
     }
 
-    private static void Log(string message, E_LogLevel logLevel, E_LogColor logColor, bool enableFileLogging = true,
+    private static void Log(string message, LogLevel logLevel, LogColor logColor, bool enableFileLogging = true,
         bool enableConsoleLogging = true)
     {
         string logMessage = message;
@@ -32,13 +50,13 @@ public class Logger
         {
             switch (logLevel)
             {
-                case E_LogLevel.Info:
+                case LogLevel.Info:
                     Debug.Log(colorizedMessage);
                     break;
-                case E_LogLevel.Warning:
+                case LogLevel.Warning:
                     Debug.LogWarning(colorizedMessage);
                     break;
-                case E_LogLevel.Error:
+                case LogLevel.Error:
                     Debug.LogError(colorizedMessage);
                     break;
             }
@@ -60,28 +78,14 @@ public class Logger
         }
     }
 
-    private static string GetColorString(E_LogColor logColor)
+    private static string GetColorString(LogColor logColor)
     {
         return logColor switch
         {
-            E_LogColor.White => "white",
-            E_LogColor.Yellow => "yellow",
-            E_LogColor.Red => "red",
+            LogColor.White => "white",
+            LogColor.Yellow => "yellow",
+            LogColor.Red => "red",
             _ => "white",
         };
-    }
-
-    private enum E_LogLevel
-    {
-        Info,
-        Warning,
-        Error
-    }
-
-    private enum E_LogColor
-    {
-        White,
-        Yellow,
-        Red
     }
 }

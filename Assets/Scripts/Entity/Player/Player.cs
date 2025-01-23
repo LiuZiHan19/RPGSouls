@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Player : CombatEntity
+public class Player : Entity
 {
     private Rigidbody2D _rb;
     private StateMachine _stateMachine;

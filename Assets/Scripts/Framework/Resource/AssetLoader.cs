@@ -1,0 +1,20 @@
+using UnityEngine;
+
+public class AssetLoader : Singleton<AssetLoader>
+{
+    public T LoadFromResources<T>(string path) where T : Object
+    {
+        T t = Resources.Load<T>(path);
+        if (t == null)
+            Logger.Error($"Failed to load asset at path: {path}. Type: {typeof(T).Name} not found.");
+        return t;
+    }
+
+    public Object LoadFromResources(string path)
+    {
+        Object asset = Resources.Load(path);
+        if (asset == null)
+            Logger.Error($"Failed to load asset at path: {path}. Asset not found.");
+        return asset;
+    }
+}

@@ -4,19 +4,19 @@ public class MonoSingleton<T> : MonoBehaviour where T : MonoBehaviour
 {
     private static T instance;
 
-    public static T Instance => instance;
-
-    protected virtual void Awake()
+    public static T Instance
     {
-        if (instance != null)
+        get
         {
-            Destroy(gameObject);
-        }
+            if (instance == null)
+            {
+                GameObject obj = new GameObject();
+                T t = obj.AddComponent<T>();
+                instance = t;
+                DontDestroyOnLoad(obj);
+            }
 
-        if (instance == null)
-        {
-            instance = this as T;
-            DontDestroyOnLoad(gameObject);
+            return instance;
         }
     }
 }

@@ -2,11 +2,10 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    private GameData _gameData;
-
     private void Awake()
     {
-        _gameData = JsonManager.Instance.LoadData<GameData>("GameData");
+        AudioManager.Instance.Initialize();
+        AudioPool.Instance.Initialize();
     }
 
     private void Start()
