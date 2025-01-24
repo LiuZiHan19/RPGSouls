@@ -3,19 +3,8 @@ using System.Collections;
 using System.Reflection;
 using UnityEngine;
 
-public class PlayerPrefsManager
+public class PlayerPrefsManager : Singleton<PlayerPrefsManager>
 {
-    private static PlayerPrefsManager instance = new PlayerPrefsManager();
-
-    public static PlayerPrefsManager Instance
-    {
-        get { return instance; }
-    }
-
-    private PlayerPrefsManager()
-    {
-    }
-
     /// <summary>
     /// 存储数据
     /// </summary>

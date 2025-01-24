@@ -1,4 +1,4 @@
-public enum InventoryConsumableType
+public enum InventoryConsumableType 
 {
     HealthPotion,         // 回复生命药水：恢复生命值
     ManaPotion,           // 回复魔法药水：恢复魔法值

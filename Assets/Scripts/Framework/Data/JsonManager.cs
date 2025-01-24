@@ -8,15 +8,8 @@ public enum JsonType
     LitJson,
 }
 
-public class JsonManager
+public class JsonManager : Singleton<JsonManager>
 {
-    private static JsonManager instance = new JsonManager();
-    public static JsonManager Instance => instance;
-
-    private JsonManager()
-    {
-    }
-
     public void SaveData(object data, string fileName, JsonType type = JsonType.LitJson)
     {
         string path = Application.persistentDataPath + "/" + fileName + ".json";

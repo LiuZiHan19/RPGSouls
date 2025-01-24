@@ -1,6 +1,8 @@
+using System;
+using UnityEditor;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "InventoryEquipmentData", menuName = "Scriptable Object/Inventory/InventoryEquipmentData", order = 1)]
+[CreateAssetMenu(fileName = "InventoryEquipmentData", menuName = "Scriptable Object/Inventory/InventoryEquipmentData")]
 public class InventoryEquipmentData : InventoryItemBaseData
 {
     public InventoryEquipmentType equipmentType;
@@ -21,4 +23,15 @@ public class InventoryEquipmentData : InventoryItemBaseData
     public int chillChance;
     public int ignitePower;
     public int igniteChance;
+
+    private void OnValidate()
+    {
+        name = equipmentType.ToString();
+        string assetPath = AssetDatabase.GetAssetPath(this);
+        EditorApplication.delayCall += () =>
+        {
+            AssetDatabase.RenameAsset(assetPath, name);
+            AssetDatabase.SaveAssets();
+        };
+    }
 }

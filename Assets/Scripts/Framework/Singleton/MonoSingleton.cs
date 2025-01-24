@@ -3,20 +3,18 @@ using UnityEngine;
 public class MonoSingleton<T> : MonoBehaviour where T : MonoBehaviour
 {
     private static T instance;
+    public static T Instance => instance;
 
-    public static T Instance
+    protected virtual void Awake()
     {
-        get
+        if (instance == null)
         {
-            if (instance == null)
-            {
-                GameObject obj = new GameObject();
-                T t = obj.AddComponent<T>();
-                instance = t;
-                DontDestroyOnLoad(obj);
-            }
-
-            return instance;
+            instance = this as T;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
         }
     }
 }

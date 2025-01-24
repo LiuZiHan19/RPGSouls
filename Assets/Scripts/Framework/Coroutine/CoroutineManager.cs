@@ -1,3 +1,3 @@
-public class CoroutineManager : MonoSingleton<CoroutineManager>
+public class CoroutineManager : MonoSingletonAuto<CoroutineManager>
 {
 }

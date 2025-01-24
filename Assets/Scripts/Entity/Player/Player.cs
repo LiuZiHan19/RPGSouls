@@ -13,6 +13,8 @@ public class Player : Entity
         _stateMachine = new StateMachine();
         _idleState = new PlayerIdleState(_stateMachine, PlayerStateConst.IdleState, this);
         _stateMachine.Initialise(_idleState);
+
+        var s = GameResource.Instance.PlayerPrefab;
     }
 
     protected override void Update()
