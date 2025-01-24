@@ -5,16 +5,17 @@ public class Player : Entity
     private Rigidbody2D _rb;
     private StateMachine _stateMachine;
     private PlayerIdleState _idleState;
+    private PlayerStats _playerStats;
 
     protected override void Awake()
     {
         base.Awake();
+        _playerStats = GetComponent<PlayerStats>();
         _rb = GetComponent<Rigidbody2D>();
+
         _stateMachine = new StateMachine();
         _idleState = new PlayerIdleState(_stateMachine, PlayerStateConst.IdleState, this);
         _stateMachine.Initialise(_idleState);
-
-        var s = GameResource.Instance.PlayerPrefab;
     }
 
     protected override void Update()

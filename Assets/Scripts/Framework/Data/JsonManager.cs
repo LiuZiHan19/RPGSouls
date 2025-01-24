@@ -1,22 +1,60 @@
 ﻿using LitJson;
 using System.IO;
+using System.Threading.Tasks;
 using UnityEngine;
-
-public enum JsonType
-{
-    JsonUtlity,
-    LitJson,
-}
+using UnityEngine.Events;
 
 public class JsonManager : Singleton<JsonManager>
 {
-    public void SaveData(object data, string fileName, JsonType type = JsonType.LitJson)
+    /// <summary>
+    /// 同步加载Json数据
+    /// </summary>
+    /// <param name="path"></param>
+    /// <returns>JsonData</returns>
+    public JsonData LoadData(string path)
     {
-        string path = Application.persistentDataPath + "/" + fileName + ".json";
+        string finalPath = Application.streamingAssetsPath + "/" + path + ".json";
+        if (!File.Exists(finalPath)) finalPath = Application.persistentDataPath + "/" + path + ".json";
+
+        string jsonStr = File.ReadAllText(finalPath);
+        JsonData jsonData = new JsonData(jsonStr);
+        jsonData = JsonMapper.ToObject(jsonStr);
+
+        return jsonData;
+    }
+
+    /// <summary>
+    /// 异步加载 JSON 数据并执行回调
+    /// </summary>
+    /// <param name="path">JSON 文件路径（相对路径，不包含扩展名）</param>
+    /// <param name="callback">加载完成后执行的回调</param>
+    /// <returns>返回解析后的 JsonData</returns>
+    public async Task<JsonData> LoadDataAsync(string path, UnityAction<JsonData> callback = null)
+    {
+        string finalPath = Application.streamingAssetsPath + "/" + path + ".json";
+        if (File.Exists(finalPath) == false) finalPath = Application.persistentDataPath + "/" + path + ".json";
+
+        if (File.Exists(finalPath) == false) Logger.Error("文件未找到: " + finalPath);
+        string json = await File.ReadAllTextAsync(finalPath);
+        JsonData jsonData = JsonMapper.ToObject(json);
+        callback?.Invoke(jsonData);
+        return jsonData;
+    }
+
+    /// <summary>
+    /// 将类对象转换为Json数据存储(适合简单类对象)
+    /// </summary>
+    /// <param name="path"></param>
+    /// <param name="type"></param>
+    /// <typeparam name="T"></typeparam>
+    /// <returns></returns>
+    public void SaveData(object data, string path, JsonType type = JsonType.LitJson)
+    {
+        string finalPath = Application.persistentDataPath + "/" + path + ".json";
         string jsonStr = "";
         switch (type)
         {
-            case JsonType.JsonUtlity:
+            case JsonType.JsonUtility:
                 jsonStr = JsonUtility.ToJson(data);
                 break;
             case JsonType.LitJson:
@@ -24,22 +62,30 @@ public class JsonManager : Singleton<JsonManager>
                 break;
         }
 
-        File.WriteAllText(path, jsonStr);
+        File.WriteAllText(finalPath, jsonStr);
     }
 
-    public T LoadData<T>(string fileName, JsonType type = JsonType.LitJson) where T : new()
+    /// <summary>
+    /// 读取Json数据转换为类对象(适合简单类对象)
+    /// </summary>
+    /// <param name="path"></param>
+    /// <param name="type"></param>
+    /// <typeparam name="T"></typeparam>
+    /// <returns></returns>
+    public T LoadData<T>(string path, JsonType type = JsonType.LitJson) where T : new()
     {
-        string path = Application.streamingAssetsPath + "/" + fileName + ".json";
-        if (!File.Exists(path))
-            path = Application.persistentDataPath + "/" + fileName + ".json";
-        if (!File.Exists(path))
+        string finalPath = Application.streamingAssetsPath + "/" + path + ".json";
+        if (!File.Exists(finalPath))
+            finalPath = Application.persistentDataPath + "/" + path + ".json";
+        if (!File.Exists(finalPath))
             return new T();
 
-        string jsonStr = File.ReadAllText(path);
+        string jsonStr = File.ReadAllText(finalPath);
+        JsonData jsonData = new JsonData(jsonStr);
         T data = default(T);
         switch (type)
         {
-            case JsonType.JsonUtlity:
+            case JsonType.JsonUtility:
                 data = JsonUtility.FromJson<T>(jsonStr);
                 break;
             case JsonType.LitJson:

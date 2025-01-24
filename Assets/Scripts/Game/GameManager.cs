@@ -1,3 +1,4 @@
+using LitJson;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -6,6 +7,7 @@ public class GameManager : MonoBehaviour
     {
         AudioManager.Instance.Initialize();
         AudioPool.Instance.Initialize();
+        GameDataManager.Instance.ParsePlayerData(JsonManager.Instance.LoadData("PlayerData"));
     }
 
     private void Start()

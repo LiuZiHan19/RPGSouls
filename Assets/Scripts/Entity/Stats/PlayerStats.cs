@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class PlayerStats : MonoBehaviour
+public class PlayerStats : CharacterStats
 {
     public Stat agility;
     public Stat intelligence;

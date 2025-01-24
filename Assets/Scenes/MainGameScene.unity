@@ -122,6 +122,51 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &531452765
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 531452767}
+  - component: {fileID: 531452766}
+  m_Layer: 0
+  m_Name: PlayerManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &531452766
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 531452765}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c070444433646ca954a45e46daa5b8e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 1741653369}
+--- !u!4 &531452767
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 531452765}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &737231229
 GameObject:
   m_ObjectHideFlags: 0
@@ -321,6 +366,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1741653370}
   - component: {fileID: 1741653369}
+  - component: {fileID: 1741653373}
   - component: {fileID: 1741653372}
   - component: {fileID: 1741653371}
   m_Layer: 0
@@ -343,7 +389,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   id: 
-  entityName: 
+  entityName: Player
   animator: {fileID: 737231231}
   collider: {fileID: 0}
 --- !u!4 &1741653370
@@ -424,6 +470,70 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &1741653373
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1741653368}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 148bb91f71154d9a8fcced007594d0fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currenHealth: 0
+  maxHealth:
+    _baseValue: 0
+    _modifiers: 
+  attackPower:
+    _baseValue: 0
+    _modifiers: 
+  armor:
+    _baseValue: 0
+    _modifiers: 
+  magicResistance:
+    _baseValue: 0
+    _modifiers: 
+  agility:
+    _baseValue: 0
+    _modifiers: 
+  intelligence:
+    _baseValue: 0
+    _modifiers: 
+  strength:
+    _baseValue: 0
+    _modifiers: 
+  vitality:
+    _baseValue: 0
+    _modifiers: 
+  criticalPower:
+    _baseValue: 0
+    _modifiers: 
+  criticalChance:
+    _baseValue: 0
+    _modifiers: 
+  evasion:
+    _baseValue: 0
+    _modifiers: 
+  lightPower:
+    _baseValue: 0
+    _modifiers: 
+  lightChance:
+    _baseValue: 0
+    _modifiers: 
+  chillPower:
+    _baseValue: 0
+    _modifiers: 
+  chillChance:
+    _baseValue: 0
+    _modifiers: 
+  ignitePower:
+    _baseValue: 0
+    _modifiers: 
+  igniteChance:
+    _baseValue: 0
+    _modifiers: 
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -431,3 +541,4 @@ SceneRoots:
   - {fileID: 968399872}
   - {fileID: 1669253936}
   - {fileID: 1741653370}
+  - {fileID: 531452767}

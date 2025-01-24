@@ -1,7 +1,8 @@
-public class GameViewModel : UIModel
-{
+using LitJson;
 
-    public override void Dispose()
+public class GameViewModel : JsonModel
+{
+    public override void Parse(JsonData jsonData)
     {
     }
 }
