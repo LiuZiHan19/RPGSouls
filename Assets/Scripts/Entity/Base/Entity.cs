@@ -6,6 +6,10 @@ public abstract class Entity : MonoBehaviour
     public string entityName;
     public Animator animator;
     public Collider collider;
+    public float moveSpeed;
+    public float attackRange;
+    public bool isFacingRight = true;
+    public float facingDir = 1;
 
     protected virtual void Awake()
     {

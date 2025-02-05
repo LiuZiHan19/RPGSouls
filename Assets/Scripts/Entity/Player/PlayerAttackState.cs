@@ -4,4 +4,19 @@ public class PlayerAttackState : PlayerState
         animBoolName, entity)
     {
     }
+
+    public override void Enter()
+    {
+        player.animator.SetInteger("AttackCounter", player.GetAttackCounter());
+        base.Enter();
+    }
+
+    public override void Update()
+    {
+        base.Update();
+        if (player.IsTriggered())
+        {
+            stateMachine.ChangeState(player.idleState);
+        }
+    }
 }

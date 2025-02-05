@@ -1,6 +1,4 @@
-using UnityEngine;
-
-public class PlayerStats : CharacterStats
+public class PlayerStats : EntityStats
 {
     public Stat agility;
     public Stat intelligence;
