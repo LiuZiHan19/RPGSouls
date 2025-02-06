@@ -19,7 +19,7 @@ public class AudioManager : Singleton<AudioManager>
     public void PlayBgm(string path, bool isLoop = true)
     {
         GameObject bgmObj = AudioPool.Instance.Get();
-        AudioClip audioClip = AssetLoader.Instance.LoadFromResources<AudioClip>(path);
+        AudioClip audioClip = ResourceLoader.Instance.LoadFromResources<AudioClip>(path);
         AudioSource audioSource = bgmObj.GetComponent<AudioSource>();
         audioSource.clip = audioClip;
         audioSource.loop = isLoop;
@@ -50,7 +50,7 @@ public class AudioManager : Singleton<AudioManager>
     public void PlaySfx(string path, bool isLoop = false)
     {
         GameObject sfxObj = AudioPool.Instance.Get();
-        AudioClip audioClip = AssetLoader.Instance.LoadFromResources<AudioClip>(path);
+        AudioClip audioClip = ResourceLoader.Instance.LoadFromResources<AudioClip>(path);
         AudioSource audioSource = sfxObj.GetComponent<AudioSource>();
         audioSource.clip = audioClip;
         audioSource.loop = isLoop;

@@ -96,3 +96,9 @@ public class JsonManager : Singleton<JsonManager>
         return data;
     }
 }
+
+public enum JsonType
+{
+    JsonUtility,
+    LitJson,
+}

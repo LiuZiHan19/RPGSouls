@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class AssetLoader : Singleton<AssetLoader>
+public class ResourceLoader : Singleton<ResourceLoader>
 {
     public T LoadFromResources<T>(string path) where T : Object
     {
