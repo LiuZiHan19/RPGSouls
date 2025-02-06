@@ -4,6 +4,7 @@ public class Player : Entity
 {
     public float jumpForce;
     public float attackRecoveryCooldown;
+    public float[] attackRangeArray;
 
     public PlayerIdleState idleState;
     public PlayerRunState runState;
@@ -12,10 +13,10 @@ public class Player : Entity
     public PlayerAttackState attackState;
     public PlayerDeathState deathState;
     public PlayerIdleBlockState idleBlockState;
+    public PlayerStats playerStats;
 
     private Rigidbody2D _rb;
     private StateMachine _stateMachine;
-    private PlayerStats _playerStats;
     private CheckCollider _checkCollider;
     private AnimEvent _animEvent;
 
@@ -24,14 +25,17 @@ public class Player : Entity
     private Vector2 _input = new Vector2();
     private Vector2 _move = new Vector2();
     private Vector2 _jump = new Vector2();
+    private Vector2 _attackPoint;
+    public Vector2 AttackPoint => _attackPoint;
 
     protected override void Awake()
     {
         base.Awake();
-        _playerStats = GetComponent<PlayerStats>();
+        playerStats = entityStats as PlayerStats;
         _rb = GetComponent<Rigidbody2D>();
         _checkCollider = GetComponentInChildren<CheckCollider>();
         _animEvent = GetComponentInChildren<AnimEvent>();
+        _attackPoint = transform.Find("AttackCheck").position;
 
         _stateMachine = new StateMachine();
         idleState = new PlayerIdleState(_stateMachine, PlayerStateConst.IdleState, this);

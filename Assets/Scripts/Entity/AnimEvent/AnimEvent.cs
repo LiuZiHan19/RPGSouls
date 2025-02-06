@@ -9,6 +9,11 @@ public class AnimEvent : MonoBehaviour
     {
         
     }
+    
+    protected virtual void Start()
+    {
+        
+    }
 
     public void Trigger()
     {

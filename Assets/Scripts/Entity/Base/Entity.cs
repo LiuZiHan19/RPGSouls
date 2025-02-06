@@ -10,12 +10,14 @@ public abstract class Entity : MonoBehaviour
     public float attackRange;
     public bool isFacingRight = true;
     public float facingDir = 1;
+    public EntityStats entityStats;
 
     protected virtual void Awake()
     {
         id = System.Guid.NewGuid().ToString();
         animator = GetComponentInChildren<Animator>();
         collider = GetComponent<Collider>();
+        entityStats = GetComponent<EntityStats>();
     }
 
     protected virtual void OnEnable()
