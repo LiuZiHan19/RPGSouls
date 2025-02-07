@@ -1,10 +1,11 @@
 using UnityEngine;
+using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 
 public abstract class EntityStats : MonoBehaviour
 {
     public CharacterStatsType statsType;
-    public int currenHealth;
+    [FormerlySerializedAs("currenHealth")] public int currentHealth;
     public Stat maxHealth;
     public Stat attackPower;
     public Stat magicPower;
@@ -45,7 +46,7 @@ public abstract class EntityStats : MonoBehaviour
             if (burnTimer < 0)
             {
                 burnTimer = 0.25f;
-                currenHealth -= 5;
+                currentHealth -= 5;
             }
 
             if (igniteTimer < 0)
@@ -69,8 +70,8 @@ public abstract class EntityStats : MonoBehaviour
 
     public void TakeDamage(int damage)
     {
-        currenHealth -= damage;
-        currenHealth = Mathf.Clamp(currenHealth, 0, currenHealth);
+        currentHealth -= damage;
+        currentHealth = Mathf.Clamp(currentHealth, 0, currentHealth);
     }
 
     public void SetMagicStatus(MagicStatus status)

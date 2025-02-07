@@ -42,30 +42,6 @@ public class JsonManager : Singleton<JsonManager>
     }
 
     /// <summary>
-    /// 将类对象转换为Json数据存储(适合简单类对象)
-    /// </summary>
-    /// <param name="path"></param>
-    /// <param name="type"></param>
-    /// <typeparam name="T"></typeparam>
-    /// <returns></returns>
-    public void SaveData(object data, string path, JsonType type = JsonType.LitJson)
-    {
-        string finalPath = Application.persistentDataPath + "/" + path + ".json";
-        string jsonStr = "";
-        switch (type)
-        {
-            case JsonType.JsonUtility:
-                jsonStr = JsonUtility.ToJson(data);
-                break;
-            case JsonType.LitJson:
-                jsonStr = JsonMapper.ToJson(data);
-                break;
-        }
-
-        File.WriteAllText(finalPath, jsonStr);
-    }
-
-    /// <summary>
     /// 读取Json数据转换为类对象(适合简单类对象)
     /// </summary>
     /// <param name="path"></param>
@@ -95,10 +71,35 @@ public class JsonManager : Singleton<JsonManager>
 
         return data;
     }
-}
 
-public enum JsonType
-{
-    JsonUtility,
-    LitJson,
+    /// <summary>
+    /// 将类对象转换为Json数据存储(适合简单类对象)
+    /// </summary>
+    /// <param name="path"></param>
+    /// <param name="type"></param>
+    /// <typeparam name="T"></typeparam>
+    /// <returns></returns>
+    public void SaveData(object data, string path, JsonType type = JsonType.LitJson)
+    {
+        string finalPath = Application.persistentDataPath + "/" + path + ".json";
+        string jsonStr = "";
+        switch (type)
+        {
+            case JsonType.JsonUtility:
+                jsonStr = JsonUtility.ToJson(data);
+                break;
+            case JsonType.LitJson:
+                jsonStr = JsonMapper.ToJson(data);
+                break;
+        }
+
+        File.WriteAllText(finalPath, jsonStr);
+    }
+
+    public void SaveData(string data, string path)
+    {
+        string finalPath = Application.persistentDataPath + "/" + path + ".json";
+        string jsonStr = data;
+        File.WriteAllText(finalPath, jsonStr);
+    }
 }

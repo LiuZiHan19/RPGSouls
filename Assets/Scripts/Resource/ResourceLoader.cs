@@ -17,4 +17,13 @@ public class ResourceLoader : Singleton<ResourceLoader>
             Logger.Error($"Failed to load asset at path: {path}. Asset not found.");
         return asset;
     }
+
+    public GameObject LoadObjFromResources(string path)
+    {
+        GameObject obj = Resources.Load<GameObject>(path);
+        if (obj == null)
+            Logger.Error($"Failed to load asset at path: {path}. Asset not found.");
+        obj = GameObject.Instantiate(obj);
+        return obj;
+    }
 }

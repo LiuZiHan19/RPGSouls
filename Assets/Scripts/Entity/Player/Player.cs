@@ -14,10 +14,11 @@ public class Player : Entity
     public PlayerDeathState deathState;
     public PlayerIdleBlockState idleBlockState;
     public PlayerStats playerStats;
+    public SkillManager skill;
 
     private Rigidbody2D _rb;
     private StateMachine _stateMachine;
-    private CheckCollider _checkCollider;
+    private ColliderChecker _colliderChecker;
     private AnimEvent _animEvent;
 
     private int _attackCounter;
@@ -32,8 +33,9 @@ public class Player : Entity
     {
         base.Awake();
         playerStats = entityStats as PlayerStats;
+        skill = SkillManager.Instance;
         _rb = GetComponent<Rigidbody2D>();
-        _checkCollider = GetComponentInChildren<CheckCollider>();
+        _colliderChecker = GetComponentInChildren<ColliderChecker>();
         _animEvent = GetComponentInChildren<AnimEvent>();
         _attackPoint = transform.Find("AttackCheck").position;
 
@@ -78,7 +80,7 @@ public class Player : Entity
 
     public bool IsGrounded()
     {
-        return _checkCollider.IsColliding();
+        return _colliderChecker.IsColliding();
     }
 
     public bool IsTriggered()

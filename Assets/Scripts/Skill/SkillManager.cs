@@ -1,6 +1,4 @@
-using UnityEngine;
-
-public class SkillManager : Singleton<SkillManager>
+public class SkillManager : MonoSingleton<SkillManager>
 {
-    
+    public Skill_Dash skill_Dash;
 }

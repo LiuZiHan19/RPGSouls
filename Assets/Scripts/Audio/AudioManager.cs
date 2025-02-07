@@ -6,8 +6,9 @@ public class AudioManager : Singleton<AudioManager>
     private Transform _sfxParent;
     private Transform _bgmParent;
 
-    public void Initialize()
+    public override void Initialize()
     {
+        base.Initialize();
         _sfxParent = new GameObject().transform;
         _bgmParent = new GameObject().transform;
 #if UNITY_EDITOR
@@ -24,7 +25,7 @@ public class AudioManager : Singleton<AudioManager>
         audioSource.clip = audioClip;
         audioSource.loop = isLoop;
         audioSource.Play();
-         CoroutineManager.Instance.StartCoroutine(WaitForAudioToEnd(bgmObj, audioSource));
+        CoroutineManager.Instance.StartCoroutine(WaitForAudioToEnd(bgmObj, audioSource));
 
 #if UNITY_EDITOR
         bgmObj.name = "BgmObj";

@@ -5,8 +5,9 @@ public class AudioPool : Singleton<AudioPool>
 {
     private Queue<GameObject> _audioPool;
 
-    public void Initialize()
+    public override void Initialize()
     {
+        base.Initialize();
         _audioPool = new Queue<GameObject>();
     }
 

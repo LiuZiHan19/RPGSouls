@@ -21,4 +21,9 @@ public class Singleton<T> where T : new()
             return instance;
         }
     }
+
+    public virtual void Initialize()
+    {
+        
+    }
 }

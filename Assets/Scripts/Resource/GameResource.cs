@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class GameResource : MonoSingleton<GameResource>
+public class GameResource : MonoBehaviour
 {
-
+    
 }
