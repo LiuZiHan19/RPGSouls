@@ -17,7 +17,7 @@ public class MainMenuView : UIBehaviour
 
     private void OnClickPlayBtn()
     {
-        NotifyViewEvent(UIViewEvent.MainMenuView.OnClickPlayBtn);
+        NotifyViewEvent(UIViewEventConst.MainMenuView.OnClickPlayBtn);
     }
 
     protected override void RemoveEvent()

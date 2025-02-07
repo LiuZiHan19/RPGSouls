@@ -18,7 +18,7 @@ public class Player : Entity
 
     private Rigidbody2D _rb;
     private StateMachine _stateMachine;
-    private ColliderChecker _colliderChecker;
+    private EntityChecker _entityChecker;
     private AnimEvent _animEvent;
 
     private int _attackCounter;
@@ -35,7 +35,7 @@ public class Player : Entity
         playerStats = entityStats as PlayerStats;
         skill = SkillManager.Instance;
         _rb = GetComponent<Rigidbody2D>();
-        _colliderChecker = GetComponentInChildren<ColliderChecker>();
+        _entityChecker = GetComponentInChildren<EntityChecker>();
         _animEvent = GetComponentInChildren<AnimEvent>();
         _attackPoint = transform.Find("AttackCheck").position;
 
@@ -80,7 +80,7 @@ public class Player : Entity
 
     public bool IsGrounded()
     {
-        return _colliderChecker.IsColliding();
+        return _entityChecker.IsColliding();
     }
 
     public bool IsTriggered()

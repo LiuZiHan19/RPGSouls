@@ -1,4 +1,4 @@
-public class UIViewEvent
+public class UIViewEventConst
 {
     public class MainMenuView
     {
