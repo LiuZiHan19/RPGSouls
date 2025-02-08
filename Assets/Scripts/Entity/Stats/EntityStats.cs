@@ -4,7 +4,7 @@ using Random = UnityEngine.Random;
 
 public abstract class EntityStats : MonoBehaviour
 {
-    public CharacterStatsType statsType;
+    public E_CharacterStats statsType;
     [FormerlySerializedAs("currenHealth")] public int currentHealth;
     public Stat maxHealth;
     public Stat attackPower;
@@ -74,19 +74,19 @@ public abstract class EntityStats : MonoBehaviour
         currentHealth = Mathf.Clamp(currentHealth, 0, currentHealth);
     }
 
-    public void SetMagicStatus(MagicStatus status)
+    public void SetMagicStatus(E_MagicStatus status)
     {
         switch (status)
         {
-            case MagicStatus.Ignite:
+            case E_MagicStatus.Ignite:
                 isIgnited = true;
                 igniteTimer = 2.5f;
                 break;
-            case MagicStatus.Chill:
+            case E_MagicStatus.Chill:
                 isChilled = true;
                 chillTimer = 2.5f;
                 break;
-            case MagicStatus.Lighting:
+            case E_MagicStatus.Lighting:
                 isShocked = true;
                 shockedTimer = 2.5f;
                 break;

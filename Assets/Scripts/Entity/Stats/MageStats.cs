@@ -9,9 +9,9 @@ public class MageStats : EntityStats
     {
         base.DoDamage(target);
 
-        if (CanChill()) target.SetMagicStatus(MagicStatus.Chill);
-        if (CanLighting()) target.SetMagicStatus(MagicStatus.Lighting);
-        if (CanIgnite()) target.SetMagicStatus(MagicStatus.Ignite);
+        if (CanChill()) target.SetMagicStatus(E_MagicStatus.Chill);
+        if (CanLighting()) target.SetMagicStatus(E_MagicStatus.Lighting);
+        if (CanIgnite()) target.SetMagicStatus(E_MagicStatus.Ignite);
 
         int armor = target.armor.GetValue();
         if (target.isChilled) armor = (int)(armor * 0.8f);

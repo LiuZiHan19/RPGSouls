@@ -10,7 +10,7 @@ public class UIManager : Singleton<UIManager>
     public Transform Top;
     private MainMenuViewController _mainMenuViewController;
     private MainGameViewController _mainGameViewController;
-    private GeneralLoadingView _generalLoadingView;
+    private LoadingView _loadingView;
 
     public override void Initialize()
     {
@@ -21,37 +21,56 @@ public class UIManager : Singleton<UIManager>
         Bottom = uiRoot.transform.Find("UICanvas").transform.Find("Bottom").transform;
         Middle = uiRoot.transform.Find("UICanvas").transform.Find("Middle").transform;
         Top = uiRoot.transform.Find("UICanvas").transform.Find("Top").transform;
+        GameObject.DontDestroyOnLoad(uiRoot);
     }
 
-    public void StartMenuScene()
+    public void StartMenuView()
     {
+        if (_mainMenuViewController != null)
+        {
+            Logger.Warning("MainMenuViewController已经存在，你重复调用了StartMenuView");
+            return;
+        }
+
         _mainMenuViewController = new MainMenuViewController();
         _mainMenuViewController.Initialise();
     }
 
-    public void StartGameScene()
+    public void StartGameView()
     {
-        ShowLoadingView();
-        _mainMenuViewController.Dispose();
-        _mainMenuViewController = null;
+        if (_mainGameViewController != null)
+        {
+            Logger.Warning("MainGameViewController已经存在，你重复调用了StartGameView");
+            return;
+        }
+
         _mainGameViewController = new MainGameViewController();
         _mainGameViewController.Initialise();
     }
 
+    #region Loading View
+
+    public void ShowLoadingView()
+    {
+        CreateLoadingView();
+        _loadingView.Show();
+    }
+
+    public void HideLoadingView()
+    {
+        _loadingView.Hide();
+    }
+
     private void CreateLoadingView()
     {
-        if (_generalLoadingView != null) return;
-        _generalLoadingView = new GeneralLoadingView();
-        GameObject loadingViewObj = ResourceLoader.Instance.LoadObjFromResources("GeneralLoadingView");
-        _generalLoadingView.SetObject(loadingViewObj);
+        if (_loadingView != null) return;
+        _loadingView = new LoadingView();
+        GameObject loadingViewObj = ResourceLoader.Instance.LoadObjFromResources("LoadingView");
+        _loadingView.SetObject(loadingViewObj);
         SetObjectToLayer(loadingViewObj.transform, UILayer.Top);
     }
 
-    private void ShowLoadingView()
-    {
-        CreateLoadingView();
-        _generalLoadingView.Show();
-    }
+    #endregion
 
     public void SetObjectToLayer(Transform obj, UILayer layer)
     {

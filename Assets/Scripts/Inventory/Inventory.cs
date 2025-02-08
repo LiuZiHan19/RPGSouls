@@ -3,35 +3,35 @@ using System.Collections.Generic;
 
 public class Inventory : Singleton<Inventory>
 {
-    public Dictionary<InventoryEquipmentType, InventoryItem> equipments;
-    public Dictionary<InventoryConsumableType, InventoryItem> consumables;
-    public Dictionary<InventoryMaterialType, InventoryItem> materials;
-    public Dictionary<InventoryItemType, InventoryItem> items;
+    public Dictionary<E_InventoryEquipment, InventoryItem> equipments;
+    public Dictionary<E_InventoryConsumable, InventoryItem> consumables;
+    public Dictionary<E_InventoryMaterial, InventoryItem> materials;
+    public Dictionary<E_InventoryItem, InventoryItem> items;
 
-    public void AddItem(InventoryItemBaseData itemData)
+    public void AddItem(InventoryItemBaseSO itemSo)
     {
-        switch (itemData.itemBaseType)
+        switch (itemSo.itemBaseType)
         {
-            case InventoryItemBaseType.Equipment:
-                InventoryEquipmentData inventoryEquipmentData = itemData as InventoryEquipmentData;
-                equipments[inventoryEquipmentData.equipmentType].Add();
+            case E_InventoryItemBase.Equipment:
+                InventoryEquipmentSO inventoryEquipmentSo = itemSo as InventoryEquipmentSO;
+                equipments[inventoryEquipmentSo.equipmentType].Add();
                 break;
-            case InventoryItemBaseType.Consumable:
-                InventoryConsumableData inventoryConsumableData = itemData as InventoryConsumableData;
-                consumables[inventoryConsumableData.consumableType].Add();
+            case E_InventoryItemBase.Consumable:
+                InventoryConsumableSO inventoryConsumableSo = itemSo as InventoryConsumableSO;
+                consumables[inventoryConsumableSo.consumableType].Add();
                 break;
-            case InventoryItemBaseType.Material:
-                InventoryMaterialData inventoryMaterialData = itemData as InventoryMaterialData;
-                materials[inventoryMaterialData.materialType].Add();
+            case E_InventoryItemBase.Material:
+                InventoryMaterialSO inventoryMaterialSo = itemSo as InventoryMaterialSO;
+                materials[inventoryMaterialSo.materialType].Add();
                 break;
-            case InventoryItemBaseType.Item:
-                InventoryItemData inventoryItemData = itemData as InventoryItemData;
-                items[inventoryItemData.itemType].Add();
+            case E_InventoryItemBase.Item:
+                InventoryItemSO inventoryItemSo = itemSo as InventoryItemSO;
+                items[inventoryItemSo.itemType].Add();
                 break;
             default:
-                Logger.Error($"[Inventory Add Item Error] 无效的物品类型: {itemData.itemBaseType}. " +
-                             $"物品名称: {itemData.name}, 物品ID: {itemData.id}, " +
-                             $"物品类型的枚举值: {Enum.GetName(typeof(InventoryItemBaseType), itemData.itemBaseType)}. " +
+                Logger.Error($"[Inventory Add Item Error] 无效的物品类型: {itemSo.itemBaseType}. " +
+                             $"物品名称: {itemSo.name}, 物品ID: {itemSo.id}, " +
+                             $"物品类型的枚举值: {Enum.GetName(typeof(E_InventoryItemBase), itemSo.itemBaseType)}. " +
                              "请检查该物品的类型和数据设置。");
                 break;
         }

@@ -1,7 +1,7 @@
 public class InventoryItem
 {
     public int number;
-    public InventoryItemBaseData itemData;
+    public InventoryItemBaseSO ItemSo;
 
     public void Add()
     {

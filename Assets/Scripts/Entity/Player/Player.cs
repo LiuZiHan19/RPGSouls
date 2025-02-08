@@ -32,6 +32,7 @@ public class Player : Entity
     protected override void Awake()
     {
         base.Awake();
+        PlayerManager.Instance.Initialize();
         playerStats = entityStats as PlayerStats;
         skill = SkillManager.Instance;
         _rb = GetComponent<Rigidbody2D>();
