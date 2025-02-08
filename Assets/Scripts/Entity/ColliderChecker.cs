@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class EntityChecker : MonoBehaviour
+public class ColliderChecker : MonoBehaviour
 {
     public string layerName;
     private Collider _collider;

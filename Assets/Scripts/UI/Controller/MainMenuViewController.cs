@@ -17,7 +17,7 @@ public class MainMenuViewController : UIController
     {
         switch (evtType)
         {
-            case UIViewEventConst.MainMenuView.OnClickPlayBtn:
+            case UIEventConst.MainMenuView.OnClickPlayBtn:
                 UIManager.Instance.StartGameView();
                 break;
         }

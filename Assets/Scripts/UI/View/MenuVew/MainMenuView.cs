@@ -20,7 +20,7 @@ public class MainMenuView : UIBehaviour
 
     private void OnClickPlayBtn()
     {
-        NotifyViewEvent(UIViewEventConst.MainMenuView.OnClickPlayBtn);
+        NotifyViewEvent(UIEventConst.MainMenuView.OnClickPlayBtn);
     }
 
     private void OnClickSettingBtn()

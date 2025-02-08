@@ -18,7 +18,7 @@ public class Player : Entity
 
     private Rigidbody2D _rb;
     private StateMachine _stateMachine;
-    private EntityChecker _entityChecker;
+    private ColliderChecker _colliderChecker;
     private AnimEvent _animEvent;
 
     private int _attackCounter;
@@ -36,18 +36,18 @@ public class Player : Entity
         playerStats = entityStats as PlayerStats;
         skill = SkillManager.Instance;
         _rb = GetComponent<Rigidbody2D>();
-        _entityChecker = GetComponentInChildren<EntityChecker>();
+        _colliderChecker = GetComponentInChildren<ColliderChecker>();
         _animEvent = GetComponentInChildren<AnimEvent>();
         _attackPoint = transform.Find("AttackCheck").position;
 
         _stateMachine = new StateMachine();
-        idleState = new PlayerIdleState(_stateMachine, PlayerStateConst.IdleState, this);
-        runState = new PlayerRunState(_stateMachine, PlayerStateConst.RunState, this);
-        jumpState = new PlayerJumpState(_stateMachine, PlayerStateConst.JumpState, this);
-        fallState = new PlayerFallState(_stateMachine, PlayerStateConst.FallState, this);
-        attackState = new PlayerAttackState(_stateMachine, PlayerStateConst.AttackState, this);
-        deathState = new PlayerDeathState(_stateMachine, PlayerStateConst.DeathState, this);
-        idleBlockState = new PlayerIdleBlockState(_stateMachine, PlayerStateConst.IdleBlockState, this);
+        idleState = new PlayerIdleState(_stateMachine, "Idle", this);
+        runState = new PlayerRunState(_stateMachine, "Run", this);
+        jumpState = new PlayerJumpState(_stateMachine, "Jump", this);
+        fallState = new PlayerFallState(_stateMachine, "Fall", this);
+        attackState = new PlayerAttackState(_stateMachine, "Attack", this);
+        deathState = new PlayerDeathState(_stateMachine, "Death", this);
+        idleBlockState = new PlayerIdleBlockState(_stateMachine, "IdleBlock", this);
         _stateMachine.Initialise(idleState);
     }
 
@@ -81,7 +81,7 @@ public class Player : Entity
 
     public bool IsGrounded()
     {
-        return _entityChecker.IsColliding();
+        return _colliderChecker.IsColliding();
     }
 
     public bool IsTriggered()
