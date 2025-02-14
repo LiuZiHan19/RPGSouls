@@ -12,7 +12,7 @@ public class PlayerAnimEvent : AnimEvent
 
     public void Attack1()
     {
-        Collider2D[] cds = Physics2D.OverlapCircleAll(_player.AttackPoint, _player.attackRangeArray[0],
+        Collider2D[] cds = Physics2D.OverlapCircleAll(_player.attackPoint.position, _player.attackRangeArray[0],
             LayerMask.NameToLayer("Enemy"));
         foreach (var cd in cds)
         {
@@ -22,7 +22,7 @@ public class PlayerAnimEvent : AnimEvent
 
     public void Attack2()
     {
-        Collider2D[] cds = Physics2D.OverlapCircleAll(_player.AttackPoint, _player.attackRangeArray[1],
+        Collider2D[] cds = Physics2D.OverlapCircleAll(_player.attackPoint.position, _player.attackRangeArray[1],
             LayerMask.NameToLayer("Enemy"));
         foreach (var cd in cds)
         {
@@ -32,7 +32,7 @@ public class PlayerAnimEvent : AnimEvent
 
     public void Attack3()
     {
-        Collider2D[] cds = Physics2D.OverlapCircleAll(_player.AttackPoint, _player.attackRangeArray[2],
+        Collider2D[] cds = Physics2D.OverlapCircleAll(_player.attackPoint.position, _player.attackRangeArray[2],
             LayerMask.NameToLayer("Enemy"));
         foreach (var cd in cds)
         {

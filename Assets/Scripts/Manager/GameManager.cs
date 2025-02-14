@@ -1,17 +1,29 @@
-public class GameManager : MonoSingleton<GameManager>
-{
-    private bool _isInitialized;
+using System;
+using UnityEngine;
 
-    protected override void Awake()
+public class GameManager : MonoBehaviour, IDisposable
+{
+    public static GameManager Instance;
+
+    private void Awake()
     {
-        base.Awake();
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+            return;
+        }
+
         InitGameSystem();
     }
 
     private void InitGameSystem()
     {
-        if (_isInitialized) return;
-        _isInitialized = true;
+        Logger.Info("Init GameSystem");
         AudioManager.Instance.Initialize();
         AudioPool.Instance.Initialize();
         UIManager.Instance.Initialize();
@@ -21,28 +33,51 @@ public class GameManager : MonoSingleton<GameManager>
         Inventory.Instance.Initialize();
         JsonManager.Instance.Initialize();
         PlayerPrefsManager.Instance.Initialize();
-        DontDestroyOnLoad(gameObject);
-        UIManager.Instance.StartMenuView();
+
+        UIManager.Instance.ShowMenuView();
+        AudioManager.Instance.PlayBgm("Audio/MenuBgm");
+
+        EventDispatcher.OnClickPlay += OnClickPlayBtn;
+        EventDispatcher.OnClickPlayAgain += OnClickPlayAgainBtn;
+        EventDispatcher.OnClickReturn += OnClickReturnBtn;
     }
 
-    public void ChangeToMainMenuScene()
+    private void OnClickPlayBtn()
     {
+        AudioManager.Instance.StopBgm();
         UIManager.Instance.ShowLoadingView();
-        UIManager.Instance.StartMenuView();
-        SceneManager.Instance.LoadSceneAsync("MainMenuScene", () => { UIManager.Instance.HideLoadingView(); });
+        UIManager.Instance.HideMenuView();
+        UIManager.Instance.ShowGameView();
+        SceneManager.Instance.LoadSceneAsync("GameSceneForest", () =>
+        {
+            AudioManager.Instance.PlayBgm("Audio/ForestBgm");
+            UIManager.Instance.HideLoadingView();
+        });
     }
 
-    public void ChangeToGameSceneForest()
+    private void OnClickPlayAgainBtn()
     {
         UIManager.Instance.ShowLoadingView();
-        UIManager.Instance.StartGameView();
         SceneManager.Instance.LoadSceneAsync("GameSceneForest", () => { UIManager.Instance.HideLoadingView(); });
     }
 
-    public void ChangeToGameSceneCity()
+    private void OnClickReturnBtn()
     {
+        AudioManager.Instance.StopBgm();
         UIManager.Instance.ShowLoadingView();
-        UIManager.Instance.StartGameView();
-        SceneManager.Instance.LoadSceneAsync("GameSceneCity", () => { UIManager.Instance.HideLoadingView(); });
+        UIManager.Instance.HideGameView();
+        UIManager.Instance.ShowMenuView();
+        SceneManager.Instance.LoadSceneAsync("MainMenuScene", () =>
+        {
+            AudioManager.Instance.PlayBgm("Audio/MenuBgm");
+            UIManager.Instance.HideLoadingView();
+        });
+    }
+
+    public void Dispose()
+    {
+        EventDispatcher.OnClickPlay -= OnClickPlayBtn;
+        EventDispatcher.OnClickPlayAgain -= OnClickPlayAgainBtn;
+        EventDispatcher.OnClickReturn -= OnClickReturnBtn;
     }
 }

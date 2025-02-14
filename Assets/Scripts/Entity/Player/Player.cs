@@ -5,6 +5,7 @@ public class Player : Entity
     public float jumpForce;
     public float attackRecoveryCooldown;
     public float[] attackRangeArray;
+    public Transform attackPoint;
 
     public PlayerIdleState idleState;
     public PlayerRunState runState;
@@ -26,8 +27,6 @@ public class Player : Entity
     private Vector2 _input = new Vector2();
     private Vector2 _move = new Vector2();
     private Vector2 _jump = new Vector2();
-    private Vector2 _attackPoint;
-    public Vector2 AttackPoint => _attackPoint;
 
     protected override void Awake()
     {
@@ -38,7 +37,6 @@ public class Player : Entity
         _rb = GetComponent<Rigidbody2D>();
         _colliderChecker = GetComponentInChildren<ColliderChecker>();
         _animEvent = GetComponentInChildren<AnimEvent>();
-        _attackPoint = transform.Find("AttackCheck").position;
 
         _stateMachine = new StateMachine();
         idleState = new PlayerIdleState(_stateMachine, "Idle", this);
@@ -135,5 +133,12 @@ public class Player : Entity
         isFacingRight = !isFacingRight;
         facingDir = -facingDir;
         transform.Rotate(0, 180, 0);
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.DrawWireSphere(attackPoint.position, attackRangeArray[0]);
+        Gizmos.DrawWireSphere(attackPoint.position, attackRangeArray[1]);
+        Gizmos.DrawWireSphere(attackPoint.position, attackRangeArray[2]);
     }
 }

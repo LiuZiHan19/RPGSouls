@@ -7,26 +7,23 @@ public class MainMenuViewController : UIController
     public override void Initialise()
     {
         _mainMenuView = new MainMenuView();
-        GameObject mainMenuViewObj = ResourceLoader.Instance.LoadObjFromResources("MainMenuView");
+        GameObject mainMenuViewObj = ResourceLoader.Instance.LoadObjFromResources("UI/MainMenuView");
         _mainMenuView.SetObject(mainMenuViewObj);
-        _mainMenuView.AddUIEvent(OnMainMenuViewAction);
         UIManager.Instance.SetObjectToLayer(mainMenuViewObj.transform, UILayer.Top);
     }
 
-    private void OnMainMenuViewAction(string evtType, object data)
+    public void ShowMenuView()
     {
-        switch (evtType)
-        {
-            case UIEventConst.MainMenuView.OnClickPlayBtn:
-                GameManager.Instance.ChangeToGameSceneForest();
-                _mainMenuView.Hide();
-                break;
-        }
+        _mainMenuView.Show();
+    }
+
+    public void HideMenuView()
+    {
+        _mainMenuView.Hide();
     }
 
     public override void Dispose()
     {
-        _mainMenuView.RemoveUIEvent(OnMainMenuViewAction);
         _mainMenuView.Dispose();
         _mainMenuView = null;
     }

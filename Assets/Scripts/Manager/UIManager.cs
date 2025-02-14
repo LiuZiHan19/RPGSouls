@@ -15,7 +15,7 @@ public class UIManager : Singleton<UIManager>
     public override void Initialize()
     {
         base.Initialize();
-        GameObject uiRoot = ResourceLoader.Instance.LoadObjFromResources("UIRoot");
+        GameObject uiRoot = ResourceLoader.Instance.LoadObjFromResources("UI/UIRoot");
         UICanvas = uiRoot.transform.Find("UICanvas").GetComponent<Canvas>();
         UICamera = uiRoot.transform.Find("UICamera").GetComponent<Camera>();
         Bottom = uiRoot.transform.Find("UICanvas").transform.Find("Bottom").transform;
@@ -24,11 +24,11 @@ public class UIManager : Singleton<UIManager>
         GameObject.DontDestroyOnLoad(uiRoot);
     }
 
-    public void StartMenuView()
+    public void ShowMenuView()
     {
         if (_mainMenuViewController != null)
         {
-            Logger.Warning("MainMenuViewController已经存在，你重复调用了StartMenuView");
+            _mainMenuViewController.ShowMenuView();
             return;
         }
 
@@ -36,16 +36,26 @@ public class UIManager : Singleton<UIManager>
         _mainMenuViewController.Initialise();
     }
 
-    public void StartGameView()
+    public void HideMenuView()
+    {
+        _mainMenuViewController.HideMenuView();
+    }
+
+    public void ShowGameView()
     {
         if (_mainGameViewController != null)
         {
-            Logger.Warning("MainGameViewController已经存在，你重复调用了StartGameView");
+            _mainGameViewController.ShowGameView();
             return;
         }
 
         _mainGameViewController = new MainGameViewController();
         _mainGameViewController.Initialise();
+    }
+
+    public void HideGameView()
+    {
+        _mainGameViewController.HideGameView();
     }
 
     #region Loading View
@@ -65,7 +75,7 @@ public class UIManager : Singleton<UIManager>
     {
         if (_loadingView != null) return;
         _loadingView = new LoadingView();
-        GameObject loadingViewObj = ResourceLoader.Instance.LoadObjFromResources("LoadingView");
+        GameObject loadingViewObj = ResourceLoader.Instance.LoadObjFromResources("UI/LoadingView");
         _loadingView.SetObject(loadingViewObj);
         SetObjectToLayer(loadingViewObj.transform, UILayer.Top);
     }

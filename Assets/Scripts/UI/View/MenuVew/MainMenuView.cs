@@ -27,7 +27,7 @@ public class MainMenuView : UIBehaviour
 
     private void OnClickPlayBtn()
     {
-        NotifyViewEvent(UIEventConst.MainMenuView.OnClickPlayBtn);
+        EventDispatcher.OnClickPlay?.Invoke();
     }
 
     private void OnClickSettingBtn()
