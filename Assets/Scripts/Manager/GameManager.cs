@@ -2,8 +2,9 @@ public class GameManager : MonoSingleton<GameManager>
 {
     private bool _isInitialized;
 
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
         InitGameSystem();
     }
 

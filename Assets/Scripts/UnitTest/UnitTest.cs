@@ -1,6 +1,3 @@
-using UnityEngine;
-
-public class UnitTest : MonoBehaviour
+public class UnitTest : MonoSingleton<UnitTest>
 {
-
 }

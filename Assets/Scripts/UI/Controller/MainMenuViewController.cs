@@ -2,14 +2,14 @@ using UnityEngine;
 
 public class MainMenuViewController : UIController
 {
-    public MainMenuView mainMenuView;
+    private MainMenuView _mainMenuView;
 
     public override void Initialise()
     {
-        mainMenuView = new MainMenuView();
+        _mainMenuView = new MainMenuView();
         GameObject mainMenuViewObj = ResourceLoader.Instance.LoadObjFromResources("MainMenuView");
-        mainMenuView.SetObject(mainMenuViewObj);
-        mainMenuView.AddUIEvent(OnMainMenuViewAction);
+        _mainMenuView.SetObject(mainMenuViewObj);
+        _mainMenuView.AddUIEvent(OnMainMenuViewAction);
         UIManager.Instance.SetObjectToLayer(mainMenuViewObj.transform, UILayer.Top);
     }
 
@@ -18,15 +18,16 @@ public class MainMenuViewController : UIController
         switch (evtType)
         {
             case UIEventConst.MainMenuView.OnClickPlayBtn:
-                UIManager.Instance.StartGameView();
+                GameManager.Instance.ChangeToGameSceneForest();
+                _mainMenuView.Hide();
                 break;
         }
     }
 
     public override void Dispose()
     {
-        mainMenuView.RemoveUIEvent(OnMainMenuViewAction);
-        mainMenuView.Dispose();
-        mainMenuView = null;
+        _mainMenuView.RemoveUIEvent(OnMainMenuViewAction);
+        _mainMenuView.Dispose();
+        _mainMenuView = null;
     }
 }
