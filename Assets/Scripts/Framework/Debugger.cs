@@ -2,7 +2,7 @@ using System;
 using System.IO;
 using UnityEngine;
 
-public class Logger
+public class Debugger
 {
     private static string logFilePath = Application.persistentDataPath + "/GameLog.txt";
 

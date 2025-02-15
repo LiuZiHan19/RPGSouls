@@ -1,18 +1,16 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public class EnemyOrcAttackState : MonoBehaviour
+public class EnemyOrcAttackState : EnemyOrcState
 {
-    // Start is called before the first frame update
-    void Start()
+    public EnemyOrcAttackState(StateMachine stateMachine, string animBoolName, Entity entity) : base(stateMachine,
+        animBoolName, entity)
     {
-        
     }
 
-    // Update is called once per frame
-    void Update()
+    public override void Update()
     {
-        
+        base.Update();
+        if (enemyOrc.IsTriggered())
+        {
+            stateMachine.ChangeState(enemyOrc.idleState);
+        }
     }
 }

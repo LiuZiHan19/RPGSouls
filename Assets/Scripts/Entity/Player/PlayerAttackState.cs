@@ -7,7 +7,7 @@ public class PlayerAttackState : PlayerState
 
     public override void Enter()
     {
-        player.animator.SetInteger("AttackCounter", player.GetAttackCounter());
+        player.SetAttackAnim();
         base.Enter();
     }
 

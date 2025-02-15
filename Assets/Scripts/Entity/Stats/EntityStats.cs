@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
@@ -18,6 +19,13 @@ public abstract class EntityStats : MonoBehaviour
     private float igniteTimer;
     private float shockedTimer;
     private float burnTimer;
+    private Entity entity;
+
+    protected void Awake()
+    {
+        entity = GetComponent<Entity>();
+        currentHealth = maxHealth.GetValue();
+    }
 
     protected virtual void Update()
     {
@@ -72,6 +80,7 @@ public abstract class EntityStats : MonoBehaviour
     {
         currentHealth -= damage;
         currentHealth = Mathf.Clamp(currentHealth, 0, currentHealth);
+        if (currentHealth == 0) entity.Die();
     }
 
     public void SetMagicStatus(E_MagicStatus status)
@@ -91,7 +100,7 @@ public abstract class EntityStats : MonoBehaviour
                 shockedTimer = 2.5f;
                 break;
             default:
-                Logger.Error(
+                Debugger.Error(
                     $"Unknown MagicStatus: {status}. Please check the input value and ensure it is one of the valid MagicStatus enum values.");
                 break;
         }

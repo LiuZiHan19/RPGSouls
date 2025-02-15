@@ -1,10 +1,10 @@
 public class EnemyOrcState : State
 {
-    protected EnemyOrc EnemyOrc;
+    protected EnemyOrc enemyOrc;
 
     public EnemyOrcState(StateMachine stateMachine, string animBoolName, Entity entity) : base(stateMachine,
         animBoolName, entity)
     {
-        EnemyOrc = entity as EnemyOrc;
+        enemyOrc = entity as EnemyOrc;
     }
 }

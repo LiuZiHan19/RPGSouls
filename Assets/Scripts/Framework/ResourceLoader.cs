@@ -6,7 +6,7 @@ public class ResourceLoader : Singleton<ResourceLoader>
     {
         T t = Resources.Load<T>(path);
         if (t == null)
-            Logger.Error($"Failed to load asset at path: {path}. Type: {typeof(T).Name} not found.");
+            Debugger.Error($"Failed to load asset at path: {path}. Type: {typeof(T).Name} not found.");
         return t;
     }
 
@@ -14,7 +14,7 @@ public class ResourceLoader : Singleton<ResourceLoader>
     {
         Object asset = Resources.Load(path);
         if (asset == null)
-            Logger.Error($"Failed to load asset at path: {path}. Asset not found.");
+            Debugger.Error($"Failed to load asset at path: {path}. Asset not found.");
         return asset;
     }
 
@@ -22,7 +22,7 @@ public class ResourceLoader : Singleton<ResourceLoader>
     {
         GameObject obj = Resources.Load<GameObject>(path);
         if (obj == null)
-            Logger.Error($"Failed to load asset at path: {path}. Asset not found.");
+            Debugger.Error($"Failed to load asset at path: {path}. Asset not found.");
         obj = GameObject.Instantiate(obj);
         return obj;
     }

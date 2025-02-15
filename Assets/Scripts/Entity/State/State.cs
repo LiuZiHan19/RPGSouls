@@ -13,7 +13,7 @@ public class State
 
     public virtual void Enter()
     {
-        Logger.Info($"{entity.entityName} Enter {animBoolName} State");
+        Debugger.Info($"{entity.entityName} Enter {animBoolName} State");
         entity.animator.SetBool(animBoolName, true);
     }
 
@@ -23,7 +23,7 @@ public class State
 
     public virtual void Exit()
     {
-        Logger.Info($"{entity.entityName} Exit {animBoolName} State");
+        Debugger.Info($"{entity.entityName} Exit {animBoolName} State");
         entity.animator.SetBool(animBoolName, false);
     }
 }

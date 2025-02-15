@@ -23,7 +23,7 @@ public class GameManager : MonoBehaviour, IDisposable
 
     private void InitGameSystem()
     {
-        Logger.Info("Init GameSystem");
+        Debugger.Info("Init GameSystem");
         AudioManager.Instance.Initialize();
         AudioPool.Instance.Initialize();
         UIManager.Instance.Initialize();

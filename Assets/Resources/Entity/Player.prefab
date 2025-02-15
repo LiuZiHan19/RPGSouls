@@ -119,6 +119,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f474c57a30603240afb745b5301d391, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  attackLayer:
+    serializedVersion: 2
+    m_Bits: 32768
 --- !u!1 &5316396864654202074
 GameObject:
   m_ObjectHideFlags: 0
@@ -129,10 +132,10 @@ GameObject:
   m_Component:
   - component: {fileID: 2007792949159350082}
   - component: {fileID: 6415397159839206981}
-  - component: {fileID: 8503436685236912193}
   - component: {fileID: 2886264239127598954}
   - component: {fileID: 7588449870969328595}
-  m_Layer: 0
+  - component: {fileID: 8424975375757068371}
+  m_Layer: 10
   m_Name: Player
   m_TagString: player
   m_Icon: {fileID: 0}
@@ -172,12 +175,12 @@ MonoBehaviour:
   id: 
   entityName: Player
   animator: {fileID: 870473802377386852}
-  collider: {fileID: 0}
   moveSpeed: 10
   attackRange: 0
   isFacingRight: 1
   facingDir: 1
   entityStats: {fileID: 0}
+  animEvent: {fileID: 0}
   jumpForce: 25
   attackRecoveryCooldown: 2.5
   attackRangeArray:
@@ -185,70 +188,7 @@ MonoBehaviour:
   - 1.25
   - 1.5
   attackPoint: {fileID: 1444514938501622063}
-  playerStats: {fileID: 0}
   skill: {fileID: 0}
---- !u!114 &8503436685236912193
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5316396864654202074}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 148bb91f71154d9a8fcced007594d0fd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  statsType: 0
-  currentHealth: 0
-  maxHealth:
-    baseValue: 0
-    modifiers: 
-  attackPower:
-    baseValue: 0
-    modifiers: 
-  magicPower:
-    baseValue: 0
-    modifiers: 
-  armor:
-    baseValue: 0
-    modifiers: 
-  magicResistance:
-    baseValue: 0
-    modifiers: 
-  isChilled: 0
-  isIgnited: 0
-  isShocked: 0
-  agility:
-    baseValue: 0
-    modifiers: 
-  intelligence:
-    baseValue: 0
-    modifiers: 
-  strength:
-    baseValue: 0
-    modifiers: 
-  vitality:
-    baseValue: 0
-    modifiers: 
-  criticalPower:
-    baseValue: 0
-    modifiers: 
-  criticalChance:
-    baseValue: 0
-    modifiers: 
-  evasion:
-    baseValue: 0
-    modifiers: 
-  lighting:
-    baseValue: 0
-    modifiers: 
-  chill:
-    baseValue: 0
-    modifiers: 
-  ignite:
-    baseValue: 0
-    modifiers: 
 --- !u!50 &2886264239127598954
 Rigidbody2D:
   serializedVersion: 4
@@ -311,6 +251,68 @@ CapsuleCollider2D:
   m_Offset: {x: -0.09061408, y: 1.4125922}
   m_Size: {x: 1.2901556, y: 2.5097976}
   m_Direction: 0
+--- !u!114 &8424975375757068371
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5316396864654202074}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee7c032ec6ff73641a5844acc7511d89, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  statsType: 0
+  currentHealth: 0
+  maxHealth:
+    baseValue: 200
+    modifiers: 
+  attackPower:
+    baseValue: 20
+    modifiers: 
+  magicPower:
+    baseValue: 0
+    modifiers: 
+  armor:
+    baseValue: 0
+    modifiers: 
+  magicResistance:
+    baseValue: 0
+    modifiers: 
+  isChilled: 0
+  isIgnited: 0
+  isShocked: 0
+  agility:
+    baseValue: 0
+    modifiers: 
+  intelligence:
+    baseValue: 0
+    modifiers: 
+  strength:
+    baseValue: 0
+    modifiers: 
+  vitality:
+    baseValue: 0
+    modifiers: 
+  criticalPower:
+    baseValue: 0
+    modifiers: 
+  criticalChance:
+    baseValue: 0
+    modifiers: 
+  evasion:
+    baseValue: 0
+    modifiers: 
+  lighting:
+    baseValue: 0
+    modifiers: 
+  chill:
+    baseValue: 0
+    modifiers: 
+  ignite:
+    baseValue: 0
+    modifiers: 
 --- !u!1 &6887327075725101876
 GameObject:
   m_ObjectHideFlags: 0

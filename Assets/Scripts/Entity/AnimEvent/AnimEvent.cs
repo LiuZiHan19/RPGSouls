@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 public class AnimEvent : MonoBehaviour
@@ -7,12 +6,10 @@ public class AnimEvent : MonoBehaviour
 
     protected virtual void Awake()
     {
-        
     }
-    
+
     protected virtual void Start()
     {
-        
     }
 
     public void Trigger()

@@ -34,7 +34,7 @@ public class JsonManager : Singleton<JsonManager>
         string finalPath = Application.streamingAssetsPath + "/" + path + ".json";
         if (File.Exists(finalPath) == false) finalPath = Application.persistentDataPath + "/" + path + ".json";
 
-        if (File.Exists(finalPath) == false) Logger.Error("文件未找到: " + finalPath);
+        if (File.Exists(finalPath) == false) Debugger.Error("文件未找到: " + finalPath);
         string json = await File.ReadAllTextAsync(finalPath);
         JsonData jsonData = JsonMapper.ToObject(json);
         callback?.Invoke(jsonData);

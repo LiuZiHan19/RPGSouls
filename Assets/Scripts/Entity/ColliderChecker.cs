@@ -4,23 +4,23 @@ public class ColliderChecker : MonoBehaviour
 {
     public string layerName;
     private Collider _collider;
-    private bool _isColliding;
+    private bool _isChecked;
 
     private void Awake()
     {
         _collider = GetComponent<Collider>();
     }
 
-    public bool IsColliding()
+    public bool IsChecked()
     {
-        return _isColliding;
+        return _isChecked;
     }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.layer == LayerMask.NameToLayer(layerName))
         {
-            _isColliding = true;
+            _isChecked = true;
         }
     }
 
@@ -28,7 +28,7 @@ public class ColliderChecker : MonoBehaviour
     {
         if (other.gameObject.layer == LayerMask.NameToLayer(layerName))
         {
-            _isColliding = false;
+            _isChecked = false;
         }
     }
 }

@@ -2,22 +2,25 @@ using UnityEngine;
 
 public abstract class Entity : MonoBehaviour
 {
-    public string id;
     public string entityName;
     public Animator animator;
-    public Collider collider;
     public float moveSpeed;
-    public float attackRange;
     public bool isFacingRight = true;
     public float facingDir = 1;
     public EntityStats entityStats;
+    public AnimEvent animEvent;
+    protected StateMachine stateMachine;
+    protected Collider collider;
+    protected Rigidbody2D rb;
 
     protected virtual void Awake()
     {
-        id = System.Guid.NewGuid().ToString();
+        stateMachine = new StateMachine();
+        rb = GetComponent<Rigidbody2D>();
         animator = GetComponentInChildren<Animator>();
         collider = GetComponent<Collider>();
         entityStats = GetComponent<EntityStats>();
+        animEvent = transform.Find("Animator").GetComponent<AnimEvent>();
     }
 
     protected virtual void OnEnable()
@@ -60,8 +63,20 @@ public abstract class Entity : MonoBehaviour
     {
     }
 
-    protected virtual void Die()
+    public void Flip()
     {
-        Logger.Info(entityName + "Die.");
+        isFacingRight = !isFacingRight;
+        facingDir = -facingDir;
+        transform.Rotate(0, 180, 0);
+    }
+
+    public virtual void Die()
+    {
+        Debugger.Info(entityName + " Die.");
+    }
+
+    public bool IsTriggered()
+    {
+        return animEvent.IsTriggered();
     }
 }

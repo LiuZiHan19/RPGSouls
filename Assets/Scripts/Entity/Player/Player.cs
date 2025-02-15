@@ -14,13 +14,10 @@ public class Player : Entity
     public PlayerAttackState attackState;
     public PlayerDeathState deathState;
     public PlayerIdleBlockState idleBlockState;
-    public PlayerStats playerStats;
     public SkillManager skill;
 
     private Rigidbody2D _rb;
-    private StateMachine _stateMachine;
     private ColliderChecker _colliderChecker;
-    private AnimEvent _animEvent;
 
     private int _attackCounter;
     private float _attackTimer;
@@ -32,32 +29,31 @@ public class Player : Entity
     {
         base.Awake();
         PlayerManager.Instance.Initialize();
-        playerStats = entityStats as PlayerStats;
         skill = SkillManager.Instance;
         _rb = GetComponent<Rigidbody2D>();
         _colliderChecker = GetComponentInChildren<ColliderChecker>();
-        _animEvent = GetComponentInChildren<AnimEvent>();
 
-        _stateMachine = new StateMachine();
-        idleState = new PlayerIdleState(_stateMachine, "Idle", this);
-        runState = new PlayerRunState(_stateMachine, "Run", this);
-        jumpState = new PlayerJumpState(_stateMachine, "Jump", this);
-        fallState = new PlayerFallState(_stateMachine, "Fall", this);
-        attackState = new PlayerAttackState(_stateMachine, "Attack", this);
-        deathState = new PlayerDeathState(_stateMachine, "Death", this);
-        idleBlockState = new PlayerIdleBlockState(_stateMachine, "IdleBlock", this);
-        _stateMachine.Initialise(idleState);
+        idleState = new PlayerIdleState(stateMachine, "Idle", this);
+        runState = new PlayerRunState(stateMachine, "Run", this);
+        jumpState = new PlayerJumpState(stateMachine, "Jump", this);
+        fallState = new PlayerFallState(stateMachine, "Fall", this);
+        attackState = new PlayerAttackState(stateMachine, "Attack", this);
+        deathState = new PlayerDeathState(stateMachine, "Death", this);
+        idleBlockState = new PlayerIdleBlockState(stateMachine, "IdleBlock", this);
+        stateMachine.Initialise(idleState);
     }
 
     protected override void Update()
     {
         base.Update();
-        _stateMachine.currentState.Update();
+        stateMachine.currentState.Update();
         _input.x = Input.GetAxisRaw("Horizontal");
         _input.y = Input.GetAxisRaw("Vertical");
 
         UpdateAttackTimer();
     }
+
+    #region Attack
 
     private void UpdateAttackTimer()
     {
@@ -66,6 +62,11 @@ public class Player : Entity
         {
             _attackCounter = 0;
         }
+    }
+
+    public void SetAttackAnim()
+    {
+        animator.SetInteger("AttackCounter", GetAttackCounter());
     }
 
     public int GetAttackCounter()
@@ -77,14 +78,11 @@ public class Player : Entity
         return _attackCounter;
     }
 
+    #endregion
+
     public bool IsGrounded()
     {
-        return _colliderChecker.IsColliding();
-    }
-
-    public bool IsTriggered()
-    {
-        return _animEvent.IsTriggered();
+        return _colliderChecker.IsChecked();
     }
 
     public Vector2 GetVelocity()
@@ -128,11 +126,10 @@ public class Player : Entity
         }
     }
 
-    private void Flip()
+    public override void Die()
     {
-        isFacingRight = !isFacingRight;
-        facingDir = -facingDir;
-        transform.Rotate(0, 180, 0);
+        base.Die();
+        stateMachine.ChangeState(deathState);
     }
 
     private void OnDrawGizmos()

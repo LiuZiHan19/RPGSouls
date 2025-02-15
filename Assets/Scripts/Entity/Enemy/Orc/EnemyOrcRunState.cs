@@ -1,18 +1,21 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public class EnemyOrcRunState : MonoBehaviour
+public class EnemyOrcRunState : EnemyOrcState
 {
-    // Start is called before the first frame update
-    void Start()
+    public EnemyOrcRunState(StateMachine stateMachine, string animBoolName, Entity entity) : base(stateMachine,
+        animBoolName, entity)
     {
-        
     }
 
-    // Update is called once per frame
-    void Update()
+    public override void Update()
     {
-        
+        base.Update();
+        enemyOrc.Move();
+        if (enemyOrc.CanAttack())
+        {
+            stateMachine.ChangeState(enemyOrc.attackState);
+        }
+        else if (enemyOrc.IsCheckedPlayer() == false)
+        {
+            stateMachine.ChangeState(enemyOrc.idleState);
+        }
     }
 }

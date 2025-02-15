@@ -17,7 +17,7 @@ public abstract class JsonModel
             return value;
         }
 
-        Logger.Warning($"Missing or invalid key: '{key}' in JSON data. Returning default value: {defaultValue}. " +
+        Debugger.Warning($"Missing or invalid key: '{key}' in JSON data. Returning default value: {defaultValue}. " +
                        $"Ensure that the key exists and is a valid integer.");
         return defaultValue;
     }
@@ -29,7 +29,7 @@ public abstract class JsonModel
             return jsonData[key].ToString();
         }
 
-        Logger.Warning($"Missing or invalid key: '{key}' in JSON data. Returning default value: {defaultValue}. " +
+        Debugger.Warning($"Missing or invalid key: '{key}' in JSON data. Returning default value: {defaultValue}. " +
                        $"Ensure that the key exists and is a valid string.");
         return defaultValue;
     }

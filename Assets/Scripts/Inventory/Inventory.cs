@@ -29,7 +29,7 @@ public class Inventory : Singleton<Inventory>
                 items[inventoryItemSo.itemType].Add();
                 break;
             default:
-                Logger.Error($"[Inventory Add Item Error] 无效的物品类型: {itemSo.itemBaseType}. " +
+                Debugger.Error($"[Inventory Add Item Error] 无效的物品类型: {itemSo.itemBaseType}. " +
                              $"物品名称: {itemSo.name}, 物品ID: {itemSo.id}, " +
                              $"物品类型的枚举值: {Enum.GetName(typeof(E_InventoryItemBase), itemSo.itemBaseType)}. " +
                              "请检查该物品的类型和数据设置。");

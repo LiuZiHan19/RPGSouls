@@ -1,7 +1,9 @@
+using System;
 using UnityEngine;
 
 public class PlayerAnimEvent : AnimEvent
 {
+    public LayerMask attackLayer;
     private Player _player;
 
     protected override void Start()
@@ -12,31 +14,44 @@ public class PlayerAnimEvent : AnimEvent
 
     public void Attack1()
     {
-        Collider2D[] cds = Physics2D.OverlapCircleAll(_player.attackPoint.position, _player.attackRangeArray[0],
-            LayerMask.NameToLayer("Enemy"));
-        foreach (var cd in cds)
-        {
-            _player.playerStats.DoDamage(cd.GetComponent<Entity>().entityStats);
-        }
+        Attack(0);
     }
 
     public void Attack2()
     {
-        Collider2D[] cds = Physics2D.OverlapCircleAll(_player.attackPoint.position, _player.attackRangeArray[1],
-            LayerMask.NameToLayer("Enemy"));
-        foreach (var cd in cds)
-        {
-            _player.playerStats.DoDamage(cd.GetComponent<Entity>().entityStats);
-        }
+        Attack(1);
     }
 
     public void Attack3()
     {
-        Collider2D[] cds = Physics2D.OverlapCircleAll(_player.attackPoint.position, _player.attackRangeArray[2],
-            LayerMask.NameToLayer("Enemy"));
+        Attack(2);
+    }
+
+    private void Attack(int rangeIndex)
+    {
+        // LayerMask.NameToLayer("Enemy") 检测不了 默认检测default层
+        Collider2D[] cds =
+            Physics2D.OverlapCircleAll(_player.attackPoint.position, _player.attackRangeArray[rangeIndex], attackLayer);
         foreach (var cd in cds)
         {
-            _player.playerStats.DoDamage(cd.GetComponent<Entity>().entityStats);
+            AlmightyStats almightyStats = _player.entityStats as AlmightyStats;
+            EntityStats stats = cd.GetComponent<Entity>().entityStats;
+            switch (stats.statsType)
+            {
+                case E_CharacterStats.Almighty:
+                    almightyStats.DoDamage(stats as AlmightyStats);
+                    break;
+                case E_CharacterStats.Mage:
+                    almightyStats.DoDamage(stats as MageStats);
+                    break;
+                case E_CharacterStats.Warrior:
+                    almightyStats.DoDamage(stats as WarriorStats);
+                    break;
+                default:
+                    Debugger.Error(
+                        $"Unknown CharacterStats: {stats.statsType}. Please check the input value and ensure it is one of the valid CharacterStats enum values.");
+                    break;
+            }
         }
     }
 }

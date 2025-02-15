@@ -48,7 +48,7 @@ public abstract class UIBehaviour : IDisposable
     {
         T t = UITransform.Find(path).GetComponent<T>();
         if (t == null)
-            Logger.Error($"[UIBehaviour] Failed to find component of type '{typeof(T).Name}' at path '{path}'");
+            Debugger.Error($"[UIBehaviour] Failed to find component of type '{typeof(T).Name}' at path '{path}'");
         return t;
     }
 
