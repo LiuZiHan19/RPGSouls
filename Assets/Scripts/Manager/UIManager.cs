@@ -76,7 +76,7 @@ public class UIManager : Singleton<UIManager>
         if (_loadingView != null) return;
         _loadingView = new LoadingView();
         GameObject loadingViewObj = ResourceLoader.Instance.LoadObjFromResources("UI/LoadingView");
-        _loadingView.SetObject(loadingViewObj);
+        _loadingView.SetDisplayObject(loadingViewObj);
         SetObjectToLayer(loadingViewObj.transform, UILayer.Top);
     }
 

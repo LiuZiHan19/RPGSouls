@@ -30,9 +30,9 @@ public class GameManager : MonoBehaviour, IDisposable
         GameDataManager.Instance.Initialize();
         ResourceLoader.Instance.Initialize();
         SceneManager.Instance.Initialize();
-        Inventory.Instance.Initialize();
         JsonManager.Instance.Initialize();
         PlayerPrefsManager.Instance.Initialize();
+        EventManager.Instance.Initialize();
 
         UIManager.Instance.ShowMenuView();
         AudioManager.Instance.PlayBgm("Audio/MenuBgm");
@@ -79,5 +79,6 @@ public class GameManager : MonoBehaviour, IDisposable
         EventDispatcher.OnClickPlay -= OnClickPlayBtn;
         EventDispatcher.OnClickPlayAgain -= OnClickPlayAgainBtn;
         EventDispatcher.OnClickReturn -= OnClickReturnBtn;
+        Inventory.Instance?.Dispose();
     }
 }

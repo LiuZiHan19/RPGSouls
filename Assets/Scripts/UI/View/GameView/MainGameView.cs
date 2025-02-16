@@ -30,6 +30,7 @@ public class MainGameView : UIBehaviour
 
     private void OnClickInventoryBtn()
     {
+        NotifyViewEvent(global::EventConst.OnClickInventory);
     }
 
     private void OnClickSkillBtn()

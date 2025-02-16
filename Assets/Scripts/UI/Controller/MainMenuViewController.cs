@@ -6,14 +6,14 @@ public class MainMenuViewController : UIController
 
     public override void Initialise()
     {
-        _mainMenuView = new MainMenuView();
-        GameObject mainMenuViewObj = ResourceLoader.Instance.LoadObjFromResources("UI/MainMenuView");
-        _mainMenuView.SetObject(mainMenuViewObj);
-        UIManager.Instance.SetObjectToLayer(mainMenuViewObj.transform, UILayer.Top);
+        ShowMenuView();
     }
+
+    #region Menu View
 
     public void ShowMenuView()
     {
+        CreateMenuView();
         _mainMenuView.Show();
     }
 
@@ -22,9 +22,19 @@ public class MainMenuViewController : UIController
         _mainMenuView.Hide();
     }
 
+    private void CreateMenuView()
+    {
+        _mainMenuView = new MainMenuView();
+        GameObject mainMenuViewObj = ResourceLoader.Instance.LoadObjFromResources("UI/MainMenuView");
+        _mainMenuView.SetDisplayObject(mainMenuViewObj);
+        UIManager.Instance.SetObjectToLayer(mainMenuViewObj.transform, UILayer.Top);
+    }
+
+    #endregion
+
     public override void Dispose()
     {
-        _mainMenuView.Dispose();
+        _mainMenuView?.Dispose();
         _mainMenuView = null;
     }
 }

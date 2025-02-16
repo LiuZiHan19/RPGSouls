@@ -1,7 +1,16 @@
+using System;
+
+[Serializable]
 public class InventoryItem
 {
     public int number;
-    public InventoryItemBaseSO ItemSo;
+    public InventoryItemBaseSO itemSO;
+
+    public InventoryItem(InventoryItemBaseSO itemSO)
+    {
+        this.itemSO = itemSO;
+        number = 1;
+    }
 
     public void Add()
     {

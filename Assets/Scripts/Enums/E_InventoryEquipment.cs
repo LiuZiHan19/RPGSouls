@@ -1,10 +1,16 @@
 public enum E_InventoryEquipment
 {
-    FlameSword,           // 火焰之剑：增加攻击力和暴击伤害
-    IceShield,            // 冰霜盾牌：增加防御力和魔法抗性
-    DragonArmor,          // 龙鳞铠甲：增加生命值和物理抗性
-    HealingStaff,         // 治疗法杖：增加魔法抗性和生命恢复
-    MysticRing,           // 神秘戒指：增加敏捷和暴击几率
-    StrengthBoots,        // 力量靴：增加力量和攻击力
-    AgilityCloak,         // 敏捷披风：增加敏捷和闪避几率
+    WoodenSword, // 木剑
+    IronSword, // 铁剑
+    SteelSword, // 钢剑
+    IceSword, // 冰剑
+    FlameSword, // 火剑
+    ThunderClaw, // 雷剑
+    BloodSword, // 血剑
+    Cutlass, // 弯刀
+    KnightSword, // 骑士剑
+    BattleAxe, // 战斧
+    TwinAxes, // 双战斧
+    MorningStar, // 晨星锤
+    SpikedMace // 钉锤
 }

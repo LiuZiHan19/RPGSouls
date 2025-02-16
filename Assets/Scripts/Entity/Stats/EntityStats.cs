@@ -21,7 +21,7 @@ public abstract class EntityStats : MonoBehaviour
     private float burnTimer;
     private Entity entity;
 
-    protected void Awake()
+    protected virtual void Awake()
     {
         entity = GetComponent<Entity>();
         currentHealth = maxHealth.GetValue();

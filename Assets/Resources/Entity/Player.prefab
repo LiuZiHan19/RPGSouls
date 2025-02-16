@@ -134,7 +134,7 @@ GameObject:
   - component: {fileID: 6415397159839206981}
   - component: {fileID: 2886264239127598954}
   - component: {fileID: 7588449870969328595}
-  - component: {fileID: 8424975375757068371}
+  - component: {fileID: 87875002659583521}
   m_Layer: 10
   m_Name: Player
   m_TagString: player
@@ -172,11 +172,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 977ca46dbf4747688c489fe53b300f3f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: 
   entityName: Player
   animator: {fileID: 870473802377386852}
   moveSpeed: 10
-  attackRange: 0
   isFacingRight: 1
   facingDir: 1
   entityStats: {fileID: 0}
@@ -251,7 +249,7 @@ CapsuleCollider2D:
   m_Offset: {x: -0.09061408, y: 1.4125922}
   m_Size: {x: 1.2901556, y: 2.5097976}
   m_Direction: 0
---- !u!114 &8424975375757068371
+--- !u!114 &87875002659583521
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -260,16 +258,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 5316396864654202074}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ee7c032ec6ff73641a5844acc7511d89, type: 3}
+  m_Script: {fileID: 11500000, guid: 84c65c8940114048bc96455134d2cbd7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   statsType: 0
   currentHealth: 0
   maxHealth:
-    baseValue: 200
+    baseValue: 0
     modifiers: 
   attackPower:
-    baseValue: 20
+    baseValue: 0
     modifiers: 
   magicPower:
     baseValue: 0
