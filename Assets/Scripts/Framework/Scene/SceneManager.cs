@@ -5,7 +5,7 @@ public class SceneManager : Singleton<SceneManager>
 {
     public void LoadSceneAsync(string sceneName, UnityAction callback = null, float delayCallback = 0f)
     {
-        CoroutineManager.Instance.StartCoroutine(IELoadSceneAsync(sceneName, callback, delayCallback));
+        CoroutineManager.Instance.StartCor(IELoadSceneAsync(sceneName, callback, delayCallback));
     }
 
     private IEnumerator IELoadSceneAsync(string sceneName, UnityAction callback = null, float delayCallback = 0f)
