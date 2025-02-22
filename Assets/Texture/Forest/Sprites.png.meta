@@ -1984,7 +1984,7 @@ TextureImporter:
         width: 16
         height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -2005,7 +2005,7 @@ TextureImporter:
         width: 16
         height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -2013,6 +2013,132 @@ TextureImporter:
       bones: []
       spriteID: fb780324354586c4db924149bf40afda
       internalID: -890148158
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sprites_0
+      rect:
+        serializedVersion: 2
+        x: 768
+        y: 368
+        width: 256
+        height: 272
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: aacb894453985804bb3bbdea2a989ffa
+      internalID: -1623839758
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UIBg1
+      rect:
+        serializedVersion: 2
+        x: 1024
+        y: 368
+        width: 256
+        height: 272
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 91ea096af297eb341b20cb94a9373052
+      internalID: 1080813101
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UIBg2
+      rect:
+        serializedVersion: 2
+        x: 768
+        y: 369
+        width: 256
+        height: 271
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d0b2f24ac2edfae449bb36677e32207c
+      internalID: -218324682
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UIBg3
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 369
+        width: 255
+        height: 271
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4784305cb20ffa44f937b9010f761a7e
+      internalID: -1383334116
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UIBg4
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 369
+        width: 256
+        height: 271
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4ddf63c1851f8b247afb5b59573555b0
+      internalID: -327333574
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UIBg5
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 369
+        width: 255
+        height: 271
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4832ee890748ff74385cc5e654a8bc8e
+      internalID: 331858382
       vertices: []
       indices: 
       edges: []
@@ -2038,6 +2164,7 @@ TextureImporter:
       Plant3: 2018053615
       Plant4: -400365580
       Plant5: -116768579
+      Sprites_0: -1623839758
       Stone1: 1746087828
       Stone2: -2145294881
       Stone3: -1019068024
@@ -2117,6 +2244,11 @@ TextureImporter:
       Tree6: 1892446599
       Tree7: -1897294959
       Tree8: -1485331619
+      UIBg1: 1080813101
+      UIBg2: -218324682
+      UIBg3: -1383334116
+      UIBg4: -327333574
+      UIBg5: 331858382
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

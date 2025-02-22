@@ -1,7 +1,9 @@
+using System;
 using UnityEngine;
 
 public class Enemy : Entity
 {
+    public GameObject[] dropItems;
     public float attackRange;
     public float canAttackRange;
     public Transform attackPoint;

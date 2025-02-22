@@ -126,10 +126,27 @@ public class Player : Entity
         }
     }
 
+    public void PlayAttackSfx()
+    {
+        switch (_attackCounter)
+        {
+            case 1:
+                SoundManager.Instance.PlaySfx("Sound/sfx_attack1");
+                break;
+            case 2:
+                SoundManager.Instance.PlaySfx("Sound/sfx_attack2");
+                break;
+            case 3:
+                SoundManager.Instance.PlaySfx("Sound/sfx_attack3");
+                break;
+        }
+    }
+
     public override void Die()
     {
         base.Die();
         stateMachine.ChangeState(deathState);
+        EventDispatcher.OnPlayerDead?.Invoke();
     }
 
     private void OnDrawGizmos()

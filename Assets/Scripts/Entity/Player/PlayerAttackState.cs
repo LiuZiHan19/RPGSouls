@@ -8,6 +8,7 @@ public class PlayerAttackState : PlayerState
     public override void Enter()
     {
         player.SetAttackAnim();
+        player.PlayAttackSfx();
         base.Enter();
     }
 

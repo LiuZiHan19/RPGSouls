@@ -6,7 +6,7 @@ public class DeadZone : MonoBehaviour
     {
         if (other.tag == "player")
         {
-            EventDispatcher.OnPlayerDead?.Invoke();
+            other.GetComponent<Player>().Die();
         }
     }
 }

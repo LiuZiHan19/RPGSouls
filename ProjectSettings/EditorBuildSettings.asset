@@ -12,6 +12,6 @@ EditorBuildSettings:
     path: Assets/Scenes/GameSceneForest.unity
     guid: 1d33c9c54140d5c449a859b4c75dbfc7
   - enabled: 1
-    path: Assets/Scenes/GameSceneCity.unity
+    path: Assets/Scenes/GameSceneOldTown.unity
     guid: 2cda990e2423bbf4892e6590ba056729
   m_configObjects: {}

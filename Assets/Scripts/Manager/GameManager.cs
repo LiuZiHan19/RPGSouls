@@ -24,8 +24,8 @@ public class GameManager : MonoBehaviour, IDisposable
     private void InitGameSystem()
     {
         Debugger.Info("Init GameSystem");
-        AudioManager.Instance.Initialize();
-        AudioPool.Instance.Initialize();
+        SoundManager.Instance.Initialize();
+        SoundPool.Instance.Initialize();
         UIManager.Instance.Initialize();
         GameDataManager.Instance.Initialize();
         ResourceLoader.Instance.Initialize();
@@ -35,7 +35,7 @@ public class GameManager : MonoBehaviour, IDisposable
         EventManager.Instance.Initialize();
 
         UIManager.Instance.ShowMenuView();
-        AudioManager.Instance.PlayBgm("Audio/MenuBgm");
+        SoundManager.Instance.PlayBgm("Sound/MenuBgm");
 
         EventDispatcher.OnClickPlay += OnClickPlayBtn;
         EventDispatcher.OnClickPlayAgain += OnClickPlayAgainBtn;
@@ -44,13 +44,13 @@ public class GameManager : MonoBehaviour, IDisposable
 
     private void OnClickPlayBtn()
     {
-        AudioManager.Instance.StopBgm();
+        SoundManager.Instance.StopBgm();
         UIManager.Instance.ShowLoadingView();
         UIManager.Instance.HideMenuView();
         UIManager.Instance.ShowGameView();
         SceneManager.Instance.LoadSceneAsync("GameSceneForest", () =>
         {
-            AudioManager.Instance.PlayBgm("Audio/ForestBgm");
+            SoundManager.Instance.PlayBgm("Sound/ForestBgm");
             UIManager.Instance.HideLoadingView();
         });
     }
@@ -63,13 +63,13 @@ public class GameManager : MonoBehaviour, IDisposable
 
     private void OnClickReturnBtn()
     {
-        AudioManager.Instance.StopBgm();
+        SoundManager.Instance.StopBgm();
         UIManager.Instance.ShowLoadingView();
         UIManager.Instance.HideGameView();
         UIManager.Instance.ShowMenuView();
         SceneManager.Instance.LoadSceneAsync("MainMenuScene", () =>
         {
-            AudioManager.Instance.PlayBgm("Audio/MenuBgm");
+            SoundManager.Instance.PlayBgm("Sound/MenuBgm");
             UIManager.Instance.HideLoadingView();
         });
     }

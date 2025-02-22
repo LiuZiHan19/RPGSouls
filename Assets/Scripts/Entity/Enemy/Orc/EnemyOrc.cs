@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class EnemyOrc : Enemy
@@ -28,5 +29,9 @@ public class EnemyOrc : Enemy
     {
         base.Die();
         stateMachine.ChangeState(deathState);
+        foreach (var dropItem in dropItems)
+        {
+            Instantiate(dropItem, transform.position, Quaternion.identity);
+        }
     }
 }
