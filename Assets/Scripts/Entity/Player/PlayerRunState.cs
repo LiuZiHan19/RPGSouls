@@ -16,6 +16,7 @@ public class PlayerRunState : PlayerGroundState
     public override void Update()
     {
         base.Update();
+        if (IsReturn()) return;
         player.SetVelocity(player.GetMove());
         player.CheckFlip();
         if (player.GetInput().x == 0)

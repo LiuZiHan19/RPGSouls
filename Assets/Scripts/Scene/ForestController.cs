@@ -11,7 +11,7 @@ public class ForestController : MonoBehaviour
 
     private void Start()
     {
-        ResourceLoader.Instance.LoadObjFromResources("MainCamera");
+        ResourceLoader.Instance.LoadObjFromResources("Setting/MainCamera");
         GameObject player = ResourceLoader.Instance.LoadObjFromResources("Entity/Player");
         player.transform.position = _playerSpawnPoint.position;
     }

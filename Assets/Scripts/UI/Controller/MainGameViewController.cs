@@ -6,6 +6,7 @@ public class MainGameViewController : UIController
     private InventoryView _inventoryView;
     private SkillView _skillView;
     private DeadView _deadView;
+    private GameSettingView _gameSettingView;
 
     public override void Initialise()
     {
@@ -44,13 +45,21 @@ public class MainGameViewController : UIController
             case EventConst.OnClickInventory:
                 OnClickInventory();
                 break;
+            case EventConst.OnClickGameSetting:
+                OnClickGameSetting();
+                break;
         }
+    }
+
+    private void OnClickGameSetting()
+    {
+        TimeManager.Instance.PauseTime();
+        ShowGameSettingView();
     }
 
     private void OnClickInventory()
     {
-        TimeManager.Instance.PauseGame();
-        HideGameView();
+        TimeManager.Instance.PauseTime();
         ShowInventoryView();
     }
 
@@ -88,13 +97,13 @@ public class MainGameViewController : UIController
         _inventoryView = new InventoryView();
         GameObject obj = ResourceLoader.Instance.LoadObjFromResources("UI/InventoryView");
         _inventoryView.SetDisplayObject(obj);
-        _inventoryView.AddUIEvent(OnInventoryViewAction);
         UIManager.Instance.SetObjectToLayer(obj.transform, UILayer.Middle);
     }
 
     private void ShowInventoryView()
     {
         CreateInventoryView();
+        _inventoryView.DisplayTransform.SetAsLastSibling();
         _inventoryView.Show();
     }
 
@@ -103,21 +112,29 @@ public class MainGameViewController : UIController
         _inventoryView.Hide();
     }
 
-    private void OnInventoryViewAction(string evtType, object data)
+    #endregion
+
+    #region Game Setting View
+
+    private void CreateGameSettingView()
     {
-        switch (evtType)
-        {
-            case EventConst.OnClickCloseInventory:
-                OnClickCloseInventory();
-                break;
-        }
+        if (_gameSettingView != null) return;
+        _gameSettingView = new GameSettingView();
+        GameObject obj = ResourceLoader.Instance.LoadObjFromResources("UI/GameSettingView");
+        _gameSettingView.SetDisplayObject(obj);
+        UIManager.Instance.SetObjectToLayer(obj.transform, UILayer.Middle);
     }
 
-    private void OnClickCloseInventory()
+    private void ShowGameSettingView()
     {
-        TimeManager.Instance.ResumeGame();
-        HideInventoryView();
-        ShowGameView();
+        CreateGameSettingView();
+        _gameSettingView.DisplayTransform.SetAsLastSibling();
+        _gameSettingView.Show();
+    }
+
+    private void HideGameSettingView()
+    {
+        _gameSettingView.Hide();
     }
 
     #endregion
@@ -132,7 +149,6 @@ public class MainGameViewController : UIController
         _skillView?.Dispose();
         _skillView = null;
 
-        _inventoryView.RemoveUIEvent(OnInventoryViewAction);
         _inventoryView?.Dispose();
         _inventoryView = null;
 

@@ -39,14 +39,15 @@ public class MainGameView : UIBehaviour
 
     private void OnClickSettingBtn()
     {
+        NotifyViewEvent(global::EventConst.OnClickGameSetting);
     }
 
     public override void Dispose()
     {
         base.Dispose();
-        UnregisterButtonEvent(_inventoryBtn, OnClickInventoryBtn);
-        UnregisterButtonEvent(_skillBtn, OnClickSkillBtn);
-        UnregisterButtonEvent(_settingBtn, OnClickSettingBtn);
-        UnregisterButtonEvent(_craftBtn, OnClickCraftBtn);
+        UnRegisterButtonEvent(_inventoryBtn, OnClickInventoryBtn);
+        UnRegisterButtonEvent(_skillBtn, OnClickSkillBtn);
+        UnRegisterButtonEvent(_settingBtn, OnClickSettingBtn);
+        UnRegisterButtonEvent(_craftBtn, OnClickCraftBtn);
     }
 }

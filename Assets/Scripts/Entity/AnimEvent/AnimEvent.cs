@@ -1,8 +1,8 @@
 using UnityEngine;
 
-public class AnimEvent : MonoBehaviour
+public abstract class AnimEvent : MonoBehaviour
 {
-    private bool _isTrigger;
+    private bool _isTrigged;
 
     protected virtual void Awake()
     {
@@ -14,13 +14,13 @@ public class AnimEvent : MonoBehaviour
 
     public void Trigger()
     {
-        _isTrigger = true;
+        _isTrigged = true;
     }
 
     public bool IsTriggered()
     {
-        bool isTrigger = _isTrigger;
-        _isTrigger = false;
+        bool isTrigger = _isTrigged;
+        _isTrigged = false;
         return isTrigger;
     }
 }

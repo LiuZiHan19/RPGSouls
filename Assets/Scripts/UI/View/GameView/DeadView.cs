@@ -32,8 +32,8 @@ public class DeadView : UIBehaviour
 
     public override void Dispose()
     {
-        UnregisterButtonEvent(_playAgainBtn, OnClickPlayAgainBtn);
-        UnregisterButtonEvent(_returnBtn, OnClickReturnBtn);
+        UnRegisterButtonEvent(_playAgainBtn, OnClickPlayAgainBtn);
+        UnRegisterButtonEvent(_returnBtn, OnClickReturnBtn);
         base.Dispose();
     }
 }

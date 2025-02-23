@@ -37,8 +37,8 @@ public class MainMenuView : UIBehaviour
     protected override void RemoveEvent()
     {
         base.RemoveEvent();
-        UnregisterButtonEvent(_playBtn, OnClickPlayBtn);
-        UnregisterButtonEvent(_settingBtn, OnClickSettingBtn);
-        UnregisterButtonEvent(_exitBtn, OnClickExitBtn);
+        UnRegisterButtonEvent(_playBtn, OnClickPlayBtn);
+        UnRegisterButtonEvent(_settingBtn, OnClickSettingBtn);
+        UnRegisterButtonEvent(_exitBtn, OnClickExitBtn);
     }
 }

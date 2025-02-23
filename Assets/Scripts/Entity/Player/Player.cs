@@ -6,6 +6,7 @@ public class Player : Entity
     public float attackRecoveryCooldown;
     public float[] attackRangeArray;
     public Transform attackPoint;
+    public float rollForce;
 
     public PlayerIdleState idleState;
     public PlayerRunState runState;
@@ -14,7 +15,9 @@ public class Player : Entity
     public PlayerAttackState attackState;
     public PlayerDeathState deathState;
     public PlayerIdleBlockState idleBlockState;
+    public PlayerRollState rollState;
     public SkillManager skill;
+    public PlayerStats playerStats;
 
     private Rigidbody2D _rb;
     private ColliderChecker _colliderChecker;
@@ -29,7 +32,8 @@ public class Player : Entity
     {
         base.Awake();
         PlayerManager.Instance.Initialize();
-        skill = SkillManager.Instance;
+        playerStats = entityStats as PlayerStats;
+        skill = GetComponent<SkillManager>();
         _rb = GetComponent<Rigidbody2D>();
         _colliderChecker = GetComponentInChildren<ColliderChecker>();
 
@@ -40,6 +44,7 @@ public class Player : Entity
         attackState = new PlayerAttackState(stateMachine, "Attack", this);
         deathState = new PlayerDeathState(stateMachine, "Death", this);
         idleBlockState = new PlayerIdleBlockState(stateMachine, "IdleBlock", this);
+        rollState = new PlayerRollState(stateMachine, "Roll", this);
         stateMachine.Initialise(idleState);
     }
 

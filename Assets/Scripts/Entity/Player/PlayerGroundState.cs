@@ -19,5 +19,11 @@ public class PlayerGroundState : PlayerState
         {
             stateMachine.ChangeState(player.attackState);
         }
+
+        if (Input.GetKeyDown(KeyCode.F) && player.IsGrounded() && player.skill.skillRoll.CanRelease())
+        {
+            stateMachine.ChangeState(player.rollState);
+            isReturn = true;
+        }
     }
 }

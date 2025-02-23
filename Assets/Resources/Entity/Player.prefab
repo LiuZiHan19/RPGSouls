@@ -131,10 +131,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2007792949159350082}
-  - component: {fileID: 6415397159839206981}
   - component: {fileID: 2886264239127598954}
   - component: {fileID: 7588449870969328595}
+  - component: {fileID: 6415397159839206981}
   - component: {fileID: 87875002659583521}
+  - component: {fileID: 2811593826197797410}
+  - component: {fileID: 1822893470963798733}
   m_Layer: 10
   m_Name: Player
   m_TagString: player
@@ -160,33 +162,6 @@ Transform:
   - {fileID: 1444514938501622063}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6415397159839206981
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5316396864654202074}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 977ca46dbf4747688c489fe53b300f3f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  entityName: Player
-  animator: {fileID: 870473802377386852}
-  moveSpeed: 10
-  isFacingRight: 1
-  facingDir: 1
-  entityStats: {fileID: 0}
-  animEvent: {fileID: 0}
-  jumpForce: 25
-  attackRecoveryCooldown: 2.5
-  attackRangeArray:
-  - 1
-  - 1.25
-  - 1.5
-  attackPoint: {fileID: 1444514938501622063}
-  skill: {fileID: 0}
 --- !u!50 &2886264239127598954
 Rigidbody2D:
   serializedVersion: 4
@@ -249,6 +224,35 @@ CapsuleCollider2D:
   m_Offset: {x: -0.09061408, y: 1.4125922}
   m_Size: {x: 1.2901556, y: 2.5097976}
   m_Direction: 0
+--- !u!114 &6415397159839206981
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5316396864654202074}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 977ca46dbf4747688c489fe53b300f3f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  entityName: Player
+  animator: {fileID: 870473802377386852}
+  moveSpeed: 10
+  isFacingRight: 1
+  facingDir: 1
+  entityStats: {fileID: 0}
+  animEvent: {fileID: 0}
+  jumpForce: 25
+  attackRecoveryCooldown: 2.5
+  attackRangeArray:
+  - 1
+  - 1.25
+  - 1.5
+  attackPoint: {fileID: 1444514938501622063}
+  rollForce: 27
+  skill: {fileID: 0}
+  playerStats: {fileID: 0}
 --- !u!114 &87875002659583521
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -311,6 +315,35 @@ MonoBehaviour:
   ignite:
     baseValue: 0
     modifiers: 
+--- !u!114 &2811593826197797410
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5316396864654202074}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b1505d3188658ca44b9df43b94023232, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skillRoll: {fileID: 0}
+--- !u!114 &1822893470963798733
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5316396864654202074}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b0862987b13546b4875a04d6eb44c2fa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  price: 0
+  isUnlocked: 0
+  cooldown: 5
+  cooldownTimer: 0
 --- !u!1 &6887327075725101876
 GameObject:
   m_ObjectHideFlags: 0

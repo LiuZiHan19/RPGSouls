@@ -78,7 +78,7 @@ public abstract class UIBehaviour : IDisposable
         button.onClick.AddListener(action);
     }
 
-    protected void UnregisterButtonEvent(Button button, UnityAction action)
+    protected void UnRegisterButtonEvent(Button button, UnityAction action)
     {
         button.onClick.RemoveListener(action);
     }

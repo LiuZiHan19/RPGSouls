@@ -16,14 +16,13 @@ MonoBehaviour:
   name: SpikedMace
   itemBaseType: 0
   sprite: {fileID: -1386125032, guid: 9c1f6cfcfa260554faa7f49a4c98a6da, type: 3}
-  equipmentType: 12
   maxHealth: 0
   attackPower: 25
   armor: 0
   magicResistance: 0
   agility: 0
   intelligence: 0
-  strength: 0
+  strength: 7
   vitality: 0
   criticalPower: 0
   criticalChance: 0
@@ -31,3 +30,4 @@ MonoBehaviour:
   lighting: 0
   chill: 0
   ignite: 0
+  equipmentType: 12

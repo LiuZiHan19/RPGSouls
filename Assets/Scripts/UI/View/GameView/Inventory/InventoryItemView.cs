@@ -37,7 +37,7 @@ public class InventoryItemView : UIBehaviour
 
     protected override void RemoveEvent()
     {
-        UnregisterButtonEvent(_btn, OnClickBtn);
+        UnRegisterButtonEvent(_btn, OnClickBtn);
         base.RemoveEvent();
     }
 }

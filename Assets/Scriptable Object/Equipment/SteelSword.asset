@@ -16,9 +16,8 @@ MonoBehaviour:
   name: SteelSword
   itemBaseType: 0
   sprite: {fileID: 12819738, guid: 9c1f6cfcfa260554faa7f49a4c98a6da, type: 3}
-  equipmentType: 2
   maxHealth: 0
-  attackPower: 0
+  attackPower: 20
   armor: 0
   magicResistance: 0
   agility: 0
@@ -28,9 +27,7 @@ MonoBehaviour:
   criticalPower: 0
   criticalChance: 0
   evasion: 0
-  lightPower: 0
-  lightChance: 0
-  chillPower: 0
-  chillChance: 0
-  ignitePower: 0
-  igniteChance: 0
+  lighting: 0
+  chill: 0
+  ignite: 0
+  equipmentType: 2
