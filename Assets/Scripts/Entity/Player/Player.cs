@@ -16,7 +16,8 @@ public class Player : Entity
     public PlayerDeathState deathState;
     public PlayerIdleBlockState idleBlockState;
     public PlayerRollState rollState;
-    public SkillManager skill;
+
+    public SkillManager skill => SkillManager.Instance;
     public PlayerStats playerStats;
 
     private Rigidbody2D _rb;
@@ -33,7 +34,6 @@ public class Player : Entity
         base.Awake();
         PlayerManager.Instance.Initialize();
         playerStats = entityStats as PlayerStats;
-        skill = GetComponent<SkillManager>();
         _rb = GetComponent<Rigidbody2D>();
         _colliderChecker = GetComponentInChildren<ColliderChecker>();
 

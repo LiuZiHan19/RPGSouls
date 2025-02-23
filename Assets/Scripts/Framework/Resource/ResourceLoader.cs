@@ -26,4 +26,13 @@ public class ResourceLoader : Singleton<ResourceLoader>
         obj = GameObject.Instantiate(obj);
         return obj;
     }
+
+    public GameObject LoadObjFromResources(string path, Vector2 position, Quaternion quaternion)
+    {
+        GameObject obj = Resources.Load<GameObject>(path);
+        if (obj == null)
+            Debugger.Error($"Failed to load asset at path: {path}. Asset not found.");
+        obj = GameObject.Instantiate(obj, position, quaternion);
+        return obj;
+    }
 }

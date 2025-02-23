@@ -173,7 +173,7 @@ public class InventoryView : UIBehaviour
 
     private void CreateEquipmentViews()
     {
-        var equipments = Inventory.Instance.equipments;
+        var equipments = InventoryManager.Instance.equipments;
         foreach (var equipment in equipments)
         {
             CreateEquipmentView(equipment);
@@ -202,7 +202,7 @@ public class InventoryView : UIBehaviour
 
     private void CreateItemViews()
     {
-        var items = Inventory.Instance.items;
+        var items = InventoryManager.Instance.items;
         foreach (var item in items)
         {
             CreateItemView(item);
@@ -221,7 +221,7 @@ public class InventoryView : UIBehaviour
 
     private void CreateMaterialViews()
     {
-        var materials = Inventory.Instance.materials;
+        var materials = InventoryManager.Instance.materials;
         foreach (var material in materials)
         {
             CreateMaterialView(material);
@@ -240,7 +240,7 @@ public class InventoryView : UIBehaviour
 
     private void CreateConsumaleViews()
     {
-        var consumables = Inventory.Instance.consumables;
+        var consumables = InventoryManager.Instance.consumables;
         foreach (var consumable in consumables)
         {
             CreateConsumableView(consumable);

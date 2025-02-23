@@ -6,13 +6,13 @@ public class ForestController : MonoBehaviour
 
     private void Awake()
     {
-        _playerSpawnPoint = transform.Find("PlayerSpawnPoint");
+        _playerSpawnPoint = GameObject.Find("PlayerSpawnPoint").transform;
     }
 
     private void Start()
     {
         ResourceLoader.Instance.LoadObjFromResources("Setting/MainCamera");
-        GameObject player = ResourceLoader.Instance.LoadObjFromResources("Entity/Player");
-        player.transform.position = _playerSpawnPoint.position;
+        ResourceLoader.Instance.LoadObjFromResources("Entity/Player", _playerSpawnPoint.position,
+            Quaternion.identity);
     }
 }

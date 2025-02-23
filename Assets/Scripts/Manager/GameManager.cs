@@ -79,6 +79,6 @@ public class GameManager : MonoBehaviour, IDisposable
         EventDispatcher.OnClickPlay -= OnClickPlayBtn;
         EventDispatcher.OnClickPlayAgain -= OnClickPlayAgainBtn;
         EventDispatcher.OnClickReturn -= OnClickReturnBtn;
-        Inventory.Instance?.Dispose();
+        InventoryManager.Instance?.Dispose();
     }
 }

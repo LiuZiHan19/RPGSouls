@@ -30,6 +30,7 @@ public class PlayerAnimEvent : AnimEvent
     private void Attack(int rangeIndex)
     {
         // LayerMask.NameToLayer("Enemy") 检测不了 默认检测default层
+        EventDispatcher.PlayerAttack?.Invoke();
         Collider2D[] cds =
             Physics2D.OverlapCircleAll(_player.attackPoint.position, _player.attackRangeArray[rangeIndex], attackLayer);
         foreach (var cd in cds)
