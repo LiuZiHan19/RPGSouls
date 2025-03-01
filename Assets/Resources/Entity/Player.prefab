@@ -177,7 +177,7 @@ Rigidbody2D:
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 7.5
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 1d90916902ebe43ebb836b44c2bbb760, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -240,14 +240,20 @@ MonoBehaviour:
   moveSpeed: 10
   isFacingRight: 1
   facingDir: 1
+  knockbackForce: 10
   entityStats: {fileID: 0}
   animEvent: {fileID: 0}
+  entityFX: {fileID: 0}
   jumpForce: 25
   attackRecoveryCooldown: 2.5
   attackRangeArray:
   - 1
   - 1.25
   - 1.5
+  attackSlightForce:
+  - 2
+  - 3
+  - 4
   attackPoint: {fileID: 1444514938501622063}
   rollForce: 27
   playerStats: {fileID: 0}

@@ -4,13 +4,11 @@ public class MainGameView : UIBehaviour
 {
     private Button _inventoryBtn;
     private Button _skillBtn;
-    private Button _craftBtn;
     private Button _settingBtn;
 
     protected override void ParseComponent()
     {
         _inventoryBtn = FindComponent<Button>("Middle/OptionList/Inventory");
-        _craftBtn = FindComponent<Button>("Middle/OptionList/Craft");
         _skillBtn = FindComponent<Button>("Middle/OptionList/Skill");
         _settingBtn = FindComponent<Button>("Middle/OptionList/Setting");
     }
@@ -21,7 +19,6 @@ public class MainGameView : UIBehaviour
         RegisterButtonEvent(_inventoryBtn, OnClickInventoryBtn);
         RegisterButtonEvent(_skillBtn, OnClickSkillBtn);
         RegisterButtonEvent(_settingBtn, OnClickSettingBtn);
-        RegisterButtonEvent(_craftBtn, OnClickCraftBtn);
     }
 
     private void OnClickCraftBtn()
@@ -48,6 +45,5 @@ public class MainGameView : UIBehaviour
         UnRegisterButtonEvent(_inventoryBtn, OnClickInventoryBtn);
         UnRegisterButtonEvent(_skillBtn, OnClickSkillBtn);
         UnRegisterButtonEvent(_settingBtn, OnClickSettingBtn);
-        UnRegisterButtonEvent(_craftBtn, OnClickCraftBtn);
     }
 }

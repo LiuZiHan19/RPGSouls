@@ -28,6 +28,7 @@ public class InventoryManager : MonoSingleton<InventoryManager>, IDisposable
         switch (itemSO.itemBaseType)
         {
             case E_InventoryItemBase.Equipment:
+                if (currentWeapon != null) EventDispatcher.UnEquip?.Invoke(currentWeapon);
                 currentWeapon = itemSO as InventoryEquipmentSO;
                 RemoveItemByItemSO(itemSO);
                 break;

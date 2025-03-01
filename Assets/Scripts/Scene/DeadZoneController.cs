@@ -1,12 +1,13 @@
+using System;
 using UnityEngine;
 
 public class DeadZone : MonoBehaviour
 {
-    private void OnTriggerEnter2D(Collider2D other)
+    private void OnCollisionEnter2D(Collision2D other)
     {
-        if (other.tag == "player")
+        if (other.gameObject.tag == "player")
         {
-            other.GetComponent<Player>().Die();
+            other.gameObject.GetComponent<Player>().Die();
         }
     }
 }

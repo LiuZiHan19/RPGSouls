@@ -31,6 +31,7 @@ public abstract class EntityStats : MonoBehaviour
     {
         ChillLogic();
         IgniteLogic();
+        LightingLogic();
     }
 
     private void ChillLogic()
@@ -40,7 +41,21 @@ public abstract class EntityStats : MonoBehaviour
             chillTimer -= Time.deltaTime;
             if (chillTimer < 0)
             {
+                entity.entityFX.StopMagicStatusFX();
                 isChilled = false;
+            }
+        }
+    }
+
+    private void LightingLogic()
+    {
+        if (isShocked)
+        {
+            shockedTimer -= Time.deltaTime;
+            if (shockedTimer < 0)
+            {
+                entity.entityFX.StopMagicStatusFX();
+                isShocked = false;
             }
         }
     }
@@ -59,6 +74,7 @@ public abstract class EntityStats : MonoBehaviour
 
             if (igniteTimer < 0)
             {
+                entity.entityFX.StopMagicStatusFX();
                 isIgnited = false;
             }
         }
@@ -66,14 +82,6 @@ public abstract class EntityStats : MonoBehaviour
 
     public virtual void DoDamage(EntityStats target)
     {
-        if (target is AlmightyStats almightyStats)
-        {
-            if (almightyStats.CanEvasion()) return;
-        }
-        else if (target is MageStats mageStats)
-        {
-            if (mageStats.CanEvasion()) return;
-        }
     }
 
     public void TakeDamage(int damage)
@@ -88,14 +96,17 @@ public abstract class EntityStats : MonoBehaviour
         switch (status)
         {
             case E_MagicStatus.Ignite:
+                entity.entityFX.PlayMagicStatusFX(E_MagicStatus.Ignite);
                 isIgnited = true;
                 igniteTimer = 2.5f;
                 break;
             case E_MagicStatus.Chill:
+                entity.entityFX.PlayMagicStatusFX(E_MagicStatus.Chill);
                 isChilled = true;
                 chillTimer = 2.5f;
                 break;
             case E_MagicStatus.Lighting:
+                entity.entityFX.PlayMagicStatusFX(E_MagicStatus.Lighting);
                 isShocked = true;
                 shockedTimer = 2.5f;
                 break;
@@ -107,4 +118,18 @@ public abstract class EntityStats : MonoBehaviour
     }
 
     protected int GetRandomValue() => Random.Range(0, 101);
+
+    protected bool CanEvasion(EntityStats target)
+    {
+        if (target is AlmightyStats almightyStats)
+        {
+            if (almightyStats.CanEvasion()) return true;
+        }
+        else if (target is MageStats mageStats)
+        {
+            if (mageStats.CanEvasion()) return true;
+        }
+
+        return false;
+    }
 }

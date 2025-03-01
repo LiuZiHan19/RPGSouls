@@ -6,23 +6,21 @@ public class CoroutineManager : MonoSingletonAuto<CoroutineManager>
 {
     private List<Coroutine> _coroutines = new List<Coroutine>();
 
-    public Coroutine StartCor(IEnumerator coroutine)
+    public Coroutine IStartCoroutine(IEnumerator coroutine)
     {
         Coroutine cor = StartCoroutine(coroutine);
         _coroutines.Add(cor);
         return cor;
     }
 
-    public void StopCor(Coroutine coroutine)
+    public void IStopCoroutine(Coroutine coroutine)
     {
-        StopCoroutine(coroutine);
-    }
-
-    public void StopAllCor()
-    {
-        foreach (var coroutine in _coroutines)
+        if (coroutine == null)
         {
-            StopCor(coroutine);
+            Debugger.Warning("Coroutine is null");
+            return;
         }
+
+        StopCoroutine(coroutine);
     }
 }

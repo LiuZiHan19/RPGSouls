@@ -8,9 +8,9 @@ public class MainMenuView : UIBehaviour
 
     protected override void ParseComponent()
     {
-        _playBtn = FindComponent<Button>("Middle/OptionList/Viewport/Content/Play");
-        _settingBtn = FindComponent<Button>("Middle/OptionList/Viewport/Content/Setting");
-        _exitBtn = FindComponent<Button>("Middle/OptionList/Viewport/Content/Exit");
+        _playBtn = FindComponent<Button>("Middle/Play");
+        _settingBtn = FindComponent<Button>("Middle/Setting");
+        _exitBtn = FindComponent<Button>("Middle/Exit");
     }
 
     protected override void AddEvent()

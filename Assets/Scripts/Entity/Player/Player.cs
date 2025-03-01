@@ -5,6 +5,7 @@ public class Player : Entity
     public float jumpForce;
     public float attackRecoveryCooldown;
     public float[] attackRangeArray;
+    public float[] attackSlightForce;
     public Transform attackPoint;
     public float rollForce;
 

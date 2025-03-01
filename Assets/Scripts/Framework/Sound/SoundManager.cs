@@ -82,7 +82,7 @@ public class SoundManager : Singleton<SoundManager>
         audioSource.clip = ResourceLoader.Instance.LoadFromResources<AudioClip>(path);
         audioSource.loop = isLoop;
         audioSource.Play();
-        CoroutineManager.Instance.StartCor(WaitForAudioToEnd(audioSource.gameObject, audioSource));
+        CoroutineManager.Instance.IStartCoroutine(WaitForAudioToEnd(audioSource.gameObject, audioSource));
 
 #if UNITY_EDITOR
         audioSource.gameObject.name = "SfxObj";
@@ -105,7 +105,7 @@ public class SoundManager : Singleton<SoundManager>
         audioSource.clip = ResourceLoader.Instance.LoadFromResources<AudioClip>(path);
         audioSource.loop = isLoop;
         audioSource.Play();
-        CoroutineManager.Instance.StartCor(WaitForAudioToEnd(audioSource.gameObject, audioSource));
+        CoroutineManager.Instance.IStartCoroutine(WaitForAudioToEnd(audioSource.gameObject, audioSource));
 
 #if UNITY_EDITOR
         audioSource.gameObject.name = "SfxObj";

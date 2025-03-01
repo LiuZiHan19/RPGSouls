@@ -7,8 +7,10 @@ public abstract class Entity : MonoBehaviour
     public float moveSpeed;
     public bool isFacingRight = true;
     public float facingDir = 1;
+    public float knockbackForce;
     public EntityStats entityStats;
     public AnimEvent animEvent;
+    public EntityFX entityFX;
     protected StateMachine stateMachine;
     protected Collider collider;
     protected Rigidbody2D rb;
@@ -16,6 +18,7 @@ public abstract class Entity : MonoBehaviour
     protected virtual void Awake()
     {
         stateMachine = new StateMachine();
+        entityFX = GetComponent<EntityFX>();
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponentInChildren<Animator>();
         collider = GetComponent<Collider>();
@@ -63,6 +66,11 @@ public abstract class Entity : MonoBehaviour
     {
     }
 
+    public void Knockback(float knockbackForce)
+    {
+        rb.velocity = new Vector2(knockbackForce * -facingDir, rb.velocity.y);
+    }
+
     public void Flip()
     {
         isFacingRight = !isFacingRight;
@@ -73,6 +81,7 @@ public abstract class Entity : MonoBehaviour
     public virtual void Die()
     {
         Debugger.Info(entityName + " Die.");
+        entityFX.StopMagicStatusFX();
     }
 
     public bool IsTriggered()

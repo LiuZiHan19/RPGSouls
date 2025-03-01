@@ -1,31 +1,53 @@
 using System;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine.UI;
 
 public class InventoryView : UIBehaviour
 {
     private Button _closeBtn;
     private ScrollRect _inventoryScrollRect;
-    private ScrollRect _statScrollRect;
-    private InventorySlotView _equipmentSlotView;
-    private InventorySlotView _armorSlotView;
-    private InventorySlotView _potionSlotView;
-    private InventorySlotView _amuletSlotView;
+    private Image _equpSlotImage;
     private List<InventoryItemView> _equipmentViews = new List<InventoryItemView>();
     private List<InventoryItemView> _consumableViews = new List<InventoryItemView>();
     private List<InventoryItemView> _materialViews = new List<InventoryItemView>();
     private List<InventoryItemView> _itemViews = new List<InventoryItemView>();
-    private List<InventoryStatView> _statViews = new List<InventoryStatView>();
+    private TextMeshProUGUI _maxHealthStatText;
+    private TextMeshProUGUI _damageStatText;
+    private TextMeshProUGUI _magicPowerStatText;
+    private TextMeshProUGUI _armorStatText;
+    private TextMeshProUGUI _magicResistanceStatText;
+    private TextMeshProUGUI _igniteStatText;
+    private TextMeshProUGUI _chillStatText;
+    private TextMeshProUGUI _lightingStatText;
+    private TextMeshProUGUI _agilityStatText;
+    private TextMeshProUGUI _intelligenceStatText;
+    private TextMeshProUGUI _strengthStatText;
+    private TextMeshProUGUI _vitalityStatText;
+    private TextMeshProUGUI _criticalStatText;
+    private TextMeshProUGUI evasionStatText;
 
     protected override void ParseComponent()
     {
-        _closeBtn = FindComponent<Button>("Top/Close");
-        _inventoryScrollRect = FindComponent<ScrollRect>("Middle/InventoryPanel/Scroll View");
-        _statScrollRect = FindComponent<ScrollRect>("Middle/PlayerPanel/StatScrollView");
+        _maxHealthStatText = FindComponent<TextMeshProUGUI>("Middle/Left_Panel/Stats/Stat_MaxHealth/Value");
+        _damageStatText = FindComponent<TextMeshProUGUI>("Middle/Left_Panel/Stats/Stat_Damage/Value");
+        _magicPowerStatText = FindComponent<TextMeshProUGUI>("Middle/Left_Panel/Stats/Stat_MagicDamage/Value");
+        _armorStatText = FindComponent<TextMeshProUGUI>("Middle/Left_Panel/Stats/Stat_Armor/Value");
+        _magicResistanceStatText = FindComponent<TextMeshProUGUI>("Middle/Left_Panel/Stats/Stat_MagicResistance/Value");
+        _igniteStatText = FindComponent<TextMeshProUGUI>("Middle/Left_Panel/Stats/Stat_Ignite/Value");
+        _chillStatText = FindComponent<TextMeshProUGUI>("Middle/Left_Panel/Stats/Stat_Chill/Value");
+        _lightingStatText = FindComponent<TextMeshProUGUI>("Middle/Left_Panel/Stats2/Stat_Lighting/Value");
+        _agilityStatText = FindComponent<TextMeshProUGUI>("Middle/Left_Panel/Stats2/Stat_Agility/Value");
+        _intelligenceStatText = FindComponent<TextMeshProUGUI>("Middle/Left_Panel/Stats2/Stat_Intelligence/Value");
+        _strengthStatText = FindComponent<TextMeshProUGUI>("Middle/Left_Panel/Stats2/Stat_Strength/Value");
+        _vitalityStatText = FindComponent<TextMeshProUGUI>("Middle/Left_Panel/Stats2/Stat_Vtality/Value");
+        _criticalStatText = FindComponent<TextMeshProUGUI>("Middle/Left_Panel/Stats2/Stat_Critical/Value");
+        evasionStatText = FindComponent<TextMeshProUGUI>("Middle/Left_Panel/Stats2/Stat_Evasion/Value");
 
-        var equipmentSlotObj = FindGameObject("Middle/PlayerPanel/Equipment/Equipment");
-        _equipmentSlotView = new InventorySlotView();
-        _equipmentSlotView.SetDisplayObject(equipmentSlotObj);
+        _closeBtn = FindComponent<Button>("Middle/TopBar/Button_Home");
+        _inventoryScrollRect = FindComponent<ScrollRect>("Middle/Right_Panel/ScrollRect");
+
+        _equpSlotImage = FindComponent<Image>("Middle/Left_Panel/Character/EquipSlot_L/EquipFrameEmpty/Icon");
     }
 
     protected override void AddEvent()
@@ -40,13 +62,31 @@ public class InventoryView : UIBehaviour
     {
         base.Show();
         CreateInventoryItemViews();
-        CreateStatViews();
+        RefreshStat();
+    }
+
+    private void RefreshStat()
+    {
+        PlayerStats playerStats = PlayerManager.Instance.player.playerStats;
+        _maxHealthStatText.text = playerStats.maxHealth.GetValue().ToString();
+        _damageStatText.text = playerStats.attackPower.GetValue().ToString();
+        _magicPowerStatText.text = playerStats.magicPower.GetValue().ToString();
+        _armorStatText.text = playerStats.armor.GetValue().ToString();
+        _magicResistanceStatText.text = playerStats.magicResistance.GetValue().ToString();
+        _igniteStatText.text = playerStats.ignite.GetValue().ToString();
+        _chillStatText.text = playerStats.chill.GetValue().ToString();
+        _lightingStatText.text = playerStats.lighting.GetValue().ToString();
+        _agilityStatText.text = playerStats.agility.GetValue().ToString();
+        _intelligenceStatText.text = playerStats.intelligence.GetValue().ToString();
+        _strengthStatText.text = playerStats.strength.GetValue().ToString();
+        _vitalityStatText.text = playerStats.vitality.GetValue().ToString();
+        _criticalStatText.text = playerStats.criticalPower.GetValue().ToString();
+        evasionStatText.text = playerStats.evasion.GetValue().ToString();
     }
 
     public override void Hide()
     {
         DisposeInventoryItemViews();
-        DisposeStatViews();
 
         base.Hide();
     }
@@ -57,9 +97,8 @@ public class InventoryView : UIBehaviour
         {
             case E_InventoryItemBase.Equipment:
                 RemoveInventoryItemViewByItemSO(itemSO);
-                _equipmentSlotView.Refresh(itemSO);
-                DisposeStatViews();
-                CreateStatViews();
+                _equpSlotImage.sprite = itemSO.sprite;
+                RefreshStat();
                 break;
             default:
                 Debugger.Warning($"点击了未处理的物品类型：[{itemSO.itemBaseType}]，物品名称：{itemSO.name}");
@@ -113,53 +152,6 @@ public class InventoryView : UIBehaviour
 
         return false;
     }
-
-    #region Stat View
-
-    private void CreateStatViews()
-    {
-        PlayerStats stats = PlayerManager.Instance.player.playerStats;
-        CreateStatView("最大生命值", stats.maxHealth);
-        CreateStatView("攻击力", stats.attackPower);
-        CreateStatView("法强", stats.magicPower);
-
-        CreateStatView("暴击率", stats.criticalChance);
-        CreateStatView("暴击力", stats.criticalPower);
-
-        CreateStatView("护甲", stats.armor);
-        CreateStatView("魔法抗性", stats.magicResistance);
-
-        CreateStatView("敏捷", stats.agility);
-        CreateStatView("智力", stats.intelligence);
-        CreateStatView("力量", stats.strength);
-        CreateStatView("活力", stats.vitality);
-        CreateStatView("闪避", stats.evasion);
-
-        CreateStatView("雷霆", stats.lighting);
-        CreateStatView("寒冰", stats.chill);
-        CreateStatView("火焰", stats.ignite);
-    }
-
-    private void CreateStatView(string name, Stat stat)
-    {
-        InventoryStatView statView = new InventoryStatView();
-        var obj = ResourceLoader.Instance.LoadObjFromResources("UI/InventoryStatView");
-        UnityObjectHelper.Instance.SetParent(obj.transform, _statScrollRect.content);
-        statView.SetDisplayObject(obj);
-        statView.Refresh(name, stat.GetValue());
-        statView.Show();
-        _statViews.Add(statView);
-    }
-
-    private void DisposeStatViews()
-    {
-        foreach (var stat in _statViews)
-        {
-            stat.Dispose();
-        }
-    }
-
-    #endregion
 
     #region Create Inventory Item View
 

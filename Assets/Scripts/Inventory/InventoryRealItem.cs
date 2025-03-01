@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -12,7 +13,7 @@ public class InventoryRealItem : MonoBehaviour
         Pop();
     }
 
-    private void OnCollisionEnter2D(Collision2D other)
+    private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.tag == "player")
         {
@@ -25,11 +26,10 @@ public class InventoryRealItem : MonoBehaviour
     {
         _rb.velocity = new Vector2(Random.Range(-5f, 5f), Random.Range(16, 20f));
     }
-
+#if UNITY_EDITOR
     private void OnValidate()
     {
-#if UNITY_EDITOR
         if (itemData != null) gameObject.name = itemData.name;
-#endif
     }
+#endif
 }

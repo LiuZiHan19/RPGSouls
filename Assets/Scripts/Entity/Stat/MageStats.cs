@@ -7,7 +7,8 @@ public class MageStats : EntityStats
 
     public override void DoDamage(EntityStats target)
     {
-        base.DoDamage(target);
+        if (target.currentHealth <= 0) return;
+        if (CanEvasion(target)) return;
 
         if (CanChill()) target.SetMagicStatus(E_MagicStatus.Chill);
         if (CanLighting()) target.SetMagicStatus(E_MagicStatus.Lighting);

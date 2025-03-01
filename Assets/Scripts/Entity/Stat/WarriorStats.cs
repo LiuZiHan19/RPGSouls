@@ -9,7 +9,8 @@ public class WarriorStats : EntityStats
 
     public override void DoDamage(EntityStats target)
     {
-        base.DoDamage(target);
+        if (target.currentHealth <= 0) return;
+        if (CanEvasion(target)) return;
 
         int armor = target.armor.GetValue();
         if (target.isChilled) armor = (int)(armor * 0.8f);

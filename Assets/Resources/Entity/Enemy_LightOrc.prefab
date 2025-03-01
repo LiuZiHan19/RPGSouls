@@ -133,6 +133,7 @@ GameObject:
   - component: {fileID: 8337046109406994328}
   - component: {fileID: 8566632733605751828}
   - component: {fileID: 2706231909992399331}
+  - component: {fileID: 8551813988464233427}
   - component: {fileID: 1888793611218957782}
   - component: {fileID: 7809065608437446714}
   m_Layer: 15
@@ -177,8 +178,10 @@ MonoBehaviour:
   moveSpeed: 3
   isFacingRight: 0
   facingDir: -1
+  knockbackForce: 0
   entityStats: {fileID: 0}
   animEvent: {fileID: 0}
+  entityFX: {fileID: 0}
   dropItems:
   - {fileID: 7433652934378968809, guid: c467aec5fc4bb4d03ab011ed5ec9b0be, type: 3}
   - {fileID: 4739517714198453033, guid: 7717eabc905c244fcade58e2a0db739c, type: 3}
@@ -247,6 +250,18 @@ MonoBehaviour:
   criticalChance:
     baseValue: 10
     modifiers: 
+--- !u!114 &8551813988464233427
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4324335996493180898}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ffc9ac32d1e2460a8df5ba705900632, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!70 &1888793611218957782
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -298,7 +313,7 @@ Rigidbody2D:
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 7.5
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 1d90916902ebe43ebb836b44c2bbb760, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0

@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 public class PlayerAnimEvent : AnimEvent
@@ -31,10 +30,18 @@ public class PlayerAnimEvent : AnimEvent
     {
         // LayerMask.NameToLayer("Enemy") 检测不了 默认检测default层
         EventDispatcher.PlayerAttack?.Invoke();
+
+        // 施加轻微攻击移动力
+        _player.SetVelocity(new Vector2(_player.attackSlightForce[rangeIndex] * _player.facingDir,
+            _player.GetVelocity().y));
+
         Collider2D[] cds =
             Physics2D.OverlapCircleAll(_player.attackPoint.position, _player.attackRangeArray[rangeIndex], attackLayer);
         foreach (var cd in cds)
         {
+            // 施加击退力
+            cd.GetComponent<Entity>().Knockback(_player.knockbackForce);
+            
             AlmightyStats almightyStats = _player.entityStats as AlmightyStats;
             EntityStats stats = cd.GetComponent<Entity>().entityStats;
             switch (stats.statsType)

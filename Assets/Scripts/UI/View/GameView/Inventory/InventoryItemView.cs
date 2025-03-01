@@ -1,16 +1,17 @@
+using TMPro;
 using UnityEngine.UI;
 
 public class InventoryItemView : UIBehaviour
 {
     public InventoryItemBaseSO itemSO;
-    public Text numberText;
+    public TextMeshProUGUI numberText;
     private Image _iconImage;
     private Button _btn;
 
     protected override void ParseComponent()
     {
-        _iconImage = FindComponent<Image>("Icon");
-        numberText = FindComponent<Text>("Number");
+        _iconImage = FindComponent<Image>("GradeFrame/ItemIcon");
+        numberText = FindComponent<TextMeshProUGUI>("Number");
         _btn = DisplayObject.GetComponent<Button>();
     }
 
