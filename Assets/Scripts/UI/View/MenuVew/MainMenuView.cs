@@ -29,11 +29,12 @@ public class MainMenuView : UIBehaviour
 
     private void OnClickPlayBtn()
     {
-        EventDispatcher.OnClickPlay?.Invoke();
+        EventDispatcher.OnClickPlayBtn?.Invoke();
     }
 
     private void OnClickSettingBtn()
     {
+        NotifyViewEvent(EventConst.OnClickMenuSetting);
     }
 
     protected override void RemoveEvent()

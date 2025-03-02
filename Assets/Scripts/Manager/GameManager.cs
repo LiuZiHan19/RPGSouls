@@ -37,9 +37,9 @@ public class GameManager : MonoBehaviour, IDisposable
         UIManager.Instance.ShowMenuView();
         SoundManager.Instance.PlayBgm("Sound/music_menu");
 
-        EventDispatcher.OnClickPlay += OnClickPlayBtn;
-        EventDispatcher.OnClickPlayAgain += OnClickPlayAgainBtn;
-        EventDispatcher.OnClickReturn += OnClickReturnBtn;
+        EventDispatcher.OnClickPlayBtn += OnClickPlayBtn;
+        EventDispatcher.OnClickPlayAgainBtn += OnClickPlayAgainBtn;
+        EventDispatcher.OnClickReturnBtn += OnClickReturnBtn;
     }
 
     private void OnClickPlayBtn()
@@ -76,9 +76,9 @@ public class GameManager : MonoBehaviour, IDisposable
 
     public void Dispose()
     {
-        EventDispatcher.OnClickPlay -= OnClickPlayBtn;
-        EventDispatcher.OnClickPlayAgain -= OnClickPlayAgainBtn;
-        EventDispatcher.OnClickReturn -= OnClickReturnBtn;
+        EventDispatcher.OnClickPlayBtn -= OnClickPlayBtn;
+        EventDispatcher.OnClickPlayAgainBtn -= OnClickPlayAgainBtn;
+        EventDispatcher.OnClickReturnBtn -= OnClickReturnBtn;
         InventoryManager.Instance?.Dispose();
     }
 }

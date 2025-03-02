@@ -8,5 +8,17 @@ public class PlayerManager : Singleton<PlayerManager>
     {
         base.Initialize();
         player = GameObject.FindObjectOfType<Player>();
+        Debugger.Info("lzh " + Application.persistentDataPath);
+        JsonManager.Instance.LoadJsonDataAsync("PlayerData", value =>
+        {
+            if (value != null)
+            {
+                GameDataManager.Instance.ParsePlayerData(value);
+            }
+            else
+            {
+                Debugger.Warning("Load PlayerData Failed");
+            }
+        });
     }
 }

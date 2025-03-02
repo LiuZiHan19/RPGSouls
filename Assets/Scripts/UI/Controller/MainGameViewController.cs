@@ -48,7 +48,16 @@ public class MainGameViewController : UIController
             case EventConst.OnClickGameSetting:
                 OnClickGameSetting();
                 break;
+            case EventConst.OnClickSkill:
+                OnClickSkill();
+                break;
         }
+    }
+
+    private void OnClickSkill()
+    {
+        TimeManager.Instance.PauseTime();
+        ShowSkillView();
     }
 
     private void OnClickGameSetting()
@@ -110,6 +119,31 @@ public class MainGameViewController : UIController
     private void HideInventoryView()
     {
         _inventoryView.Hide();
+    }
+
+    #endregion
+
+    #region Skill View
+
+    private void CreateSkillView()
+    {
+        if (_skillView != null) return;
+        _skillView = new SkillView();
+        GameObject obj = ResourceLoader.Instance.LoadObjFromResources("UI/SkillView");
+        _skillView.SetDisplayObject(obj);
+        UIManager.Instance.SetObjectToLayer(obj.transform, UILayer.Middle);
+    }
+
+    private void ShowSkillView()
+    {
+        CreateSkillView();
+        _skillView.DisplayTransform.SetAsLastSibling();
+        _skillView.Show();
+    }
+
+    private void HideSkillView()
+    {
+        _skillView.Hide();
     }
 
     #endregion

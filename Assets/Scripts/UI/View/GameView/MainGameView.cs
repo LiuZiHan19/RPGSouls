@@ -27,16 +27,17 @@ public class MainGameView : UIBehaviour
 
     private void OnClickInventoryBtn()
     {
-        NotifyViewEvent(global::EventConst.OnClickInventory);
+        NotifyViewEvent(EventConst.OnClickInventory);
     }
 
     private void OnClickSkillBtn()
     {
+        NotifyViewEvent(EventConst.OnClickSkill);
     }
 
     private void OnClickSettingBtn()
     {
-        NotifyViewEvent(global::EventConst.OnClickGameSetting);
+        NotifyViewEvent(EventConst.OnClickGameSetting);
     }
 
     public override void Dispose()

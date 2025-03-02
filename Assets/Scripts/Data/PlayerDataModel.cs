@@ -2,12 +2,12 @@ using LitJson;
 
 public class PlayerDataModel : JsonModel
 {
-    public AlmightyStats playerStats;
+    public PlayerStats playerStats;
 
     public override void Parse(JsonData jsonData)
     {
         base.Parse(jsonData);
-        playerStats = PlayerManager.Instance.player.entityStats as AlmightyStats;
+        playerStats = PlayerManager.Instance.player.playerStats;
 
         if (jsonData.Keys.Contains("currentHealth") && jsonData["currentHealth"] != null)
         {

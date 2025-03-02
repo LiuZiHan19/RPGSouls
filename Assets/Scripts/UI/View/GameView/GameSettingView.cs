@@ -22,7 +22,7 @@ public class GameSettingView : UIBehaviour
     {
         Hide();
         TimeManager.Instance.ResumeTime();
-        EventDispatcher.OnClickReturn?.Invoke();
+        EventDispatcher.OnClickReturnBtn?.Invoke();
     }
 
     private void OnClickResumeBtn()

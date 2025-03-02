@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class EventDispatcher
 {
-    public static Action OnClickPlay
+    public static Action OnClickPlayBtn
     {
         get;
         set;
@@ -15,13 +15,13 @@ public class EventDispatcher
         set;
     }
 
-    public static Action OnClickPlayAgain
+    public static Action OnClickPlayAgainBtn
     {
         get; 
         set;
     }
 
-    public static Action OnClickReturn
+    public static Action OnClickReturnBtn
     {
         get; 
         set;
