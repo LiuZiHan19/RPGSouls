@@ -48,7 +48,7 @@ public class GameManager : MonoBehaviour, IDisposable
         UIManager.Instance.ShowLoadingView();
         UIManager.Instance.HideMenuView();
         UIManager.Instance.ShowGameView();
-        SceneManager.Instance.LoadSceneAsync("GameSceneForest", () =>
+        SceneManager.Instance.LoadSceneAsync("MainGameScene", () =>
         {
             SoundManager.Instance.PlayBgm("Sound/ForestBgm");
             UIManager.Instance.HideLoadingView();
@@ -58,7 +58,7 @@ public class GameManager : MonoBehaviour, IDisposable
     private void OnClickPlayAgainBtn()
     {
         UIManager.Instance.ShowLoadingView();
-        SceneManager.Instance.LoadSceneAsync("GameSceneForest", () => { UIManager.Instance.HideLoadingView(); });
+        SceneManager.Instance.LoadSceneAsync("MainGameScene", () => { UIManager.Instance.HideLoadingView(); });
     }
 
     private void OnClickReturnBtn()

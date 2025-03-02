@@ -3,6 +3,7 @@ using UnityEngine;
 public class PlayerAnimEvent : AnimEvent
 {
     public LayerMask attackLayer;
+    public Transform attackPoint;
     private Player _player;
 
     protected override void Start()
@@ -29,7 +30,7 @@ public class PlayerAnimEvent : AnimEvent
     private void Attack(int rangeIndex)
     {
         // LayerMask.NameToLayer("Enemy") 检测不了 默认检测default层
-        EventDispatcher.PlayerAttack?.Invoke();
+        EventDispatcher.PlayerAttack?.Invoke(attackPoint);
 
         // 施加轻微攻击移动力
         _player.SetVelocity(new Vector2(_player.attackSlightForce[rangeIndex] * _player.facingDir,
@@ -41,7 +42,7 @@ public class PlayerAnimEvent : AnimEvent
         {
             // 施加击退力
             cd.GetComponent<Entity>().Knockback(_player.knockbackForce);
-            
+
             AlmightyStats almightyStats = _player.entityStats as AlmightyStats;
             EntityStats stats = cd.GetComponent<Entity>().entityStats;
             switch (stats.statsType)

@@ -892,7 +892,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Transparent_Icon_36
+      name: Roll
       rect:
         serializedVersion: 2
         x: 416
@@ -913,7 +913,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Transparent_Icon_37
+      name: Clone
       rect:
         serializedVersion: 2
         x: 448
@@ -6112,12 +6112,14 @@ TextureImporter:
     nameFileIdTable:
       BattleAxe: -1620034974
       BloodSword: -2020690341
+      Clone: -1234029932
       Cutlass: 604876724
       FlameSword: -497172145
       IceSword: -2040040740
       IronSword: 198407749
       KnightSword: 832288536
       MorningStar: 1540613961
+      Roll: 76475110
       SpikedMace: -1386125032
       SteelSword: 12819738
       ThunderClaw: -966611831
@@ -6334,8 +6336,6 @@ TextureImporter:
       Transparent_Icon_33: -228615479
       Transparent_Icon_34: -863920076
       Transparent_Icon_35: 1202896825
-      Transparent_Icon_36: 76475110
-      Transparent_Icon_37: -1234029932
       Transparent_Icon_38: -970940226
       Transparent_Icon_39: -551984144
       Transparent_Icon_4: 2054760542

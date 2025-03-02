@@ -1,3 +1,4 @@
+using UnityEngine;
 using UnityEngine.UI;
 
 public class MainMenuView : UIBehaviour
@@ -23,6 +24,7 @@ public class MainMenuView : UIBehaviour
 
     private void OnClickExitBtn()
     {
+        Application.Quit();
     }
 
     private void OnClickPlayBtn()

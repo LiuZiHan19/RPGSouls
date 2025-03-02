@@ -11,6 +11,7 @@ public class PlayerRollState : PlayerState
     {
         base.Enter();
         player.SetVelocity(new Vector2(player.rollForce * player.facingDir, player.GetVelocity().y));
+        player.skill.skillClone.Clone(player);
     }
 
     public override void Update()
@@ -21,5 +22,11 @@ public class PlayerRollState : PlayerState
             player.SetVelocity(Vector2.zero);
             stateMachine.ChangeState(player.idleState);
         }
+    }
+
+    public override void Exit()
+    {
+        player.skill.skillClone.Clone(player);
+        base.Exit();
     }
 }

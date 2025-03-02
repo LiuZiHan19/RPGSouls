@@ -1,4 +1,5 @@
 using System;
+using UnityEngine;
 
 public class EventDispatcher
 {
@@ -44,7 +45,7 @@ public class EventDispatcher
         set;
     }
 
-    public static Action PlayerAttack
+    public static Action<Transform> PlayerAttack
     {
         get;
         set;

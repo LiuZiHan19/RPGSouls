@@ -11,69 +11,39 @@ public class PlayerFX : EntityFX
         EventDispatcher.PlayerAttack += PlayAttackFX;
     }
 
-    public void PlayAttackFX()
+    public void PlayAttackFX(Transform transform)
     {
         if (InventoryManager.Instance.currentWeapon == null) return;
 
         if (InventoryManager.Instance.currentWeapon.equipmentType == E_InventoryEquipment.FlameSword)
-        {
-            PlayFlameFX();
-        }
+            PlayIgniteFX(transform);
         else if (InventoryManager.Instance.currentWeapon.equipmentType == E_InventoryEquipment.IceSword)
-        {
-            PlayIceFX();
-        }
+            PlayChillFX(transform);
         else if (InventoryManager.Instance.currentWeapon.equipmentType == E_InventoryEquipment.ThunderClaw)
-        {
-            PlayLightingFX();
-        }
+            PlayLightingFX(transform);
     }
 
-    public void PlayFlameFX()
+    public void PlayIgniteFX(Transform transform)
     {
         if (_player.facingDir == 1)
-        {
-            ResourceLoader.Instance.LoadObjFromResources("FX/FlameFX",
-                _player.attackPoint.position + Vector3.up * 2 + Vector3.right * _player.facingDir,
-                Quaternion.identity);
-        }
+            FXPool.Instance.GetIgniteFx(transform).PlayFX();
         else
-        {
-            ResourceLoader.Instance.LoadObjFromResources("FX/FlameFX",
-                _player.attackPoint.position + Vector3.up * 2 + Vector3.right * _player.facingDir,
-                Quaternion.Euler(0, 180, 0));
-        }
+            FXPool.Instance.GetIgniteFx(transform, new Vector3(0, 180, 0)).PlayFX();
     }
 
-    public void PlayIceFX()
+    public void PlayChillFX(Transform transform)
     {
         if (_player.facingDir == 1)
-        {
-            ResourceLoader.Instance.LoadObjFromResources("FX/IceFX",
-                _player.attackPoint.position + Vector3.right * _player.facingDir,
-                Quaternion.identity);
-        }
+            FXPool.Instance.GetChillFx(transform).PlayFX();
         else
-        {
-            ResourceLoader.Instance.LoadObjFromResources("FX/IceFX",
-                _player.attackPoint.position + Vector3.right * _player.facingDir,
-                Quaternion.Euler(0, 180, 0));
-        }
+            FXPool.Instance.GetChillFx(transform, new Vector3(0, 180, 0)).PlayFX();
     }
 
-    public void PlayLightingFX()
+    public void PlayLightingFX(Transform transform)
     {
         if (_player.facingDir == 1)
-        {
-            ResourceLoader.Instance.LoadObjFromResources("FX/ThunderFX",
-                _player.attackPoint.position + Vector3.right * _player.facingDir,
-                Quaternion.identity);
-        }
+            FXPool.Instance.GetLightingFx(transform).PlayFX();
         else
-        {
-            ResourceLoader.Instance.LoadObjFromResources("FX/ThunderFX",
-                _player.attackPoint.position + Vector3.right * _player.facingDir,
-                Quaternion.Euler(0, 180, 0));
-        }
+            FXPool.Instance.GetLightingFx(transform, new Vector3(0, 180, 0)).PlayFX();
     }
 }

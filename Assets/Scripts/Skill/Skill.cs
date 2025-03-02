@@ -22,4 +22,9 @@ public abstract class Skill : MonoBehaviour
 
         return false;
     }
+
+    public virtual void Release()
+    {
+
+    }
 }
