@@ -10,7 +10,7 @@ public class PlayerRunState : PlayerGroundState
     public override void Enter()
     {
         base.Enter();
-        _runSfx = SoundManager.Instance.PlaySfx("Sound/sfx_footsteps", true);
+        _runSfx = SoundManager.Instance.PlaySfx("Sound/sfx_grass_step", true);
     }
 
     public override void Update()

@@ -8,7 +8,7 @@ public class ButtonHoverDetector : MonoBehaviour, IPointerEnterHandler, IPointer
     public void OnPointerEnter(PointerEventData eventData)
     {
         isHovering = true;
-        SoundManager.Instance.PlaySfx("Sound/001_Hover_01");
+        SoundManager.Instance.PlaySfx("Sound/sfx_btn_hover");
     }
 
     public void OnPointerExit(PointerEventData eventData)

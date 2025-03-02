@@ -151,7 +151,7 @@ public class Player : Entity
     public override void Die()
     {
         base.Die();
-        SoundManager.Instance.PlaySfx("Sound/sfx_death_screen");
+        SoundManager.Instance.PlaySfx("Sound/sfx_death");
         stateMachine.ChangeState(deathState);
         EventDispatcher.OnPlayerDead?.Invoke();
     }

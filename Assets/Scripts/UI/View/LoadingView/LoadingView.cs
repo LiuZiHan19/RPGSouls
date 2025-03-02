@@ -1,19 +1,18 @@
 using System.Collections;
 using UnityEngine;
-using TMPro;
 using UnityEngine.UI;
 
 public class LoadingView : UIBehaviour
 {
     private Slider _progressSlider;
-    private TextMeshProUGUI _progressText;
+    private Text _progressText;
     private float smoothSpeed = 50f;
     private float accelerateSpeed = 100f;
 
     protected override void ParseComponent()
     {
         _progressSlider = FindComponent<Slider>("Slider_LoadingBar");
-        _progressText = FindComponent<TextMeshProUGUI>("Slider_LoadingBar/Text_LoadingValue");
+        _progressText = FindComponent<Text>("Slider_LoadingBar/Text_LoadingValue");
     }
 
     public override void Show()

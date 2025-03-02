@@ -35,7 +35,7 @@ public class GameManager : MonoBehaviour, IDisposable
         EventManager.Instance.Initialize();
 
         UIManager.Instance.ShowMenuView();
-        SoundManager.Instance.PlayBgm("Sound/MenuBgm");
+        SoundManager.Instance.PlayBgm("Sound/music_menu");
 
         EventDispatcher.OnClickPlay += OnClickPlayBtn;
         EventDispatcher.OnClickPlayAgain += OnClickPlayAgainBtn;
@@ -50,7 +50,7 @@ public class GameManager : MonoBehaviour, IDisposable
         UIManager.Instance.ShowGameView();
         SceneManager.Instance.LoadSceneAsync("MainGameScene", () =>
         {
-            SoundManager.Instance.PlayBgm("Sound/ForestBgm");
+            SoundManager.Instance.PlayBgm("Sound/music_forest");
             UIManager.Instance.HideLoadingView();
         });
     }
@@ -69,7 +69,7 @@ public class GameManager : MonoBehaviour, IDisposable
         UIManager.Instance.ShowMenuView();
         SceneManager.Instance.LoadSceneAsync("MainMenuScene", () =>
         {
-            SoundManager.Instance.PlayBgm("Sound/MenuBgm");
+            SoundManager.Instance.PlayBgm("Sound/music_menu");
             UIManager.Instance.HideLoadingView();
         });
     }

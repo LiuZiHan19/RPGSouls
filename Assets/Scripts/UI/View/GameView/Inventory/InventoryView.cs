@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using TMPro;
 using UnityEngine.UI;
 
 public class InventoryView : UIBehaviour
@@ -12,37 +11,37 @@ public class InventoryView : UIBehaviour
     private List<InventoryItemView> _consumableViews = new List<InventoryItemView>();
     private List<InventoryItemView> _materialViews = new List<InventoryItemView>();
     private List<InventoryItemView> _itemViews = new List<InventoryItemView>();
-    private TextMeshProUGUI _maxHealthStatText;
-    private TextMeshProUGUI _damageStatText;
-    private TextMeshProUGUI _magicPowerStatText;
-    private TextMeshProUGUI _armorStatText;
-    private TextMeshProUGUI _magicResistanceStatText;
-    private TextMeshProUGUI _igniteStatText;
-    private TextMeshProUGUI _chillStatText;
-    private TextMeshProUGUI _lightingStatText;
-    private TextMeshProUGUI _agilityStatText;
-    private TextMeshProUGUI _intelligenceStatText;
-    private TextMeshProUGUI _strengthStatText;
-    private TextMeshProUGUI _vitalityStatText;
-    private TextMeshProUGUI _criticalStatText;
-    private TextMeshProUGUI evasionStatText;
+    private Text _maxHealthStatText;
+    private Text _damageStatText;
+    private Text _magicPowerStatText;
+    private Text _armorStatText;
+    private Text _magicResistanceStatText;
+    private Text _igniteStatText;
+    private Text _chillStatText;
+    private Text _lightingStatText;
+    private Text _agilityStatText;
+    private Text _intelligenceStatText;
+    private Text _strengthStatText;
+    private Text _vitalityStatText;
+    private Text _criticalStatText;
+    private Text evasionStatText;
 
     protected override void ParseComponent()
     {
-        _maxHealthStatText = FindComponent<TextMeshProUGUI>("Middle/Left_Panel/Stats/Stat_MaxHealth/Value");
-        _damageStatText = FindComponent<TextMeshProUGUI>("Middle/Left_Panel/Stats/Stat_Damage/Value");
-        _magicPowerStatText = FindComponent<TextMeshProUGUI>("Middle/Left_Panel/Stats/Stat_MagicDamage/Value");
-        _armorStatText = FindComponent<TextMeshProUGUI>("Middle/Left_Panel/Stats/Stat_Armor/Value");
-        _magicResistanceStatText = FindComponent<TextMeshProUGUI>("Middle/Left_Panel/Stats/Stat_MagicResistance/Value");
-        _igniteStatText = FindComponent<TextMeshProUGUI>("Middle/Left_Panel/Stats/Stat_Ignite/Value");
-        _chillStatText = FindComponent<TextMeshProUGUI>("Middle/Left_Panel/Stats/Stat_Chill/Value");
-        _lightingStatText = FindComponent<TextMeshProUGUI>("Middle/Left_Panel/Stats2/Stat_Lighting/Value");
-        _agilityStatText = FindComponent<TextMeshProUGUI>("Middle/Left_Panel/Stats2/Stat_Agility/Value");
-        _intelligenceStatText = FindComponent<TextMeshProUGUI>("Middle/Left_Panel/Stats2/Stat_Intelligence/Value");
-        _strengthStatText = FindComponent<TextMeshProUGUI>("Middle/Left_Panel/Stats2/Stat_Strength/Value");
-        _vitalityStatText = FindComponent<TextMeshProUGUI>("Middle/Left_Panel/Stats2/Stat_Vtality/Value");
-        _criticalStatText = FindComponent<TextMeshProUGUI>("Middle/Left_Panel/Stats2/Stat_Critical/Value");
-        evasionStatText = FindComponent<TextMeshProUGUI>("Middle/Left_Panel/Stats2/Stat_Evasion/Value");
+        _maxHealthStatText = FindComponent<Text>("Middle/Left_Panel/Stats/Stat_MaxHealth/Value");
+        _damageStatText = FindComponent<Text>("Middle/Left_Panel/Stats/Stat_Damage/Value");
+        _magicPowerStatText = FindComponent<Text>("Middle/Left_Panel/Stats/Stat_MagicDamage/Value");
+        _armorStatText = FindComponent<Text>("Middle/Left_Panel/Stats/Stat_Armor/Value");
+        _magicResistanceStatText = FindComponent<Text>("Middle/Left_Panel/Stats/Stat_MagicResistance/Value");
+        _igniteStatText = FindComponent<Text>("Middle/Left_Panel/Stats/Stat_Ignite/Value");
+        _chillStatText = FindComponent<Text>("Middle/Left_Panel/Stats/Stat_Chill/Value");
+        _lightingStatText = FindComponent<Text>("Middle/Left_Panel/Stats2/Stat_Lighting/Value");
+        _agilityStatText = FindComponent<Text>("Middle/Left_Panel/Stats2/Stat_Agility/Value");
+        _intelligenceStatText = FindComponent<Text>("Middle/Left_Panel/Stats2/Stat_Intelligence/Value");
+        _strengthStatText = FindComponent<Text>("Middle/Left_Panel/Stats2/Stat_Strength/Value");
+        _vitalityStatText = FindComponent<Text>("Middle/Left_Panel/Stats2/Stat_Vtality/Value");
+        _criticalStatText = FindComponent<Text>("Middle/Left_Panel/Stats2/Stat_Critical/Value");
+        evasionStatText = FindComponent<Text>("Middle/Left_Panel/Stats2/Stat_Evasion/Value");
 
         _closeBtn = FindComponent<Button>("Middle/TopBar/Button_Home");
         _inventoryScrollRect = FindComponent<ScrollRect>("Middle/Right_Panel/ScrollRect");
