@@ -33,7 +33,6 @@ public class Player : Entity
     protected override void Awake()
     {
         base.Awake();
-        PlayerManager.Instance.Initialize();
         playerStats = entityStats as PlayerStats;
         _rb = GetComponent<Rigidbody2D>();
         _colliderChecker = GetComponentInChildren<ColliderChecker>();
@@ -47,6 +46,12 @@ public class Player : Entity
         idleBlockState = new PlayerIdleBlockState(stateMachine, "IdleBlock", this);
         rollState = new PlayerRollState(stateMachine, "Roll", this);
         stateMachine.Initialise(idleState);
+    }
+
+    protected override void Start()
+    {
+        base.Start();
+        PlayerManager.Instance.Initialize();
     }
 
     protected override void Update()
@@ -153,7 +158,7 @@ public class Player : Entity
         base.Die();
         SoundManager.Instance.PlaySfx("Sound/sfx_death");
         stateMachine.ChangeState(deathState);
-        EventDispatcher.OnPlayerDead?.Invoke();
+        GameEventDispatcher.OnPlayerDead?.Invoke();
     }
 
     private void OnDrawGizmos()

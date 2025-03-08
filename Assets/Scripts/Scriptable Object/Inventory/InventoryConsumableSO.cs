@@ -6,9 +6,10 @@ public class InventoryConsumableSO : InventoryItemStatSO
 {
     public E_InventoryConsumable consumableType;
 
-    private void OnValidate()
-    {
 #if UNITY_EDITOR
+    protected override void OnValidate()
+    {
+        base.OnValidate();
         name = consumableType.ToString();
         string assetPath = AssetDatabase.GetAssetPath(this);
         EditorApplication.delayCall += () =>
@@ -16,6 +17,6 @@ public class InventoryConsumableSO : InventoryItemStatSO
             AssetDatabase.RenameAsset(assetPath, name);
             AssetDatabase.SaveAssets();
         };
-#endif
     }
+#endif
 }

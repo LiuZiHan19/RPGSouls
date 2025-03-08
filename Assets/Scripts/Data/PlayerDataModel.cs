@@ -1,13 +1,19 @@
 using LitJson;
+using UnityEngine.Events;
 
 public class PlayerDataModel : JsonModel
 {
-    public PlayerStats playerStats;
-
-    public override void Parse(JsonData jsonData)
+    public override void ParseData(JsonData jsonData, UnityAction callback = null)
     {
-        base.Parse(jsonData);
-        playerStats = PlayerManager.Instance.player.playerStats;
+        base.ParseData(jsonData);
+
+        var playerStats = PlayerManager.Instance.player.playerStats;
+
+        if (jsonData == null)
+        {
+            Debugger.Warning($"[PlayerData] jsonData is null in {nameof(ParseData)} | Class: {GetType().Name}");
+            return;
+        }
 
         if (jsonData.Keys.Contains("currentHealth") && jsonData["currentHealth"] != null)
         {
@@ -43,30 +49,16 @@ public class PlayerDataModel : JsonModel
         ParseStat(jsonData, "armor", playerStats.armor);
 
         ParseStat(jsonData, "magicResistance", playerStats.magicResistance);
+
+        callback?.Invoke();
     }
 
-    private void ParseStat(JsonData jsonData, string statName, Stat targetStat)
+    public override JsonData GetSaveJsonData()
     {
-        if (!jsonData.Keys.Contains(statName) || jsonData[statName] == null) return;
+        base.GetSaveJsonData();
 
-        if (jsonData[statName].Keys.Contains("baseValue") && jsonData[statName]["baseValue"] != null)
-        {
-            targetStat.SetDefaultValue((int)(jsonData[statName]["baseValue"]));
-        }
+        var playerStats = PlayerManager.Instance.player.playerStats;
 
-        if (jsonData[statName].Keys.Contains("modifiers") && jsonData[statName]["modifiers"] != null &&
-            jsonData[statName]["modifiers"].Count > 0)
-        {
-            int modifierLength = jsonData[statName]["modifiers"].Count;
-            for (int i = 0; i < modifierLength; i++)
-            {
-                targetStat.AddModifier((int)(jsonData[statName]["modifiers"][i]));
-            }
-        }
-    }
-
-    public JsonData GetSaveJsonData()
-    {
         JsonData jsonData = new JsonData();
 
         // Save currentHealth
@@ -255,5 +247,25 @@ public class PlayerDataModel : JsonModel
         jsonData["magicResistance"] = magicResistanceData;
 
         return jsonData;
+    }
+
+    private void ParseStat(JsonData jsonData, string statName, Stat targetStat)
+    {
+        if (!jsonData.Keys.Contains(statName) || jsonData[statName] == null) return;
+
+        if (jsonData[statName].Keys.Contains("baseValue") && jsonData[statName]["baseValue"] != null)
+        {
+            targetStat.SetDefaultValue((int)(jsonData[statName]["baseValue"]));
+        }
+
+        if (jsonData[statName].Keys.Contains("modifiers") && jsonData[statName]["modifiers"] != null &&
+            jsonData[statName]["modifiers"].Count > 0)
+        {
+            int modifierLength = jsonData[statName]["modifiers"].Count;
+            for (int i = 0; i < modifierLength; i++)
+            {
+                targetStat.AddModifier((int)(jsonData[statName]["modifiers"][i]));
+            }
+        }
     }
 }

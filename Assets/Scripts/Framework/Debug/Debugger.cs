@@ -42,6 +42,7 @@ public class Debugger
     private static void Log(string message, E_LogLevel logLevel, E_LogColor logColor, bool enableFileLogging = true,
         bool enableConsoleLogging = true)
     {
+#if UNITY_EDITOR
         string logMessage = message;
         string colorizedMessage = $"<color={GetColorString(logColor)}>{logMessage}</color>";
 
@@ -76,6 +77,7 @@ public class Debugger
                 Debug.LogError($"Failed to write log to file: {ex.Message}");
             }
         }
+#endif
     }
 
     private static string GetColorString(E_LogColor logColor)

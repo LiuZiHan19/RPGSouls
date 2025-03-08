@@ -4,6 +4,8 @@ using UnityEngine;
 public class GameManager : MonoBehaviour, IDisposable
 {
     public static GameManager Instance;
+    public int totalDataNumber = 1;
+    public int loadedDataNumber;
 
     private void Awake()
     {
@@ -19,6 +21,7 @@ public class GameManager : MonoBehaviour, IDisposable
         }
 
         InitGameSystem();
+        LoadData();
     }
 
     private void InitGameSystem()
@@ -37,9 +40,25 @@ public class GameManager : MonoBehaviour, IDisposable
         UIManager.Instance.ShowMenuView();
         SoundManager.Instance.PlayBgm("Sound/music_menu");
 
-        EventDispatcher.OnClickPlayBtn += OnClickPlayBtn;
-        EventDispatcher.OnClickPlayAgainBtn += OnClickPlayAgainBtn;
-        EventDispatcher.OnClickReturnBtn += OnClickReturnBtn;
+        GameEventDispatcher.OnClickPlayBtn += OnClickPlayBtn;
+        GameEventDispatcher.OnClickPlayAgainBtn += OnClickPlayAgainBtn;
+        GameEventDispatcher.OnClickReturnBtn += OnClickReturnBtn;
+    }
+
+    private void LoadData()
+    {
+        Debugger.Info("Load Data");
+        GameDataManager.Instance.LoadPlayerData(() => { loadedDataNumber++; });
+        GameDataManager.Instance.LoadInventoryData(() => { loadedDataNumber++;});
+    }
+
+    private void Update()
+    {
+        if (loadedDataNumber == totalDataNumber)
+        {
+            Debugger.Info("Load Data Success");
+            loadedDataNumber = 0;
+        }
     }
 
     private void OnClickPlayBtn()
@@ -76,9 +95,9 @@ public class GameManager : MonoBehaviour, IDisposable
 
     public void Dispose()
     {
-        EventDispatcher.OnClickPlayBtn -= OnClickPlayBtn;
-        EventDispatcher.OnClickPlayAgainBtn -= OnClickPlayAgainBtn;
-        EventDispatcher.OnClickReturnBtn -= OnClickReturnBtn;
+        GameEventDispatcher.OnClickPlayBtn -= OnClickPlayBtn;
+        GameEventDispatcher.OnClickPlayAgainBtn -= OnClickPlayAgainBtn;
+        GameEventDispatcher.OnClickReturnBtn -= OnClickReturnBtn;
         InventoryManager.Instance?.Dispose();
     }
 }

@@ -21,13 +21,13 @@ public class DeadView : UIBehaviour
     private void OnClickReturnBtn()
     {
         Hide();
-        EventDispatcher.OnClickReturnBtn?.Invoke();
+        GameEventDispatcher.OnClickReturnBtn?.Invoke();
     }
 
     private void OnClickPlayAgainBtn()
     {
         Hide();
-        EventDispatcher.OnClickPlayAgainBtn?.Invoke();
+        GameEventDispatcher.OnClickPlayAgainBtn?.Invoke();
     }
 
     public override void Dispose()

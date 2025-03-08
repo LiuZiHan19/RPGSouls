@@ -30,7 +30,7 @@ public class PlayerAnimEvent : AnimEvent
     private void Attack(int rangeIndex)
     {
         // LayerMask.NameToLayer("Enemy") 检测不了 默认检测default层
-        EventDispatcher.PlayerAttack?.Invoke(attackPoint);
+        GameEventDispatcher.PlayerAttack?.Invoke(attackPoint);
 
         // 施加轻微攻击移动力
         _player.SetVelocity(new Vector2(_player.attackSlightForce[rangeIndex] * _player.facingDir,

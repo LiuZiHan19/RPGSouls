@@ -5,8 +5,8 @@ public class PlayerStats : AlmightyStats, IDisposable
     protected override void Awake()
     {
         base.Awake();
-        EventDispatcher.Equip += Equip;
-        EventDispatcher.UnEquip += UnEquip;
+        GameEventDispatcher.Equip += Equip;
+        GameEventDispatcher.UnEquip += UnEquip;
     }
 
     private void Equip(InventoryItemBaseSO itemSO)
@@ -53,7 +53,7 @@ public class PlayerStats : AlmightyStats, IDisposable
 
     public void Dispose()
     {
-        EventDispatcher.Equip -= Equip;
-        EventDispatcher.UnEquip -= UnEquip;
+        GameEventDispatcher.Equip -= Equip;
+        GameEventDispatcher.UnEquip -= UnEquip;
     }
 }

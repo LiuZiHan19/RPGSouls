@@ -12,6 +12,12 @@ public class InventoryItem
         number = 1;
     }
 
+    public InventoryItem(InventoryItemBaseSO itemSO, int number)
+    {
+        this.itemSO = itemSO;
+        this.number = number;
+    }
+
     public void Add()
     {
         number++;

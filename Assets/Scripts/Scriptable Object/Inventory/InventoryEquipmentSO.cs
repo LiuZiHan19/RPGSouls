@@ -1,4 +1,3 @@
-using System;
 using UnityEditor;
 using UnityEngine;
 
@@ -7,9 +6,10 @@ public class InventoryEquipmentSO : InventoryItemStatSO
 {
     public E_InventoryEquipment equipmentType;
 
-    private void OnValidate()
-    {
 #if UNITY_EDITOR
+    protected override void OnValidate()
+    {
+        base.OnValidate();
         name = equipmentType.ToString();
         string assetPath = AssetDatabase.GetAssetPath(this);
         EditorApplication.delayCall += () =>
@@ -17,6 +17,6 @@ public class InventoryEquipmentSO : InventoryItemStatSO
             AssetDatabase.RenameAsset(assetPath, name);
             AssetDatabase.SaveAssets();
         };
-#endif
     }
+#endif
 }

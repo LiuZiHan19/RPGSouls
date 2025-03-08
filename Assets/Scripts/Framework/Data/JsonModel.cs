@@ -1,12 +1,21 @@
 using LitJson;
+using UnityEngine.Events;
 
 public abstract class JsonModel
 {
     public JsonData jsonData;
 
-    public virtual void Parse(JsonData jsonData) => this.jsonData = jsonData;
+    public void PareSelf()
+    {
+        ParseData(jsonData);
+    }
 
-    public virtual JsonData GetJsonData() => jsonData;
+    public virtual void ParseData(JsonData jsonData, UnityAction callback = null) => this.jsonData = jsonData;
+
+    public virtual JsonData GetSaveJsonData()
+    {
+        return null;
+    }
 
     private int GetInteger(JsonData jsonData, string key, int defaultValue = 0)
     {
@@ -18,7 +27,7 @@ public abstract class JsonModel
         }
 
         Debugger.Warning($"Missing or invalid key: '{key}' in JSON data. Returning default value: {defaultValue}. " +
-                       $"Ensure that the key exists and is a valid integer.");
+                         $"Ensure that the key exists and is a valid integer.");
         return defaultValue;
     }
 
@@ -30,7 +39,7 @@ public abstract class JsonModel
         }
 
         Debugger.Warning($"Missing or invalid key: '{key}' in JSON data. Returning default value: {defaultValue}. " +
-                       $"Ensure that the key exists and is a valid string.");
+                         $"Ensure that the key exists and is a valid string.");
         return defaultValue;
     }
 }

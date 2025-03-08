@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-public class EventDispatcher
+public class GameEventDispatcher
 {
     public static Action OnClickPlayBtn
     {

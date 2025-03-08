@@ -8,18 +8,18 @@ public class PlayerFX : EntityFX
     {
         base.Awake();
         _player = GetComponent<Player>();
-        EventDispatcher.PlayerAttack += PlayAttackFX;
+        GameEventDispatcher.PlayerAttack += PlayAttackFX;
     }
 
     public void PlayAttackFX(Transform transform)
     {
-        if (InventoryManager.Instance.currentWeapon == null) return;
+        if (InventoryManager.Instance.weapon == null) return;
 
-        if (InventoryManager.Instance.currentWeapon.equipmentType == E_InventoryEquipment.FlameSword)
+        if (InventoryManager.Instance.weapon.equipmentType == E_InventoryEquipment.FlameSword)
             PlayIgniteFX(transform);
-        else if (InventoryManager.Instance.currentWeapon.equipmentType == E_InventoryEquipment.IceSword)
+        else if (InventoryManager.Instance.weapon.equipmentType == E_InventoryEquipment.IceSword)
             PlayChillFX(transform);
-        else if (InventoryManager.Instance.currentWeapon.equipmentType == E_InventoryEquipment.ThunderClaw)
+        else if (InventoryManager.Instance.weapon.equipmentType == E_InventoryEquipment.ThunderClaw)
             PlayLightingFX(transform);
     }
 

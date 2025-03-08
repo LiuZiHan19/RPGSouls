@@ -241,7 +241,7 @@ MonoBehaviour:
   moveSpeed: 10
   isFacingRight: 1
   facingDir: 1
-  knockbackForce: 20
+  knockbackForce: 7.5
   entityStats: {fileID: 0}
   animEvent: {fileID: 0}
   entityFX: {fileID: 0}

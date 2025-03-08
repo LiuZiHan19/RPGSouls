@@ -4,11 +4,13 @@ public class GameSettingView : UIBehaviour
 {
     private Button _resumeBtn;
     private Button _returnBtn;
+    private Button _saveBtn;
 
     protected override void ParseComponent()
     {
         _resumeBtn = FindComponent<Button>("Middle/Resume");
         _returnBtn = FindComponent<Button>("Middle/Return");
+        _saveBtn = FindComponent<Button>("Middle/Save");
     }
 
     protected override void AddEvent()
@@ -16,13 +18,14 @@ public class GameSettingView : UIBehaviour
         base.AddEvent();
         RegisterButtonEvent(_resumeBtn, OnClickResumeBtn);
         RegisterButtonEvent(_returnBtn, OnClickReturnBtn);
+        RegisterButtonEvent(_saveBtn, OnClickSaveBtn);
     }
 
     private void OnClickReturnBtn()
     {
         Hide();
         TimeManager.Instance.ResumeTime();
-        EventDispatcher.OnClickReturnBtn?.Invoke();
+        GameEventDispatcher.OnClickReturnBtn?.Invoke();
     }
 
     private void OnClickResumeBtn()
@@ -31,10 +34,24 @@ public class GameSettingView : UIBehaviour
         Hide();
     }
 
+    private void OnClickSaveBtn()
+    {
+        GameDataManager.Instance.SavePlayerData(() =>
+        {
+            Debugger.Info($"[GameSetting] {nameof(GameDataManager.SavePlayerData)} Success");
+        });
+
+        GameDataManager.Instance.SaveInventoryData(() =>
+        {
+            Debugger.Info($"[GameSetting] {nameof(GameDataManager.SaveInventoryData)} Success");
+        });
+    }
+
     protected override void RemoveEvent()
     {
         base.RemoveEvent();
         UnRegisterButtonEvent(_resumeBtn, OnClickResumeBtn);
         UnRegisterButtonEvent(_returnBtn, OnClickReturnBtn);
+        UnRegisterButtonEvent(_saveBtn, OnClickSaveBtn);
     }
 }

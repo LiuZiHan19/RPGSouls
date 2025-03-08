@@ -12,7 +12,7 @@ public class MainGameViewController : UIController
     {
         ShowGameView();
 
-        EventDispatcher.OnPlayerDead += ShowDeadView;
+        GameEventDispatcher.OnPlayerDead += ShowDeadView;
     }
 
     #region Game View
@@ -175,7 +175,7 @@ public class MainGameViewController : UIController
 
     public override void Dispose()
     {
-        EventDispatcher.OnPlayerDead -= ShowDeadView;
+        GameEventDispatcher.OnPlayerDead -= ShowDeadView;
 
         _deadView?.Dispose();
         _deadView = null;

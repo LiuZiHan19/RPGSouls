@@ -29,7 +29,7 @@ public class MainMenuView : UIBehaviour
 
     private void OnClickPlayBtn()
     {
-        EventDispatcher.OnClickPlayBtn?.Invoke();
+        GameEventDispatcher.OnClickPlayBtn?.Invoke();
     }
 
     private void OnClickSettingBtn()

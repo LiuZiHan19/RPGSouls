@@ -6,9 +6,10 @@ public class InventoryItemSO : InventoryItemBaseSO
 {
     public E_InventoryItem itemType;
 
-    private void OnValidate()
-    {
 #if UNITY_EDITOR
+    protected override void OnValidate()
+    {
+        base.OnValidate();
         name = itemType.ToString();
         string assetPath = AssetDatabase.GetAssetPath(this);
         EditorApplication.delayCall += () =>
@@ -16,6 +17,6 @@ public class InventoryItemSO : InventoryItemBaseSO
             AssetDatabase.RenameAsset(assetPath, name);
             AssetDatabase.SaveAssets();
         };
-#endif
     }
+#endif
 }

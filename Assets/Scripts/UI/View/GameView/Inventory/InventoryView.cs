@@ -6,7 +6,7 @@ public class InventoryView : UIBehaviour
 {
     private Button _closeBtn;
     private ScrollRect _inventoryScrollRect;
-    private Image _equpSlotImage;
+    private Image _weaponSlotImage;
     private List<InventoryItemView> _equipmentViews = new List<InventoryItemView>();
     private List<InventoryItemView> _consumableViews = new List<InventoryItemView>();
     private List<InventoryItemView> _materialViews = new List<InventoryItemView>();
@@ -46,14 +46,14 @@ public class InventoryView : UIBehaviour
         _closeBtn = FindComponent<Button>("Middle/TopBar/Button_Home");
         _inventoryScrollRect = FindComponent<ScrollRect>("Middle/Right_Panel/ScrollRect");
 
-        _equpSlotImage = FindComponent<Image>("Middle/Left_Panel/Character/EquipSlot_L/EquipFrameEmpty/Icon");
+        _weaponSlotImage = FindComponent<Image>("Middle/Left_Panel/Character/EquipSlot_L/EquipFrameEmpty/Icon");
     }
 
     protected override void AddEvent()
     {
         base.AddEvent();
-        EventDispatcher.Equip += Equip;
-        EventDispatcher.UnEquip += UnEquip;
+        GameEventDispatcher.Equip += Equip;
+        GameEventDispatcher.UnEquip += UnEquip;
         RegisterButtonEvent(_closeBtn, OnClickCloseBtn);
     }
 
@@ -61,6 +61,8 @@ public class InventoryView : UIBehaviour
     {
         base.Show();
         CreateInventoryItemViews();
+        if (InventoryManager.Instance.weapon != null)
+            _weaponSlotImage.sprite = InventoryManager.Instance.weapon.sprite;
         RefreshStat();
     }
 
@@ -96,7 +98,7 @@ public class InventoryView : UIBehaviour
         {
             case E_InventoryItemBase.Equipment:
                 RemoveInventoryItemViewByItemSO(itemSO);
-                _equpSlotImage.sprite = itemSO.sprite;
+                _weaponSlotImage.sprite = itemSO.sprite;
                 RefreshStat();
                 break;
             default:
@@ -164,7 +166,7 @@ public class InventoryView : UIBehaviour
 
     private void CreateEquipmentViews()
     {
-        var equipments = InventoryManager.Instance.equipments;
+        var equipments = InventoryManager.Instance.equipmentDict;
         foreach (var equipment in equipments)
         {
             CreateEquipmentView(equipment);
@@ -193,7 +195,7 @@ public class InventoryView : UIBehaviour
 
     private void CreateItemViews()
     {
-        var items = InventoryManager.Instance.items;
+        var items = InventoryManager.Instance.itemDict;
         foreach (var item in items)
         {
             CreateItemView(item);
@@ -212,7 +214,7 @@ public class InventoryView : UIBehaviour
 
     private void CreateMaterialViews()
     {
-        var materials = InventoryManager.Instance.materials;
+        var materials = InventoryManager.Instance.materialDict;
         foreach (var material in materials)
         {
             CreateMaterialView(material);
@@ -231,7 +233,7 @@ public class InventoryView : UIBehaviour
 
     private void CreateConsumaleViews()
     {
-        var consumables = InventoryManager.Instance.consumables;
+        var consumables = InventoryManager.Instance.consumableDict;
         foreach (var consumable in consumables)
         {
             CreateConsumableView(consumable);
@@ -310,8 +312,8 @@ public class InventoryView : UIBehaviour
 
     protected override void RemoveEvent()
     {
-        EventDispatcher.Equip -= Equip;
-        EventDispatcher.UnEquip -= UnEquip;
+        GameEventDispatcher.Equip -= Equip;
+        GameEventDispatcher.UnEquip -= UnEquip;
         UnRegisterButtonEvent(_closeBtn, OnClickCloseBtn);
         base.RemoveEvent();
     }
