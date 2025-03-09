@@ -52,6 +52,7 @@ public class GameManager : MonoBehaviour, IDisposable
 
     private void OnClickPlayBtn()
     {
+        ClearSceneTrash();
         SoundManager.Instance.StopBgm();
         UIManager.Instance.ShowLoadingView();
         UIManager.Instance.HideMenuView();
@@ -65,12 +66,14 @@ public class GameManager : MonoBehaviour, IDisposable
 
     private void OnClickPlayAgainBtn()
     {
+        ClearSceneTrash();
         UIManager.Instance.ShowLoadingView();
         SceneManager.Instance.LoadSceneAsync("MainGameScene", () => { UIManager.Instance.HideLoadingView(); });
     }
 
     private void OnClickReturnBtn()
     {
+        ClearSceneTrash();
         SoundManager.Instance.StopBgm();
         UIManager.Instance.ShowLoadingView();
         UIManager.Instance.HideGameView();
@@ -80,6 +83,12 @@ public class GameManager : MonoBehaviour, IDisposable
             SoundManager.Instance.PlayBgm("Sound/music_menu");
             UIManager.Instance.HideLoadingView();
         });
+    }
+
+    private void ClearSceneTrash()
+    {
+        FXPool.Instance.Clear();
+        CoroutineManager.Instance.IStopAllCoroutine();
     }
 
     public void Dispose()
