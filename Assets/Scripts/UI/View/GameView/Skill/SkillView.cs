@@ -6,7 +6,7 @@ public class SkillView : UIBehaviour
 
     protected override void ParseComponent()
     {
-        _closeBtn = FindComponent<Button>("Middle/TopBar/Button_Home");
+        _closeBtn = FindComponent<Button>("Top/Button_Back");
     }
 
     protected override void AddEvent()

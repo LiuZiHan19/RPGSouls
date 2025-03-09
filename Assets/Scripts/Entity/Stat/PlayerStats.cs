@@ -51,6 +51,12 @@ public class PlayerStats : AlmightyStats, IDisposable
         }
     }
 
+    public override void TakeDamage(int damage)
+    {
+        base.TakeDamage(damage);
+        GameEventDispatcher.OnPlayerTakeDamage?.Invoke((float)currentHealth / maxHealth.GetValue());
+    }
+
     public void Dispose()
     {
         GameEventDispatcher.Equip -= Equip;

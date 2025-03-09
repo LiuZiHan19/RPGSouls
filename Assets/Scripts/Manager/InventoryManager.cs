@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-public class InventoryManager : MonoSingleton<InventoryManager>, IDisposable
+public class InventoryManager : MonoSingleton<InventoryManager>
 {
     public Dictionary<E_InventoryEquipment, InventoryItem> equipmentDict;
     public Dictionary<E_InventoryConsumable, InventoryItem> consumableDict;
@@ -200,7 +200,11 @@ public class InventoryManager : MonoSingleton<InventoryManager>, IDisposable
             if (item.itemSO == itemSO)
             {
                 item.Remove();
-                if (item.number == 0) allItemList.Remove(item);
+                if (item.number == 0)
+                {
+                    allItemList.Remove(item);
+                }
+
                 return;
             }
         }
@@ -208,13 +212,13 @@ public class InventoryManager : MonoSingleton<InventoryManager>, IDisposable
 
     public InventoryItemBaseSO LoadDataByGUID(string guid)
     {
-        var configuration = GameResources.Instance.inventoryConfigurationSO.equipmentList;
+        List<InventoryItemBaseSO> configurationData = GameResources.Instance.inventoryConfigurationSO.equipmentList;
 
-        foreach (var so in configuration)
+        foreach (var itemData in configurationData)
         {
-            if (guid == so.id)
+            if (guid == itemData.id)
             {
-                return so;
+                return itemData;
             }
         }
 
@@ -222,7 +226,7 @@ public class InventoryManager : MonoSingleton<InventoryManager>, IDisposable
         return null;
     }
 
-    public void Dispose()
+    ~InventoryManager()
     {
         GameEventDispatcher.OnInventoryRealItemPickup -= AddItemByItemSO;
         GameEventDispatcher.Equip -= Equip;

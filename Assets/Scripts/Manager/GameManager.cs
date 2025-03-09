@@ -4,8 +4,6 @@ using UnityEngine;
 public class GameManager : MonoBehaviour, IDisposable
 {
     public static GameManager Instance;
-    public int totalDataNumber = 1;
-    public int loadedDataNumber;
 
     private void Awake()
     {
@@ -21,7 +19,7 @@ public class GameManager : MonoBehaviour, IDisposable
         }
 
         InitGameSystem();
-        LoadData();
+        LoadGameData();
     }
 
     private void InitGameSystem()
@@ -45,20 +43,11 @@ public class GameManager : MonoBehaviour, IDisposable
         GameEventDispatcher.OnClickReturnBtn += OnClickReturnBtn;
     }
 
-    private void LoadData()
+    private void LoadGameData()
     {
-        Debugger.Info("Load Data");
-        GameDataManager.Instance.LoadPlayerData(() => { loadedDataNumber++; });
-        GameDataManager.Instance.LoadInventoryData(() => { loadedDataNumber++;});
-    }
-
-    private void Update()
-    {
-        if (loadedDataNumber == totalDataNumber)
-        {
-            Debugger.Info("Load Data Success");
-            loadedDataNumber = 0;
-        }
+        Debugger.Info("Load GameData");
+        GameDataManager.Instance.LoadPlayerData();
+        GameDataManager.Instance.LoadInventoryData();
     }
 
     private void OnClickPlayBtn()
@@ -98,6 +87,5 @@ public class GameManager : MonoBehaviour, IDisposable
         GameEventDispatcher.OnClickPlayBtn -= OnClickPlayBtn;
         GameEventDispatcher.OnClickPlayAgainBtn -= OnClickPlayAgainBtn;
         GameEventDispatcher.OnClickReturnBtn -= OnClickReturnBtn;
-        InventoryManager.Instance?.Dispose();
     }
 }

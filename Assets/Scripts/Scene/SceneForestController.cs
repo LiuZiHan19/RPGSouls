@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class ForestController : MonoBehaviour
+public class SceneForestController : MonoBehaviour
 {
     private Transform _playerSpawnPoint;
 

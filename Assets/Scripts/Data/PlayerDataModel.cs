@@ -5,15 +5,13 @@ public class PlayerDataModel : JsonModel
 {
     public override void ParseData(JsonData jsonData, UnityAction callback = null)
     {
-        base.ParseData(jsonData);
-
-        var playerStats = PlayerManager.Instance.player.playerStats;
-
         if (jsonData == null)
         {
             Debugger.Warning($"[PlayerData] jsonData is null in {nameof(ParseData)} | Class: {GetType().Name}");
             return;
         }
+
+        var playerStats = PlayerManager.Instance.player.playerStats;
 
         if (jsonData.Keys.Contains("currentHealth") && jsonData["currentHealth"] != null)
         {

@@ -5,6 +5,8 @@ public class SceneManager : Singleton<SceneManager>
 {
     public void LoadSceneAsync(string sceneName, UnityAction callback = null, float delayCallback = 0f)
     {
+        FXPool.Instance.Clear();
+        CoroutineManager.Instance.IStopAllCoroutine();
         CoroutineManager.Instance.IStartCoroutine(IELoadSceneAsync(sceneName, callback, delayCallback));
     }
 

@@ -1,10 +1,11 @@
-using System;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 
 public abstract class EntityStats : MonoBehaviour
 {
+    public UnityAction<float> takeDamageCallback;
     public E_CharacterStats statsType;
     [FormerlySerializedAs("currenHealth")] public int currentHealth;
     public Stat maxHealth;
@@ -84,11 +85,12 @@ public abstract class EntityStats : MonoBehaviour
     {
     }
 
-    public void TakeDamage(int damage)
+    public virtual void TakeDamage(int damage)
     {
         currentHealth -= damage;
         currentHealth = Mathf.Clamp(currentHealth, 0, currentHealth);
         if (currentHealth == 0) entity.Die();
+        takeDamageCallback?.Invoke((float)currentHealth / maxHealth.GetValue());
     }
 
     public void SetMagicStatus(E_MagicStatus status)

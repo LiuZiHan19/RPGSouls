@@ -50,4 +50,10 @@ public class GameEventDispatcher
         get;
         set;
     }
+    
+    public static Action<float> OnPlayerTakeDamage
+    {
+        get;
+        set;
+    }
 }

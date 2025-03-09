@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 public class Enemy : Entity
@@ -7,12 +6,15 @@ public class Enemy : Entity
     public float attackRange;
     public float canAttackRange;
     public Transform attackPoint;
+    protected WorldHealthBar healthBar;
     private ColliderChecker _colliderChecker;
 
     protected override void Awake()
     {
         base.Awake();
         _colliderChecker = transform.Find("PlayerCheck").GetComponent<ColliderChecker>();
+        healthBar = transform.Find("World_Health_Bar").GetComponent<WorldHealthBar>();
+        entityStats.takeDamageCallback += healthBar.UpdateHealthBar;
     }
 
     public bool CanAttack()
@@ -41,9 +43,21 @@ public class Enemy : Entity
         rb.velocity = new Vector2(facingDir * moveSpeed, rb.velocity.y);
     }
 
+    public override void Flip()
+    {
+        base.Flip();
+        healthBar.transform.Rotate(0, 180, 0);
+    }
+
     private void OnDrawGizmos()
     {
         Gizmos.DrawWireSphere(attackPoint.position, attackRange);
         Gizmos.DrawWireSphere(attackPoint.position, canAttackRange);
+    }
+
+    protected override void OnDestroy()
+    {
+        entityStats.takeDamageCallback -= healthBar.UpdateHealthBar;
+        base.OnDestroy();
     }
 }

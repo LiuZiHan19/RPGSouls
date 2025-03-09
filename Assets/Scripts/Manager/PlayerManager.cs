@@ -8,6 +8,10 @@ public class PlayerManager : Singleton<PlayerManager>
     {
         base.Initialize();
         player = GameObject.FindObjectOfType<Player>();
-        GameDataManager.Instance.playerDataModel.PareSelf();
+        GameDataManager.Instance.playerDataModel.PareSelf(() =>
+        {
+            GameEventDispatcher.OnPlayerTakeDamage?.Invoke((float)player.playerStats.currentHealth /
+                                                           player.playerStats.maxHealth.GetValue());
+        });
     }
 }

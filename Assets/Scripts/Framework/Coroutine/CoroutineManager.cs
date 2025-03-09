@@ -25,6 +25,14 @@ public class CoroutineManager : MonoSingletonAuto<CoroutineManager>
         StopCoroutine(coroutine);
     }
 
+    public void IStopAllCoroutine()
+    {
+        foreach (Coroutine cor in _coroutines)
+        {
+            IStopCoroutine(cor);
+        }
+    }
+
     public void WaitForSeconds(float seconds, UnityAction callback)
     {
         IStartCoroutine(WaitForSecondsCoroutine(seconds, callback));

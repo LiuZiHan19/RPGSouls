@@ -8,31 +8,51 @@ public class FXPool : Singleton<FXPool>
     private Stack<AttackFXController> chillFxPool = new Stack<AttackFXController>();
     private Stack<AttackFXController> lightingFxPool = new Stack<AttackFXController>();
 
-    public AttackFXController GetIgniteFx(Transform transform, Vector3 euler = new Vector3())
+    public AttackFXController GetFx(E_MagicStatus magicStatus, Transform transform, Vector3 euler = new Vector3())
     {
-        ClearPool(chillFxPool, lightingFxPool);
-
-        if (igniteFxPool.Count > 0) return GetPooledFX(igniteFxPool, transform, euler);
-
-        return CreateFX("FX/IgniteFX", transform, euler);
+        switch (magicStatus)
+        {
+            case E_MagicStatus.Ignite:
+                if (igniteFxPool.Count > 0) return GetPoolFx(igniteFxPool, transform, euler);
+                return CreateFx("FX/IgniteFX", transform, euler);
+            case E_MagicStatus.Chill:
+                if (chillFxPool.Count > 0) return GetPoolFx(chillFxPool, transform, euler);
+                return CreateFx("FX/ChillFX", transform, euler);
+            case E_MagicStatus.Lighting:
+                if (lightingFxPool.Count > 0) return GetPoolFx(lightingFxPool, transform, euler);
+                return CreateFx("FX/LightingFX", transform, euler);
+            default:
+                throw new ArgumentOutOfRangeException(nameof(magicStatus), magicStatus, null);
+        }
     }
 
-    public AttackFXController GetChillFx(Transform transform, Vector3 euler = new Vector3())
+    private AttackFXController GetPoolFx(Stack<AttackFXController> pool, Transform transform, Vector3 euler)
     {
-        ClearPool(igniteFxPool, lightingFxPool);
+        Player player = PlayerManager.Instance.player;
 
-        if (chillFxPool.Count > 0) return GetPooledFX(chillFxPool, transform, euler);
+        AttackFXController attackFX = pool.Pop();
 
-        return CreateFX("FX/ChillFX", transform, euler);
+        attackFX.gameObject.transform.position = transform.position + Vector3.right * player.facingDir;
+
+        if (attackFX.fxType == E_MagicStatus.Ignite) attackFX.gameObject.transform.position += Vector3.up * 2f;
+
+        attackFX.gameObject.transform.rotation = Quaternion.Euler(euler);
+
+        return attackFX;
     }
 
-    public AttackFXController GetLightingFx(Transform transform, Vector3 euler = new Vector3())
+    private AttackFXController CreateFx(string path, Transform transform, Vector3 euler)
     {
-        ClearPool(igniteFxPool, chillFxPool);
+        Player player = PlayerManager.Instance.player;
 
-        if (lightingFxPool.Count > 0) return GetPooledFX(lightingFxPool, transform, euler);
+        AttackFXController attackFX = ResourceLoader.Instance.LoadObjFromResources(
+            path, transform.position + Vector3.right * player.facingDir,
+            Quaternion.Euler(euler)
+        ).GetComponent<AttackFXController>();
 
-        return CreateFX("FX/LightingFX", transform, euler);
+        if (attackFX.fxType == E_MagicStatus.Ignite) attackFX.gameObject.transform.position += Vector3.up * 2f;
+
+        return attackFX;
     }
 
     public void ReturnFx(AttackFXController attackFX)
@@ -53,38 +73,25 @@ public class FXPool : Singleton<FXPool>
         }
     }
 
-    private void ClearPool(params Stack<AttackFXController>[] pools)
+    public void Clear()
     {
-        foreach (var pool in pools)
+        foreach (var fx in igniteFxPool)
         {
-            while (pool.Count > 0) GameObject.Destroy(pool.Pop().gameObject);
+            GameObject.Destroy(fx.gameObject);
         }
-    }
 
-    private AttackFXController GetPooledFX(Stack<AttackFXController> pool, Transform transform, Vector3 euler)
-    {
-        AttackFXController attackFX = pool.Pop();
-        Player player = PlayerManager.Instance.player;
+        foreach (var fx in chillFxPool)
+        {
+            GameObject.Destroy(fx.gameObject);
+        }
 
-        attackFX.gameObject.transform.position = transform.position + Vector3.right * player.facingDir;
+        foreach (var fx in lightingFxPool)
+        {
+            GameObject.Destroy(fx.gameObject);
+        }
 
-        if (attackFX.fxType == E_MagicStatus.Ignite) attackFX.gameObject.transform.position += Vector3.up * 2f;
-
-        attackFX.gameObject.transform.rotation = Quaternion.Euler(euler);
-        attackFX.gameObject.SetActive(true);
-        return attackFX;
-    }
-
-    private AttackFXController CreateFX(string path, Transform transform, Vector3 euler)
-    {
-        Player player = PlayerManager.Instance.player;
-        AttackFXController attackFX = ResourceLoader.Instance.LoadObjFromResources(
-            path, transform.position + Vector3.right * player.facingDir,
-            Quaternion.Euler(euler)
-        ).GetComponent<AttackFXController>();
-
-        if (attackFX.fxType == E_MagicStatus.Ignite) attackFX.gameObject.transform.position += Vector3.up * 2f;
-
-        return attackFX;
+        igniteFxPool.Clear();
+        chillFxPool.Clear();
+        lightingFxPool.Clear();
     }
 }

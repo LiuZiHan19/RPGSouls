@@ -71,7 +71,7 @@ public abstract class Entity : MonoBehaviour
         rb.velocity = new Vector2(knockbackForce * -facingDir, rb.velocity.y);
     }
 
-    public void Flip()
+    public virtual void Flip()
     {
         isFacingRight = !isFacingRight;
         facingDir = -facingDir;

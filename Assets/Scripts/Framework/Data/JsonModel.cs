@@ -5,9 +5,9 @@ public abstract class JsonModel
 {
     public JsonData jsonData;
 
-    public void PareSelf()
+    public void PareSelf(UnityAction callback = null)
     {
-        ParseData(jsonData);
+        ParseData(jsonData, callback);
     }
 
     public virtual void ParseData(JsonData jsonData, UnityAction callback = null) => this.jsonData = jsonData;

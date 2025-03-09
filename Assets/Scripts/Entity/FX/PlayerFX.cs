@@ -8,6 +8,7 @@ public class PlayerFX : EntityFX
     {
         base.Awake();
         _player = GetComponent<Player>();
+        GameEventDispatcher.PlayerAttack = null;
         GameEventDispatcher.PlayerAttack += PlayAttackFX;
     }
 
@@ -26,24 +27,29 @@ public class PlayerFX : EntityFX
     public void PlayIgniteFX(Transform transform)
     {
         if (_player.facingDir == 1)
-            FXPool.Instance.GetIgniteFx(transform).PlayFX();
+            FXPool.Instance.GetFx(E_MagicStatus.Ignite, transform).PlayFX();
         else
-            FXPool.Instance.GetIgniteFx(transform, new Vector3(0, 180, 0)).PlayFX();
+            FXPool.Instance.GetFx(E_MagicStatus.Ignite, transform, new Vector3(0, 180, 0)).PlayFX();
     }
 
     public void PlayChillFX(Transform transform)
     {
         if (_player.facingDir == 1)
-            FXPool.Instance.GetChillFx(transform).PlayFX();
+            FXPool.Instance.GetFx(E_MagicStatus.Chill, transform).PlayFX();
         else
-            FXPool.Instance.GetChillFx(transform, new Vector3(0, 180, 0)).PlayFX();
+            FXPool.Instance.GetFx(E_MagicStatus.Chill, transform, new Vector3(0, 180, 0)).PlayFX();
     }
 
     public void PlayLightingFX(Transform transform)
     {
         if (_player.facingDir == 1)
-            FXPool.Instance.GetLightingFx(transform).PlayFX();
+            FXPool.Instance.GetFx(E_MagicStatus.Lighting, transform).PlayFX();
         else
-            FXPool.Instance.GetLightingFx(transform, new Vector3(0, 180, 0)).PlayFX();
+            FXPool.Instance.GetFx(E_MagicStatus.Lighting, transform, new Vector3(0, 180, 0)).PlayFX();
+    }
+
+    ~PlayerFX()
+    {
+        GameEventDispatcher.PlayerAttack -= PlayAttackFX;
     }
 }

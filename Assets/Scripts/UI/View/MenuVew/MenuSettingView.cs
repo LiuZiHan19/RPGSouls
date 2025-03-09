@@ -10,7 +10,7 @@ public class MenuSettingView : UIBehaviour
     {
         _musicSlider = FindComponent<Slider>("Middle/MusicSlider");
         _soundSlider = FindComponent<Slider>("Middle/SoundSlider");
-        _closeBtn = FindComponent<Button>("Middle/TopBar/Button_Home");
+        _closeBtn = FindComponent<Button>("Top/Button_Back");
     }
 
     protected override void AddEvent()

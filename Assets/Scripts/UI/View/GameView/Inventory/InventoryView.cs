@@ -43,7 +43,7 @@ public class InventoryView : UIBehaviour
         _criticalStatText = FindComponent<Text>("Middle/Left_Panel/Stats2/Stat_Critical/Value");
         evasionStatText = FindComponent<Text>("Middle/Left_Panel/Stats2/Stat_Evasion/Value");
 
-        _closeBtn = FindComponent<Button>("Middle/TopBar/Button_Home");
+        _closeBtn = FindComponent<Button>("Top/Button_Back");
         _inventoryScrollRect = FindComponent<ScrollRect>("Middle/Right_Panel/ScrollRect");
 
         _weaponSlotImage = FindComponent<Image>("Middle/Left_Panel/Character/EquipSlot_L/EquipFrameEmpty/Icon");
