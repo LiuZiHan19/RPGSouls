@@ -19,6 +19,10 @@ public class GameManager : MonoBehaviour, IDisposable
         }
 
         InitGameSystem();
+    }
+
+    private void Start()
+    {
         LoadGameData();
     }
 
@@ -28,10 +32,9 @@ public class GameManager : MonoBehaviour, IDisposable
         SoundManager.Instance.Initialize();
         SoundPool.Instance.Initialize();
         UIManager.Instance.Initialize();
-        GameDataManager.Instance.Initialize();
         ResourceLoader.Instance.Initialize();
         SceneManager.Instance.Initialize();
-        JsonManager.Instance.Initialize();
+        JSONManager.Instance.Initialize();
         PlayerPrefsManager.Instance.Initialize();
         EventManager.Instance.Initialize();
 
@@ -48,6 +51,7 @@ public class GameManager : MonoBehaviour, IDisposable
         Debugger.Info("Load GameData");
         GameDataManager.Instance.LoadPlayerData();
         GameDataManager.Instance.LoadInventoryData();
+        GameDataManager.Instance.LoadSkillData();
     }
 
     private void OnClickPlayBtn()

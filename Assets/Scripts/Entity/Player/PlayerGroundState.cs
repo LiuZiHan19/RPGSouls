@@ -25,5 +25,10 @@ public class PlayerGroundState : PlayerState
             stateMachine.ChangeState(player.rollState);
             isReturn = true;
         }
+
+        if (Input.GetMouseButtonDown(1) && player.skill.skillIdleBlock.CanRelease())
+        {
+            stateMachine.ChangeState(player.idleBlockState);
+        }
     }
 }

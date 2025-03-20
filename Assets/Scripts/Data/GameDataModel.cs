@@ -1,3 +1,3 @@
-public class GameDataModel : JsonModel
+public class GameDataModel : JSONDataModel
 {
 }

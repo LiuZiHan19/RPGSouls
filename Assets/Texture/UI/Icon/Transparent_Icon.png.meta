@@ -766,13 +766,13 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Transparent_Icon_30
+      name: IdleBlock
       rect:
         serializedVersion: 2
         x: 224
-        y: 738.8889
+        y: 739
         width: 32
-        height: 32.11111
+        height: 32
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -899,8 +899,8 @@ TextureImporter:
         y: 738.8889
         width: 32
         height: 32.11111
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 9
+      pivot: {x: 0.5, y: 0.4734252}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -6116,6 +6116,7 @@ TextureImporter:
       Cutlass: 604876724
       FlameSword: -497172145
       IceSword: -2040040740
+      IdleBlock: 1052893372
       IronSword: 198407749
       KnightSword: 832288536
       MorningStar: 1540613961
@@ -6330,7 +6331,6 @@ TextureImporter:
       Transparent_Icon_283: -937608435
       Transparent_Icon_29: -1316994849
       Transparent_Icon_3: -868475164
-      Transparent_Icon_30: 1052893372
       Transparent_Icon_31: -956647621
       Transparent_Icon_32: -842700831
       Transparent_Icon_33: -228615479

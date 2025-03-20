@@ -1,14 +1,23 @@
 using LitJson;
 using UnityEngine.Events;
 
-public class PlayerDataModel : JsonModel
+public class PlayerDataModel : JSONDataModel
 {
+    public int coin;
+
     public override void ParseData(JsonData jsonData, UnityAction callback = null)
     {
         if (jsonData == null)
         {
             Debugger.Warning($"[PlayerData] jsonData is null in {nameof(ParseData)} | Class: {GetType().Name}");
             return;
+        }
+
+        if (jsonData.Keys.Contains("coin") && jsonData["coin"] != null)
+        {
+            int coin;
+            int.TryParse(jsonData["coin"].ToString(), out coin);
+            this.coin = coin;
         }
 
         var playerStats = PlayerManager.Instance.player.playerStats;
@@ -58,6 +67,8 @@ public class PlayerDataModel : JsonModel
         var playerStats = PlayerManager.Instance.player.playerStats;
 
         JsonData jsonData = new JsonData();
+
+        jsonData["coin"] = coin;
 
         // Save currentHealth
         jsonData["currentHealth"] = playerStats.currentHealth;

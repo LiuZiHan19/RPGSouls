@@ -14,6 +14,8 @@ public abstract class Skill : MonoBehaviour
 
     public bool CanRelease()
     {
+        if (isUnlocked == false) return false;
+
         if (cooldownTimer > cooldown)
         {
             cooldownTimer = 0;
@@ -23,8 +25,7 @@ public abstract class Skill : MonoBehaviour
         return false;
     }
 
-    public virtual void Release()
+    public virtual void Release(params object[] parameters)
     {
-
     }
 }

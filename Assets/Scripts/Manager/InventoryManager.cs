@@ -9,7 +9,7 @@ public class InventoryManager : MonoSingleton<InventoryManager>
     public Dictionary<E_InventoryMaterial, InventoryItem> materialDict;
     public Dictionary<E_InventoryItem, InventoryItem> itemDict;
     public List<InventoryItem> allItemList = new List<InventoryItem>();
-    public InventoryEquipmentSO weapon;
+    public InventoryEquipmentData weapon;
 
     protected override void Awake()
     {
@@ -22,22 +22,22 @@ public class InventoryManager : MonoSingleton<InventoryManager>
         GameEventDispatcher.Equip += Equip;
         GameEventDispatcher.UnEquip += UnEquip;
 
-        GameDataManager.Instance.inventoryDataModel.PareSelf();
+        GameDataManager.Instance.InventoryDataModel.PareSelf();
     }
 
-    private void Equip(InventoryItemBaseSO itemSO)
+    private void Equip(InventoryItemBaseData itemSO)
     {
         switch (itemSO.itemBaseType)
         {
             case E_InventoryItemBase.Equipment:
                 if (weapon != null) GameEventDispatcher.UnEquip?.Invoke(weapon);
-                weapon = itemSO as InventoryEquipmentSO;
+                weapon = itemSO as InventoryEquipmentData;
                 RemoveItemByItemSO(itemSO);
                 break;
         }
     }
 
-    private void UnEquip(InventoryItemBaseSO itemSO)
+    private void UnEquip(InventoryItemBaseData itemSO)
     {
         switch (itemSO.itemBaseType)
         {
@@ -47,12 +47,12 @@ public class InventoryManager : MonoSingleton<InventoryManager>
         }
     }
 
-    public void AddItemByItemSO(InventoryItemBaseSO itemSO)
+    public void AddItemByItemSO(InventoryItemBaseData itemSO)
     {
         switch (itemSO.itemBaseType)
         {
             case E_InventoryItemBase.Equipment:
-                InventoryEquipmentSO inventoryEquipmentSo = itemSO as InventoryEquipmentSO;
+                InventoryEquipmentData inventoryEquipmentSo = itemSO as InventoryEquipmentData;
                 if (equipmentDict.Keys.Contains(inventoryEquipmentSo.equipmentType))
                 {
                     equipmentDict[inventoryEquipmentSo.equipmentType].Add();
@@ -64,7 +64,7 @@ public class InventoryManager : MonoSingleton<InventoryManager>
 
                 break;
             case E_InventoryItemBase.Consumable:
-                InventoryConsumableSO inventoryConsumableSo = itemSO as InventoryConsumableSO;
+                InventoryConsumableData inventoryConsumableSo = itemSO as InventoryConsumableData;
                 if (consumableDict.Keys.Contains(inventoryConsumableSo.consumableType))
                 {
                     consumableDict[inventoryConsumableSo.consumableType].Add();
@@ -76,7 +76,7 @@ public class InventoryManager : MonoSingleton<InventoryManager>
 
                 break;
             case E_InventoryItemBase.Material:
-                InventoryMaterialSO inventoryMaterialSo = itemSO as InventoryMaterialSO;
+                InventoryMaterialData inventoryMaterialSo = itemSO as InventoryMaterialData;
                 if (materialDict.Keys.Contains(inventoryMaterialSo.materialType))
                 {
                     materialDict[inventoryMaterialSo.materialType].Add();
@@ -88,7 +88,7 @@ public class InventoryManager : MonoSingleton<InventoryManager>
 
                 break;
             case E_InventoryItemBase.Item:
-                InventoryItemSO inventoryItemSo = itemSO as InventoryItemSO;
+                InventoryItemData inventoryItemSo = itemSO as InventoryItemData;
                 if (itemDict.Keys.Contains(inventoryItemSo.itemType))
                 {
                     itemDict[inventoryItemSo.itemType].Add();
@@ -110,12 +110,12 @@ public class InventoryManager : MonoSingleton<InventoryManager>
         AddToList(itemSO);
     }
 
-    public void RemoveItemByItemSO(InventoryItemBaseSO itemSO)
+    public void RemoveItemByItemSO(InventoryItemBaseData itemSO)
     {
         switch (itemSO.itemBaseType)
         {
             case E_InventoryItemBase.Equipment:
-                if (itemSO is InventoryEquipmentSO equipmentSO)
+                if (itemSO is InventoryEquipmentData equipmentSO)
                 {
                     if (equipmentDict.TryGetValue(equipmentSO.equipmentType, out var equipmentItem))
                     {
@@ -129,7 +129,7 @@ public class InventoryManager : MonoSingleton<InventoryManager>
 
                 break;
             case E_InventoryItemBase.Consumable:
-                if (itemSO is InventoryConsumableSO consumableSO)
+                if (itemSO is InventoryConsumableData consumableSO)
                 {
                     if (consumableDict.TryGetValue(consumableSO.consumableType, out var consumableItem))
                     {
@@ -143,7 +143,7 @@ public class InventoryManager : MonoSingleton<InventoryManager>
 
                 break;
             case E_InventoryItemBase.Material:
-                if (itemSO is InventoryMaterialSO materialSO)
+                if (itemSO is InventoryMaterialData materialSO)
                 {
                     if (materialDict.TryGetValue(materialSO.materialType, out var materialItem))
                     {
@@ -157,7 +157,7 @@ public class InventoryManager : MonoSingleton<InventoryManager>
 
                 break;
             case E_InventoryItemBase.Item:
-                if (itemSO is InventoryItemSO itemTypeSO)
+                if (itemSO is InventoryItemData itemTypeSO)
                 {
                     if (itemDict.TryGetValue(itemTypeSO.itemType, out var typeItem))
                     {
@@ -179,7 +179,7 @@ public class InventoryManager : MonoSingleton<InventoryManager>
         RemoveFromList(itemSO);
     }
 
-    private void AddToList(InventoryItemBaseSO itemSO)
+    private void AddToList(InventoryItemBaseData itemSO)
     {
         foreach (var item in allItemList)
         {
@@ -193,7 +193,7 @@ public class InventoryManager : MonoSingleton<InventoryManager>
         allItemList.Add(new InventoryItem(itemSO));
     }
 
-    private void RemoveFromList(InventoryItemBaseSO itemSO)
+    private void RemoveFromList(InventoryItemBaseData itemSO)
     {
         foreach (var item in allItemList)
         {
@@ -210,9 +210,9 @@ public class InventoryManager : MonoSingleton<InventoryManager>
         }
     }
 
-    public InventoryItemBaseSO LoadDataByGUID(string guid)
+    public InventoryItemBaseData LoadDataByGUID(string guid)
     {
-        List<InventoryItemBaseSO> configurationData = GameResources.Instance.inventoryConfigurationSO.equipmentList;
+        List<InventoryItemBaseData> configurationData = GameResources.Instance.inventoryConfigurationSO.equipmentList;
 
         foreach (var itemData in configurationData)
         {

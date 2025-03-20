@@ -4,15 +4,15 @@ using System;
 public class InventoryItem
 {
     public int number;
-    public InventoryItemBaseSO itemSO;
+    public InventoryItemBaseData itemSO;
 
-    public InventoryItem(InventoryItemBaseSO itemSO)
+    public InventoryItem(InventoryItemBaseData itemSO)
     {
         this.itemSO = itemSO;
         number = 1;
     }
 
-    public InventoryItem(InventoryItemBaseSO itemSO, int number)
+    public InventoryItem(InventoryItemBaseData itemSO, int number)
     {
         this.itemSO = itemSO;
         this.number = number;

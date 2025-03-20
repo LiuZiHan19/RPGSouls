@@ -1,9 +1,9 @@
 {
+  "coin": 0,
   "currentHealth": 200,
   "maxHealth": {
     "baseValue": 200,
     "modifiers": [
-
     ]
   },
   "attackPower": {
@@ -44,19 +44,16 @@
   "criticalPower": {
     "baseValue": 0,
     "modifiers": [
-
     ]
   },
   "criticalChance": {
     "baseValue": 0,
     "modifiers": [
-
     ]
   },
   "evasion": {
     "baseValue": 0,
     "modifiers": [
-
     ]
   },
   "lighting": {
@@ -69,25 +66,21 @@
   "chill": {
     "baseValue": 0,
     "modifiers": [
-
     ]
   },
   "ignite": {
     "baseValue": 0,
     "modifiers": [
-
     ]
   },
   "armor": {
     "baseValue": 0,
     "modifiers": [
-
     ]
   },
   "magicResistance": {
     "baseValue": 0,
     "modifiers": [
-
     ]
   }
 }

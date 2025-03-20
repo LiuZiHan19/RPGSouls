@@ -4,7 +4,7 @@ using Random = UnityEngine.Random;
 
 public class InventoryRealItem : MonoBehaviour
 {
-    public InventoryItemBaseSO itemData;
+    public InventoryItemBaseData itemData;
     private Rigidbody2D _rb;
 
     private void Awake()

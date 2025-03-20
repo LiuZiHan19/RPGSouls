@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class Enemy : Entity
 {
+    public int coin;
     public GameObject[] dropItems;
     public float attackRange;
     public float canAttackRange;
@@ -41,6 +42,12 @@ public class Enemy : Entity
     public void Move()
     {
         rb.velocity = new Vector2(facingDir * moveSpeed, rb.velocity.y);
+    }
+
+    public override void Die()
+    {
+        base.Die();
+        GameDataManager.Instance.PlayerDataModel.coin += coin;
     }
 
     public override void Flip()

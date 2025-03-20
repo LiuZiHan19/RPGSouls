@@ -9,9 +9,9 @@ public class PlayerStats : AlmightyStats, IDisposable
         GameEventDispatcher.UnEquip += UnEquip;
     }
 
-    private void Equip(InventoryItemBaseSO itemSO)
+    private void Equip(InventoryItemBaseData itemSO)
     {
-        if (itemSO is InventoryItemStatSO statSO)
+        if (itemSO is InventoryItemStatData statSO)
         {
             if (statSO.maxHealth > 0) maxHealth.AddModifier(statSO.maxHealth);
             if (statSO.attackPower > 0) attackPower.AddModifier(statSO.attackPower);
@@ -30,9 +30,9 @@ public class PlayerStats : AlmightyStats, IDisposable
         }
     }
 
-    private void UnEquip(InventoryItemBaseSO itemSO)
+    private void UnEquip(InventoryItemBaseData itemSO)
     {
-        if (itemSO is InventoryItemStatSO statSO)
+        if (itemSO is InventoryItemStatData statSO)
         {
             if (statSO.maxHealth > 0) maxHealth.RemoveModifier(statSO.maxHealth);
             if (statSO.attackPower > 0) attackPower.RemoveModifier(statSO.attackPower);
@@ -53,6 +53,7 @@ public class PlayerStats : AlmightyStats, IDisposable
 
     public override void TakeDamage(int damage)
     {
+        if (isInvincible) return;
         base.TakeDamage(damage);
         GameEventDispatcher.OnPlayerTakeDamage?.Invoke((float)currentHealth / maxHealth.GetValue());
     }

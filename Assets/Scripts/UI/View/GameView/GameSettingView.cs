@@ -45,6 +45,11 @@ public class GameSettingView : UIBehaviour
         {
             Debugger.Info($"[GameSetting] {nameof(GameDataManager.SaveInventoryData)} Success");
         });
+
+        GameDataManager.Instance.SaveSkillData(() =>
+        {
+            Debugger.Info($"[GameSetting] {nameof(GameDataManager.SaveSkillData)} Success");
+        });
     }
 
     protected override void RemoveEvent()

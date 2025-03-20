@@ -2,7 +2,7 @@ using UnityEngine.UI;
 
 public class InventoryItemView : UIBehaviour
 {
-    public InventoryItemBaseSO itemSO;
+    public InventoryItemBaseData itemSO;
     public Text numberText;
     private Image _iconImage;
     private Button _btn;
@@ -20,7 +20,7 @@ public class InventoryItemView : UIBehaviour
         RegisterButtonEvent(_btn, OnClickBtn);
     }
 
-    public void Initialise(InventoryItemBaseSO itemSO, int number)
+    public void Initialise(InventoryItemBaseData itemSO, int number)
     {
         this.itemSO = itemSO;
         _iconImage.sprite = itemSO.sprite;

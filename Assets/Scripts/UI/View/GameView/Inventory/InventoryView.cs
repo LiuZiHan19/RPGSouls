@@ -92,7 +92,7 @@ public class InventoryView : UIBehaviour
         base.Hide();
     }
 
-    private void Equip(InventoryItemBaseSO itemSO)
+    private void Equip(InventoryItemBaseData itemSO)
     {
         switch (itemSO.itemBaseType)
         {
@@ -107,7 +107,7 @@ public class InventoryView : UIBehaviour
         }
     }
 
-    private void RemoveInventoryItemViewByItemSO(InventoryItemBaseSO itemSO)
+    private void RemoveInventoryItemViewByItemSO(InventoryItemBaseData itemSO)
     {
         foreach (var equipment in _equipmentViews)
         {
@@ -128,7 +128,7 @@ public class InventoryView : UIBehaviour
         }
     }
 
-    private void UnEquip(InventoryItemBaseSO itemSO)
+    private void UnEquip(InventoryItemBaseData itemSO)
     {
         switch (itemSO.itemBaseType)
         {
@@ -140,7 +140,7 @@ public class InventoryView : UIBehaviour
         }
     }
 
-    private bool AddInventoryItemViewByItemSO(InventoryItemBaseSO itemSO)
+    private bool AddInventoryItemViewByItemSO(InventoryItemBaseData itemSO)
     {
         foreach (var equipment in _equipmentViews)
         {
@@ -183,7 +183,7 @@ public class InventoryView : UIBehaviour
         _equipmentViews.Add(inventoryItemView);
     }
 
-    private void CreateEquipmentViewByItemSO(InventoryItemBaseSO itemSO)
+    private void CreateEquipmentViewByItemSO(InventoryItemBaseData itemSO)
     {
         var obj = ResourceLoader.Instance.LoadObjFromResources("UI/InventoryItemView");
         UnityObjectHelper.Instance.SetParent(obj.transform, _inventoryScrollRect.content);

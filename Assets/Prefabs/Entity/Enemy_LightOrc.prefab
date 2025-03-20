@@ -183,6 +183,7 @@ MonoBehaviour:
   entityStats: {fileID: 0}
   animEvent: {fileID: 0}
   entityFX: {fileID: 0}
+  coin: 100
   dropItems:
   - {fileID: 7433652934378968809, guid: c467aec5fc4bb4d03ab011ed5ec9b0be, type: 3}
   - {fileID: 4739517714198453033, guid: 7717eabc905c244fcade58e2a0db739c, type: 3}
@@ -233,6 +234,7 @@ MonoBehaviour:
   isChilled: 0
   isIgnited: 0
   isShocked: 0
+  isInvincible: 0
   agility:
     baseValue: 0
     modifiers: 

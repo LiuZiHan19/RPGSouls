@@ -18,5 +18,5 @@ public class GameResources : MonoBehaviour
         }
     }
 
-    [Header("InventoryConfiguration")] public InventoryConfigurationSO inventoryConfigurationSO;
+    [Header("InventoryConfiguration")] public InventoryDataManifest inventoryConfigurationSO;
 }

@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class SceneForestController : MonoBehaviour
 {
+    [SerializeField] private GameObject playerPrefab;
+    [SerializeField] private GameObject mainCameraPrefab;
     private Transform _playerSpawnPoint;
 
     private void Awake()
@@ -11,8 +13,7 @@ public class SceneForestController : MonoBehaviour
 
     private void Start()
     {
-        ResourceLoader.Instance.LoadObjFromResources("Setting/MainCamera");
-        ResourceLoader.Instance.LoadObjFromResources("Entity/Player", _playerSpawnPoint.position,
-            Quaternion.identity);
+        Instantiate(mainCameraPrefab);
+        Instantiate(playerPrefab, _playerSpawnPoint.position, Quaternion.identity);
     }
 }

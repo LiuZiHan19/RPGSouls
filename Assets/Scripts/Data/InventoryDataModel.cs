@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using LitJson;
 using UnityEngine.Events;
 
-public class InventoryDataModel : JsonModel
+public class InventoryDataModel : JSONDataModel
 {
     public string weapon;
     public List<string> equiomentIDList = new List<string>();
@@ -35,7 +35,7 @@ public class InventoryDataModel : JsonModel
         if (jsonData.Keys.Contains("weapon") && jsonData["weapon"] != null && jsonData["weapon"].ToString() != "")
         {
             weapon = jsonData["weapon"].ToString();
-            InventoryManager.Instance.weapon = InventoryManager.Instance.LoadDataByGUID(weapon) as InventoryEquipmentSO;
+            InventoryManager.Instance.weapon = InventoryManager.Instance.LoadDataByGUID(weapon) as InventoryEquipmentData;
         }
     }
 

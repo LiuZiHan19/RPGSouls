@@ -27,19 +27,19 @@ public class GameEventDispatcher
         set;
     }
 
-    public static Action<InventoryItemBaseSO> OnInventoryRealItemPickup
+    public static Action<InventoryItemBaseData> OnInventoryRealItemPickup
     {
         get; 
         set;
     }
 
-    public static Action<InventoryItemBaseSO> Equip
+    public static Action<InventoryItemBaseData> Equip
     {
         get;
         set;
     }
 
-    public static Action<InventoryItemBaseSO> UnEquip
+    public static Action<InventoryItemBaseData> UnEquip
     {
         get; 
         set;

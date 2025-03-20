@@ -7,7 +7,7 @@ public abstract class EntityStats : MonoBehaviour
 {
     public UnityAction<float> takeDamageCallback;
     public E_CharacterStats statsType;
-    [FormerlySerializedAs("currenHealth")] public int currentHealth;
+    public int currentHealth;
     public Stat maxHealth;
     public Stat attackPower;
     public Stat magicPower;
@@ -16,6 +16,7 @@ public abstract class EntityStats : MonoBehaviour
     public bool isChilled; // reduce armor by 20%
     public bool isIgnited; // does damage over time
     public bool isShocked; // reduce magicResistance by 20%
+    public bool isInvincible;
     private float chillTimer;
     private float igniteTimer;
     private float shockedTimer;
@@ -87,6 +88,7 @@ public abstract class EntityStats : MonoBehaviour
 
     public virtual void TakeDamage(int damage)
     {
+        if (isInvincible) return;
         currentHealth -= damage;
         currentHealth = Mathf.Clamp(currentHealth, 0, currentHealth);
         if (currentHealth == 0) entity.Die();
