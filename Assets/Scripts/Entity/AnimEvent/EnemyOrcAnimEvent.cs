@@ -13,8 +13,7 @@ public class EnemyOrcAnimEvent : AnimEvent
 
     private void Attack()
     {
-        Collider2D[] cds =
-            Physics2D.OverlapCircleAll(_enemyOrc.attackPoint.position, _enemyOrc.attackRange, attackLayer);
+        Collider2D[] cds = Physics2D.OverlapCircleAll(_enemyOrc.AttackPosition, _enemyOrc.AttackRaduis, attackLayer);
         foreach (var cd in cds)
         {
             WarriorStats warriorStats = _enemyOrc.entityStats as WarriorStats;

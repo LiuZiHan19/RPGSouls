@@ -2,7 +2,7 @@ using LitJson;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class GameDataManager : MonoSingleton<GameDataManager>
+public class GameDataManager : MonoSingletonDontDes<GameDataManager>
 {
     public SkillDataManifest SkillDataManifest;
     public InventoryDataManifest InventoryDataManifest;
@@ -14,7 +14,9 @@ public class GameDataManager : MonoSingleton<GameDataManager>
     protected override void Awake()
     {
         base.Awake();
-        DontDestroyOnLoad(gameObject);
+        LoadPlayerData();
+        LoadInventoryData();
+        LoadSkillData();
     }
 
     public void LoadPlayerData(UnityAction callback = null)

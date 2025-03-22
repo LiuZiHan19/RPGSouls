@@ -30,4 +30,10 @@ public class JSONManager : Singleton<JSONManager>
         await File.WriteAllTextAsync(finalPath, jsonStr);
         callback?.Invoke();
     }
+
+    private enum E_JSON
+    {
+        JsonUtility,
+        LitJson,
+    }
 }

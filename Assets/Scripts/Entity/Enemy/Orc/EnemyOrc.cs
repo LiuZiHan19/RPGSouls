@@ -1,22 +1,23 @@
-using System;
 using UnityEngine;
 
 public class EnemyOrc : Enemy
 {
     public EnemyOrcIdleState idleState;
-    public EnemyOrcRunState runState;
+    public EnemyOrcBattleState BattleState;
     public EnemyOrcAttackState attackState;
     public EnemyOrcDeadState deathState;
+    public EnemyOrcPatrolState patrolState;
     private Vector2 _moveVec;
 
     protected override void Awake()
     {
         base.Awake();
         idleState = new EnemyOrcIdleState(stateMachine, "Idle", this);
-        runState = new EnemyOrcRunState(stateMachine, "Run", this);
+        BattleState = new EnemyOrcBattleState(stateMachine, "Run", this);
         attackState = new EnemyOrcAttackState(stateMachine, "Attack", this);
         deathState = new EnemyOrcDeadState(stateMachine, "Dead", this);
-        stateMachine.Initialise(idleState);
+        patrolState = new EnemyOrcPatrolState(stateMachine, "Run", this);
+        stateMachine.Initialise(patrolState);
     }
 
     protected override void Update()

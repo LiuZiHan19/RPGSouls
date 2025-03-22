@@ -1,19 +1,33 @@
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class Enemy : Entity
 {
+    public EnemyID enemyID;
     public int coin;
     public GameObject[] dropItems;
-    public float attackRange;
-    public float canAttackRange;
-    public Transform attackPoint;
+    public float idleDuration;
+
+    public Vector3 AttackPosition => attackPosition.position;
+    public float AttackRaduis => attackRadius;
+    public bool IsGrounded => groundChecker.IsChecked();
+    public bool IsWalled => wallChecker.IsChecked();
+    public bool IsPlayerNear => isPlayerInRangeChecker.IsChecked();
+
+    [Header("Checker")] [SerializeField] private float attackRadius;
+    [SerializeField] private Vector2 isPlayerInRangeCheckSize;
+    [SerializeField] private float wallCheckRadius;
+    [SerializeField] private float groundCheckRadius;
+    [SerializeField] private Transform attackPosition;
+    [SerializeField] private ColliderChecker isPlayerInRangeChecker;
+    [SerializeField] private ColliderChecker wallChecker;
+    [SerializeField] private ColliderChecker groundChecker;
+
     protected WorldHealthBar healthBar;
-    private ColliderChecker _colliderChecker;
 
     protected override void Awake()
     {
         base.Awake();
-        _colliderChecker = transform.Find("PlayerCheck").GetComponent<ColliderChecker>();
         healthBar = transform.Find("World_Health_Bar").GetComponent<WorldHealthBar>();
         entityStats.takeDamageCallback += healthBar.UpdateHealthBar;
     }
@@ -21,22 +35,17 @@ public class Enemy : Entity
     public bool CanAttack()
     {
         bool canAttack = Vector2.Distance(transform.position, PlayerManager.Instance.player.transform.position) <
-                         canAttackRange;
+                         attackRadius;
         return canAttack;
     }
 
-    public void CheckFlip()
+    public void CheckFlipByPlayer()
     {
         if (PlayerManager.Instance.player.transform.position.x > transform.position.x && isFacingRight == false ||
             PlayerManager.Instance.player.transform.position.x < transform.position.x && isFacingRight == true)
         {
             Flip();
         }
-    }
-
-    public bool IsCheckedPlayer()
-    {
-        return _colliderChecker.IsChecked();
     }
 
     public void Move()
@@ -58,8 +67,10 @@ public class Enemy : Entity
 
     private void OnDrawGizmos()
     {
-        Gizmos.DrawWireSphere(attackPoint.position, attackRange);
-        Gizmos.DrawWireSphere(attackPoint.position, canAttackRange);
+        Gizmos.DrawWireSphere(attackPosition.position, attackRadius);
+        Gizmos.DrawWireCube(isPlayerInRangeChecker.Position, isPlayerInRangeCheckSize);
+        Gizmos.DrawWireSphere(wallChecker.Position, wallCheckRadius);
+        Gizmos.DrawWireSphere(groundChecker.Position, groundCheckRadius);
     }
 
     protected override void OnDestroy()
@@ -67,4 +78,10 @@ public class Enemy : Entity
         entityStats.takeDamageCallback -= healthBar.UpdateHealthBar;
         base.OnDestroy();
     }
+}
+
+public enum EnemyID
+{
+    Orc,
+    GrimReaper
 }

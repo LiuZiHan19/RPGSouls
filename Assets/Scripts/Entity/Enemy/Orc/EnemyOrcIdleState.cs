@@ -1,4 +1,4 @@
-public class EnemyOrcIdleState : EnemyOrcState
+public class EnemyOrcIdleState : EnemyOrcGroundedState
 {
     public EnemyOrcIdleState(StateMachine stateMachine, string animBoolName, Entity entity) : base(stateMachine,
         animBoolName, entity)
@@ -7,18 +7,11 @@ public class EnemyOrcIdleState : EnemyOrcState
 
     public override void Update()
     {
-        base.Update();
-        if (enemyOrc.IsCheckedPlayer())
+        if (timer > enemyOrc.idleDuration)
         {
-            enemyOrc.CheckFlip();
-            if (enemyOrc.CanAttack())
-            {
-                stateMachine.ChangeState(enemyOrc.attackState);
-            }
-            else
-            {
-                stateMachine.ChangeState(enemyOrc.runState);
-            }
+            stateMachine.ChangeState(enemyOrc.patrolState);
         }
+
+        base.Update();
     }
 }

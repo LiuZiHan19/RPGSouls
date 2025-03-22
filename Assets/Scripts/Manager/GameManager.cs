@@ -1,29 +1,16 @@
 using System;
 using UnityEngine;
 
-public class GameManager : MonoBehaviour, IDisposable
+public class GameManager : MonoSingletonDontDes<GameManager>, IDisposable
 {
-    public static GameManager Instance;
+    public bool initialized = false;
 
-    private void Awake()
+    protected override void Awake()
     {
-        if (Instance == null)
-        {
-            Instance = this;
-            DontDestroyOnLoad(gameObject);
-        }
-        else
-        {
-            Destroy(gameObject);
-            return;
-        }
-
+        base.Awake();
+        if (initialized) return;
+        initialized = true;
         InitGameSystem();
-    }
-
-    private void Start()
-    {
-        LoadGameData();
     }
 
     private void InitGameSystem()
@@ -36,7 +23,6 @@ public class GameManager : MonoBehaviour, IDisposable
         SceneManager.Instance.Initialize();
         JSONManager.Instance.Initialize();
         PlayerPrefsManager.Instance.Initialize();
-        EventManager.Instance.Initialize();
 
         UIManager.Instance.ShowMenuView();
         SoundManager.Instance.PlayBgm("Sound/music_menu");
@@ -44,14 +30,6 @@ public class GameManager : MonoBehaviour, IDisposable
         GameEventDispatcher.OnClickPlayBtn += OnClickPlayBtn;
         GameEventDispatcher.OnClickPlayAgainBtn += OnClickPlayAgainBtn;
         GameEventDispatcher.OnClickReturnBtn += OnClickReturnBtn;
-    }
-
-    private void LoadGameData()
-    {
-        Debugger.Info("Load GameData");
-        GameDataManager.Instance.LoadPlayerData();
-        GameDataManager.Instance.LoadInventoryData();
-        GameDataManager.Instance.LoadSkillData();
     }
 
     private void OnClickPlayBtn()
