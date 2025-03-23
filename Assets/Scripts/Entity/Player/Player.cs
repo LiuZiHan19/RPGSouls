@@ -9,23 +9,27 @@ public class Player : Entity
     public Transform attackPoint;
     public float rollForce;
 
-    public PlayerIdleState idleState;
-    public PlayerRunState runState;
-    public PlayerJumpState jumpState;
-    public PlayerFallState fallState;
-    public PlayerAttackState attackState;
-    public PlayerDeathState deathState;
-    public PlayerIdleBlockState idleBlockState;
-    public PlayerRollState rollState;
+    public PlayerIdleState IdleState { get; private set; }
+    public PlayerRunState RunState { get; private set; }
+    public PlayerJumpState JumpState { get; private set; }
+    public PlayerFallState FallState { get; private set; }
+    public PlayerAttackState AttackState { get; private set; }
+    public PlayerDeathState DeathState { get; private set; }
+    public PlayerIdleBlockState IdleBlockState { get; private set; }
+    public PlayerRollState RollState { get; private set; }
+
+    public bool IsGrounded => _groundedChecker.IsChecked;
+    public Vector2 Velocity => _rb.velocity;
+    public Vector2 GetInput => _input;
 
     public SkillManager skill => SkillManager.Instance;
-    public PlayerStats playerStats;
+    public PlayerStats playerStats => entityStats as PlayerStats;
 
     private Rigidbody2D _rb;
-    private ColliderChecker _colliderChecker;
+    private ColliderChecker _groundedChecker;
 
-    private int _attackCounter;
-    private float _attackTimer;
+    private int _attackCounter = 0;
+    private float _attackTimer = 0;
     private Vector2 _input = new Vector2();
     private Vector2 _move = new Vector2();
     private Vector2 _jump = new Vector2();
@@ -33,19 +37,18 @@ public class Player : Entity
     protected override void Awake()
     {
         base.Awake();
-        playerStats = entityStats as PlayerStats;
         _rb = GetComponent<Rigidbody2D>();
-        _colliderChecker = GetComponentInChildren<ColliderChecker>();
+        _groundedChecker = GetComponentInChildren<ColliderChecker>();
 
-        idleState = new PlayerIdleState(stateMachine, "Idle", this);
-        runState = new PlayerRunState(stateMachine, "Run", this);
-        jumpState = new PlayerJumpState(stateMachine, "Jump", this);
-        fallState = new PlayerFallState(stateMachine, "Fall", this);
-        attackState = new PlayerAttackState(stateMachine, "Attack", this);
-        deathState = new PlayerDeathState(stateMachine, "Death", this);
-        idleBlockState = new PlayerIdleBlockState(stateMachine, "IdleBlock", this);
-        rollState = new PlayerRollState(stateMachine, "Roll", this);
-        stateMachine.Initialise(idleState);
+        IdleState = new PlayerIdleState(stateMachine, "Idle", this);
+        RunState = new PlayerRunState(stateMachine, "Run", this);
+        JumpState = new PlayerJumpState(stateMachine, "Jump", this);
+        FallState = new PlayerFallState(stateMachine, "Fall", this);
+        AttackState = new PlayerAttackState(stateMachine, "Attack", this);
+        DeathState = new PlayerDeathState(stateMachine, "Death", this);
+        IdleBlockState = new PlayerIdleBlockState(stateMachine, "IdleBlock", this);
+        RollState = new PlayerRollState(stateMachine, "Roll", this);
+        stateMachine.Initialise(IdleState);
     }
 
     protected override void Start()
@@ -91,21 +94,6 @@ public class Player : Entity
 
     #endregion
 
-    public bool IsGrounded()
-    {
-        return _colliderChecker.IsChecked();
-    }
-
-    public Vector2 GetVelocity()
-    {
-        return _rb.velocity;
-    }
-
-    public Vector2 GetInput()
-    {
-        return _input;
-    }
-
     public Vector2 GetMove()
     {
         _move.x = _input.x * moveSpeed;
@@ -127,11 +115,11 @@ public class Player : Entity
 
     public void CheckFlip()
     {
-        if (GetInput().x > 0 && isFacingRight == false)
+        if (GetInput.x > 0 && isFacingRight == false)
         {
             Flip();
         }
-        else if (GetInput().x < 0 && isFacingRight == true)
+        else if (GetInput.x < 0 && isFacingRight == true)
         {
             Flip();
         }
@@ -157,7 +145,7 @@ public class Player : Entity
     {
         base.Die();
         SoundManager.Instance.PlaySfx("Sound/sfx_death");
-        stateMachine.ChangeState(deathState);
+        stateMachine.ChangeState(DeathState);
         GameEventDispatcher.OnPlayerDead?.Invoke();
     }
 

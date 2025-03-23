@@ -14,9 +14,9 @@ public class PlayerJumpState : PlayerState
     public override void Update()
     {
         base.Update();
-        if (player.GetVelocity().y < 0)
+        if (player.Velocity.y < 0)
         {
-            stateMachine.ChangeState(player.fallState);
+            stateMachine.ChangeState(player.FallState);
         }
     }
 }

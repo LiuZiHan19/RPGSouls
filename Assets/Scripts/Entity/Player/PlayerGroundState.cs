@@ -10,25 +10,25 @@ public class PlayerGroundState : PlayerState
     public override void Update()
     {
         base.Update();
-        if (Input.GetKeyDown(KeyCode.Space) && player.IsGrounded())
+        if (Input.GetKeyDown(KeyCode.Space) && player.IsGrounded)
         {
-            stateMachine.ChangeState(player.jumpState);
+            stateMachine.ChangeState(player.JumpState);
         }
 
         if (Input.GetMouseButtonDown(0))
         {
-            stateMachine.ChangeState(player.attackState);
+            stateMachine.ChangeState(player.AttackState);
         }
 
-        if (Input.GetKeyDown(KeyCode.F) && player.IsGrounded() && player.skill.skillRoll.CanRelease())
+        if (Input.GetKeyDown(KeyCode.F) && player.IsGrounded && player.skill.skillRoll.CanRelease())
         {
-            stateMachine.ChangeState(player.rollState);
+            stateMachine.ChangeState(player.RollState);
             isReturn = true;
         }
 
         if (Input.GetMouseButtonDown(1) && player.skill.skillIdleBlock.CanRelease())
         {
-            stateMachine.ChangeState(player.idleBlockState);
+            stateMachine.ChangeState(player.IdleBlockState);
         }
     }
 }

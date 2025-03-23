@@ -7,6 +7,7 @@ public class State
     protected Entity entity;
     protected bool isReturn;
     protected float timer;
+    public bool triggered;
 
     public State(StateMachine stateMachine, string animBoolName, Entity entity)
     {
@@ -17,7 +18,7 @@ public class State
 
     public virtual void Enter()
     {
-        // Debugger.Info($"{entity.entityName} Enter {animBoolName} State");
+        triggered = false;
         entity.animator.SetBool(animBoolName, true);
         timer = 0;
     }
@@ -29,7 +30,6 @@ public class State
 
     public virtual void Exit()
     {
-        // Debugger.Info($"{entity.entityName} Exit {animBoolName} State");
         entity.animator.SetBool(animBoolName, false);
     }
 

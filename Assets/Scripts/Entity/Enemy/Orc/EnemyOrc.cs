@@ -2,17 +2,17 @@ using UnityEngine;
 
 public class EnemyOrc : Enemy
 {
-    public EnemyOrcIdleState idleState;
-    public EnemyOrcBattleState BattleState;
-    public EnemyOrcAttackState attackState;
-    public EnemyOrcDeadState deathState;
-    public EnemyOrcPatrolState patrolState;
+    public EnemyOrcIdleState IdleState { get; private set; }
+    public EnemyOrcBattleState BattleState { get; private set; }
+    public EnemyOrcAttackState attackState { get; private set; }
+    public EnemyOrcDeadState deathState { get; private set; }
+    public EnemyOrcPatrolState patrolState { get; private set; }
     private Vector2 _moveVec;
 
     protected override void Awake()
     {
         base.Awake();
-        idleState = new EnemyOrcIdleState(stateMachine, "Idle", this);
+        IdleState = new EnemyOrcIdleState(stateMachine, "Idle", this);
         BattleState = new EnemyOrcBattleState(stateMachine, "Run", this);
         attackState = new EnemyOrcAttackState(stateMachine, "Attack", this);
         deathState = new EnemyOrcDeadState(stateMachine, "Dead", this);
@@ -30,9 +30,5 @@ public class EnemyOrc : Enemy
     {
         base.Die();
         stateMachine.ChangeState(deathState);
-        foreach (var dropItem in dropItems)
-        {
-            Instantiate(dropItem, transform.position, Quaternion.identity);
-        }
     }
 }

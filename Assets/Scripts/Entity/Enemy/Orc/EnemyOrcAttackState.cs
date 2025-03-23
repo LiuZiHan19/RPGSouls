@@ -10,7 +10,7 @@ public class EnemyOrcAttackState : EnemyOrcState
         base.Update();
         if (enemyOrc.IsTriggered())
         {
-            stateMachine.ChangeState(enemyOrc.idleState);
+            stateMachine.ChangeState(enemyOrc.IdleState);
         }
     }
 }

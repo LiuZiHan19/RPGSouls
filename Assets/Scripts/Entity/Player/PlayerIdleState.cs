@@ -15,16 +15,16 @@ public class PlayerIdleState : PlayerGroundState
 
     public override void Update()
     {
-        if (player.GetVelocity().x != 0)
+        if (player.Velocity.x != 0)
         {
-            player.SetVelocity(new Vector2(0, player.GetVelocity().y));
+            player.SetVelocity(new Vector2(0, player.Velocity.y));
         }
         
         base.Update();
 
-        if (player.GetInput().x != 0)
+        if (player.GetInput.x != 0)
         {
-            stateMachine.ChangeState(player.runState);
+            stateMachine.ChangeState(player.RunState);
         }
     }
 }

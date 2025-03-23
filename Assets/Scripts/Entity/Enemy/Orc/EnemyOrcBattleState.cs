@@ -15,7 +15,7 @@ public class EnemyOrcBattleState : EnemyOrcState
         }
         else if (enemyOrc.IsPlayerNear == false)
         {
-            stateMachine.ChangeState(enemyOrc.idleState);
+            stateMachine.ChangeState(enemyOrc.IdleState);
         }
     }
 }

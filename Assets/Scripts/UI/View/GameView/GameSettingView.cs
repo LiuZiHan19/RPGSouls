@@ -8,7 +8,7 @@ public class GameSettingView : UIBehaviour
 
     protected override void ParseComponent()
     {
-        _resumeBtn = FindComponent<Button>("Middle/Resume");
+        _resumeBtn = FindComponent<Button>("Middle/PlayAgain");
         _returnBtn = FindComponent<Button>("Middle/Return");
         _saveBtn = FindComponent<Button>("Middle/Save");
     }

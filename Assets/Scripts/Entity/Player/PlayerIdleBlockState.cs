@@ -18,7 +18,7 @@ public class PlayerIdleBlockState : PlayerState
         base.Update();
         if (Input.GetMouseButtonUp(1))
         {
-            stateMachine.ChangeState(player.idleState);
+            stateMachine.ChangeState(player.IdleState);
         }
     }
 

@@ -24,6 +24,7 @@ public class MainMenuView : UIBehaviour
 
     private void OnClickExitBtn()
     {
+        GameManager.Instance.Dispose();
         Application.Quit();
     }
 

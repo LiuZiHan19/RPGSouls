@@ -7,12 +7,14 @@ public class MainGameViewController : UIController
     private SkillView _skillView;
     private DeadView _deadView;
     private GameSettingView _gameSettingView;
+    private GameWinView _gameWinView;
 
     public override void Initialise()
     {
         ShowGameView();
 
         GameEventDispatcher.OnPlayerDead += ShowDeadView;
+        GameEventDispatcher.OnGameWin += ShowGameWinView;
     }
 
     #region Game View
@@ -173,9 +175,35 @@ public class MainGameViewController : UIController
 
     #endregion
 
+    #region Game Win View
+
+    private void CreateGameWinView()
+    {
+        if (_gameWinView != null) return;
+        _gameWinView = new GameWinView();
+        GameObject obj = ResourceLoader.Instance.LoadObjFromResources("UI/GameWinView");
+        _gameWinView.SetDisplayObject(obj);
+        UIManager.Instance.SetObjectToLayer(obj.transform, UILayer.Middle);
+    }
+
+    private void ShowGameWinView()
+    {
+        CreateGameWinView();
+        _gameWinView.DisplayTransform.SetAsLastSibling();
+        _gameWinView.Show();
+    }
+
+    private void HideGameWinView()
+    {
+        _gameWinView.Hide();
+    }
+
+    #endregion
+
     public override void Dispose()
     {
         GameEventDispatcher.OnPlayerDead -= ShowDeadView;
+        GameEventDispatcher.OnGameWin -= ShowGameWinView;
 
         _deadView?.Dispose();
         _deadView = null;
@@ -189,5 +217,8 @@ public class MainGameViewController : UIController
         _mainGameView.RemoveUIEvent(OnGameViewAction);
         _mainGameView?.Dispose();
         _mainGameView = null;
+
+        _gameWinView?.Dispose();
+        _gameWinView = null;
     }
 }

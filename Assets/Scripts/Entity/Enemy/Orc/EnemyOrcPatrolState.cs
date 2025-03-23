@@ -12,7 +12,7 @@ public class EnemyOrcPatrolState : EnemyOrcGroundedState
         if (enemyOrc.IsGrounded == false || enemyOrc.IsWalled)
         {
             enemyOrc.Flip();
-            stateMachine.ChangeState(enemyOrc.idleState);
+            stateMachine.ChangeState(enemyOrc.IdleState);
         }
 
         base.Update();

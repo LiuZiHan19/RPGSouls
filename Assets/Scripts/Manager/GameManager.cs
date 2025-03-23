@@ -1,21 +1,90 @@
 using System;
-using UnityEngine;
 
-public class GameManager : MonoSingletonDontDes<GameManager>, IDisposable
+public class GameManager : MonoSingletonDontDes<GameManager>, IDisposable, IGameStatusProvider, IGrimReaperProvider
 {
-    public bool initialized = false;
+    #region IGrimReaperProvider
+
+    public AlmightyStats GrimReaperStats
+    {
+        get
+        {
+            if (m_GrimReaper == null)
+            {
+                m_GrimReaper = FindObjectOfType<EnemyGrimReaper>();
+            }
+
+            return m_GrimReaper.entityStats as AlmightyStats;
+        }
+    }
+
+    private EnemyGrimReaper m_GrimReaper;
+
+    #endregion
+
+    #region IGameStatusProvider
+
+    private bool m_IsChallengeBoss = false;
+
+    public bool IsChallengeBoss
+    {
+        get => m_IsChallengeBoss;
+        set
+        {
+            if (m_GrimReaper == null)
+            {
+                m_GrimReaper = FindObjectOfType<EnemyGrimReaper>();
+            }
+
+            if (value)
+            {
+                m_GrimReaper.stateMachine.ChangeState(m_GrimReaper.BattleState);
+                SoundManager.Instance.PlayBgm("Sound/music_boss");
+                SoundManager.Instance.PlaySfx("Sound/sfx_evil_voice");
+            }
+            else
+            {
+                SoundManager.Instance.PlayBgm("Sound/music_forest");
+                m_GrimReaper.stateMachine.ChangeState(m_GrimReaper.IdleState);
+            }
+
+            m_IsChallengeBoss = value;
+        }
+    }
+
+    private bool m_IsBossDead = false;
+
+    public bool IsBossDead
+    {
+        get => m_IsBossDead;
+        set
+        {
+            if (value)
+            {
+                SoundManager.Instance.PlayBgm("Sound/music_forest");
+                m_IsChallengeBoss = false;
+            }
+
+            m_IsBossDead = value;
+        }
+    }
+
+    public bool IsGamePaused { get; set; }
+
+    #endregion
+
+    private bool m_initialized = false;
 
     protected override void Awake()
     {
         base.Awake();
-        if (initialized) return;
-        initialized = true;
+        if (m_initialized) return;
+        m_initialized = true;
         InitGameSystem();
+        RegisterEvent();
     }
 
     private void InitGameSystem()
     {
-        Debugger.Info("Init GameSystem");
         SoundManager.Instance.Initialize();
         SoundPool.Instance.Initialize();
         UIManager.Instance.Initialize();
@@ -25,12 +94,23 @@ public class GameManager : MonoSingletonDontDes<GameManager>, IDisposable
         PlayerPrefsManager.Instance.Initialize();
 
         UIManager.Instance.ShowMenuView();
-        SoundManager.Instance.PlayBgm("Sound/music_menu");
+    }
 
+    private void RegisterEvent()
+    {
         GameEventDispatcher.OnClickPlayBtn += OnClickPlayBtn;
         GameEventDispatcher.OnClickPlayAgainBtn += OnClickPlayAgainBtn;
         GameEventDispatcher.OnClickReturnBtn += OnClickReturnBtn;
     }
+
+    private void ClearSceneTrash()
+    {
+        SoundPool.Instance.Dispose();
+        FXPool.Instance.Dispose();
+        CoroutineManager.Instance.IStopAllCoroutine();
+    }
+
+    #region Event
 
     private void OnClickPlayBtn()
     {
@@ -67,11 +147,7 @@ public class GameManager : MonoSingletonDontDes<GameManager>, IDisposable
         });
     }
 
-    private void ClearSceneTrash()
-    {
-        FXPool.Instance.Clear();
-        CoroutineManager.Instance.IStopAllCoroutine();
-    }
+    #endregion
 
     public void Dispose()
     {

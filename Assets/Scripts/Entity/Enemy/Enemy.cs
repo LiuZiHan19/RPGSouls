@@ -10,9 +10,9 @@ public class Enemy : Entity
 
     public Vector3 AttackPosition => attackPosition.position;
     public float AttackRaduis => attackRadius;
-    public bool IsGrounded => groundChecker.IsChecked();
-    public bool IsWalled => wallChecker.IsChecked();
-    public bool IsPlayerNear => isPlayerInRangeChecker.IsChecked();
+    public bool IsGrounded => groundChecker.IsChecked;
+    public bool IsWalled => wallChecker.IsChecked;
+    public bool IsPlayerNear => isPlayerInRangeChecker.IsChecked;
 
     [Header("Checker")] [SerializeField] private float attackRadius;
     [SerializeField] private Vector2 isPlayerInRangeCheckSize;
@@ -56,6 +56,11 @@ public class Enemy : Entity
     public override void Die()
     {
         base.Die();
+        foreach (var dropItem in dropItems)
+        {
+            Instantiate(dropItem, transform.position, Quaternion.identity);
+        }
+
         GameDataManager.Instance.PlayerDataModel.coin += coin;
     }
 

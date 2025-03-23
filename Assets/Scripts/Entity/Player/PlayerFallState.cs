@@ -8,9 +8,9 @@ public class PlayerFallState : PlayerState
     public override void Update()
     {
         base.Update();
-        if (player.IsGrounded())
+        if (player.IsGrounded)
         {
-            stateMachine.ChangeState(player.idleState);
+            stateMachine.ChangeState(player.IdleState);
         }
     }
 }

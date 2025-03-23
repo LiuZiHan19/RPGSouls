@@ -131,7 +131,7 @@ GameObject:
   - component: {fileID: 3504353403525310214}
   - component: {fileID: 2202947136805780999}
   m_Layer: 5
-  m_Name: Resume
+  m_Name: PlayAgain
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -440,7 +440,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u5B58\u50A8"
+  m_Text: "\u5B58\u50A8\u6E38\u620F"
 --- !u!1 &4373617502685408609
 GameObject:
   m_ObjectHideFlags: 0
@@ -519,7 +519,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u7EE7\u7EED"
+  m_Text: "\u518D\u73A9\u4E00\u6B21"
 --- !u!1 &4601169635278946172
 GameObject:
   m_ObjectHideFlags: 0
@@ -673,7 +673,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u8FD4\u56DE"
+  m_Text: "\u8FD4\u56DE\u5927\u5385"
 --- !u!1 &5561372307259319521
 GameObject:
   m_ObjectHideFlags: 0

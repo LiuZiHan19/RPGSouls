@@ -6,11 +6,11 @@ public abstract class Entity : MonoBehaviour
     public bool isFacingRight = true;
     public float facingDir = 1;
     public float knockbackForce;
+    [HideInInspector]  public StateMachine stateMachine;
     [HideInInspector]  public Animator animator;
     [HideInInspector] public EntityStats entityStats;
-    [HideInInspector]  public AnimEvent animEvent;
+    [HideInInspector]  public EntityAnimationEvent animEvent;
     [HideInInspector]  public EntityFX entityFX;
-    protected StateMachine stateMachine;
     protected Collider collider;
     protected Rigidbody2D rb;
 
@@ -22,7 +22,7 @@ public abstract class Entity : MonoBehaviour
         animator = GetComponentInChildren<Animator>();
         collider = GetComponent<Collider>();
         entityStats = GetComponent<EntityStats>();
-        animEvent = transform.Find("Animator").GetComponent<AnimEvent>();
+        animEvent = transform.Find("Animator").GetComponent<EntityAnimationEvent>();
     }
 
     protected virtual void OnEnable()

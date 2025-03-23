@@ -10,7 +10,7 @@ public class PlayerRollState : PlayerState
     public override void Enter()
     {
         base.Enter();
-        player.SetVelocity(new Vector2(player.rollForce * player.facingDir, player.GetVelocity().y));
+        player.SetVelocity(new Vector2(player.rollForce * player.facingDir, player.Velocity.y));
         if (player.skill.skillClone.CanRelease())
             player.skill.skillClone.Release(player);
     }
@@ -21,7 +21,7 @@ public class PlayerRollState : PlayerState
         if (player.IsTriggered())
         {
             player.SetVelocity(Vector2.zero);
-            stateMachine.ChangeState(player.idleState);
+            stateMachine.ChangeState(player.IdleState);
         }
     }
 

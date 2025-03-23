@@ -26,11 +26,13 @@ public class UIManager : Singleton<UIManager>
 
     public void ShowMenuView()
     {
+        SoundManager.Instance.PlayBgm("Sound/music_menu");
         if (_mainMenuViewController != null)
         {
             _mainMenuViewController.ShowMenuView();
             return;
         }
+
 
         _mainMenuViewController = new MainMenuViewController();
         _mainMenuViewController.Initialise();

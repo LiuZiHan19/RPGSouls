@@ -17,7 +17,7 @@ public class PlayerAttackState : PlayerState
         base.Update();
         if (player.IsTriggered())
         {
-            stateMachine.ChangeState(player.idleState);
+            stateMachine.ChangeState(player.IdleState);
         }
     }
 }

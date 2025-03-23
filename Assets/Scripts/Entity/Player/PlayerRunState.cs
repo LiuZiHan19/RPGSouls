@@ -19,9 +19,9 @@ public class PlayerRunState : PlayerGroundState
         if (IsReturn()) return;
         player.SetVelocity(player.GetMove());
         player.CheckFlip();
-        if (player.GetInput().x == 0)
+        if (player.GetInput.x == 0)
         {
-            stateMachine.ChangeState(player.idleState);
+            stateMachine.ChangeState(player.IdleState);
         }
     }
 
