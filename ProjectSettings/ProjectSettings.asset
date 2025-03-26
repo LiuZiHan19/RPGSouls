@@ -698,20 +698,23 @@ PlayerSettings:
   webGLMemoryGeometricGrowthCap: 96
   webGLPowerPreference: 2
   scriptingDefineSymbols:
-    Android: ES3_UGUI
-    EmbeddedLinux: ES3_UGUI
+    Android: ES3_UGUI;TextMeshPro
+    EmbeddedLinux: ES3_UGUI;TextMeshPro
+    GameCoreXboxOne: TextMeshPro
     LinuxHeadlessSimulation: ES3_UGUI
-    Nintendo Switch: ES3_UGUI
-    PS4: ES3_UGUI
-    QNX: ES3_UGUI
+    Nintendo Switch: ES3_UGUI;TextMeshPro
+    PS4: ES3_UGUI;TextMeshPro
+    PS5: TextMeshPro
+    QNX: ES3_UGUI;TextMeshPro
     Server: ES3_UGUI
-    Standalone: ES3_UGUI
-    VisionOS: ES3_UGUI
-    WebGL: ES3_UGUI
+    Stadia: TextMeshPro
+    Standalone: ES3_UGUI;TextMeshPro
+    VisionOS: ES3_UGUI;TextMeshPro
+    WebGL: ES3_UGUI;TextMeshPro
     Windows Store Apps: ES3_UGUI
-    XboxOne: ES3_UGUI
-    iPhone: ES3_UGUI
-    tvOS: ES3_UGUI
+    XboxOne: ES3_UGUI;TextMeshPro
+    iPhone: ES3_UGUI;TextMeshPro
+    tvOS: ES3_UGUI;TextMeshPro
   additionalCompilerArguments: {}
   platformArchitecture: {}
   scriptingBackend: {}
