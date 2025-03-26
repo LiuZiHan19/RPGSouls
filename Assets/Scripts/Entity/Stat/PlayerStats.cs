@@ -53,6 +53,7 @@ public class PlayerStats : AlmightyStats, IDisposable
 
     public override void TakeDamage(int damage)
     {
+        if (isDead) return;
         if (isInvincible) return;
         base.TakeDamage(damage);
         GameEventDispatcher.OnPlayerTakeDamage?.Invoke((float)currentHealth / maxHealth.GetValue());

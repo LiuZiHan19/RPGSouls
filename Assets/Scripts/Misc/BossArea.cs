@@ -10,10 +10,12 @@ public class BossArea : MonoBehaviour
     private void Awake()
     {
         cd = GetComponent<Collider2D>();
+        OnTriggerEnter2D(null);
     }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
+        if (other == null) return;
         if (GameManager.Instance.IsBossDead) return;
 
         if (other.gameObject.tag == "player")

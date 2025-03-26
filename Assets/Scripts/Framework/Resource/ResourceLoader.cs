@@ -1,4 +1,7 @@
+using System;
+using System.Threading.Tasks;
 using UnityEngine;
+using Object = UnityEngine.Object;
 
 public class ResourceLoader : Singleton<ResourceLoader>
 {
@@ -8,6 +11,31 @@ public class ResourceLoader : Singleton<ResourceLoader>
         if (t == null)
             Debugger.Error($"Failed to load asset at path: {path}. Type: {typeof(T).Name} not found.");
         return t;
+    }
+
+    public async void LoadFromResourcesAsync<T>(string path, Action<T> onSuccess, Action<Exception> onError = null)
+        where T : Object
+    {
+        try
+        {
+            var request = Resources.LoadAsync<T>(path);
+
+            while (!request.isDone)
+            {
+                await Task.Yield();
+            }
+
+            if (request.asset == null || !(request.asset is T))
+            {
+                throw new Exception($"Failed to load asset at path: {path}. Type: {typeof(T).Name} not found.");
+            }
+
+            onSuccess?.Invoke((T)request.asset);
+        }
+        catch (Exception ex)
+        {
+            onError?.Invoke(ex);
+        }
     }
 
     public Object LoadFromResources(string path)

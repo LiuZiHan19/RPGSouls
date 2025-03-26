@@ -17,6 +17,8 @@ public abstract class EntityStats : MonoBehaviour
     public bool isIgnited; // does damage over time
     public bool isShocked; // reduce magicResistance by 20%
     public bool isInvincible;
+    public bool isDead;
+
     private float chillTimer;
     private float igniteTimer;
     private float shockedTimer;
@@ -88,10 +90,17 @@ public abstract class EntityStats : MonoBehaviour
 
     public virtual void TakeDamage(int damage)
     {
+        if (isDead) return;
         if (isInvincible) return;
         currentHealth -= damage;
-        currentHealth = Mathf.Clamp(currentHealth, 0, currentHealth);
-        if (currentHealth == 0) entity.Die();
+        currentHealth = Mathf.Max(currentHealth, 0);
+        if (currentHealth <= 0)
+        {
+            currentHealth = 0;
+            isDead = true;
+            entity.Die();
+        }
+
         takeDamageCallback?.Invoke((float)currentHealth / maxHealth.GetValue());
     }
 

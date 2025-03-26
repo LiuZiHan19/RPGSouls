@@ -35,5 +35,7 @@ public class SoundPool : Singleton<SoundPool>
         {
             GameObject.Destroy(audio);
         }
+
+        _audioPool.Clear();
     }
 }

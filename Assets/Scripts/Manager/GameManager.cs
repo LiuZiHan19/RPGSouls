@@ -1,20 +1,16 @@
 using System;
+using UnityEngine;
 
-public class GameManager : MonoSingletonDontDes<GameManager>, IDisposable, IGameStatusProvider, IGrimReaperProvider
+public class GameManager : MonoBehaviour, IDisposable, IGameStatusProvider, IGrimReaperProvider
 {
+    private static GameManager instance;
+    public static GameManager Instance => instance;
+
     #region IGrimReaperProvider
 
     public AlmightyStats GrimReaperStats
     {
-        get
-        {
-            if (m_GrimReaper == null)
-            {
-                m_GrimReaper = FindObjectOfType<EnemyGrimReaper>();
-            }
-
-            return m_GrimReaper.entityStats as AlmightyStats;
-        }
+        get { return m_GrimReaper.entityStats as AlmightyStats; }
     }
 
     private EnemyGrimReaper m_GrimReaper;
@@ -23,31 +19,22 @@ public class GameManager : MonoSingletonDontDes<GameManager>, IDisposable, IGame
 
     #region IGameStatusProvider
 
-    private bool m_IsChallengeBoss = false;
+    private bool m_isChanged = false;
+    private bool m_isChallengeBoss = false;
 
     public bool IsChallengeBoss
     {
-        get => m_IsChallengeBoss;
+        get => m_isChallengeBoss;
         set
         {
             if (m_GrimReaper == null)
             {
-                m_GrimReaper = FindObjectOfType<EnemyGrimReaper>();
+                m_isChallengeBoss = false;
+                return;
             }
 
-            if (value)
-            {
-                m_GrimReaper.stateMachine.ChangeState(m_GrimReaper.BattleState);
-                SoundManager.Instance.PlayBgm("Sound/music_boss");
-                SoundManager.Instance.PlaySfx("Sound/sfx_evil_voice");
-            }
-            else
-            {
-                SoundManager.Instance.PlayBgm("Sound/music_forest");
-                m_GrimReaper.stateMachine.ChangeState(m_GrimReaper.IdleState);
-            }
-
-            m_IsChallengeBoss = value;
+            m_isChanged = true;
+            m_isChallengeBoss = value;
         }
     }
 
@@ -61,7 +48,7 @@ public class GameManager : MonoSingletonDontDes<GameManager>, IDisposable, IGame
             if (value)
             {
                 SoundManager.Instance.PlayBgm("Sound/music_forest");
-                m_IsChallengeBoss = false;
+                m_isChallengeBoss = false;
             }
 
             m_IsBossDead = value;
@@ -72,15 +59,40 @@ public class GameManager : MonoSingletonDontDes<GameManager>, IDisposable, IGame
 
     #endregion
 
-    private bool m_initialized = false;
-
-    protected override void Awake()
+    protected virtual void Awake()
     {
-        base.Awake();
-        if (m_initialized) return;
-        m_initialized = true;
+        if (instance == null)
+        {
+            instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+            return;
+        }
+
         InitGameSystem();
         RegisterEvent();
+    }
+
+    private void Update()
+    {
+        if (m_isChanged)
+        {
+            m_isChanged = false;
+            if (m_isChallengeBoss)
+            {
+                m_GrimReaper.stateMachine.ChangeState(m_GrimReaper.BattleState);
+                SoundManager.Instance.PlayBgmAsync("Sound/music_boss");
+                SoundManager.Instance.PlaySfxAsync("Sound/sfx_evil_voice");
+            }
+            else
+            {
+                SoundManager.Instance.PlayBgmAsync("Sound/music_forest");
+                m_GrimReaper.stateMachine.ChangeState(m_GrimReaper.IdleState);
+            }
+        }
     }
 
     private void InitGameSystem()
@@ -121,6 +133,7 @@ public class GameManager : MonoSingletonDontDes<GameManager>, IDisposable, IGame
         UIManager.Instance.ShowGameView();
         SceneManager.Instance.LoadSceneAsync("MainGameScene", () =>
         {
+            m_GrimReaper = FindObjectOfType<EnemyGrimReaper>();
             SoundManager.Instance.PlayBgm("Sound/music_forest");
             UIManager.Instance.HideLoadingView();
         });

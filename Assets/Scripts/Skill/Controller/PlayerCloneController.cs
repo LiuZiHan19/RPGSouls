@@ -5,7 +5,7 @@ public class PlayerCloneController : MonoBehaviour
 {
     private Animator _animator;
     private SpriteRenderer _sr;
-    private PlayerAnimEvent _playerAnimEvent;
+    private AnimEvent_Player _animEventPlayer;
     private bool _isFade;
     private float _fadeSpeed = 4f;
 
@@ -13,7 +13,7 @@ public class PlayerCloneController : MonoBehaviour
     {
         _animator = GetComponentInChildren<Animator>();
         _sr = GetComponentInChildren<SpriteRenderer>();
-        _playerAnimEvent = GetComponentInChildren<PlayerAnimEvent>();
+        _animEventPlayer = GetComponentInChildren<AnimEvent_Player>();
 
         if (PlayerManager.Instance.player.facingDir == -1)
         {
@@ -35,7 +35,7 @@ public class PlayerCloneController : MonoBehaviour
 
     private void Update()
     {
-        if (_playerAnimEvent.IsTriggered())
+        if (_animEventPlayer.IsTriggered())
         {
             _animator.SetBool("Attack", false);
             _isFade = true;

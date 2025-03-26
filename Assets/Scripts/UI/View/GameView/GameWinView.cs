@@ -36,20 +36,7 @@ public class GameWinView : UIBehaviour
 
     private void OnClickSaveBtn()
     {
-        GameDataManager.Instance.SavePlayerData(() =>
-        {
-            Debugger.Info($"[GameSetting] {nameof(GameDataManager.SavePlayerData)} Success");
-        });
-
-        GameDataManager.Instance.SaveInventoryData(() =>
-        {
-            Debugger.Info($"[GameSetting] {nameof(GameDataManager.SaveInventoryData)} Success");
-        });
-
-        GameDataManager.Instance.SaveSkillData(() =>
-        {
-            Debugger.Info($"[GameSetting] {nameof(GameDataManager.SaveSkillData)} Success");
-        });
+        GameDataManager.Instance.SaveGameData();
     }
 
     protected override void RemoveEvent()

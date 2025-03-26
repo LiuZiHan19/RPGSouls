@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class SoundManager : Singleton<SoundManager>
 {
@@ -11,6 +12,7 @@ public class SoundManager : Singleton<SoundManager>
     private AudioSource _bgmAudioSource;
     private Dictionary<uint, AudioSource> _sfxAudioSources;
     private uint _signCounter;
+    private Dictionary<string, AudioClip> m_longClip;
 
     /// <summary>
     /// 在编辑器状态下创建音频对象父对象进行管理
@@ -18,6 +20,7 @@ public class SoundManager : Singleton<SoundManager>
     public override void Initialize()
     {
         _sfxAudioSources = new Dictionary<uint, AudioSource>();
+        m_longClip = new Dictionary<string, AudioClip>();
         base.Initialize();
         sfxVolume = 1;
         musicVolume = 1;
@@ -64,6 +67,26 @@ public class SoundManager : Singleton<SoundManager>
         _bgmAudioSource.Play();
     }
 
+    public void PlayBgmAsync(string path, bool isLoop = true, UnityAction callback = null)
+    {
+        if (_bgmAudioSource == null)
+        {
+            _bgmAudioSource = SoundPool.Instance.Get();
+#if UNITY_EDITOR
+            _bgmAudioSource.gameObject.name = "BgmObj";
+            _bgmAudioSource.gameObject.transform.SetParent(_bgmParent, false);
+#endif
+        }
+
+        _bgmAudioSource.volume = musicVolume;
+        ResourceLoader.Instance.LoadFromResourcesAsync<AudioClip>(path, value =>
+        {
+            _bgmAudioSource.clip = value;
+            _bgmAudioSource.loop = isLoop;
+            _bgmAudioSource.Play();
+        });
+    }
+
     public void StopBgm()
     {
         if (_bgmAudioSource == null)
@@ -88,6 +111,27 @@ public class SoundManager : Singleton<SoundManager>
         audioSource.gameObject.name = "SfxObj";
         audioSource.gameObject.transform.SetParent(_sfxParent, false);
 #endif
+        _signCounter++;
+        _sfxAudioSources.Add(_signCounter, audioSource);
+        return _signCounter;
+    }
+
+    public uint PlaySfxAsync(string path, bool isLoop = false)
+    {
+        AudioSource audioSource = SoundPool.Instance.Get();
+        audioSource.volume = sfxVolume;
+        ResourceLoader.Instance.LoadFromResourcesAsync<AudioClip>(path, value =>
+        {
+            audioSource.clip = value;
+            audioSource.loop = isLoop;
+            audioSource.Play();
+            CoroutineManager.Instance.IStartCoroutine(WaitForAudioToEnd(audioSource.gameObject, audioSource));
+
+#if UNITY_EDITOR
+            audioSource.gameObject.name = "SfxObj";
+            audioSource.gameObject.transform.SetParent(_sfxParent, false);
+#endif
+        });
         _signCounter++;
         _sfxAudioSources.Add(_signCounter, audioSource);
         return _signCounter;

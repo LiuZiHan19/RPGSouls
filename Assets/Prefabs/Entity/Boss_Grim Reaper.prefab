@@ -197,7 +197,7 @@ GameObject:
   - component: {fileID: 6695931571874647739}
   - component: {fileID: 4083189290861505916}
   m_Layer: 15
-  m_Name: Grim Reaper
+  m_Name: Boss_Grim Reaper
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -211,7 +211,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5893510675262593305}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 56.96, y: -1.2, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -363,6 +363,7 @@ MonoBehaviour:
   isIgnited: 0
   isShocked: 0
   isInvincible: 0
+  isDead: 0
   agility:
     baseValue: 0
     modifiers: 

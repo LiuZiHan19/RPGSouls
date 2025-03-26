@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class ColliderChecker : MonoBehaviour
+public class Collider_Checker : MonoBehaviour
 {
     public string layerName;
     public Vector3 Position => transform.position;

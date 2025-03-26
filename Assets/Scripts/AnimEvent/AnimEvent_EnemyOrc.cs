@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class EnemyOrcAnimEvent : EntityAnimationEvent
+public class AnimEvent_EnemyOrc : EntityAnimationEvent
 {
     public LayerMask attackLayer;
     private EnemyOrc _enemyOrc;

@@ -1,27 +1,86 @@
-using LitJson;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class GameDataManager : MonoSingletonDontDes<GameDataManager>
+public class GameDataManager : MonoBehaviour
 {
+    private static GameDataManager instance;
+    public static GameDataManager Instance => instance;
+
     public SkillDataManifest SkillDataManifest;
     public InventoryDataManifest InventoryDataManifest;
+
     public GameDataModel GameDataModel { get; set; } = new GameDataModel();
     public PlayerDataModel PlayerDataModel { get; set; } = new PlayerDataModel();
     public InventoryDataModel InventoryDataModel { get; set; } = new InventoryDataModel();
     public SkillDataModel SkillDataModel { get; set; } = new SkillDataModel();
 
-    protected override void Awake()
+    protected virtual void Awake()
     {
-        base.Awake();
-        LoadPlayerData();
-        LoadInventoryData();
-        LoadSkillData();
+        if (instance == null)
+        {
+            instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+            return;
+        }
+
+        LoadGameData();
+    }
+
+    public void SaveGameData(UnityAction callback = null)
+    {
+        SavePlayerData(() =>
+        {
+            Debugger.Info(
+                $"[GameDataManager] Save Player Data Successfully | Class: {GetType().Name}");
+            SaveInventoryData(() =>
+            {
+                Debugger.Info(
+                    $"[GameDataManager] Save Inventory Data Successfully | Class: {GetType().Name}");
+                SaveSkillData(() =>
+                {
+                    Debugger.Info(
+                        $"[GameDataManager] Save Skill Data Successfully | Class: {GetType().Name}");
+                    callback?.Invoke();
+                });
+            });
+        });
+
+        GameDataModel.Save();
+    }
+
+    public void LoadGameData(UnityAction callback = null)
+    {
+        LoadPlayerData(() =>
+        {
+            Debugger.Info(
+                $"[GameDataManager] Load Player Data Successfully | Class: {GetType().Name}");
+            LoadInventoryData(() =>
+            {
+                Debugger.Info(
+                    $"[GameDataManager] Load Inventory Data Successfully | Class: {GetType().Name}");
+                LoadSkillData(() =>
+                {
+                    Debugger.Info(
+                        $"[GameDataManager] Load Skill Data Successfully | Class: {GetType().Name}");
+                    callback?.Invoke();
+                });
+            });
+        });
+
+        GameDataModel.Load();
     }
 
     public void LoadPlayerData(UnityAction callback = null)
     {
-        JSONManager.Instance.LoadJsonDataAsync("PlayerData", jsonData => { PlayerDataModel.jsonData = jsonData; });
+        JSONManager.Instance.LoadJsonDataAsync("PlayerData", jsonData =>
+        {
+            PlayerDataModel.jsonData = jsonData;
+            callback?.Invoke();
+        });
     }
 
     public void SavePlayerData(UnityAction callback = null)
@@ -31,8 +90,11 @@ public class GameDataManager : MonoSingletonDontDes<GameDataManager>
 
     public void LoadInventoryData(UnityAction callback = null)
     {
-        JSONManager.Instance.LoadJsonDataAsync("InventoryData",
-            jsonData => { InventoryDataModel.jsonData = jsonData; });
+        JSONManager.Instance.LoadJsonDataAsync("InventoryData", jsonData =>
+        {
+            InventoryDataModel.jsonData = jsonData;
+            callback?.Invoke();
+        });
     }
 
     public void SaveInventoryData(UnityAction callback = null)
@@ -43,7 +105,11 @@ public class GameDataManager : MonoSingletonDontDes<GameDataManager>
 
     public void LoadSkillData(UnityAction callback = null)
     {
-        JSONManager.Instance.LoadJsonDataAsync("SkillData", jsonData => { SkillDataModel.jsonData = jsonData; });
+        JSONManager.Instance.LoadJsonDataAsync("SkillData", jsonData =>
+        {
+            SkillDataModel.jsonData = jsonData;
+            callback?.Invoke();
+        });
     }
 
     public void SaveSkillData(UnityAction callback = null)

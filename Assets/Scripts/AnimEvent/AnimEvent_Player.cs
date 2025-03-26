@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class PlayerAnimEvent : EntityAnimationEvent
+public class AnimEvent_Player : EntityAnimationEvent
 {
     public LayerMask attackLayer;
     public Transform attackPoint;

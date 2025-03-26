@@ -26,7 +26,7 @@ public class Player : Entity
     public PlayerStats playerStats => entityStats as PlayerStats;
 
     private Rigidbody2D _rb;
-    private ColliderChecker _groundedChecker;
+    private Collider_Checker _groundedChecker;
 
     private int _attackCounter = 0;
     private float _attackTimer = 0;
@@ -38,7 +38,7 @@ public class Player : Entity
     {
         base.Awake();
         _rb = GetComponent<Rigidbody2D>();
-        _groundedChecker = GetComponentInChildren<ColliderChecker>();
+        _groundedChecker = GetComponentInChildren<Collider_Checker>();
 
         IdleState = new PlayerIdleState(stateMachine, "Idle", this);
         RunState = new PlayerRunState(stateMachine, "Run", this);
@@ -143,6 +143,7 @@ public class Player : Entity
 
     public override void Die()
     {
+        PlayerManager.Instance.IsPlayerDead = true;
         base.Die();
         SoundManager.Instance.PlaySfx("Sound/sfx_death");
         stateMachine.ChangeState(DeathState);

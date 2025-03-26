@@ -3,6 +3,7 @@ using UnityEngine;
 public class PlayerManager : Singleton<PlayerManager>
 {
     public Player player;
+    public bool IsPlayerDead { get; set; }
 
     public override void Initialize()
     {

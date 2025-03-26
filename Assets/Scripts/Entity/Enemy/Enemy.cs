@@ -19,9 +19,9 @@ public class Enemy : Entity
     [SerializeField] private float wallCheckRadius;
     [SerializeField] private float groundCheckRadius;
     [SerializeField] private Transform attackPosition;
-    [SerializeField] private ColliderChecker isPlayerInRangeChecker;
-    [SerializeField] private ColliderChecker wallChecker;
-    [SerializeField] private ColliderChecker groundChecker;
+    [SerializeField] private Collider_Checker isPlayerInRangeChecker;
+    [SerializeField] private Collider_Checker wallChecker;
+    [SerializeField] private Collider_Checker groundChecker;
 
     protected WorldHealthBar healthBar;
 

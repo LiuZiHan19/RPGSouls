@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class EnemyGrimReaperAnimEvent : EntityAnimationEvent
+public class AnimEvent_EnemyGrimReaper : EntityAnimationEvent
 {
     public LayerMask attackLayer;
     [SerializeField] private GameObject magicPrefab;

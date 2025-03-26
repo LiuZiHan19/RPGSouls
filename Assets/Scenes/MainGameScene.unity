@@ -20613,6 +20613,63 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1001 &1776546436
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 3124023508922592635, guid: 523fd1b41fd02b54386a836e50e08680, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 56.96
+      objectReference: {fileID: 0}
+    - target: {fileID: 3124023508922592635, guid: 523fd1b41fd02b54386a836e50e08680, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -1.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3124023508922592635, guid: 523fd1b41fd02b54386a836e50e08680, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3124023508922592635, guid: 523fd1b41fd02b54386a836e50e08680, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3124023508922592635, guid: 523fd1b41fd02b54386a836e50e08680, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3124023508922592635, guid: 523fd1b41fd02b54386a836e50e08680, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3124023508922592635, guid: 523fd1b41fd02b54386a836e50e08680, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3124023508922592635, guid: 523fd1b41fd02b54386a836e50e08680, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3124023508922592635, guid: 523fd1b41fd02b54386a836e50e08680, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3124023508922592635, guid: 523fd1b41fd02b54386a836e50e08680, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5893510675262593305, guid: 523fd1b41fd02b54386a836e50e08680, type: 3}
+      propertyPath: m_Name
+      value: Boss_Grim Reaper
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 523fd1b41fd02b54386a836e50e08680, type: 3}
 --- !u!1 &1859108219
 GameObject:
   m_ObjectHideFlags: 0
@@ -21722,67 +21779,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1001 &5860176512239937676
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 2919942761060803866, guid: 523fd1b41fd02b54386a836e50e08680, type: 3}
-      propertyPath: bossArea
-      value: 
-      objectReference: {fileID: 943193459}
-    - target: {fileID: 3124023508922592635, guid: 523fd1b41fd02b54386a836e50e08680, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 56.96
-      objectReference: {fileID: 0}
-    - target: {fileID: 3124023508922592635, guid: 523fd1b41fd02b54386a836e50e08680, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -1.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 3124023508922592635, guid: 523fd1b41fd02b54386a836e50e08680, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3124023508922592635, guid: 523fd1b41fd02b54386a836e50e08680, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3124023508922592635, guid: 523fd1b41fd02b54386a836e50e08680, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3124023508922592635, guid: 523fd1b41fd02b54386a836e50e08680, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3124023508922592635, guid: 523fd1b41fd02b54386a836e50e08680, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3124023508922592635, guid: 523fd1b41fd02b54386a836e50e08680, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3124023508922592635, guid: 523fd1b41fd02b54386a836e50e08680, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3124023508922592635, guid: 523fd1b41fd02b54386a836e50e08680, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5893510675262593305, guid: 523fd1b41fd02b54386a836e50e08680, type: 3}
-      propertyPath: m_Name
-      value: Grim Reaper
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 523fd1b41fd02b54386a836e50e08680, type: 3}
 --- !u!212 &6028920106854187120
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -24352,6 +24348,6 @@ SceneRoots:
   - {fileID: 245827516}
   - {fileID: 2034259526}
   - {fileID: 1149962038}
-  - {fileID: 5860176512239937676}
+  - {fileID: 1776546436}
   - {fileID: 2248598057240488025}
   - {fileID: 1377553336}

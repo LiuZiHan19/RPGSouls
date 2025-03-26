@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class AbilityGrimReaperAnimEvent : AnimationEvent
+public class AnimEvent_AbilityGrimReaper : AnimationEvent
 {
     private AbilityGrimReaper m_abilityGrimReaper;
 
