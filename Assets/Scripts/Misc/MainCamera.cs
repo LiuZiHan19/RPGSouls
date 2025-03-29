@@ -12,6 +12,9 @@ public class MainCamera : MonoBehaviour
 
     private void Start()
     {
-        _cinemachineVirtualCamera.Follow = PlayerManager.Instance.player.transform;
+        CoroutineManager.Instance.StartWaitForFrame(() =>
+        {
+            _cinemachineVirtualCamera.Follow = PlayerManager.Instance.player.transform;
+        });
     }
 }

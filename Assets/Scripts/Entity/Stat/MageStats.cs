@@ -1,3 +1,6 @@
+/// <summary>
+/// 法师属性
+/// </summary>
 public class MageStats : EntityStats
 {
     public Stat evasion;
@@ -10,9 +13,9 @@ public class MageStats : EntityStats
         if (target.currentHealth <= 0) return;
         if (CanEvasion(target)) return;
 
-        if (CanChill()) target.SetMagicStatus(E_MagicStatus.Chill);
-        if (CanLighting()) target.SetMagicStatus(E_MagicStatus.Lighting);
-        if (CanIgnite()) target.SetMagicStatus(E_MagicStatus.Ignite);
+        if (CanChill()) target.SetMagicStatus(ElementStatusType.Chill);
+        if (CanLighting()) target.SetMagicStatus(ElementStatusType.Lighting);
+        if (CanIgnite()) target.SetMagicStatus(ElementStatusType.Ignite);
 
         int armor = target.armor.GetValue();
         if (target.isChilled) armor = (int)(armor * 0.8f);

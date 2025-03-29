@@ -1,44 +1,57 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class CoroutineManager : MonoSingletonDontDes<CoroutineManager>
+public class CoroutineManager : MonoBehaviour
 {
-    private List<Coroutine> _coroutines = new List<Coroutine>();
+    private static CoroutineManager m_instance;
+    public static CoroutineManager Instance => m_instance;
 
-    public Coroutine IStartCoroutine(IEnumerator coroutine)
+    private void Awake()
     {
-        Coroutine cor = StartCoroutine(coroutine);
-        _coroutines.Add(cor);
-        return cor;
-    }
-
-    public void IStopCoroutine(Coroutine coroutine)
-    {
-        if (coroutine == null)
+        if (m_instance == null)
         {
-            Debugger.Warning("Coroutine is null");
-            return;
+            m_instance = this;
+            DontDestroyOnLoad(gameObject);
         }
-
-        StopCoroutine(coroutine);
-    }
-
-    public void IStopAllCoroutine()
-    {
-        foreach (Coroutine cor in _coroutines)
+        else
         {
-            IStopCoroutine(cor);
+            Destroy(gameObject);
         }
     }
 
-    public void WaitForSeconds(float seconds, UnityAction callback)
+    public void StartWaitForFrame(UnityAction callback)
     {
-        IStartCoroutine(WaitForSecondsCoroutine(seconds, callback));
+        StartCoroutine(WaitForFrame(callback));
     }
 
-    private IEnumerator WaitForSecondsCoroutine(float seconds, UnityAction callback)
+    private IEnumerator WaitForFrame(UnityAction callback)
+    {
+        yield return null;
+        callback?.Invoke();
+    }
+
+    public void StartWaitForFrames(int frames, UnityAction callback)
+    {
+        StartCoroutine(WaitForFrames(frames, callback));
+    }
+
+    private IEnumerator WaitForFrames(int frames, UnityAction callback)
+    {
+        for (int i = 0; i < frames; i++)
+        {
+            yield return null;
+        }
+
+        callback?.Invoke();
+    }
+
+    public void StartWaitForSeconds(float seconds, UnityAction callback)
+    {
+        StartCoroutine(WaitForSeconds(seconds, callback));
+    }
+
+    private IEnumerator WaitForSeconds(float seconds, UnityAction callback)
     {
         yield return new WaitForSeconds(seconds);
         callback?.Invoke();

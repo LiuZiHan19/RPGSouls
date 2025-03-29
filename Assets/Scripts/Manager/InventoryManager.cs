@@ -1,182 +1,196 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEngine;
 
-public class InventoryManager : MonoSingleton<InventoryManager>
+public class InventoryManager : MonoBehaviour
 {
-    public Dictionary<E_InventoryEquipment, InventoryItem> equipmentDict;
-    public Dictionary<E_InventoryConsumable, InventoryItem> consumableDict;
-    public Dictionary<E_InventoryMaterial, InventoryItem> materialDict;
-    public Dictionary<E_InventoryItem, InventoryItem> itemDict;
-    public List<InventoryItem> allItemList = new List<InventoryItem>();
-    public InventoryEquipmentData weapon;
+    private static InventoryManager m_instance;
+    public static InventoryManager Instance => m_instance;
 
-    protected override void Awake()
+    public Dictionary<InventoryEquipmentID, InventoryItem> equipmentDict;
+    public Dictionary<InventoryConsumableID, InventoryItem> consumableDict;
+    public Dictionary<InventoryMaterialID, InventoryItem> materialDict;
+    public Dictionary<InventoryItemID, InventoryItem> itemDict;
+    public List<InventoryItem> allItemList = new List<InventoryItem>();
+    public InventoryEquipmentData currentWeaponData;
+
+    private void Awake()
     {
-        base.Awake();
-        equipmentDict = new Dictionary<E_InventoryEquipment, InventoryItem>();
-        consumableDict = new Dictionary<E_InventoryConsumable, InventoryItem>();
-        materialDict = new Dictionary<E_InventoryMaterial, InventoryItem>();
-        itemDict = new Dictionary<E_InventoryItem, InventoryItem>();
-        GameEventDispatcher.OnInventoryRealItemPickup += AddItemByItemSO;
+        if (m_instance == null)
+        {
+            m_instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+
+        equipmentDict = new Dictionary<InventoryEquipmentID, InventoryItem>();
+        consumableDict = new Dictionary<InventoryConsumableID, InventoryItem>();
+        materialDict = new Dictionary<InventoryMaterialID, InventoryItem>();
+        itemDict = new Dictionary<InventoryItemID, InventoryItem>();
+
+        GameEventDispatcher.OnInventoryRealItemPickup += AddItemByItemData;
         GameEventDispatcher.Equip += Equip;
         GameEventDispatcher.UnEquip += UnEquip;
 
         GameDataManager.Instance.InventoryDataModel.PareSelf();
     }
 
-    private void Equip(InventoryItemBaseData itemSO)
+    private void Equip(InventoryItemBaseData itemData)
     {
-        switch (itemSO.itemBaseType)
+        switch (itemData.itemBaseType)
         {
-            case E_InventoryItemBase.Equipment:
-                if (weapon != null) GameEventDispatcher.UnEquip?.Invoke(weapon);
-                weapon = itemSO as InventoryEquipmentData;
-                RemoveItemByItemSO(itemSO);
+            case InventoryItemBaseType.Equipment:
+                if (currentWeaponData != null)
+                    GameEventDispatcher.UnEquip?.Invoke(currentWeaponData);
+                currentWeaponData = itemData as InventoryEquipmentData;
+                RemoveItemByItemData(itemData);
                 break;
         }
     }
 
-    private void UnEquip(InventoryItemBaseData itemSO)
+    private void UnEquip(InventoryItemBaseData itemData)
     {
-        switch (itemSO.itemBaseType)
+        switch (itemData.itemBaseType)
         {
-            case E_InventoryItemBase.Equipment:
-                AddItemByItemSO(itemSO);
+            case InventoryItemBaseType.Equipment:
+                AddItemByItemData(itemData);
                 break;
         }
     }
 
-    public void AddItemByItemSO(InventoryItemBaseData itemSO)
+    public void AddItemByItemData(InventoryItemBaseData itemData)
     {
-        switch (itemSO.itemBaseType)
+        switch (itemData.itemBaseType)
         {
-            case E_InventoryItemBase.Equipment:
-                InventoryEquipmentData inventoryEquipmentSo = itemSO as InventoryEquipmentData;
-                if (equipmentDict.Keys.Contains(inventoryEquipmentSo.equipmentType))
+            case InventoryItemBaseType.Equipment:
+                InventoryEquipmentData inventoryEquipmentSo = itemData as InventoryEquipmentData;
+                if (equipmentDict.Keys.Contains(inventoryEquipmentSo.equipmentID))
                 {
-                    equipmentDict[inventoryEquipmentSo.equipmentType].Add();
+                    equipmentDict[inventoryEquipmentSo.equipmentID].Add();
                 }
                 else
                 {
-                    equipmentDict.Add(inventoryEquipmentSo.equipmentType, new InventoryItem(inventoryEquipmentSo));
+                    equipmentDict.Add(inventoryEquipmentSo.equipmentID, new InventoryItem(inventoryEquipmentSo));
                 }
 
                 break;
-            case E_InventoryItemBase.Consumable:
-                InventoryConsumableData inventoryConsumableSo = itemSO as InventoryConsumableData;
-                if (consumableDict.Keys.Contains(inventoryConsumableSo.consumableType))
+            case InventoryItemBaseType.Consumable:
+                InventoryConsumableData inventoryConsumableSo = itemData as InventoryConsumableData;
+                if (consumableDict.Keys.Contains(inventoryConsumableSo.consumableID))
                 {
-                    consumableDict[inventoryConsumableSo.consumableType].Add();
+                    consumableDict[inventoryConsumableSo.consumableID].Add();
                 }
                 else
                 {
-                    consumableDict.Add(inventoryConsumableSo.consumableType, new InventoryItem(inventoryConsumableSo));
+                    consumableDict.Add(inventoryConsumableSo.consumableID, new InventoryItem(inventoryConsumableSo));
                 }
 
                 break;
-            case E_InventoryItemBase.Material:
-                InventoryMaterialData inventoryMaterialSo = itemSO as InventoryMaterialData;
-                if (materialDict.Keys.Contains(inventoryMaterialSo.materialType))
+            case InventoryItemBaseType.Material:
+                InventoryMaterialData inventoryMaterialSo = itemData as InventoryMaterialData;
+                if (materialDict.Keys.Contains(inventoryMaterialSo.materialID))
                 {
-                    materialDict[inventoryMaterialSo.materialType].Add();
+                    materialDict[inventoryMaterialSo.materialID].Add();
                 }
                 else
                 {
-                    materialDict.Add(inventoryMaterialSo.materialType, new InventoryItem(inventoryMaterialSo));
+                    materialDict.Add(inventoryMaterialSo.materialID, new InventoryItem(inventoryMaterialSo));
                 }
 
                 break;
-            case E_InventoryItemBase.Item:
-                InventoryItemData inventoryItemSo = itemSO as InventoryItemData;
-                if (itemDict.Keys.Contains(inventoryItemSo.itemType))
+            case InventoryItemBaseType.Item:
+                InventoryItemData inventoryItemSo = itemData as InventoryItemData;
+                if (itemDict.Keys.Contains(inventoryItemSo.itemID))
                 {
-                    itemDict[inventoryItemSo.itemType].Add();
+                    itemDict[inventoryItemSo.itemID].Add();
                 }
                 else
                 {
-                    itemDict.Add(inventoryItemSo.itemType, new InventoryItem(inventoryItemSo));
+                    itemDict.Add(inventoryItemSo.itemID, new InventoryItem(inventoryItemSo));
                 }
 
                 break;
             default:
-                Debugger.Error($"[Inventory Add Item Error] 无效的物品类型: {itemSO.itemBaseType}. " +
-                               $"物品名称: {itemSO.name}, 物品ID: {itemSO.id}, " +
-                               $"物品类型的枚举值: {Enum.GetName(typeof(E_InventoryItemBase), itemSO.itemBaseType)}. " +
+                Debugger.Error($"[Inventory Add Item Error] 无效的物品类型: {itemData.itemBaseType}. " +
+                               $"物品名称: {itemData.name}, 物品ID: {itemData.id}, " +
+                               $"物品类型的枚举值: {Enum.GetName(typeof(InventoryItemBaseType), itemData.itemBaseType)}. " +
                                "请检查该物品的类型和数据设置。");
                 break;
         }
 
-        AddToList(itemSO);
+        AddToList(itemData);
     }
 
-    public void RemoveItemByItemSO(InventoryItemBaseData itemSO)
+    public void RemoveItemByItemData(InventoryItemBaseData itemData)
     {
-        switch (itemSO.itemBaseType)
+        switch (itemData.itemBaseType)
         {
-            case E_InventoryItemBase.Equipment:
-                if (itemSO is InventoryEquipmentData equipmentSO)
+            case InventoryItemBaseType.Equipment:
+                if (itemData is InventoryEquipmentData equipmentItemData)
                 {
-                    if (equipmentDict.TryGetValue(equipmentSO.equipmentType, out var equipmentItem))
+                    if (equipmentDict.TryGetValue(equipmentItemData.equipmentID, out var equipmentItem))
                     {
                         equipmentItem.Remove();
                         if (equipmentItem.number <= 0)
                         {
-                            equipmentDict.Remove(equipmentSO.equipmentType);
+                            equipmentDict.Remove(equipmentItemData.equipmentID);
                         }
                     }
                 }
 
                 break;
-            case E_InventoryItemBase.Consumable:
-                if (itemSO is InventoryConsumableData consumableSO)
+            case InventoryItemBaseType.Consumable:
+                if (itemData is InventoryConsumableData consumableItemData)
                 {
-                    if (consumableDict.TryGetValue(consumableSO.consumableType, out var consumableItem))
+                    if (consumableDict.TryGetValue(consumableItemData.consumableID, out var consumableItem))
                     {
                         consumableItem.Remove();
                         if (consumableItem.number <= 0)
                         {
-                            consumableDict.Remove(consumableSO.consumableType);
+                            consumableDict.Remove(consumableItemData.consumableID);
                         }
                     }
                 }
 
                 break;
-            case E_InventoryItemBase.Material:
-                if (itemSO is InventoryMaterialData materialSO)
+            case InventoryItemBaseType.Material:
+                if (itemData is InventoryMaterialData materialItemData)
                 {
-                    if (materialDict.TryGetValue(materialSO.materialType, out var materialItem))
+                    if (materialDict.TryGetValue(materialItemData.materialID, out var materialItem))
                     {
                         materialItem.Remove();
                         if (materialItem.number <= 0)
                         {
-                            materialDict.Remove(materialSO.materialType);
+                            materialDict.Remove(materialItemData.materialID);
                         }
                     }
                 }
 
                 break;
-            case E_InventoryItemBase.Item:
-                if (itemSO is InventoryItemData itemTypeSO)
+            case InventoryItemBaseType.Item:
+                if (itemData is InventoryItemData itemItemData)
                 {
-                    if (itemDict.TryGetValue(itemTypeSO.itemType, out var typeItem))
+                    if (itemDict.TryGetValue(itemItemData.itemID, out var typeItem))
                     {
                         typeItem.Remove();
                         if (typeItem.number <= 0)
                         {
-                            itemDict.Remove(itemTypeSO.itemType);
+                            itemDict.Remove(itemItemData.itemID);
                         }
                     }
                 }
 
                 break;
             default:
-                Debugger.Error($"[Inventory Remove Item Error] 无效的物品类型: {itemSO.itemBaseType}. " +
-                               $"物品名称: {itemSO.name}, 物品ID: {itemSO.id}");
+                Debugger.Error($"[Inventory Remove Item Error] 无效的物品类型: {itemData.itemBaseType}. " +
+                               $"物品名称: {itemData.name}, 物品ID: {itemData.id}");
                 break;
         }
 
-        RemoveFromList(itemSO);
+        RemoveFromList(itemData);
     }
 
     private void AddToList(InventoryItemBaseData itemSO)
@@ -212,7 +226,7 @@ public class InventoryManager : MonoSingleton<InventoryManager>
 
     public InventoryItemBaseData LoadDataByGUID(string guid)
     {
-        List<InventoryItemBaseData> configurationData = GameResources.Instance.inventoryConfigurationSO.equipmentList;
+        List<InventoryItemBaseData> configurationData = GameResources.Instance.InventoryDataManifest.equipmentList;
 
         foreach (var itemData in configurationData)
         {
@@ -228,7 +242,7 @@ public class InventoryManager : MonoSingleton<InventoryManager>
 
     ~InventoryManager()
     {
-        GameEventDispatcher.OnInventoryRealItemPickup -= AddItemByItemSO;
+        GameEventDispatcher.OnInventoryRealItemPickup -= AddItemByItemData;
         GameEventDispatcher.Equip -= Equip;
         GameEventDispatcher.UnEquip -= UnEquip;
     }

@@ -1,8 +1,11 @@
 using System;
 using UnityEngine;
 
-public class UIManager : Singleton<UIManager>
+public class UIManager
 {
+    private static UIManager m_instance;
+    public static UIManager Instance => m_instance ?? (m_instance = new UIManager());
+
     public Canvas UICanvas;
     public Camera UICamera;
     public Transform Bottom;
@@ -12,9 +15,8 @@ public class UIManager : Singleton<UIManager>
     private MainGameViewController _mainGameViewController;
     private LoadingView _loadingView;
 
-    public override void Initialize()
+    public void CreateGameUI()
     {
-        base.Initialize();
         GameObject uiRoot = ResourceLoader.Instance.LoadObjFromResources("UI/UIRoot");
         UICanvas = uiRoot.transform.Find("UICanvas").GetComponent<Canvas>();
         UICamera = uiRoot.transform.Find("UICamera").GetComponent<Camera>();
@@ -22,17 +24,16 @@ public class UIManager : Singleton<UIManager>
         Middle = uiRoot.transform.Find("UICanvas").transform.Find("Middle").transform;
         Top = uiRoot.transform.Find("UICanvas").transform.Find("Top").transform;
         GameObject.DontDestroyOnLoad(uiRoot);
+        ShowMenuView();
     }
 
     public void ShowMenuView()
     {
-        SoundManager.Instance.PlayBgm("Sound/music_menu");
         if (_mainMenuViewController != null)
         {
             _mainMenuViewController.ShowMenuView();
             return;
         }
-
 
         _mainMenuViewController = new MainMenuViewController();
         _mainMenuViewController.Initialise();

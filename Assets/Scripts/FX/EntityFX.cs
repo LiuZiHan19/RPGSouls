@@ -21,37 +21,37 @@ public class EntityFX : MonoBehaviour
     {
     }
 
-    public void PlayMagicStatusFX(E_MagicStatus magicStatus)
+    public void StartPlayElementStatusFx(ElementStatusType elementStatus)
     {
-        StopMagicStatusFX();
+        StopElementStatusFX();
 
-        switch (magicStatus)
+        switch (elementStatus)
         {
-            case E_MagicStatus.Ignite:
-                _currentCoroutine = CoroutineManager.Instance.IStartCoroutine(PlayMagicStatusFXCor(magicStatus));
+            case ElementStatusType.Ignite:
+                _currentCoroutine = CoroutineManager.Instance.StartCoroutine(PlayElementStatusFx(elementStatus));
                 break;
-            case E_MagicStatus.Chill:
-                _currentCoroutine = CoroutineManager.Instance.IStartCoroutine(PlayMagicStatusFXCor(magicStatus));
+            case ElementStatusType.Chill:
+                _currentCoroutine = CoroutineManager.Instance.StartCoroutine(PlayElementStatusFx(elementStatus));
                 break;
-            case E_MagicStatus.Lighting:
-                _currentCoroutine = CoroutineManager.Instance.IStartCoroutine(PlayMagicStatusFXCor(magicStatus));
+            case ElementStatusType.Lighting:
+                _currentCoroutine = CoroutineManager.Instance.StartCoroutine(PlayElementStatusFx(elementStatus));
                 break;
             default:
-                throw new ArgumentOutOfRangeException(nameof(magicStatus), magicStatus, null);
+                throw new ArgumentOutOfRangeException(nameof(elementStatus), elementStatus, null);
         }
     }
 
-    public void StopMagicStatusFX()
+    public void StopElementStatusFX()
     {
         _sr.color = _oriColor;
-        CoroutineManager.Instance.IStopCoroutine(_currentCoroutine);
+        if (_currentCoroutine != null) CoroutineManager.Instance.StopCoroutine(_currentCoroutine);
     }
 
-    private IEnumerator PlayMagicStatusFXCor(E_MagicStatus magicStatus)
+    private IEnumerator PlayElementStatusFx(ElementStatusType elementStatus)
     {
-        switch (magicStatus)
+        switch (elementStatus)
         {
-            case E_MagicStatus.Ignite:
+            case ElementStatusType.Ignite:
                 while (true)
                 {
                     _sr.color = _igniteColor;
@@ -59,7 +59,7 @@ public class EntityFX : MonoBehaviour
                     _sr.color = _oriColor;
                     yield return new WaitForSeconds(0.1f);
                 }
-            case E_MagicStatus.Chill:
+            case ElementStatusType.Chill:
                 while (true)
                 {
                     _sr.color = _chillColor;
@@ -67,7 +67,7 @@ public class EntityFX : MonoBehaviour
                     _sr.color = _oriColor;
                     yield return new WaitForSeconds(0.1f);
                 }
-            case E_MagicStatus.Lighting:
+            case ElementStatusType.Lighting:
                 while (true)
                 {
                     _sr.color = _lightingColor;
@@ -76,7 +76,7 @@ public class EntityFX : MonoBehaviour
                     yield return new WaitForSeconds(0.1f);
                 }
             default:
-                throw new ArgumentOutOfRangeException(nameof(magicStatus), magicStatus, null);
+                throw new ArgumentOutOfRangeException(nameof(elementStatus), elementStatus, null);
         }
     }
 }

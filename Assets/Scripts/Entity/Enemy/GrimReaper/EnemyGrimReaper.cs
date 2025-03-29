@@ -51,6 +51,6 @@ public class EnemyGrimReaper : Enemy
     {
         base.Die();
         stateMachine.ChangeState(DeathState);
-        GameManager.Instance.IsBossDead = true;
+        GameManager.Instance.IsGrimReaperDead = true;
     }
 }

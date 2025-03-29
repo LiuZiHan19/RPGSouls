@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class PlayerGroundState : PlayerState
 {
@@ -15,7 +16,7 @@ public class PlayerGroundState : PlayerState
             stateMachine.ChangeState(player.JumpState);
         }
 
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) && !EventSystem.current.IsPointerOverGameObject())
         {
             stateMachine.ChangeState(player.AttackState);
         }

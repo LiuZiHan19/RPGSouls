@@ -18,5 +18,7 @@ public class GameResources : MonoBehaviour
         }
     }
 
-    [Header("InventoryConfiguration")] public InventoryDataManifest inventoryConfigurationSO;
+    [Header("Audio")] public AudioDataManifest AudioDataManifest;
+    [Header("Inventory")] public InventoryDataManifest InventoryDataManifest;
+    [Header("Skill")] public SkillDataManifest SkillDataManifest;
 }

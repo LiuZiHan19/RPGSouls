@@ -1,5 +1,9 @@
 using UnityEngine;
 
+/// <summary>
+/// 实体状态基类
+/// 兼容状态设计模式
+/// </summary>
 public class EntityAnimationEvent : MonoBehaviour
 {
     public Entity entity;

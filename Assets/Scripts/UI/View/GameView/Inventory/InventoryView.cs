@@ -61,8 +61,8 @@ public class InventoryView : UIBehaviour
     {
         base.Show();
         CreateInventoryItemViews();
-        if (InventoryManager.Instance.weapon != null)
-            _weaponSlotImage.sprite = InventoryManager.Instance.weapon.sprite;
+        if (InventoryManager.Instance.currentWeaponData != null)
+            _weaponSlotImage.sprite = InventoryManager.Instance.currentWeaponData.sprite;
         RefreshStat();
     }
 
@@ -96,7 +96,7 @@ public class InventoryView : UIBehaviour
     {
         switch (itemSO.itemBaseType)
         {
-            case E_InventoryItemBase.Equipment:
+            case InventoryItemBaseType.Equipment:
                 RemoveInventoryItemViewByItemSO(itemSO);
                 _weaponSlotImage.sprite = itemSO.sprite;
                 RefreshStat();
@@ -111,7 +111,7 @@ public class InventoryView : UIBehaviour
     {
         foreach (var equipment in _equipmentViews)
         {
-            if (equipment.itemSO == itemSO)
+            if (equipment.itemData == itemSO)
             {
                 int number = int.Parse(equipment.numberText.text);
                 if (number - 1 == 0)
@@ -132,7 +132,7 @@ public class InventoryView : UIBehaviour
     {
         switch (itemSO.itemBaseType)
         {
-            case E_InventoryItemBase.Equipment:
+            case InventoryItemBaseType.Equipment:
                 if (AddInventoryItemViewByItemSO(itemSO) == false) CreateEquipmentViewByItemSO(itemSO);
                 break;
             default:
@@ -144,7 +144,7 @@ public class InventoryView : UIBehaviour
     {
         foreach (var equipment in _equipmentViews)
         {
-            if (equipment.itemSO == itemSO)
+            if (equipment.itemData == itemSO)
             {
                 equipment.numberText.text = (int.Parse(equipment.numberText.text) + 1).ToString();
                 return true;
@@ -173,10 +173,10 @@ public class InventoryView : UIBehaviour
         }
     }
 
-    private void CreateEquipmentView(KeyValuePair<E_InventoryEquipment, InventoryItem> equipment)
+    private void CreateEquipmentView(KeyValuePair<InventoryEquipmentID, InventoryItem> equipment)
     {
         var obj = ResourceLoader.Instance.LoadObjFromResources("UI/InventoryItemView");
-        UnityObjectHelper.Instance.SetParent(obj.transform, _inventoryScrollRect.content);
+        UnityHelper.SetParent(obj.transform, _inventoryScrollRect.content);
         InventoryItemView inventoryItemView = new InventoryItemView();
         inventoryItemView.SetDisplayObject(obj);
         inventoryItemView.Initialise(equipment.Value.itemSO, equipment.Value.number);
@@ -186,7 +186,7 @@ public class InventoryView : UIBehaviour
     private void CreateEquipmentViewByItemSO(InventoryItemBaseData itemSO)
     {
         var obj = ResourceLoader.Instance.LoadObjFromResources("UI/InventoryItemView");
-        UnityObjectHelper.Instance.SetParent(obj.transform, _inventoryScrollRect.content);
+        UnityHelper.SetParent(obj.transform, _inventoryScrollRect.content);
         InventoryItemView inventoryItemView = new InventoryItemView();
         inventoryItemView.SetDisplayObject(obj);
         inventoryItemView.Initialise(itemSO, 1);
@@ -202,10 +202,10 @@ public class InventoryView : UIBehaviour
         }
     }
 
-    private void CreateItemView(KeyValuePair<E_InventoryItem, InventoryItem> item)
+    private void CreateItemView(KeyValuePair<InventoryItemID, InventoryItem> item)
     {
         var obj = ResourceLoader.Instance.LoadObjFromResources("UI/InventoryItemView");
-        UnityObjectHelper.Instance.SetParent(obj.transform, _inventoryScrollRect.content);
+        UnityHelper.SetParent(obj.transform, _inventoryScrollRect.content);
         InventoryItemView inventoryItemView = new InventoryItemView();
         inventoryItemView.SetDisplayObject(obj);
         inventoryItemView.Initialise(item.Value.itemSO, item.Value.number);
@@ -221,10 +221,10 @@ public class InventoryView : UIBehaviour
         }
     }
 
-    private void CreateMaterialView(KeyValuePair<E_InventoryMaterial, InventoryItem> material)
+    private void CreateMaterialView(KeyValuePair<InventoryMaterialID, InventoryItem> material)
     {
         var obj = ResourceLoader.Instance.LoadObjFromResources("UI/InventoryItemView");
-        UnityObjectHelper.Instance.SetParent(obj.transform, _inventoryScrollRect.content);
+        UnityHelper.SetParent(obj.transform, _inventoryScrollRect.content);
         InventoryItemView inventoryItemView = new InventoryItemView();
         inventoryItemView.SetDisplayObject(obj);
         inventoryItemView.Initialise(material.Value.itemSO, material.Value.number);
@@ -240,10 +240,10 @@ public class InventoryView : UIBehaviour
         }
     }
 
-    private void CreateConsumableView(KeyValuePair<E_InventoryConsumable, InventoryItem> consumable)
+    private void CreateConsumableView(KeyValuePair<InventoryConsumableID, InventoryItem> consumable)
     {
         var obj = ResourceLoader.Instance.LoadObjFromResources("UI/InventoryItemView");
-        UnityObjectHelper.Instance.SetParent(obj.transform, _inventoryScrollRect.content);
+        UnityHelper.SetParent(obj.transform, _inventoryScrollRect.content);
         InventoryItemView inventoryItemView = new InventoryItemView();
         inventoryItemView.SetDisplayObject(obj);
         inventoryItemView.Initialise(consumable.Value.itemSO, consumable.Value.number);

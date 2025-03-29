@@ -19,14 +19,14 @@ public class LoadingView : UIBehaviour
     {
         base.Show();
         _progressSlider.value = 0;
-        CoroutineManager.Instance.IStartCoroutine(FillProgress());
+        CoroutineManager.Instance.StartCoroutine(FillProgress());
     }
 
     public override void Hide()
     {
         if (_progressSlider.value < 100)
         {
-            CoroutineManager.Instance.IStartCoroutine(FillToComplete());
+            CoroutineManager.Instance.StartCoroutine(FillToComplete());
         }
         else
         {

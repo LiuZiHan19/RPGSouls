@@ -47,13 +47,13 @@ public class AnimEvent_Player : EntityAnimationEvent
             EntityStats stats = cd.GetComponent<Entity>().entityStats;
             switch (stats.statsType)
             {
-                case E_CharacterStats.Almighty:
+                case CharacterStatsType.Almighty:
                     playerStats.DoDamage(stats as AlmightyStats);
                     break;
-                case E_CharacterStats.Mage:
+                case CharacterStatsType.Mage:
                     playerStats.DoDamage(stats as MageStats);
                     break;
-                case E_CharacterStats.Warrior:
+                case CharacterStatsType.Warrior:
                     playerStats.DoDamage(stats as WarriorStats);
                     break;
                 default:

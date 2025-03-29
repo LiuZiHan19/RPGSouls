@@ -3,7 +3,6 @@ using UnityEngine;
 public class GameSceneGenerator : MonoBehaviour
 {
     [SerializeField] private GameObject playerPrefab;
-    [SerializeField] private GameObject mainCameraPrefab;
     private Transform _playerSpawnPoint;
 
     private void Awake()
@@ -13,7 +12,6 @@ public class GameSceneGenerator : MonoBehaviour
 
     private void Start()
     {
-        Instantiate(mainCameraPrefab);
         Instantiate(playerPrefab, _playerSpawnPoint.position, Quaternion.identity);
     }
 }

@@ -1,7 +1,10 @@
 using UnityEngine;
 
-public class TimeManager : Singleton<TimeManager>
+public class TimeManager
 {
+    private static TimeManager m_instance;
+    public static TimeManager Instance => m_instance ?? (m_instance = new TimeManager());
+
     public void PauseTime()
     {
         Time.timeScale = 0;

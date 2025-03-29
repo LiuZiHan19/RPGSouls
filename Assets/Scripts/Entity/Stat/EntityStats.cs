@@ -1,12 +1,14 @@
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 
+/// <summary>
+/// 属性基类
+/// </summary>
 public abstract class EntityStats : MonoBehaviour
 {
     public UnityAction<float> takeDamageCallback;
-    public E_CharacterStats statsType;
+    public CharacterStatsType statsType;
     public int currentHealth;
     public Stat maxHealth;
     public Stat attackPower;
@@ -45,7 +47,7 @@ public abstract class EntityStats : MonoBehaviour
             chillTimer -= Time.deltaTime;
             if (chillTimer < 0)
             {
-                entity.entityFX.StopMagicStatusFX();
+                entity.entityFX.StopElementStatusFX();
                 isChilled = false;
             }
         }
@@ -58,7 +60,7 @@ public abstract class EntityStats : MonoBehaviour
             shockedTimer -= Time.deltaTime;
             if (shockedTimer < 0)
             {
-                entity.entityFX.StopMagicStatusFX();
+                entity.entityFX.StopElementStatusFX();
                 isShocked = false;
             }
         }
@@ -78,7 +80,7 @@ public abstract class EntityStats : MonoBehaviour
 
             if (igniteTimer < 0)
             {
-                entity.entityFX.StopMagicStatusFX();
+                entity.entityFX.StopElementStatusFX();
                 isIgnited = false;
             }
         }
@@ -104,22 +106,22 @@ public abstract class EntityStats : MonoBehaviour
         takeDamageCallback?.Invoke((float)currentHealth / maxHealth.GetValue());
     }
 
-    public void SetMagicStatus(E_MagicStatus status)
+    public void SetMagicStatus(ElementStatusType status)
     {
         switch (status)
         {
-            case E_MagicStatus.Ignite:
-                entity.entityFX.PlayMagicStatusFX(E_MagicStatus.Ignite);
+            case ElementStatusType.Ignite:
+                entity.entityFX.StartPlayElementStatusFx(ElementStatusType.Ignite);
                 isIgnited = true;
                 igniteTimer = 2.5f;
                 break;
-            case E_MagicStatus.Chill:
-                entity.entityFX.PlayMagicStatusFX(E_MagicStatus.Chill);
+            case ElementStatusType.Chill:
+                entity.entityFX.StartPlayElementStatusFx(ElementStatusType.Chill);
                 isChilled = true;
                 chillTimer = 2.5f;
                 break;
-            case E_MagicStatus.Lighting:
-                entity.entityFX.PlayMagicStatusFX(E_MagicStatus.Lighting);
+            case ElementStatusType.Lighting:
+                entity.entityFX.StartPlayElementStatusFx(ElementStatusType.Lighting);
                 isShocked = true;
                 shockedTimer = 2.5f;
                 break;

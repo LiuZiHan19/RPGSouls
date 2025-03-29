@@ -33,6 +33,10 @@ public class Player : Entity
     private Vector2 _input = new Vector2();
     private Vector2 _move = new Vector2();
     private Vector2 _jump = new Vector2();
+    private ulong _attackSfx1;
+    private ulong _attackSfx2;
+    private ulong _attackSfx3;
+    private ulong _deathSfx;
 
     protected override void Awake()
     {
@@ -130,13 +134,13 @@ public class Player : Entity
         switch (_attackCounter)
         {
             case 1:
-                SoundManager.Instance.PlaySfx("Sound/sfx_attack1");
+                SoundManager.Instance.PlaySfx(AudioID.AttackSfx1, ref _attackSfx1);
                 break;
             case 2:
-                SoundManager.Instance.PlaySfx("Sound/sfx_attack2");
+                SoundManager.Instance.PlaySfx(AudioID.AttackSfx2, ref _attackSfx2);
                 break;
             case 3:
-                SoundManager.Instance.PlaySfx("Sound/sfx_attack3");
+                SoundManager.Instance.PlaySfx(AudioID.AttackSfx3, ref _attackSfx3);
                 break;
         }
     }
@@ -145,7 +149,7 @@ public class Player : Entity
     {
         PlayerManager.Instance.IsPlayerDead = true;
         base.Die();
-        SoundManager.Instance.PlaySfx("Sound/sfx_death");
+        SoundManager.Instance.PlaySfx(AudioID.PlayerDeathSfx, ref _deathSfx);
         stateMachine.ChangeState(DeathState);
         GameEventDispatcher.OnPlayerDead?.Invoke();
     }

@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -5,9 +6,6 @@ public class GameDataManager : MonoBehaviour
 {
     private static GameDataManager instance;
     public static GameDataManager Instance => instance;
-
-    public SkillDataManifest SkillDataManifest;
-    public InventoryDataManifest InventoryDataManifest;
 
     public GameDataModel GameDataModel { get; set; } = new GameDataModel();
     public PlayerDataModel PlayerDataModel { get; set; } = new PlayerDataModel();
@@ -24,10 +22,7 @@ public class GameDataManager : MonoBehaviour
         else
         {
             Destroy(gameObject);
-            return;
         }
-
-        LoadGameData();
     }
 
     public void SaveGameData(UnityAction callback = null)
@@ -119,7 +114,7 @@ public class GameDataManager : MonoBehaviour
 
     public SkillData GetSkillDataByID(SkillID skillID)
     {
-        foreach (var skillData in SkillDataManifest.SkillDataList)
+        foreach (var skillData in GameResources.Instance.SkillDataManifest.SkillDataList)
         {
             if (skillID == skillData.SkillID)
             {

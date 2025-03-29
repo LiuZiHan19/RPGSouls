@@ -119,6 +119,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f474c57a30603240afb745b5301d391, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  entity: {fileID: 0}
   attackLayer:
     serializedVersion: 2
     m_Bits: 32768
@@ -236,12 +237,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 977ca46dbf4747688c489fe53b300f3f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  entityName: Player
-  animator: {fileID: 870473802377386852}
   moveSpeed: 10
   isFacingRight: 1
   facingDir: 1
   knockbackForce: 7.5
+  animator: {fileID: 870473802377386852}
   entityStats: {fileID: 0}
   animEvent: {fileID: 0}
   entityFX: {fileID: 0}
@@ -257,7 +257,6 @@ MonoBehaviour:
   - 1
   attackPoint: {fileID: 1444514938501622063}
   rollForce: 27
-  playerStats: {fileID: 0}
 --- !u!114 &87875002659583521
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -290,6 +289,8 @@ MonoBehaviour:
   isChilled: 0
   isIgnited: 0
   isShocked: 0
+  isInvincible: 0
+  isDead: 0
   agility:
     baseValue: 0
     modifiers: 
@@ -332,6 +333,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b5c7aa8efeec4b758990eecabc41767f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fireFxPrefab: {fileID: 5704432894850068444, guid: 3bf76cbebd88551458ce9913bc1956c4, type: 3}
+  iceFxPrefab: {fileID: 6749142080594411639, guid: 0408e5421100d36469d15c0e08db86b4, type: 3}
+  lightingFxPrefab: {fileID: 1184944266205169312, guid: 513582240ead77d4da0534f9f30eaa2b, type: 3}
 --- !u!1 &6887327075725101876
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,13 +1,15 @@
 using UnityEngine;
 
-public class PlayerManager : Singleton<PlayerManager>
+public class PlayerManager
 {
+    private static PlayerManager m_instance;
+    public static PlayerManager Instance => m_instance ?? (m_instance = new PlayerManager());
+
     public Player player;
     public bool IsPlayerDead { get; set; }
 
-    public override void Initialize()
+    public void Initialize()
     {
-        base.Initialize();
         player = GameObject.FindObjectOfType<Player>();
         GameDataManager.Instance.PlayerDataModel.PareSelf(() =>
         {

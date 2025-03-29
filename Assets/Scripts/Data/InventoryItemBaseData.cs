@@ -5,7 +5,7 @@ public class InventoryItemBaseData : ScriptableObject
 {
     public string id;
     public string name;
-    public E_InventoryItemBase itemBaseType;
+    public InventoryItemBaseType itemBaseType;
     public Sprite sprite;
 
 #if UNITY_EDITOR

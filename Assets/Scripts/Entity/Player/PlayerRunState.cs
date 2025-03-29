@@ -1,6 +1,6 @@
 public class PlayerRunState : PlayerGroundState
 {
-    private uint _runSfx;
+    private ulong _runSfx;
 
     public PlayerRunState(StateMachine stateMachine, string animBoolName, Entity entity) : base(stateMachine,
         animBoolName, entity)
@@ -10,7 +10,7 @@ public class PlayerRunState : PlayerGroundState
     public override void Enter()
     {
         base.Enter();
-        _runSfx = SoundManager.Instance.PlaySfx("Sound/sfx_grass_step", true);
+        SoundManager.Instance.PlaySfx(AudioID.PlayerStepSfx, ref _runSfx, true);
     }
 
     public override void Update()
@@ -28,6 +28,6 @@ public class PlayerRunState : PlayerGroundState
     public override void Exit()
     {
         base.Exit();
-        SoundManager.Instance.StopSfx(_runSfx);
+        SoundManager.Instance.PauseSfx(_runSfx);
     }
 }

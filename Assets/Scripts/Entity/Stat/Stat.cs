@@ -1,5 +1,8 @@
 using System.Collections.Generic;
 
+/// <summary>
+/// 属性基本单位
+/// </summary>
 [System.Serializable]
 public class Stat
 {

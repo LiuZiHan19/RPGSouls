@@ -4,8 +4,11 @@ using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class JSONManager : Singleton<JSONManager>
+public class JSONManager
 {
+    private static JSONManager m_instance;
+    public static JSONManager Instance => m_instance ?? (m_instance = new JSONManager());
+
     public async Task<JsonData> LoadJsonDataAsync(string path, UnityAction<JsonData> callback = null)
     {
         string finalPath = Application.streamingAssetsPath + "/" + path + ".json";
@@ -29,11 +32,5 @@ public class JSONManager : Singleton<JSONManager>
         string jsonStr = data;
         await File.WriteAllTextAsync(finalPath, jsonStr);
         callback?.Invoke();
-    }
-
-    private enum E_JSON
-    {
-        JsonUtility,
-        LitJson,
     }
 }

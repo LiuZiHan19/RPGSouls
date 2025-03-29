@@ -3,8 +3,11 @@ using System.Threading.Tasks;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
-public class ResourceLoader : Singleton<ResourceLoader>
+public class ResourceLoader
 {
+    private static ResourceLoader m_instance;
+    public static ResourceLoader Instance => m_instance ?? (m_instance = new ResourceLoader());
+
     public T LoadFromResources<T>(string path) where T : Object
     {
         T t = Resources.Load<T>(path);
@@ -36,14 +39,6 @@ public class ResourceLoader : Singleton<ResourceLoader>
         {
             onError?.Invoke(ex);
         }
-    }
-
-    public Object LoadFromResources(string path)
-    {
-        Object asset = Resources.Load(path);
-        if (asset == null)
-            Debugger.Error($"Failed to load asset at path: {path}. Asset not found.");
-        return asset;
     }
 
     public GameObject LoadObjFromResources(string path)

@@ -2,7 +2,13 @@ using UnityEngine;
 
 public class PlayerFX : EntityFX
 {
+    [SerializeField] private GameObject fireFxPrefab;
+    [SerializeField] private GameObject iceFxPrefab;
+    [SerializeField] private GameObject lightingFxPrefab;
     private Player _player;
+    private ObjectPool<ElementAttackFX> _iceFxPool = new ObjectPool<ElementAttackFX>();
+    private ObjectPool<ElementAttackFX> _lightingFxPool = new ObjectPool<ElementAttackFX>();
+    private ObjectPool<ElementAttackFX> _fireFxPool = new ObjectPool<ElementAttackFX>();
 
     protected override void Awake()
     {
@@ -14,42 +20,66 @@ public class PlayerFX : EntityFX
 
     public void PlayAttackFX(Transform transform)
     {
-        if (InventoryManager.Instance.weapon == null) return;
+        if (InventoryManager.Instance.currentWeaponData == null) return;
 
-        if (InventoryManager.Instance.weapon.equipmentType == E_InventoryEquipment.FlameSword)
-            PlayIgniteFX(transform);
-        else if (InventoryManager.Instance.weapon.equipmentType == E_InventoryEquipment.IceSword)
-            PlayChillFX(transform);
-        else if (InventoryManager.Instance.weapon.equipmentType == E_InventoryEquipment.ThunderClaw)
-            PlayLightingFX(transform);
-    }
+        if (InventoryManager.Instance.currentWeaponData.equipmentID == InventoryEquipmentID.FlameSword)
+        {
+            ElementAttackFX fireFx = _fireFxPool.Get();
+            if (fireFx == null)
+            {
+                fireFx = Instantiate(fireFxPrefab).GetComponent<ElementAttackFX>();
+                fireFx.callback += _fireFxPool.Set;
+            }
 
-    public void PlayIgniteFX(Transform transform)
-    {
-        if (_player.facingDir == 1)
-            FXPool.Instance.GetFx(E_MagicStatus.Ignite, transform).PlayFX();
-        else
-            FXPool.Instance.GetFx(E_MagicStatus.Ignite, transform, new Vector3(0, 180, 0)).PlayFX();
-    }
+            fireFx.PlayFX(_player.facingDir, _player.attackPoint.position);
+        }
+        else if (InventoryManager.Instance.currentWeaponData.equipmentID == InventoryEquipmentID.IceSword)
+        {
+            ElementAttackFX iceFx = _iceFxPool.Get();
+            if (iceFx == null)
+            {
+                iceFx = Instantiate(iceFxPrefab).GetComponent<ElementAttackFX>();
+                iceFx.callback += _iceFxPool.Set;
+            }
 
-    public void PlayChillFX(Transform transform)
-    {
-        if (_player.facingDir == 1)
-            FXPool.Instance.GetFx(E_MagicStatus.Chill, transform).PlayFX();
-        else
-            FXPool.Instance.GetFx(E_MagicStatus.Chill, transform, new Vector3(0, 180, 0)).PlayFX();
-    }
+            iceFx.PlayFX(_player.facingDir, _player.attackPoint.position);
+        }
+        else if (InventoryManager.Instance.currentWeaponData.equipmentID == InventoryEquipmentID.ThunderClaw)
+        {
+            ElementAttackFX lightingFx = _lightingFxPool.Get();
+            if (lightingFx == null)
+            {
+                lightingFx = Instantiate(lightingFxPrefab).GetComponent<ElementAttackFX>();
+                lightingFx.callback += _lightingFxPool.Set;
+            }
 
-    public void PlayLightingFX(Transform transform)
-    {
-        if (_player.facingDir == 1)
-            FXPool.Instance.GetFx(E_MagicStatus.Lighting, transform).PlayFX();
-        else
-            FXPool.Instance.GetFx(E_MagicStatus.Lighting, transform, new Vector3(0, 180, 0)).PlayFX();
+            lightingFx.PlayFX(_player.facingDir, _player.attackPoint.position);
+        }
     }
 
     ~PlayerFX()
     {
+        while (_fireFxPool.pool.Count > 0)
+        {
+            Destroy(_fireFxPool.pool.Dequeue().gameObject);
+        }
+
+        _fireFxPool.pool.Clear();
+
+        while (_iceFxPool.pool.Count > 0)
+        {
+            Destroy(_iceFxPool.pool.Dequeue().gameObject);
+        }
+
+        _iceFxPool.pool.Clear();
+
+        while (_lightingFxPool.pool.Count > 0)
+        {
+            Destroy(_lightingFxPool.pool.Dequeue().gameObject);
+        }
+
+        _lightingFxPool.pool.Clear();
+
         GameEventDispatcher.PlayerAttack -= PlayAttackFX;
     }
 }

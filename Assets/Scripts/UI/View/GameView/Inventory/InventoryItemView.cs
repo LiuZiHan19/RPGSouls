@@ -2,7 +2,7 @@ using UnityEngine.UI;
 
 public class InventoryItemView : UIBehaviour
 {
-    public InventoryItemBaseData itemSO;
+    public InventoryItemBaseData itemData;
     public Text numberText;
     private Image _iconImage;
     private Button _btn;
@@ -22,16 +22,16 @@ public class InventoryItemView : UIBehaviour
 
     public void Initialise(InventoryItemBaseData itemSO, int number)
     {
-        this.itemSO = itemSO;
+        this.itemData = itemSO;
         _iconImage.sprite = itemSO.sprite;
         numberText.text = number.ToString();
     }
 
     private void OnClickBtn()
     {
-        if (itemSO.itemBaseType == E_InventoryItemBase.Equipment)
+        if (itemData.itemBaseType == InventoryItemBaseType.Equipment)
         {
-            GameEventDispatcher.Equip?.Invoke(itemSO);
+            GameEventDispatcher.Equip?.Invoke(itemData);
         }
     }
 

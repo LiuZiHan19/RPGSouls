@@ -1,3 +1,6 @@
+/// <summary>
+/// 全能者属性：法师 + 战士
+/// </summary>
 public class AlmightyStats : EntityStats
 {
     public Stat agility; // 1 point increase evasion by 1% and critical.chance by 1%
@@ -16,9 +19,9 @@ public class AlmightyStats : EntityStats
         if (target.currentHealth <= 0) return;
         if (CanEvasion(target)) return;
 
-        if (CanChill()) target.SetMagicStatus(E_MagicStatus.Chill);
-        if (CanLighting()) target.SetMagicStatus(E_MagicStatus.Lighting);
-        if (CanIgnite()) target.SetMagicStatus(E_MagicStatus.Ignite);
+        if (CanChill()) target.SetMagicStatus(ElementStatusType.Chill);
+        if (CanLighting()) target.SetMagicStatus(ElementStatusType.Lighting);
+        if (CanIgnite()) target.SetMagicStatus(ElementStatusType.Ignite);
 
         int armor = target.armor.GetValue();
         if (target.isChilled) armor = (int)(armor * 0.8f);

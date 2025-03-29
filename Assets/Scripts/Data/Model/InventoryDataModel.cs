@@ -35,7 +35,7 @@ public class InventoryDataModel : JSONDataModel
         if (jsonData.Keys.Contains("weapon") && jsonData["weapon"] != null && jsonData["weapon"].ToString() != "")
         {
             weapon = jsonData["weapon"].ToString();
-            InventoryManager.Instance.weapon = InventoryManager.Instance.LoadDataByGUID(weapon) as InventoryEquipmentData;
+            InventoryManager.Instance.currentWeaponData = InventoryManager.Instance.LoadDataByGUID(weapon) as InventoryEquipmentData;
         }
     }
 
@@ -60,7 +60,7 @@ public class InventoryDataModel : JSONDataModel
         for (int i = 0; i < equiomentIDList.Count; i++)
         {
             var itemData = InventoryManager.Instance.LoadDataByGUID(equiomentIDList[i]);
-            InventoryManager.Instance.AddItemByItemSO(itemData);
+            InventoryManager.Instance.AddItemByItemData(itemData);
         }
     }
 
@@ -68,7 +68,7 @@ public class InventoryDataModel : JSONDataModel
     {
         JsonData saveJson = new JsonData();
 
-        saveJson["weapon"] = InventoryManager.Instance.weapon == null ? "" : InventoryManager.Instance.weapon.id;
+        saveJson["weapon"] = InventoryManager.Instance.currentWeaponData == null ? "" : InventoryManager.Instance.currentWeaponData.id;
 
         var equipmentDict = InventoryManager.Instance.equipmentDict;
         JsonData equipmentListJson = new JsonData();

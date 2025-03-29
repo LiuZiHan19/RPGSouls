@@ -1,3 +1,6 @@
+/// <summary>
+/// 战士属性
+/// </summary>
 public class WarriorStats : EntityStats
 {
     public Stat agility; // 1 point increase evasion by 1% and critical.chance by 1%
