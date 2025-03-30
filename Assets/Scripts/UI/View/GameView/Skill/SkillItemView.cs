@@ -7,6 +7,12 @@ public class SkillItemView : UIBehaviour
     private Button _btn;
     private bool isUnlocked;
     private Image _lockImage;
+    private IDataProvider _dataProvider;
+
+    public SkillItemView(IDataProvider dataProvider)
+    {
+        _dataProvider = dataProvider;
+    }
 
     protected override void ParseComponent()
     {
@@ -30,15 +36,12 @@ public class SkillItemView : UIBehaviour
         switch (SkillID)
         {
             case SkillID.Roll:
-                if (GameDataManager.Instance.CanUnlockSkill(SkillID) == false) return;
-                if (GameDataManager.Instance.SkillDataModel.skillRollData.isUlocked) return;
-                if (GameDataManager.Instance.PlayerDataModel.coin > SkillManager.Instance.skillRoll.price)
-                {
-                    GameDataManager.Instance.PlayerDataModel.coin -= SkillManager.Instance.skillRoll.price;
-                    GameDataManager.Instance.SkillDataModel.skillRollData.isUlocked = true;
-                    SkillManager.Instance.skillRoll.isUnlocked = true;
-                    Unlock();
-                }
+                if (SkillManager.Instance.SkillRoll.isUnlocked) return;
+                if (SkillManager.Instance.CanUnlockSkill(SkillID) == false) return;
+                if (_dataProvider.Coin < SkillManager.Instance.SkillRoll.price) return;
+                _dataProvider.Coin -= SkillManager.Instance.SkillRoll.price;
+                SkillManager.Instance.SkillRoll.isUnlocked = true;
+                Unlock();
 
                 break;
             case SkillID.IdleBlock:
@@ -55,11 +58,4 @@ public class SkillItemView : UIBehaviour
         base.RemoveEvent();
         UnRegisterButtonEvent(_btn, OnClickBtn);
     }
-}
-
-public enum SkillID
-{
-    Roll,
-    IdleBlock,
-    Clone
 }

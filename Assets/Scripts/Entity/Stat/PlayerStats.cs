@@ -8,8 +8,8 @@ public class PlayerStats : AlmightyStats, IDisposable
     protected override void Awake()
     {
         base.Awake();
-        GameEventDispatcher.Equip += Equip;
-        GameEventDispatcher.UnEquip += UnEquip;
+        EventDispatcher.Equip += Equip;
+        EventDispatcher.UnEquip += UnEquip;
     }
 
     /// <summary>
@@ -65,12 +65,12 @@ public class PlayerStats : AlmightyStats, IDisposable
         if (isDead) return;
         if (isInvincible) return;
         base.TakeDamage(damage);
-        GameEventDispatcher.OnPlayerTakeDamage?.Invoke((float)currentHealth / maxHealth.GetValue());
+        EventDispatcher.OnPlayerHealthChange?.Invoke((float)currentHealth / maxHealth.GetValue());
     }
 
     public void Dispose()
     {
-        GameEventDispatcher.Equip -= Equip;
-        GameEventDispatcher.UnEquip -= UnEquip;
+        EventDispatcher.Equip -= Equip;
+        EventDispatcher.UnEquip -= UnEquip;
     }
 }

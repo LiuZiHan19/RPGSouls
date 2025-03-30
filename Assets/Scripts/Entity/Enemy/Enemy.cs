@@ -60,7 +60,7 @@ public class Enemy : Entity
             Instantiate(dropItem, transform.position, Quaternion.identity);
         }
 
-        GameDataManager.Instance.PlayerDataModel.coin += coin;
+        DataManager.Instance.GameDataModel.AddCoin(coin);
     }
 
     public override void Flip()

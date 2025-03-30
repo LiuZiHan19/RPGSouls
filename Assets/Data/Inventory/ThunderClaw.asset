@@ -12,8 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e402b4e58bfc42c687b9bba00404a0c2, type: 3}
   m_Name: ThunderClaw
   m_EditorClassIdentifier: 
-  id: 0
-  name: ThunderClaw
+  id: e0e3bcaa-35c2-4934-9366-e30f66c7ab23
   itemBaseType: 0
   sprite: {fileID: -966611831, guid: 9c1f6cfcfa260554faa7f49a4c98a6da, type: 3}
   maxHealth: 0
@@ -30,4 +29,4 @@ MonoBehaviour:
   lighting: 50
   chill: 0
   ignite: 0
-  equipmentType: 5
+  equipmentID: 5

@@ -4,11 +4,13 @@ public class GameDataModel
 {
     public float soundVolume;
     public float musicVolume;
+    public int coin;
 
     public void Save()
     {
         PlayerPrefs.SetFloat("SoundVolume", soundVolume);
         PlayerPrefs.SetFloat("MusicVolume", musicVolume);
+        PlayerPrefs.SetInt("Coin", coin);
     }
 
     public void Load()
@@ -17,5 +19,11 @@ public class GameDataModel
         musicVolume = PlayerPrefs.GetFloat("MusicVolume", 1f);
         SoundManager.Instance.UpdateMusicVolume(musicVolume);
         SoundManager.Instance.UpdateSfxVolume(soundVolume);
+        coin = PlayerPrefs.GetInt("Coin", 0);
+    }
+
+    public void AddCoin(int number)
+    {
+        coin += number;
     }
 }

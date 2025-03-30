@@ -79,7 +79,7 @@ public abstract class Entity : MonoBehaviour
 
     public virtual void Die()
     {
-        entityFX.StopElementStatusFX();
+
     }
 
     public bool IsTriggered()

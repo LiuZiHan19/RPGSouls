@@ -13,8 +13,8 @@ public class MainGameViewController : UIController
     {
         ShowGameView();
 
-        GameEventDispatcher.OnPlayerDead += ShowDeadView;
-        GameEventDispatcher.OnGameWin += ShowGameWinView;
+        EventDispatcher.OnPlayerDead += ShowDeadView;
+        EventDispatcher.OnGameWin += ShowGameWinView;
     }
 
     #region Game View
@@ -71,6 +71,7 @@ public class MainGameViewController : UIController
     private void OnClickInventory()
     {
         TimeManager.Instance.PauseTime();
+
         ShowInventoryView();
     }
 
@@ -130,7 +131,7 @@ public class MainGameViewController : UIController
     private void CreateSkillView()
     {
         if (_skillView != null) return;
-        _skillView = new SkillView();
+        _skillView = new SkillView(GameManager.Instance);
         GameObject obj = ResourceLoader.Instance.LoadObjFromResources("UI/SkillView");
         _skillView.SetDisplayObject(obj);
         UIManager.Instance.SetObjectToLayer(obj.transform, UILayer.Middle);
@@ -155,7 +156,7 @@ public class MainGameViewController : UIController
     private void CreateGameSettingView()
     {
         if (_gameSettingView != null) return;
-        _gameSettingView = new GameSettingView();
+        _gameSettingView = new GameSettingView(GameManager.Instance);
         GameObject obj = ResourceLoader.Instance.LoadObjFromResources("UI/GameSettingView");
         _gameSettingView.SetDisplayObject(obj);
         UIManager.Instance.SetObjectToLayer(obj.transform, UILayer.Middle);
@@ -180,7 +181,7 @@ public class MainGameViewController : UIController
     private void CreateGameWinView()
     {
         if (_gameWinView != null) return;
-        _gameWinView = new GameWinView();
+        _gameWinView = new GameWinView(GameManager.Instance);
         GameObject obj = ResourceLoader.Instance.LoadObjFromResources("UI/GameWinView");
         _gameWinView.SetDisplayObject(obj);
         UIManager.Instance.SetObjectToLayer(obj.transform, UILayer.Middle);
@@ -202,8 +203,8 @@ public class MainGameViewController : UIController
 
     public override void Dispose()
     {
-        GameEventDispatcher.OnPlayerDead -= ShowDeadView;
-        GameEventDispatcher.OnGameWin -= ShowGameWinView;
+        EventDispatcher.OnPlayerDead -= ShowDeadView;
+        EventDispatcher.OnGameWin -= ShowGameWinView;
 
         _deadView?.Dispose();
         _deadView = null;

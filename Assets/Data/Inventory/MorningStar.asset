@@ -12,8 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e402b4e58bfc42c687b9bba00404a0c2, type: 3}
   m_Name: MorningStar
   m_EditorClassIdentifier: 
-  id: 0
-  name: MorningStar
+  id: 57474827-2ee9-4b95-be56-c5dac386ccaf
   itemBaseType: 0
   sprite: {fileID: 1540613961, guid: 9c1f6cfcfa260554faa7f49a4c98a6da, type: 3}
   maxHealth: 0
@@ -30,4 +29,4 @@ MonoBehaviour:
   lighting: 0
   chill: 0
   ignite: 0
-  equipmentType: 11
+  equipmentID: 11

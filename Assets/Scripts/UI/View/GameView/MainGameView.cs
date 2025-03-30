@@ -21,7 +21,7 @@ public class MainGameView : UIBehaviour
         RegisterButtonEvent(_inventoryBtn, OnClickInventoryBtn);
         RegisterButtonEvent(_skillBtn, OnClickSkillBtn);
         RegisterButtonEvent(_settingBtn, OnClickSettingBtn);
-        GameEventDispatcher.OnPlayerTakeDamage += OnPlayerTakeDamage;
+        EventDispatcher.OnPlayerHealthChange += OnPlayerTakeDamage;
     }
 
     private void OnPlayerTakeDamage(float percentage)
@@ -50,6 +50,6 @@ public class MainGameView : UIBehaviour
         UnRegisterButtonEvent(_inventoryBtn, OnClickInventoryBtn);
         UnRegisterButtonEvent(_skillBtn, OnClickSkillBtn);
         UnRegisterButtonEvent(_settingBtn, OnClickSettingBtn);
-        GameEventDispatcher.OnPlayerTakeDamage -= OnPlayerTakeDamage;
+        EventDispatcher.OnPlayerHealthChange -= OnPlayerTakeDamage;
     }
 }

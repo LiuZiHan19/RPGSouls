@@ -85,7 +85,7 @@ public class SoundManager : MonoBehaviour
         m_bgmHolder.name = audioID.ToString();
 #endif
         AudioSource audioSource = m_bgmHolder.AddComponent<AudioSource>();
-        audioSource.clip = GameResources.Instance.AudioDataManifest.audioDatas.Find(x => x.AudioID == audioID)
+        audioSource.clip = GameResources.Instance.AudioDataManifest.audioDataList.Find(x => x.AudioID == audioID)
             .audioClip;
         audioSource.loop = isLoop;
         audioSource.volume = m_musicVolume;
@@ -111,7 +111,7 @@ public class SoundManager : MonoBehaviour
 #endif
         DontDestroyOnLoad(sfxHolder);
         AudioSource audioSource = sfxHolder.AddComponent<AudioSource>();
-        audioSource.clip = GameResources.Instance.AudioDataManifest.audioDatas.Find(x => x.AudioID == audioID)
+        audioSource.clip = GameResources.Instance.AudioDataManifest.audioDataList.Find(x => x.AudioID == audioID)
             .audioClip;
         audioSource.loop = isLoop;
         audioSource.volume = m_sfxVolume;
@@ -121,26 +121,26 @@ public class SoundManager : MonoBehaviour
         id = m_sfxID;
     }
 
-    public void PauseBGM(uint id)
+    public void StopBGM(uint id)
     {
         if (!m_bgmDict.Keys.Contains(id))
         {
-            Debugger.Warning($"[BGM not found in {nameof(PauseBGM)} | Class: {GetType().Name}");
+            Debugger.Warning($"[BGM not found in {nameof(StopBGM)} | Class: {GetType().Name}");
             return;
         }
 
-        m_bgmDict[id].Pause();
+        m_bgmDict[id].Stop();
     }
 
-    public void PauseSfx(ulong id)
+    public void StopSfx(ulong id)
     {
         if (!m_sfxDict.Keys.Contains(id))
         {
-            Debugger.Warning($"[Sfx not found in {nameof(PauseSfx)} | Class: {GetType().Name}");
+            Debugger.Warning($"[Sfx not found in {nameof(StopSfx)} | Class: {GetType().Name}");
             return;
         }
 
-        m_sfxDict[id].Pause();
+        m_sfxDict[id].Stop();
     }
 }
 

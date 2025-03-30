@@ -11,10 +11,21 @@ public class PlayerManager
     public void Initialize()
     {
         player = GameObject.FindObjectOfType<Player>();
-        GameDataManager.Instance.PlayerDataModel.PareSelf(() =>
+        DataManager.Instance.PlayerDataModel.ParseJSONData(UpdateOnParseDataCompleted);
+    }
+
+    private void UpdateOnParseDataCompleted()
+    {
+        if (GameManager.Instance.ResetPlayerHealth)
         {
-            GameEventDispatcher.OnPlayerTakeDamage?.Invoke((float)player.playerStats.currentHealth /
-                                                           player.playerStats.maxHealth.GetValue());
-        });
+            GameManager.Instance.ResetPlayerHealth = false;
+            player.playerStats.currentHealth = 200;
+            EventDispatcher.OnPlayerHealthChange?.Invoke(1);
+        }
+        else
+        {
+            float percentage = (float)player.playerStats.currentHealth / player.playerStats.maxHealth.GetValue();
+            EventDispatcher.OnPlayerHealthChange?.Invoke(percentage);
+        }
     }
 }

@@ -5,6 +5,12 @@ public class MenuSettingView : UIBehaviour
     private Slider _musicSlider;
     private Slider _soundSlider;
     private Button _closeBtn;
+    private IDataProvider _dataProvider;
+
+    public MenuSettingView(IDataProvider dataProvider)
+    {
+        _dataProvider = dataProvider;
+    }
 
     protected override void ParseComponent()
     {
@@ -24,20 +30,20 @@ public class MenuSettingView : UIBehaviour
     public override void Show()
     {
         base.Show();
-        _musicSlider.value = GameDataManager.Instance.GameDataModel.musicVolume;
-        _soundSlider.value = GameDataManager.Instance.GameDataModel.soundVolume;
+        _musicSlider.value = _dataProvider.MusicVolume;
+        _soundSlider.value = _dataProvider.SoundVolume;
     }
 
     private void OnSoundSliderValueChanged(float arg0)
     {
         SoundManager.Instance.UpdateSfxVolume(arg0);
-        GameDataManager.Instance.GameDataModel.soundVolume = arg0;
+        _dataProvider.SoundVolume = arg0;
     }
 
     private void OnMusicSliderValueChanged(float arg0)
     {
         SoundManager.Instance.UpdateMusicVolume(arg0);
-        GameDataManager.Instance.GameDataModel.musicVolume = arg0;
+        _dataProvider.MusicVolume = arg0;
     }
 
     private void OnClickCloseBtn()

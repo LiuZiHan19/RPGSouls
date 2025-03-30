@@ -6,7 +6,7 @@ using UnityEngine;
 /// </summary>
 public class EntityAnimationEvent : MonoBehaviour
 {
-    public Entity entity;
+    protected Entity entity;
 
     protected virtual void Awake()
     {
@@ -21,12 +21,12 @@ public class EntityAnimationEvent : MonoBehaviour
     {
     }
 
-    public void Trigger()
+    public virtual void Trigger()
     {
         entity.stateMachine.currentState.triggered = true;
     }
 
-    public bool IsTriggered()
+    public virtual bool IsTriggered()
     {
         return entity.stateMachine.currentState.triggered;
     }

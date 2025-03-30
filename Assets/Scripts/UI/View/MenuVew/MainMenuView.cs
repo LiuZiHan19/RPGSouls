@@ -6,9 +6,11 @@ public class MainMenuView : UIBehaviour
     private Button _playBtn;
     private Button _settingBtn;
     private Button _exitBtn;
+    private Text _coinText;
 
     protected override void ParseComponent()
     {
+        _coinText = FindComponent<Text>("Middle/Status/Status_Gold/Text");
         _playBtn = FindComponent<Button>("Middle/Play");
         _settingBtn = FindComponent<Button>("Middle/Setting");
         _exitBtn = FindComponent<Button>("Middle/Exit");
@@ -22,6 +24,12 @@ public class MainMenuView : UIBehaviour
         RegisterButtonEvent(_exitBtn, OnClickExitBtn);
     }
 
+    public override void Show()
+    {
+        base.Show();
+        _coinText.text = DataManager.Instance.GameDataModel.coin.ToString();
+    }
+
     private void OnClickExitBtn()
     {
         GameManager.Instance.Dispose();
@@ -30,7 +38,7 @@ public class MainMenuView : UIBehaviour
 
     private void OnClickPlayBtn()
     {
-        GameEventDispatcher.OnClickPlayBtn?.Invoke();
+        EventDispatcher.OnClickPlayBtn?.Invoke();
     }
 
     private void OnClickSettingBtn()

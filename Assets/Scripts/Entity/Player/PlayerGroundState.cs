@@ -21,13 +21,13 @@ public class PlayerGroundState : PlayerState
             stateMachine.ChangeState(player.AttackState);
         }
 
-        if (Input.GetKeyDown(KeyCode.F) && player.IsGrounded && player.skill.skillRoll.CanRelease())
+        if (Input.GetKeyDown(KeyCode.F) && player.IsGrounded && player.skill.SkillRoll.CanRelease())
         {
             stateMachine.ChangeState(player.RollState);
             isReturn = true;
         }
 
-        if (Input.GetMouseButtonDown(1) && player.skill.skillIdleBlock.CanRelease())
+        if (Input.GetMouseButtonDown(1) && player.skill.SkillIdleBlock.CanRelease())
         {
             stateMachine.ChangeState(player.IdleBlockState);
         }

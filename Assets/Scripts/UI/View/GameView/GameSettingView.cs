@@ -5,10 +5,16 @@ public class GameSettingView : UIBehaviour
     private Button _resumeBtn;
     private Button _returnBtn;
     private Button _saveBtn;
+    private IDataProvider _dataProvider;
+
+    public GameSettingView(IDataProvider dataProvider)
+    {
+        _dataProvider = dataProvider;
+    }
 
     protected override void ParseComponent()
     {
-        _resumeBtn = FindComponent<Button>("Middle/PlayAgain");
+        _resumeBtn = FindComponent<Button>("Middle/Resume");
         _returnBtn = FindComponent<Button>("Middle/Return");
         _saveBtn = FindComponent<Button>("Middle/Save");
     }
@@ -25,7 +31,7 @@ public class GameSettingView : UIBehaviour
     {
         Hide();
         TimeManager.Instance.ResumeTime();
-        GameEventDispatcher.OnClickReturnBtn?.Invoke();
+        EventDispatcher.OnClickReturnBtn?.Invoke();
     }
 
     private void OnClickResumeBtn()
@@ -36,7 +42,8 @@ public class GameSettingView : UIBehaviour
 
     private void OnClickSaveBtn()
     {
-        GameDataManager.Instance.SaveGameData();
+        _dataProvider.SaveGameData();
+        GameManager.Instance.ReloadData = true;
     }
 
     protected override void RemoveEvent()

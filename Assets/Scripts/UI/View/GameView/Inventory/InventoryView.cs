@@ -8,9 +8,6 @@ public class InventoryView : UIBehaviour
     private ScrollRect _inventoryScrollRect;
     private Image _weaponSlotImage;
     private List<InventoryItemView> _equipmentViews = new List<InventoryItemView>();
-    private List<InventoryItemView> _consumableViews = new List<InventoryItemView>();
-    private List<InventoryItemView> _materialViews = new List<InventoryItemView>();
-    private List<InventoryItemView> _itemViews = new List<InventoryItemView>();
     private Text _maxHealthStatText;
     private Text _damageStatText;
     private Text _magicPowerStatText;
@@ -52,21 +49,32 @@ public class InventoryView : UIBehaviour
     protected override void AddEvent()
     {
         base.AddEvent();
-        GameEventDispatcher.Equip += Equip;
-        GameEventDispatcher.UnEquip += UnEquip;
+        EventDispatcher.Equip += Equip;
+        EventDispatcher.UnEquip += UnEquip;
         RegisterButtonEvent(_closeBtn, OnClickCloseBtn);
     }
 
     public override void Show()
     {
         base.Show();
-        CreateInventoryItemViews();
-        if (InventoryManager.Instance.currentWeaponData != null)
-            _weaponSlotImage.sprite = InventoryManager.Instance.currentWeaponData.sprite;
-        RefreshStat();
+        RefresView();
     }
 
-    private void RefreshStat()
+    private void RefresView()
+    {
+        InventoryManager inventory = InventoryManager.Instance;
+
+        // 装备栏
+        if (inventory.currentWeaponData != null)
+            _weaponSlotImage.sprite = inventory.currentWeaponData.sprite;
+
+        // 属性
+        RefreshStatView();
+
+        RefreshEquipmentItemViews();
+    }
+
+    private void RefreshStatView()
     {
         PlayerStats playerStats = PlayerManager.Instance.player.playerStats;
         _maxHealthStatText.text = playerStats.maxHealth.GetValue().ToString();
@@ -87,10 +95,11 @@ public class InventoryView : UIBehaviour
 
     public override void Hide()
     {
-        DisposeInventoryItemViews();
-
+        DisposeEquipmentItemViews();
         base.Hide();
     }
+
+    #region 装备 卸下 武器
 
     private void Equip(InventoryItemBaseData itemSO)
     {
@@ -99,7 +108,7 @@ public class InventoryView : UIBehaviour
             case InventoryItemBaseType.Equipment:
                 RemoveInventoryItemViewByItemSO(itemSO);
                 _weaponSlotImage.sprite = itemSO.sprite;
-                RefreshStat();
+                RefreshStatView();
                 break;
             default:
                 Debugger.Warning($"点击了未处理的物品类型：[{itemSO.itemBaseType}]，物品名称：{itemSO.name}");
@@ -128,23 +137,23 @@ public class InventoryView : UIBehaviour
         }
     }
 
-    private void UnEquip(InventoryItemBaseData itemSO)
+    private void UnEquip(InventoryItemBaseData itemData)
     {
-        switch (itemSO.itemBaseType)
+        switch (itemData.itemBaseType)
         {
             case InventoryItemBaseType.Equipment:
-                if (AddInventoryItemViewByItemSO(itemSO) == false) CreateEquipmentViewByItemSO(itemSO);
+                if (AddInventoryItemViewByItemSO(itemData) == false) CreateEquipmentViewByItemSO(itemData);
                 break;
             default:
                 throw new ArgumentOutOfRangeException();
         }
     }
 
-    private bool AddInventoryItemViewByItemSO(InventoryItemBaseData itemSO)
+    private bool AddInventoryItemViewByItemSO(InventoryItemBaseData itemData)
     {
         foreach (var equipment in _equipmentViews)
         {
-            if (equipment.itemData == itemSO)
+            if (equipment.itemData == itemData)
             {
                 equipment.numberText.text = (int.Parse(equipment.numberText.text) + 1).ToString();
                 return true;
@@ -154,17 +163,11 @@ public class InventoryView : UIBehaviour
         return false;
     }
 
-    #region Create Inventory Item View
+    #endregion
 
-    private void CreateInventoryItemViews()
-    {
-        CreateConsumaleViews();
-        CreateMaterialViews();
-        CreateItemViews();
-        CreateEquipmentViews();
-    }
+    #region 武器物品
 
-    private void CreateEquipmentViews()
+    private void RefreshEquipmentItemViews()
     {
         var equipments = InventoryManager.Instance.equipmentDict;
         foreach (var equipment in equipments)
@@ -193,76 +196,7 @@ public class InventoryView : UIBehaviour
         _equipmentViews.Add(inventoryItemView);
     }
 
-    private void CreateItemViews()
-    {
-        var items = InventoryManager.Instance.itemDict;
-        foreach (var item in items)
-        {
-            CreateItemView(item);
-        }
-    }
-
-    private void CreateItemView(KeyValuePair<InventoryItemID, InventoryItem> item)
-    {
-        var obj = ResourceLoader.Instance.LoadObjFromResources("UI/InventoryItemView");
-        UnityHelper.SetParent(obj.transform, _inventoryScrollRect.content);
-        InventoryItemView inventoryItemView = new InventoryItemView();
-        inventoryItemView.SetDisplayObject(obj);
-        inventoryItemView.Initialise(item.Value.itemSO, item.Value.number);
-        _itemViews.Add(inventoryItemView);
-    }
-
-    private void CreateMaterialViews()
-    {
-        var materials = InventoryManager.Instance.materialDict;
-        foreach (var material in materials)
-        {
-            CreateMaterialView(material);
-        }
-    }
-
-    private void CreateMaterialView(KeyValuePair<InventoryMaterialID, InventoryItem> material)
-    {
-        var obj = ResourceLoader.Instance.LoadObjFromResources("UI/InventoryItemView");
-        UnityHelper.SetParent(obj.transform, _inventoryScrollRect.content);
-        InventoryItemView inventoryItemView = new InventoryItemView();
-        inventoryItemView.SetDisplayObject(obj);
-        inventoryItemView.Initialise(material.Value.itemSO, material.Value.number);
-        _materialViews.Add(inventoryItemView);
-    }
-
-    private void CreateConsumaleViews()
-    {
-        var consumables = InventoryManager.Instance.consumableDict;
-        foreach (var consumable in consumables)
-        {
-            CreateConsumableView(consumable);
-        }
-    }
-
-    private void CreateConsumableView(KeyValuePair<InventoryConsumableID, InventoryItem> consumable)
-    {
-        var obj = ResourceLoader.Instance.LoadObjFromResources("UI/InventoryItemView");
-        UnityHelper.SetParent(obj.transform, _inventoryScrollRect.content);
-        InventoryItemView inventoryItemView = new InventoryItemView();
-        inventoryItemView.SetDisplayObject(obj);
-        inventoryItemView.Initialise(consumable.Value.itemSO, consumable.Value.number);
-        _consumableViews.Add(inventoryItemView);
-    }
-
-    #endregion
-
-    #region Dispose Inventory Item Views
-
-    private void DisposeInventoryItemViews()
-    {
-        DisposeEquipmentViews();
-        DisposeConsumableViews();
-        DisposeMaterialViews();
-        DisposeItemViews();
-    }
-
-    private void DisposeEquipmentViews()
+    private void DisposeEquipmentItemViews()
     {
         foreach (var itemView in _equipmentViews)
         {
@@ -270,36 +204,6 @@ public class InventoryView : UIBehaviour
         }
 
         _equipmentViews.Clear();
-    }
-
-    private void DisposeConsumableViews()
-    {
-        foreach (var itemView in _consumableViews)
-        {
-            itemView.Dispose();
-        }
-
-        _consumableViews.Clear();
-    }
-
-    private void DisposeMaterialViews()
-    {
-        foreach (var itemView in _materialViews)
-        {
-            itemView.Dispose();
-        }
-
-        _materialViews.Clear();
-    }
-
-    private void DisposeItemViews()
-    {
-        foreach (var itemView in _itemViews)
-        {
-            itemView.Dispose();
-        }
-
-        _itemViews.Clear();
     }
 
     #endregion
@@ -312,8 +216,8 @@ public class InventoryView : UIBehaviour
 
     protected override void RemoveEvent()
     {
-        GameEventDispatcher.Equip -= Equip;
-        GameEventDispatcher.UnEquip -= UnEquip;
+        EventDispatcher.Equip -= Equip;
+        EventDispatcher.UnEquip -= UnEquip;
         UnRegisterButtonEvent(_closeBtn, OnClickCloseBtn);
         base.RemoveEvent();
     }

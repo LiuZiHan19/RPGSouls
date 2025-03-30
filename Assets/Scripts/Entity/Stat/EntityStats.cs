@@ -47,7 +47,7 @@ public abstract class EntityStats : MonoBehaviour
             chillTimer -= Time.deltaTime;
             if (chillTimer < 0)
             {
-                entity.entityFX.StopElementStatusFX();
+                entity.entityFX.DestroyElementFx();
                 isChilled = false;
             }
         }
@@ -60,7 +60,7 @@ public abstract class EntityStats : MonoBehaviour
             shockedTimer -= Time.deltaTime;
             if (shockedTimer < 0)
             {
-                entity.entityFX.StopElementStatusFX();
+                entity.entityFX.DestroyElementFx();
                 isShocked = false;
             }
         }
@@ -80,7 +80,7 @@ public abstract class EntityStats : MonoBehaviour
 
             if (igniteTimer < 0)
             {
-                entity.entityFX.StopElementStatusFX();
+                entity.entityFX.DestroyElementFx();
                 isIgnited = false;
             }
         }

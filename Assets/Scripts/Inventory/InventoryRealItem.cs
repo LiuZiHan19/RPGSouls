@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -17,7 +16,7 @@ public class InventoryRealItem : MonoBehaviour
     {
         if (other.gameObject.tag == "player")
         {
-            GameEventDispatcher.OnInventoryRealItemPickup?.Invoke(itemData);
+            EventDispatcher.OnInventoryRealItemPickup?.Invoke(itemData);
             Destroy(gameObject);
         }
     }

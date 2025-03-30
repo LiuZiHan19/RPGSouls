@@ -1,9 +1,9 @@
 using System;
 using UnityEditor;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 [CreateAssetMenu(fileName = "AudioData", menuName = "Scriptable Object/Audio/AudioData")]
+[Serializable]
 public class AudioData : ScriptableObject
 {
     public AudioID AudioID;
@@ -23,4 +23,3 @@ public class AudioData : ScriptableObject
     }
 #endif
 }
-

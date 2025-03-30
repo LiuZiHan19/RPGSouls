@@ -31,7 +31,7 @@ public class InventoryItemView : UIBehaviour
     {
         if (itemData.itemBaseType == InventoryItemBaseType.Equipment)
         {
-            GameEventDispatcher.Equip?.Invoke(itemData);
+            EventDispatcher.Equip?.Invoke(itemData);
         }
     }
 

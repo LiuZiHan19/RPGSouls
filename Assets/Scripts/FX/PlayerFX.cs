@@ -14,8 +14,8 @@ public class PlayerFX : EntityFX
     {
         base.Awake();
         _player = GetComponent<Player>();
-        GameEventDispatcher.PlayerAttack = null;
-        GameEventDispatcher.PlayerAttack += PlayAttackFX;
+        EventDispatcher.PlayerAttack = null;
+        EventDispatcher.PlayerAttack += PlayAttackFX;
     }
 
     public void PlayAttackFX(Transform transform)
@@ -31,7 +31,7 @@ public class PlayerFX : EntityFX
                 fireFx.callback += _fireFxPool.Set;
             }
 
-            fireFx.PlayFX(_player.facingDir, _player.attackPoint.position);
+            fireFx.PlayFX(_player.facingDir, transform.position);
         }
         else if (InventoryManager.Instance.currentWeaponData.equipmentID == InventoryEquipmentID.IceSword)
         {
@@ -42,7 +42,7 @@ public class PlayerFX : EntityFX
                 iceFx.callback += _iceFxPool.Set;
             }
 
-            iceFx.PlayFX(_player.facingDir, _player.attackPoint.position);
+            iceFx.PlayFX(_player.facingDir, transform.position);
         }
         else if (InventoryManager.Instance.currentWeaponData.equipmentID == InventoryEquipmentID.ThunderClaw)
         {
@@ -53,7 +53,7 @@ public class PlayerFX : EntityFX
                 lightingFx.callback += _lightingFxPool.Set;
             }
 
-            lightingFx.PlayFX(_player.facingDir, _player.attackPoint.position);
+            lightingFx.PlayFX(_player.facingDir, transform.position);
         }
     }
 
@@ -80,6 +80,6 @@ public class PlayerFX : EntityFX
 
         _lightingFxPool.pool.Clear();
 
-        GameEventDispatcher.PlayerAttack -= PlayAttackFX;
+        EventDispatcher.PlayerAttack -= PlayAttackFX;
     }
 }

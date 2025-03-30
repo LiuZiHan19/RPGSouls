@@ -12,8 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e402b4e58bfc42c687b9bba00404a0c2, type: 3}
   m_Name: SpikedMace
   m_EditorClassIdentifier: 
-  id: 0
-  name: SpikedMace
+  id: 46d1ea6c-719d-4c0b-b16b-34782bbadfa9
   itemBaseType: 0
   sprite: {fileID: -1386125032, guid: 9c1f6cfcfa260554faa7f49a4c98a6da, type: 3}
   maxHealth: 0
@@ -30,4 +29,4 @@ MonoBehaviour:
   lighting: 0
   chill: 0
   ignite: 0
-  equipmentType: 12
+  equipmentID: 12

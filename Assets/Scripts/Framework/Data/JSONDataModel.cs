@@ -3,43 +3,25 @@ using UnityEngine.Events;
 
 public abstract class JSONDataModel
 {
-    public JsonData jsonData;
+    public JsonData JSONData { get; set; }
 
-    public void PareSelf(UnityAction callback = null)
+    public void SetJSONData(JsonData data)
     {
-        ParseData(jsonData, callback);
+        JSONData = data;
     }
 
-    public virtual void ParseData(JsonData jsonData, UnityAction callback = null) => this.jsonData = jsonData;
+    public void ParseJSONData(UnityAction callback = null)
+    {
+        ParseJSONData(JSONData, callback);
+    }
 
-    public virtual JsonData GetSaveJsonData()
+    public virtual void ParseJSONData(JsonData data, UnityAction callback = null)
+    {
+        JSONData = data;
+    }
+
+    public virtual JsonData GetJSONData()
     {
         return null;
-    }
-
-    private int GetInteger(JsonData jsonData, string key, int defaultValue = 0)
-    {
-        if (jsonData.Keys.Contains(key) && jsonData[key] != null)
-        {
-            int value = 0;
-            int.TryParse(jsonData[key].ToString(), out value);
-            return value;
-        }
-
-        Debugger.Warning($"Missing or invalid key: '{key}' in JSON data. Returning default value: {defaultValue}. " +
-                         $"Ensure that the key exists and is a valid integer.");
-        return defaultValue;
-    }
-
-    private string GetString(JsonData jsonData, string key, string defaultValue = "")
-    {
-        if (jsonData.Keys.Contains(key) && jsonData[key] != null)
-        {
-            return jsonData[key].ToString();
-        }
-
-        Debugger.Warning($"Missing or invalid key: '{key}' in JSON data. Returning default value: {defaultValue}. " +
-                         $"Ensure that the key exists and is a valid string.");
-        return defaultValue;
     }
 }

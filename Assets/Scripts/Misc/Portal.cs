@@ -8,7 +8,7 @@ public class Portal : MonoBehaviour
 
         if (other.gameObject.tag == "player")
         {
-            GameEventDispatcher.OnGameWin?.Invoke();
+            EventDispatcher.OnGameWin?.Invoke();
         }
     }
 }

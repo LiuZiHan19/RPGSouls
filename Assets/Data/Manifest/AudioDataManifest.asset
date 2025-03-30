@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d784bfac1a1a40288704d4bbad628815, type: 3}
   m_Name: AudioDataManifest
   m_EditorClassIdentifier: 
-  audioDatas:
+  audioDataList:
   - {fileID: 11400000, guid: 1e8d3029c589f48eb83957e485fa9cc8, type: 2}
   - {fileID: 11400000, guid: de3da601f1c6a49a3bec758413d678a1, type: 2}
   - {fileID: 11400000, guid: e7a5808681e964ab1b1551d3d9995724, type: 2}

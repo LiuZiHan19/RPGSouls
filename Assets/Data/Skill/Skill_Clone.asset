@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 217a927b7abf49fd8143137340971a2a, type: 3}
   m_Name: Skill_Clone
   m_EditorClassIdentifier: 
-  SkillID: 2
+  id: 36117b23-e024-42f4-942c-406fa01f3a72
   price: 50
+  skillID: 2
   unlockCondition: 0000000001000000

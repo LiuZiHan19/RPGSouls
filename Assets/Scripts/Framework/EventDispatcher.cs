@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-public class GameEventDispatcher
+public class EventDispatcher
 {
     public static Action OnClickPlayBtn
     {
@@ -51,13 +51,19 @@ public class GameEventDispatcher
         set;
     }
     
-    public static Action<float> OnPlayerTakeDamage
+    public static Action<float> OnPlayerHealthChange
     {
         get;
         set;
     }
 
     public static Action OnGameWin
+    {
+        get;
+        set;
+    }
+
+    public static Action<int> OnCoinChange
     {
         get;
         set;

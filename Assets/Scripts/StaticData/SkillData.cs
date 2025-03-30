@@ -1,12 +1,13 @@
 using System;
 using UnityEngine;
 
-public class InventoryItemBaseData : ScriptableObject
+[CreateAssetMenu(fileName = "SkillData", menuName = "Scriptable Object/Skill/SkillData")]
+public class SkillData : ScriptableObject
 {
     public string id;
-    public string name;
-    public InventoryItemBaseType itemBaseType;
-    public Sprite sprite;
+    public int price;
+    public SkillID skillID;
+    public SkillID[] unlockCondition;
 
 #if UNITY_EDITOR
     protected virtual void OnValidate()

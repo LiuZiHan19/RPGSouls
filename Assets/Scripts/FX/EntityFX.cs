@@ -23,7 +23,7 @@ public class EntityFX : MonoBehaviour
 
     public void StartPlayElementStatusFx(ElementStatusType elementStatus)
     {
-        StopElementStatusFX();
+        DestroyElementFx();
 
         switch (elementStatus)
         {
@@ -39,12 +39,6 @@ public class EntityFX : MonoBehaviour
             default:
                 throw new ArgumentOutOfRangeException(nameof(elementStatus), elementStatus, null);
         }
-    }
-
-    public void StopElementStatusFX()
-    {
-        _sr.color = _oriColor;
-        if (_currentCoroutine != null) CoroutineManager.Instance.StopCoroutine(_currentCoroutine);
     }
 
     private IEnumerator PlayElementStatusFx(ElementStatusType elementStatus)
@@ -54,29 +48,49 @@ public class EntityFX : MonoBehaviour
             case ElementStatusType.Ignite:
                 while (true)
                 {
-                    _sr.color = _igniteColor;
+                    SetColor(_igniteColor);
                     yield return new WaitForSeconds(0.1f);
-                    _sr.color = _oriColor;
+                    SetColor(_oriColor);
                     yield return new WaitForSeconds(0.1f);
                 }
             case ElementStatusType.Chill:
                 while (true)
                 {
-                    _sr.color = _chillColor;
+                    SetColor(_chillColor);
                     yield return new WaitForSeconds(0.1f);
-                    _sr.color = _oriColor;
+                    SetColor(_oriColor);
                     yield return new WaitForSeconds(0.1f);
                 }
             case ElementStatusType.Lighting:
                 while (true)
                 {
-                    _sr.color = _lightingColor;
+                    SetColor(_lightingColor);
                     yield return new WaitForSeconds(0.1f);
-                    _sr.color = _oriColor;
+                    SetColor(_oriColor);
                     yield return new WaitForSeconds(0.1f);
                 }
             default:
                 throw new ArgumentOutOfRangeException(nameof(elementStatus), elementStatus, null);
         }
+    }
+
+    public void DestroyElementFx()
+    {
+        SetColor(_oriColor);
+        if (_currentCoroutine != null)
+            CoroutineManager.Instance.StopCoroutine(_currentCoroutine);
+    }
+
+    private void SetColor(Color color)
+    {
+        if (_sr == null)
+        {
+            Debugger.Warning($"[EntityFX] The sr is null, but you want to try acess it.");
+            if (_currentCoroutine != null)
+                CoroutineManager.Instance.StopCoroutine(_currentCoroutine);
+            return;
+        }
+
+        _sr.color = color;
     }
 }

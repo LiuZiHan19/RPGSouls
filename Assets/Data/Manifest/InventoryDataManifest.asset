@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 634600f1df994bcf9b86fba9c41832bb, type: 3}
   m_Name: InventoryDataManifest
   m_EditorClassIdentifier: 
-  equipmentList:
+  equipmentDataList:
   - {fileID: 11400000, guid: 51c82973c54f64ccc85e3b1e9c6b8dd7, type: 2}
   - {fileID: 11400000, guid: 43ecc64340fc748b4ae4ecc09707417c, type: 2}
   - {fileID: 11400000, guid: 1b2a2b117e00e41269d3dabb2a58200d, type: 2}
@@ -26,3 +26,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 6fd226a4eb77f4f3d984c75eb3ade4b1, type: 2}
   - {fileID: 11400000, guid: 35a6206dc14764c6ab0c022e6e4d3909, type: 2}
   - {fileID: 11400000, guid: 120b5aa90d85a4cd7aefb33bbd619966, type: 2}
+  consumableDataList: []
+  materialDataList: []
+  itemDataList: []

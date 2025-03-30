@@ -12,8 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e402b4e58bfc42c687b9bba00404a0c2, type: 3}
   m_Name: FlameSword
   m_EditorClassIdentifier: 
-  id: 0
-  name: FlameSword
+  id: 80800ffe-2e61-4c8e-b4d0-a94354525f41
   itemBaseType: 0
   sprite: {fileID: -497172145, guid: 9c1f6cfcfa260554faa7f49a4c98a6da, type: 3}
   maxHealth: 0
@@ -30,4 +29,4 @@ MonoBehaviour:
   lighting: 0
   chill: 0
   ignite: 50
-  equipmentType: 4
+  equipmentID: 4

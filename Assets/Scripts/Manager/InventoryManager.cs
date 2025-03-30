@@ -31,34 +31,11 @@ public class InventoryManager : MonoBehaviour
         materialDict = new Dictionary<InventoryMaterialID, InventoryItem>();
         itemDict = new Dictionary<InventoryItemID, InventoryItem>();
 
-        GameEventDispatcher.OnInventoryRealItemPickup += AddItemByItemData;
-        GameEventDispatcher.Equip += Equip;
-        GameEventDispatcher.UnEquip += UnEquip;
+        EventDispatcher.OnInventoryRealItemPickup += AddItemByItemData;
+        EventDispatcher.Equip += Equip;
+        EventDispatcher.UnEquip += UnEquip;
 
-        GameDataManager.Instance.InventoryDataModel.PareSelf();
-    }
-
-    private void Equip(InventoryItemBaseData itemData)
-    {
-        switch (itemData.itemBaseType)
-        {
-            case InventoryItemBaseType.Equipment:
-                if (currentWeaponData != null)
-                    GameEventDispatcher.UnEquip?.Invoke(currentWeaponData);
-                currentWeaponData = itemData as InventoryEquipmentData;
-                RemoveItemByItemData(itemData);
-                break;
-        }
-    }
-
-    private void UnEquip(InventoryItemBaseData itemData)
-    {
-        switch (itemData.itemBaseType)
-        {
-            case InventoryItemBaseType.Equipment:
-                AddItemByItemData(itemData);
-                break;
-        }
+        DataManager.Instance.InventoryDataModel.ParseJSONData(UpdateOnParseDataCompleted);
     }
 
     public void AddItemByItemData(InventoryItemBaseData itemData)
@@ -66,14 +43,14 @@ public class InventoryManager : MonoBehaviour
         switch (itemData.itemBaseType)
         {
             case InventoryItemBaseType.Equipment:
-                InventoryEquipmentData inventoryEquipmentSo = itemData as InventoryEquipmentData;
-                if (equipmentDict.Keys.Contains(inventoryEquipmentSo.equipmentID))
+                InventoryEquipmentData inventoryEquipmentData = itemData as InventoryEquipmentData;
+                if (equipmentDict.Keys.Contains(inventoryEquipmentData.equipmentID))
                 {
-                    equipmentDict[inventoryEquipmentSo.equipmentID].Add();
+                    equipmentDict[inventoryEquipmentData.equipmentID].Add();
                 }
                 else
                 {
-                    equipmentDict.Add(inventoryEquipmentSo.equipmentID, new InventoryItem(inventoryEquipmentSo));
+                    equipmentDict.Add(inventoryEquipmentData.equipmentID, new InventoryItem(inventoryEquipmentData));
                 }
 
                 break;
@@ -193,6 +170,45 @@ public class InventoryManager : MonoBehaviour
         RemoveFromList(itemData);
     }
 
+    public InventoryItemBaseData LoadDataByGUID(string guid)
+    {
+        List<InventoryItemBaseData> configurationData = GameResources.Instance.InventoryDataManifest.equipmentDataList;
+
+        foreach (var itemData in configurationData)
+        {
+            if (guid == itemData.id)
+            {
+                return itemData;
+            }
+        }
+
+        Debugger.Error($"[Inventory Load Data Error] 无法找到物品: {guid}");
+        return null;
+    }
+
+    private void Equip(InventoryItemBaseData itemData)
+    {
+        switch (itemData.itemBaseType)
+        {
+            case InventoryItemBaseType.Equipment:
+                if (currentWeaponData != null)
+                    EventDispatcher.UnEquip?.Invoke(currentWeaponData);
+                currentWeaponData = itemData as InventoryEquipmentData;
+                RemoveItemByItemData(itemData);
+                break;
+        }
+    }
+
+    private void UnEquip(InventoryItemBaseData itemData)
+    {
+        switch (itemData.itemBaseType)
+        {
+            case InventoryItemBaseType.Equipment:
+                AddItemByItemData(itemData);
+                break;
+        }
+    }
+
     private void AddToList(InventoryItemBaseData itemSO)
     {
         foreach (var item in allItemList)
@@ -224,26 +240,27 @@ public class InventoryManager : MonoBehaviour
         }
     }
 
-    public InventoryItemBaseData LoadDataByGUID(string guid)
+    private void UpdateOnParseDataCompleted()
     {
-        List<InventoryItemBaseData> configurationData = GameResources.Instance.InventoryDataManifest.equipmentList;
+        InventoryDataModel inventoryDataModel = DataManager.Instance.InventoryDataModel;
+        currentWeaponData = LoadDataByGUID(inventoryDataModel.currentWeaponID) as InventoryEquipmentData;
 
-        foreach (var itemData in configurationData)
+        var equipmentDataList = inventoryDataModel.equipmentDataList;
+        for (int i = 0; i < equipmentDataList.Count; i++)
         {
-            if (guid == itemData.id)
+            InventoryItemDataModel itemDataModel = equipmentDataList[i];
+            var itemData = LoadDataByGUID(equipmentDataList[i].id);
+            for (int j = 0; j < itemDataModel.number; j++)
             {
-                return itemData;
+                AddItemByItemData(itemData);
             }
         }
-
-        Debugger.Error($"[Inventory Load Data Error] 无法找到物品: {guid}");
-        return null;
     }
 
     ~InventoryManager()
     {
-        GameEventDispatcher.OnInventoryRealItemPickup -= AddItemByItemData;
-        GameEventDispatcher.Equip -= Equip;
-        GameEventDispatcher.UnEquip -= UnEquip;
+        EventDispatcher.OnInventoryRealItemPickup -= AddItemByItemData;
+        EventDispatcher.Equip -= Equip;
+        EventDispatcher.UnEquip -= UnEquip;
     }
 }

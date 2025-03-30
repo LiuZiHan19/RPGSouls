@@ -1,55 +1,55 @@
-using System;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class PlayerCloneController : MonoBehaviour
 {
+    public UnityAction<PlayerCloneController> callback;
+
+    [SerializeField] private float fadeSpeed = 4f;
+    private float _animTimer;
     private Animator _animator;
     private SpriteRenderer _sr;
-    private AnimEvent_Player _animEventPlayer;
     private bool _isFade;
-    private float _fadeSpeed = 4f;
 
     private void Awake()
     {
         _animator = GetComponentInChildren<Animator>();
         _sr = GetComponentInChildren<SpriteRenderer>();
-        _animEventPlayer = GetComponentInChildren<AnimEvent_Player>();
-
-        if (PlayerManager.Instance.player.facingDir == -1)
-        {
-            transform.Rotate(0, 180, 0);
-        }
     }
 
-    public void Attack()
+    public void Release()
     {
+        _animTimer = 0f;
         Color newColor = _sr.color;
         newColor.a = 1f;
         _sr.color = newColor;
         _isFade = false;
 
-        int randomInteger = UnityEngine.Random.Range(1, 4);
+        int randomInteger = Random.Range(1, 4);
         _animator.SetInteger("AttackNumber", randomInteger);
         _animator.SetBool("Attack", true);
     }
 
     private void Update()
     {
-        if (_animEventPlayer.IsTriggered())
+        if (_isFade == false)
         {
-            _animator.SetBool("Attack", false);
-            _isFade = true;
+            _animTimer += Time.deltaTime;
+            if (_animTimer > 0.5f)
+            {
+                _animator.SetBool("Attack", false);
+                _isFade = true;
+            }
         }
-
-        if (_isFade)
+        else
         {
             Color currentColor = _sr.color;
-            currentColor.a = Mathf.MoveTowards(currentColor.a, 0, _fadeSpeed * Time.deltaTime);
+            currentColor.a = Mathf.MoveTowards(currentColor.a, 0, fadeSpeed * Time.deltaTime);
             _sr.color = currentColor;
 
             if (currentColor.a <= 0)
             {
-                Destroy(gameObject);
+                callback?.Invoke(this);
             }
         }
     }

@@ -11,8 +11,8 @@ public class PlayerRollState : PlayerState
     {
         base.Enter();
         player.SetVelocity(new Vector2(player.rollForce * player.facingDir, player.Velocity.y));
-        if (player.skill.skillClone.CanRelease())
-            player.skill.skillClone.Release(player);
+        if (player.skill.SkillClone.CanRelease())
+            player.skill.SkillClone.Release(player);
     }
 
     public override void Update()
@@ -27,8 +27,8 @@ public class PlayerRollState : PlayerState
 
     public override void Exit()
     {
-        if (player.skill.skillClone.CanRelease())
-            player.skill.skillClone.Release(player);
+        if (player.skill.SkillClone.CanRelease())
+            player.skill.SkillClone.Release(player);
         base.Exit();
     }
 }

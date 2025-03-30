@@ -28,6 +28,6 @@ public class PlayerRunState : PlayerGroundState
     public override void Exit()
     {
         base.Exit();
-        SoundManager.Instance.PauseSfx(_runSfx);
+        SoundManager.Instance.StopSfx(_runSfx);
     }
 }

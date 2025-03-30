@@ -1,11 +1,10 @@
 using UnityEditor;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 [CreateAssetMenu(fileName = "InventoryEquipmentData", menuName = "Scriptable Object/Inventory/InventoryMaterialData")]
 public class InventoryMaterialData : InventoryItemBaseData
 {
-    [FormerlySerializedAs("materialType")] public InventoryMaterialID materialID;
+    public InventoryMaterialID materialID;
 
 #if UNITY_EDITOR
     protected override void OnValidate()

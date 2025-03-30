@@ -151,7 +151,6 @@ public class Player : Entity
         base.Die();
         SoundManager.Instance.PlaySfx(AudioID.PlayerDeathSfx, ref _deathSfx);
         stateMachine.ChangeState(DeathState);
-        GameEventDispatcher.OnPlayerDead?.Invoke();
     }
 
     private void OnDrawGizmos()

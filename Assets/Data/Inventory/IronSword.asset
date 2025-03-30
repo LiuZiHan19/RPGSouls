@@ -12,8 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e402b4e58bfc42c687b9bba00404a0c2, type: 3}
   m_Name: IronSword
   m_EditorClassIdentifier: 
-  id: 0
-  name: IronSword
+  id: 5587d66e-d640-42fa-9b2d-d55cabd6c12c
   itemBaseType: 0
   sprite: {fileID: 198407749, guid: 9c1f6cfcfa260554faa7f49a4c98a6da, type: 3}
   maxHealth: 0
@@ -30,4 +29,4 @@ MonoBehaviour:
   lighting: 0
   chill: 0
   ignite: 0
-  equipmentType: 1
+  equipmentID: 1

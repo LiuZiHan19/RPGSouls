@@ -1,17 +1,16 @@
 using UnityEditor;
 using UnityEngine;
-using UnityEngine.Serialization;
 
-[CreateAssetMenu(fileName = "InventoryEquipmentData", menuName = "Scriptable Object/Inventory/InventoryEquipmentData")]
-public class InventoryEquipmentData : InventoryItemStatData
+[CreateAssetMenu(fileName = "InventoryEquipmentData", menuName = "Scriptable Object/Inventory/InventoryConsumableData")]
+public class InventoryConsumableData : InventoryItemStatData
 {
-    [FormerlySerializedAs("equipmentType")] public InventoryEquipmentID equipmentID;
+    public InventoryConsumableID consumableID;
 
 #if UNITY_EDITOR
     protected override void OnValidate()
     {
         base.OnValidate();
-        name = equipmentID.ToString();
+        name = consumableID.ToString();
         string assetPath = AssetDatabase.GetAssetPath(this);
         EditorApplication.delayCall += () =>
         {

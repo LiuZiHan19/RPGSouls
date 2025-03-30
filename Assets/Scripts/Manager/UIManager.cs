@@ -24,10 +24,10 @@ public class UIManager
         Middle = uiRoot.transform.Find("UICanvas").transform.Find("Middle").transform;
         Top = uiRoot.transform.Find("UICanvas").transform.Find("Top").transform;
         GameObject.DontDestroyOnLoad(uiRoot);
-        ShowMenuView();
+        CreateMenuView();
     }
 
-    public void ShowMenuView()
+    public void CreateMenuView()
     {
         if (_mainMenuViewController != null)
         {

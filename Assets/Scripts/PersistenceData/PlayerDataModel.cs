@@ -3,72 +3,63 @@ using UnityEngine.Events;
 
 public class PlayerDataModel : JSONDataModel
 {
-    public int coin;
-
-    public override void ParseData(JsonData jsonData, UnityAction callback = null)
+    public override void ParseJSONData(JsonData data, UnityAction callback = null)
     {
-        if (jsonData == null)
+        base.ParseJSONData(data);
+        if (data == null)
         {
-            Debugger.Warning($"[PlayerData] jsonData is null in {nameof(ParseData)} | Class: {GetType().Name}");
+            Debugger.Warning($"[PlayerData] jsonData is null in {nameof(ParseJSONData)} | Class: {GetType().Name}");
+            callback?.Invoke();
             return;
-        }
-
-        if (jsonData.Keys.Contains("coin") && jsonData["coin"] != null)
-        {
-            int coin;
-            int.TryParse(jsonData["coin"].ToString(), out coin);
-            this.coin = coin;
         }
 
         var playerStats = PlayerManager.Instance.player.playerStats;
 
-        if (jsonData.Keys.Contains("currentHealth") && jsonData["currentHealth"] != null)
+        if (data.Keys.Contains("currentHealth") && data["currentHealth"] != null)
         {
             int currentHealth;
-            int.TryParse(jsonData["currentHealth"].ToString(), out currentHealth);
+            int.TryParse(data["currentHealth"].ToString(), out currentHealth);
             playerStats.currentHealth = currentHealth;
         }
 
-        ParseStat(jsonData, "maxHealth", playerStats.maxHealth);
+        ParseStat(data, "maxHealth", playerStats.maxHealth);
 
-        ParseStat(jsonData, "attackPower", playerStats.attackPower);
+        ParseStat(data, "attackPower", playerStats.attackPower);
 
-        ParseStat(jsonData, "agility", playerStats.agility);
+        ParseStat(data, "agility", playerStats.agility);
 
-        ParseStat(jsonData, "intelligence", playerStats.intelligence);
+        ParseStat(data, "intelligence", playerStats.intelligence);
 
-        ParseStat(jsonData, "strength", playerStats.strength);
+        ParseStat(data, "strength", playerStats.strength);
 
-        ParseStat(jsonData, "vitality", playerStats.vitality);
+        ParseStat(data, "vitality", playerStats.vitality);
 
-        ParseStat(jsonData, "criticalPower", playerStats.criticalPower);
+        ParseStat(data, "criticalPower", playerStats.criticalPower);
 
-        ParseStat(jsonData, "criticalChance", playerStats.criticalChance);
+        ParseStat(data, "criticalChance", playerStats.criticalChance);
 
-        ParseStat(jsonData, "evasion", playerStats.evasion);
+        ParseStat(data, "evasion", playerStats.evasion);
 
-        ParseStat(jsonData, "lighting", playerStats.lighting);
+        ParseStat(data, "lighting", playerStats.lighting);
 
-        ParseStat(jsonData, "chill", playerStats.chill);
+        ParseStat(data, "chill", playerStats.chill);
 
-        ParseStat(jsonData, "ignite", playerStats.ignite);
+        ParseStat(data, "ignite", playerStats.ignite);
 
-        ParseStat(jsonData, "armor", playerStats.armor);
+        ParseStat(data, "armor", playerStats.armor);
 
-        ParseStat(jsonData, "magicResistance", playerStats.magicResistance);
+        ParseStat(data, "magicResistance", playerStats.magicResistance);
 
         callback?.Invoke();
     }
 
-    public override JsonData GetSaveJsonData()
+    public override JsonData GetJSONData()
     {
-        base.GetSaveJsonData();
+        base.GetJSONData();
 
         var playerStats = PlayerManager.Instance.player.playerStats;
 
         JsonData jsonData = new JsonData();
-
-        jsonData["coin"] = coin;
 
         // Save currentHealth
         jsonData["currentHealth"] = playerStats.currentHealth;

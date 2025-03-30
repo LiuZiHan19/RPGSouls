@@ -1,11 +1,10 @@
-using System;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class GameDataManager : MonoBehaviour
+public class DataManager : MonoBehaviour
 {
-    private static GameDataManager instance;
-    public static GameDataManager Instance => instance;
+    private static DataManager instance;
+    public static DataManager Instance => instance;
 
     public GameDataModel GameDataModel { get; set; } = new GameDataModel();
     public PlayerDataModel PlayerDataModel { get; set; } = new PlayerDataModel();
@@ -47,7 +46,7 @@ public class GameDataManager : MonoBehaviour
         GameDataModel.Save();
     }
 
-    public void LoadGameData(UnityAction callback = null)
+    public void LoadData(UnityAction callback = null)
     {
         LoadPlayerData(() =>
         {
@@ -71,94 +70,43 @@ public class GameDataManager : MonoBehaviour
 
     public void LoadPlayerData(UnityAction callback = null)
     {
-        JSONManager.Instance.LoadJsonDataAsync("PlayerData", jsonData =>
+        JSONManager.Instance.LoadJsonDataAsync("PlayerData", data =>
         {
-            PlayerDataModel.jsonData = jsonData;
+            PlayerDataModel.SetJSONData(data);
             callback?.Invoke();
         });
     }
 
     public void SavePlayerData(UnityAction callback = null)
     {
-        JSONManager.Instance.SaveJsonDataAsync(PlayerDataModel.GetSaveJsonData().ToJson(), "PlayerData", callback);
+        JSONManager.Instance.SaveJsonDataAsync(PlayerDataModel.GetJSONData().ToJson(), "PlayerData", callback);
     }
 
     public void LoadInventoryData(UnityAction callback = null)
     {
-        JSONManager.Instance.LoadJsonDataAsync("InventoryData", jsonData =>
+        JSONManager.Instance.LoadJsonDataAsync("InventoryData", data =>
         {
-            InventoryDataModel.jsonData = jsonData;
+            InventoryDataModel.SetJSONData(data);
             callback?.Invoke();
         });
     }
 
     public void SaveInventoryData(UnityAction callback = null)
     {
-        JSONManager.Instance.SaveJsonDataAsync(InventoryDataModel.GetSaveJsonData().ToJson(), "InventoryData",
-            callback);
+        JSONManager.Instance.SaveJsonDataAsync(InventoryDataModel.GetJSONData().ToJson(), "InventoryData", callback);
     }
 
     public void LoadSkillData(UnityAction callback = null)
     {
-        JSONManager.Instance.LoadJsonDataAsync("SkillData", jsonData =>
+        JSONManager.Instance.LoadJsonDataAsync("SkillData", data =>
         {
-            SkillDataModel.jsonData = jsonData;
+            SkillDataModel.SetJSONData(data);
             callback?.Invoke();
         });
     }
 
     public void SaveSkillData(UnityAction callback = null)
     {
-        JSONManager.Instance.SaveJsonDataAsync(SkillDataModel.GetSaveJsonData().ToJson(), "SkillData", callback);
-    }
-
-    public SkillData GetSkillDataByID(SkillID skillID)
-    {
-        foreach (var skillData in GameResources.Instance.SkillDataManifest.SkillDataList)
-        {
-            if (skillID == skillData.SkillID)
-            {
-                return skillData;
-            }
-        }
-
-        Debugger.Warning(
-            $"[GameDataManager] SkillData not found in {nameof(GetSkillDataByID)} | Class: {GetType().Name}");
-        return null;
-    }
-
-    public bool CanUnlockSkill(SkillID skillID)
-    {
-        SkillData skillData = GetSkillDataByID(skillID);
-        SkillID[] skillIds = skillData.unlockCondition;
-        foreach (var skillId in skillIds)
-        {
-            switch (skillId)
-            {
-                case SkillID.Roll:
-                    if (SkillDataModel.skillRollData.isUlocked == false)
-                    {
-                        return false;
-                    }
-
-                    break;
-                case SkillID.IdleBlock:
-                    if (SkillDataModel.skillIdleBlockData.isUlocked == false)
-                    {
-                        return false;
-                    }
-
-                    break;
-                case SkillID.Clone:
-                    if (SkillDataModel.skillCloneData.isUlocked == false)
-                    {
-                        return false;
-                    }
-
-                    break;
-            }
-        }
-
-        return true;
+        JSONManager.Instance.SaveJsonDataAsync(SkillDataModel.GetJSONData().ToJson(), "SkillData", callback);
     }
 }

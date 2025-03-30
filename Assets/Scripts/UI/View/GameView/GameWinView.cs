@@ -5,6 +5,12 @@ public class GameWinView : UIBehaviour
     private Button _resumeBtn;
     private Button _returnBtn;
     private Button _saveBtn;
+    private IDataProvider _dataProvider;
+
+    public GameWinView(IDataProvider dataProvider)
+    {
+        _dataProvider = dataProvider;
+    }
 
     protected override void ParseComponent()
     {
@@ -25,7 +31,7 @@ public class GameWinView : UIBehaviour
     {
         Hide();
         TimeManager.Instance.ResumeTime();
-        GameEventDispatcher.OnClickReturnBtn?.Invoke();
+        EventDispatcher.OnClickReturnBtn?.Invoke();
     }
 
     private void OnClickResumeBtn()
@@ -36,7 +42,8 @@ public class GameWinView : UIBehaviour
 
     private void OnClickSaveBtn()
     {
-        GameDataManager.Instance.SaveGameData();
+        _dataProvider.SaveGameData();
+        GameManager.Instance.ReloadData = true;
     }
 
     protected override void RemoveEvent()
