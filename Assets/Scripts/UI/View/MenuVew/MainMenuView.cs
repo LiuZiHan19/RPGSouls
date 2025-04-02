@@ -1,3 +1,5 @@
+using I2.Loc;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -7,6 +9,7 @@ public class MainMenuView : UIBehaviour
     private Button _settingBtn;
     private Button _exitBtn;
     private Text _coinText;
+    private TMP_Dropdown _languageDropdown;
 
     protected override void ParseComponent()
     {
@@ -14,6 +17,8 @@ public class MainMenuView : UIBehaviour
         _playBtn = FindComponent<Button>("Middle/Play");
         _settingBtn = FindComponent<Button>("Middle/Setting");
         _exitBtn = FindComponent<Button>("Middle/Exit");
+        _languageDropdown = FindComponent<TMP_Dropdown>("Middle/LanguageDropdown");
+        _languageDropdown.onValueChanged.AddListener(OnSelectValueChanged);
     }
 
     protected override void AddEvent()
@@ -28,27 +33,53 @@ public class MainMenuView : UIBehaviour
     {
         base.Show();
         _coinText.text = DataManager.Instance.GameDataModel.coin.ToString();
+        switch (LocalizationManager.CurrentLanguage)
+        {
+            case "Chinese (Simplified)":
+                _languageDropdown.value = 0;
+                break;
+            case "English":
+                _languageDropdown.value = 1;
+                break;
+        }
     }
 
     private void OnClickExitBtn()
     {
+        SoundManager.Instance.PlaySharedSfx(AudioID.ButtonClickSfx);
         GameManager.Instance.Dispose();
         Application.Quit();
     }
 
     private void OnClickPlayBtn()
     {
-        EventDispatcher.OnClickPlayBtn?.Invoke();
+        EventSubscriber.FromMenuSceneToGameScene?.Invoke();
+        SoundManager.Instance.PlaySharedSfx(AudioID.ButtonClickSfx);
     }
 
     private void OnClickSettingBtn()
     {
         NotifyViewEvent(EventConst.OnClickMenuSetting);
+        SoundManager.Instance.PlaySharedSfx(AudioID.ButtonClickSfx);
+    }
+
+    public void OnSelectValueChanged(int index)
+    {
+        switch (index)
+        {
+            case 0:
+                LocalizationManager.CurrentLanguage = "Chinese (Simplified)";
+                break;
+            case 1:
+                LocalizationManager.CurrentLanguage = "English";
+                break;
+        }
     }
 
     protected override void RemoveEvent()
     {
         base.RemoveEvent();
+        _languageDropdown.onValueChanged.RemoveListener(OnSelectValueChanged);
         UnRegisterButtonEvent(_playBtn, OnClickPlayBtn);
         UnRegisterButtonEvent(_settingBtn, OnClickSettingBtn);
         UnRegisterButtonEvent(_exitBtn, OnClickExitBtn);

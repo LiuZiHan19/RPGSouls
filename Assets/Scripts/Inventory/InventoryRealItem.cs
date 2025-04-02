@@ -16,7 +16,7 @@ public class InventoryRealItem : MonoBehaviour
     {
         if (other.gameObject.tag == "player")
         {
-            EventDispatcher.OnInventoryRealItemPickup?.Invoke(itemData);
+            EventSubscriber.OnInventoryRealItemPickup?.Invoke(itemData);
             Destroy(gameObject);
         }
     }

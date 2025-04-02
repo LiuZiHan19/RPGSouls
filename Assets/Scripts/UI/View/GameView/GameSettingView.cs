@@ -31,7 +31,7 @@ public class GameSettingView : UIBehaviour
     {
         Hide();
         TimeManager.Instance.ResumeTime();
-        EventDispatcher.OnClickReturnBtn?.Invoke();
+        EventSubscriber.FromGameSceneToMenuScene?.Invoke();
     }
 
     private void OnClickResumeBtn()

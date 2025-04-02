@@ -3,12 +3,10 @@ using UnityEditor;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "AudioData", menuName = "Scriptable Object/Audio/AudioData")]
-[Serializable]
 public class AudioData : ScriptableObject
 {
     public AudioID AudioID;
     public AudioClip audioClip;
-
 
 #if UNITY_EDITOR
     protected void OnValidate()

@@ -17,13 +17,14 @@ public class SkillView : UIBehaviour
     protected override void ParseComponent()
     {
         _closeBtn = FindComponent<Button>("Top/Button_Back");
-        _skill_RollView = new SkillItemView(GameManager.Instance);
+        _skill_RollView = new SkillItemView(GameManager.Instance, SkillID.Roll);
         _skill_RollView.SetDisplayObject(FindGameObject("Middle/Skill_Roll"));
-        _skill_CloneView = new SkillItemView(GameManager.Instance);
+        _skill_CloneView = new SkillItemView(GameManager.Instance, SkillID.Clone);
         _skill_CloneView.SetDisplayObject(FindGameObject("Middle/Skill_Clone"));
-        _skill_IdleBlockView = new SkillItemView(GameManager.Instance);
+        _skill_IdleBlockView = new SkillItemView(GameManager.Instance, SkillID.IdleBlock);
         _skill_IdleBlockView.SetDisplayObject(FindGameObject("Middle/Skill_IdleBlock"));
         _coinText = FindComponent<Text>("Top/TopBar/Status_All/StatusGold/Text");
+        EventSubscriber.OnCoinChange += RefreshCoin;
     }
 
     protected override void AddEvent()
@@ -50,6 +51,11 @@ public class SkillView : UIBehaviour
             _skill_IdleBlockView.Unlock();
         }
 
+        RefreshCoin();
+    }
+
+    private void RefreshCoin()
+    {
         _coinText.text = _dataProvider.Coin.ToString();
     }
 
@@ -62,6 +68,7 @@ public class SkillView : UIBehaviour
     protected override void RemoveEvent()
     {
         base.RemoveEvent();
+        EventSubscriber.OnCoinChange -= RefreshCoin;
         UnRegisterButtonEvent(_closeBtn, OnClickCloseBtn);
     }
 }

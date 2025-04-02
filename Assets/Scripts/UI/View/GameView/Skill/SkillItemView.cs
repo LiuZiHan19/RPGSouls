@@ -4,14 +4,16 @@ using UnityEngine.UI;
 public class SkillItemView : UIBehaviour
 {
     public SkillID SkillID { get; set; }
+    private ulong _sfx;
     private Button _btn;
     private bool isUnlocked;
     private Image _lockImage;
     private IDataProvider _dataProvider;
 
-    public SkillItemView(IDataProvider dataProvider)
+    public SkillItemView(IDataProvider dataProvider, SkillID skillID)
     {
         _dataProvider = dataProvider;
+        SkillID = skillID;
     }
 
     protected override void ParseComponent()
@@ -33,24 +35,30 @@ public class SkillItemView : UIBehaviour
 
     private void OnClickBtn()
     {
+        Skill skill = null;
         switch (SkillID)
         {
             case SkillID.Roll:
-                if (SkillManager.Instance.SkillRoll.isUnlocked) return;
-                if (SkillManager.Instance.CanUnlockSkill(SkillID) == false) return;
-                if (_dataProvider.Coin < SkillManager.Instance.SkillRoll.price) return;
-                _dataProvider.Coin -= SkillManager.Instance.SkillRoll.price;
-                SkillManager.Instance.SkillRoll.isUnlocked = true;
-                Unlock();
-
+                skill = SkillManager.Instance.SkillRoll;
                 break;
             case SkillID.IdleBlock:
+                skill = SkillManager.Instance.SkillIdleBlock;
                 break;
             case SkillID.Clone:
+                skill = SkillManager.Instance.SkillClone;
                 break;
             default:
                 throw new ArgumentOutOfRangeException();
         }
+
+        if (skill.isUnlocked) return;
+        if (SkillManager.Instance.CanUnlockSkill(SkillID) == false) return;
+        if (_dataProvider.Coin < skill.price) return;
+
+        _dataProvider.Coin -= skill.price;
+        skill.isUnlocked = true;
+        Unlock();
+        SoundManager.Instance.PlaySfx(AudioID.SkillUnlockSfx, ref _sfx);
     }
 
     protected override void RemoveEvent()

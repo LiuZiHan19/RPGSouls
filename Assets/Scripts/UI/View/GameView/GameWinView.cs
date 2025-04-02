@@ -2,7 +2,7 @@ using UnityEngine.UI;
 
 public class GameWinView : UIBehaviour
 {
-    private Button _resumeBtn;
+    private Button _playAgainBtn;
     private Button _returnBtn;
     private Button _saveBtn;
     private IDataProvider _dataProvider;
@@ -14,7 +14,7 @@ public class GameWinView : UIBehaviour
 
     protected override void ParseComponent()
     {
-        _resumeBtn = FindComponent<Button>("Middle/PlayAgain");
+        _playAgainBtn = FindComponent<Button>("Middle/PlayAgain");
         _returnBtn = FindComponent<Button>("Middle/Return");
         _saveBtn = FindComponent<Button>("Middle/Save");
     }
@@ -22,7 +22,7 @@ public class GameWinView : UIBehaviour
     protected override void AddEvent()
     {
         base.AddEvent();
-        RegisterButtonEvent(_resumeBtn, OnClickResumeBtn);
+        RegisterButtonEvent(_playAgainBtn, OnClickPlayAgainBtn);
         RegisterButtonEvent(_returnBtn, OnClickReturnBtn);
         RegisterButtonEvent(_saveBtn, OnClickSaveBtn);
     }
@@ -30,14 +30,12 @@ public class GameWinView : UIBehaviour
     private void OnClickReturnBtn()
     {
         Hide();
-        TimeManager.Instance.ResumeTime();
-        EventDispatcher.OnClickReturnBtn?.Invoke();
+        EventSubscriber.FromGameSceneToMenuScene?.Invoke();
     }
 
-    private void OnClickResumeBtn()
+    private void OnClickPlayAgainBtn()
     {
-        TimeManager.Instance.ResumeTime();
-        Hide();
+        EventSubscriber.ReloadGameScene?.Invoke();
     }
 
     private void OnClickSaveBtn()
@@ -49,7 +47,7 @@ public class GameWinView : UIBehaviour
     protected override void RemoveEvent()
     {
         base.RemoveEvent();
-        UnRegisterButtonEvent(_resumeBtn, OnClickResumeBtn);
+        UnRegisterButtonEvent(_playAgainBtn, OnClickPlayAgainBtn);
         UnRegisterButtonEvent(_returnBtn, OnClickReturnBtn);
         UnRegisterButtonEvent(_saveBtn, OnClickSaveBtn);
     }

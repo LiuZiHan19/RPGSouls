@@ -119,7 +119,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f474c57a30603240afb745b5301d391, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  entity: {fileID: 0}
   attackLayer:
     serializedVersion: 2
     m_Bits: 32768
@@ -256,7 +255,7 @@ MonoBehaviour:
   - 0.75
   - 1
   attackPoint: {fileID: 1444514938501622063}
-  rollForce: 27
+  rollForce: 15
 --- !u!114 &87875002659583521
 MonoBehaviour:
   m_ObjectHideFlags: 0

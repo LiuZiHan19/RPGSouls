@@ -14,8 +14,8 @@ public class PlayerFX : EntityFX
     {
         base.Awake();
         _player = GetComponent<Player>();
-        EventDispatcher.PlayerAttack = null;
-        EventDispatcher.PlayerAttack += PlayAttackFX;
+        EventSubscriber.PlayerAttack = null;
+        EventSubscriber.PlayerAttack += PlayAttackFX;
     }
 
     public void PlayAttackFX(Transform transform)
@@ -80,6 +80,6 @@ public class PlayerFX : EntityFX
 
         _lightingFxPool.pool.Clear();
 
-        EventDispatcher.PlayerAttack -= PlayAttackFX;
+        EventSubscriber.PlayerAttack -= PlayAttackFX;
     }
 }

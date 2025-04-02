@@ -12,6 +12,10 @@ public abstract class Skill : MonoBehaviour
         cooldownTimer += Time.deltaTime;
     }
 
+    public virtual void Setup(params object[] parameters)
+    {
+    }
+
     public bool CanRelease()
     {
         if (isUnlocked == false) return false;

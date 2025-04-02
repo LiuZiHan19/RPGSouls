@@ -26,6 +26,3 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 6fd226a4eb77f4f3d984c75eb3ade4b1, type: 2}
   - {fileID: 11400000, guid: 35a6206dc14764c6ab0c022e6e4d3909, type: 2}
   - {fileID: 11400000, guid: 120b5aa90d85a4cd7aefb33bbd619966, type: 2}
-  consumableDataList: []
-  materialDataList: []
-  itemDataList: []

@@ -1,12 +1,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "InventoryConfigurationData",
-    menuName = "Scriptable Object/Inventory/InventoryConfigurationData")]
+[CreateAssetMenu(fileName = "InventoryDataManifest", menuName = "Scriptable Object/Inventory/InventoryDataManifest")]
 public class InventoryDataManifest : ScriptableObject
 {
     public List<InventoryItemBaseData> equipmentDataList;
-    public List<InventoryItemBaseData> consumableDataList;
-    public List<InventoryItemBaseData> materialDataList;
-    public List<InventoryItemBaseData> itemDataList;
 }

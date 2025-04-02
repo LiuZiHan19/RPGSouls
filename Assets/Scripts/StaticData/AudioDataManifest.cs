@@ -4,5 +4,5 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "AudioDataManifest", menuName = "Scriptable Object/Audio/AudioDataManifest")]
 public class AudioDataManifest : ScriptableObject
 {
-    public List<AudioData> audioDataList;
+     public List<AudioData> audioDataList;
 }

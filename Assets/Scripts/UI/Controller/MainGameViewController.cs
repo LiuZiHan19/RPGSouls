@@ -13,8 +13,8 @@ public class MainGameViewController : UIController
     {
         ShowGameView();
 
-        EventDispatcher.OnPlayerDead += ShowDeadView;
-        EventDispatcher.OnGameWin += ShowGameWinView;
+        EventSubscriber.OnPlayerDead += ShowDeadView;
+        EventSubscriber.OnGameWin += ShowGameWinView;
     }
 
     #region Game View
@@ -203,8 +203,8 @@ public class MainGameViewController : UIController
 
     public override void Dispose()
     {
-        EventDispatcher.OnPlayerDead -= ShowDeadView;
-        EventDispatcher.OnGameWin -= ShowGameWinView;
+        EventSubscriber.OnPlayerDead -= ShowDeadView;
+        EventSubscriber.OnGameWin -= ShowGameWinView;
 
         _deadView?.Dispose();
         _deadView = null;

@@ -49,8 +49,8 @@ public class InventoryView : UIBehaviour
     protected override void AddEvent()
     {
         base.AddEvent();
-        EventDispatcher.Equip += Equip;
-        EventDispatcher.UnEquip += UnEquip;
+        EventSubscriber.Equip += Equip;
+        EventSubscriber.UnEquip += UnEquip;
         RegisterButtonEvent(_closeBtn, OnClickCloseBtn);
     }
 
@@ -216,8 +216,8 @@ public class InventoryView : UIBehaviour
 
     protected override void RemoveEvent()
     {
-        EventDispatcher.Equip -= Equip;
-        EventDispatcher.UnEquip -= UnEquip;
+        EventSubscriber.Equip -= Equip;
+        EventSubscriber.UnEquip -= UnEquip;
         UnRegisterButtonEvent(_closeBtn, OnClickCloseBtn);
         base.RemoveEvent();
     }

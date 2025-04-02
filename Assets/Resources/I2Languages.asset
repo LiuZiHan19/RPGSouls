@@ -16,11 +16,121 @@ MonoBehaviour:
     UserAgreesToHaveItOnTheScene: 0
     UserAgreesToHaveItInsideThePluginsFolder: 0
     GoogleLiveSyncIsUptoDate: 1
-    mTerms: []
+    mTerms:
+    - Term: Play
+      TermType: 0
+      Description: 
+      Languages:
+      - Play
+      - "\u5F00\u59CB"
+      Flags: 0000
+      Languages_Touch: []
+    - Term: Death
+      TermType: 0
+      Description: 
+      Languages:
+      - Death
+      - "\u6B7B\u4EA1"
+      Flags: 0000
+      Languages_Touch: []
+    - Term: Back
+      TermType: 0
+      Description: 
+      Languages:
+      - Back
+      - "\u8FD4\u56DE"
+      Flags: 0000
+      Languages_Touch: []
+    - Term: Respawn
+      TermType: 0
+      Description: 
+      Languages:
+      - Respawn
+      - "\u91CD\u751F"
+      Flags: 0000
+      Languages_Touch: []
+    - Term: Pause
+      TermType: 0
+      Description: 
+      Languages:
+      - Pause
+      - "\u6682\u505C"
+      Flags: 0000
+      Languages_Touch: []
+    - Term: Return to Lobby
+      TermType: 0
+      Description: 
+      Languages:
+      - Return to Lobby
+      - "\u8FD4\u56DE\u5927\u5385"
+      Flags: 0000
+      Languages_Touch: []
+    - Term: Save Game
+      TermType: 0
+      Description: 
+      Languages:
+      - Save Game
+      - "\u5B58\u50A8\u6E38\u620F"
+      Flags: 0000
+      Languages_Touch: []
+    - Term: Continue
+      TermType: 0
+      Description: 
+      Languages:
+      - Continue
+      - "\u7EE7\u7EED\u6E38\u620F"
+      Flags: 0000
+      Languages_Touch: []
+    - Term: 'Victory '
+      TermType: 0
+      Description: 
+      Languages:
+      - "Victory\uFF01"
+      - "\u6E38\u620F\u80DC\u5229\uFF01"
+      Flags: 0000
+      Languages_Touch: []
+    - Term: Play Again
+      TermType: 0
+      Description: 
+      Languages:
+      - Play Again
+      - "\u518D\u73A9\u4E00\u6B21"
+      Flags: 0000
+      Languages_Touch: []
+    - Term: Inventory
+      TermType: 0
+      Description: 
+      Languages:
+      - Inventory
+      - "\u80CC\u5305"
+      Flags: 0000
+      Languages_Touch: []
+    - Term: Settings
+      TermType: 0
+      Description: 
+      Languages:
+      - Settings
+      - "\u8BBE\u7F6E"
+      Flags: 0000
+      Languages_Touch: []
+    - Term: Skill Tree
+      TermType: 0
+      Description: 
+      Languages:
+      - Skill Tree
+      - "\u6280\u80FD\u6811"
+      Flags: 0000
+      Languages_Touch: []
     CaseInsensitiveTerms: 0
     OnMissingTranslation: 1
     mTerm_AppName: 
-    mLanguages: []
+    mLanguages:
+    - Name: English
+      Code: en
+      Flags: 0
+    - Name: Chinese (Simplified)
+      Code: zh-CN
+      Flags: 0
     IgnoreDeviceLanguage: 0
     _AllowUnloadingLanguages: 0
     Google_WebServiceURL: 
@@ -33,7 +143,7 @@ MonoBehaviour:
     GoogleUpdateSynchronization: 1
     GoogleUpdateDelay: 0
     Assets: []
-    Spreadsheet_LocalFileName: 
+    Spreadsheet_LocalFileName: /Users/jaeger/Game Dev/CSV/I2Localization_2DRPG.csv
     Spreadsheet_LocalCSVSeparator: ','
     Spreadsheet_LocalCSVEncoding: utf-8
     Spreadsheet_SpecializationAsRows: 1
