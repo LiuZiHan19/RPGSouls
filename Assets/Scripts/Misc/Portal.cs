@@ -10,7 +10,7 @@ public class Portal : MonoBehaviour
 
         if (other.gameObject.tag == "player")
         {
-            SoundManager.Instance.PlaySfx(AudioID.TeleportSfx, ref _sfx);
+            SoundManager.Instance.PlaySfx(AudioID.SfxTeleport, ref _sfx);
             EventSubscriber.OnGameWin?.Invoke();
         }
     }

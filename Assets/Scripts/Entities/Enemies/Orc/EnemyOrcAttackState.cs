@@ -10,7 +10,7 @@ public class EnemyOrcAttackState : EnemyOrcState
     public override void Enter()
     {
         base.Enter();
-        SoundManager.Instance.PlaySfx(AudioID.OrcAttackSfx, ref _sfx);
+        SoundManager.Instance.PlaySfx(AudioID.SfxOrcRoar, ref _sfx);
     }
 
     public override void Update()

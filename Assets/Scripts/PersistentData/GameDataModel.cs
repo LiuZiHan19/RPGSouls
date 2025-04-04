@@ -26,4 +26,9 @@ public class GameDataModel
     {
         coin += number;
     }
+
+    public void ResetCoin()
+    {
+        coin = PlayerPrefs.GetInt("Coin", 0);
+    }
 }

@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Skill_IdleBlock
   m_EditorClassIdentifier: 
   id: 3c33a548-11fd-428d-a1d9-5a86f0b5ad54
-  price: 50
+  price: 100
   skillID: 1
   unlockCondition: 00000000

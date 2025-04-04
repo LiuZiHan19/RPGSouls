@@ -888,13 +888,64 @@ PrefabInstance:
       propertyPath: m_Name
       value: Slider_HealthBar
       objectReference: {fileID: 0}
+    - target: {fileID: 5081493235222384088, guid: 711695054603747e3b96ce9587cd472a, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 5081493235222384088, guid: 711695054603747e3b96ce9587cd472a, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3216398249256484682}
   m_SourcePrefab: {fileID: 100100000, guid: 711695054603747e3b96ce9587cd472a, type: 3}
 --- !u!224 &7460595825911297659 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 5081493235030465834, guid: 711695054603747e3b96ce9587cd472a, type: 3}
   m_PrefabInstance: {fileID: 2381361095223733073}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &7460595826164098697 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5081493235222384088, guid: 711695054603747e3b96ce9587cd472a, type: 3}
+  m_PrefabInstance: {fileID: 2381361095223733073}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &3216398249256484682
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7460595826164098697}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 344445a89b4f74a0e9a0a766903df87e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mTerm: 
+  mTermSecondary: 
+  PrimaryTermModifier: 0
+  SecondaryTermModifier: 0
+  TermPrefix: 
+  TermSuffix: 
+  LocalizeOnAwake: 1
+  IgnoreRTL: 0
+  MaxCharactersInRTL: 0
+  IgnoreNumbersInRTL: 1
+  CorrectAlignmentForRTL: 1
+  AddSpacesToJoinedLanguages: 0
+  AllowLocalizedParameters: 1
+  AllowParameters: 1
+  TranslatedObjects: []
+  LocalizeEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  AlwaysForceLocalize: 0
+  LocalizeCallBack:
+    Target: {fileID: 0}
+    MethodName: 
+  mGUI_ShowReferences: 0
+  mGUI_ShowTems: 1
+  mGUI_ShowCallback: 0
+  mLocalizeTarget: {fileID: 0}
+  mLocalizeTargetName: I2.Loc.LocalizeTarget_UnityUI_Text

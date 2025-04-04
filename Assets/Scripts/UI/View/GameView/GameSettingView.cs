@@ -31,18 +31,21 @@ public class GameSettingView : UIBehaviour
     {
         Hide();
         TimeManager.Instance.ResumeTime();
+        SoundManager.Instance.PlaySharedSfx(AudioID.SfxButtonClick);
         EventSubscriber.FromGameSceneToMenuScene?.Invoke();
     }
 
     private void OnClickResumeBtn()
     {
         TimeManager.Instance.ResumeTime();
+        SoundManager.Instance.PlaySharedSfx(AudioID.SfxButtonClick);
         Hide();
     }
 
     private void OnClickSaveBtn()
     {
         _dataProvider.SaveGameData();
+        SoundManager.Instance.PlaySharedSfx(AudioID.SfxButtonClick);
         GameManager.Instance.ReloadData = true;
     }
 

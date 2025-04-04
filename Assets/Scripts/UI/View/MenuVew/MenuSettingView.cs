@@ -48,6 +48,7 @@ public class MenuSettingView : UIBehaviour
 
     private void OnClickCloseBtn()
     {
+        SoundManager.Instance.PlaySharedSfx(AudioID.SfxButtonClick);
         Hide();
     }
 

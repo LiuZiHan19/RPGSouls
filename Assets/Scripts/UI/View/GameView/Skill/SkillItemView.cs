@@ -28,9 +28,9 @@ public class SkillItemView : UIBehaviour
         RegisterButtonEvent(_btn, OnClickBtn);
     }
 
-    public void Unlock()
+    public void SetUnlock(bool isUnlocked)
     {
-        _lockImage.fillAmount = 0;
+        _lockImage.fillAmount = isUnlocked ? 0 : 1;
     }
 
     private void OnClickBtn()
@@ -56,9 +56,10 @@ public class SkillItemView : UIBehaviour
         if (_dataProvider.Coin < skill.price) return;
 
         _dataProvider.Coin -= skill.price;
+        EventSubscriber.OnCoinChange?.Invoke();
         skill.isUnlocked = true;
-        Unlock();
-        SoundManager.Instance.PlaySfx(AudioID.SkillUnlockSfx, ref _sfx);
+        SetUnlock(true);
+        SoundManager.Instance.PlaySfx(AudioID.SfxUnlockSkill, ref _sfx);
     }
 
     protected override void RemoveEvent()

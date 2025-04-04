@@ -271,7 +271,7 @@ MonoBehaviour:
   statsType: 0
   currentHealth: 0
   maxHealth:
-    baseValue: 200
+    baseValue: 7000
     modifiers: 
   attackPower:
     baseValue: 100
@@ -280,10 +280,10 @@ MonoBehaviour:
     baseValue: 0
     modifiers: 
   armor:
-    baseValue: 0
+    baseValue: 25
     modifiers: 
   magicResistance:
-    baseValue: 0
+    baseValue: 25
     modifiers: 
   isChilled: 0
   isIgnited: 0

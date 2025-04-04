@@ -12,7 +12,7 @@ public class EnemyGrimReaperDeathState : EnemyGrimReaperState
     public override void Enter()
     {
         base.Enter();
-        SoundManager.Instance.PlaySfx(AudioID.GrimRepearDeathSfx, ref _sfx);
+        SoundManager.Instance.PlaySfx(AudioID.SfxGrimRepearDeath, ref _sfx);
     }
 
     public override void Update()

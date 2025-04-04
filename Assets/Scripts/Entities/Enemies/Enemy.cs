@@ -29,6 +29,48 @@ public class Enemy : Entity
         base.Awake();
         healthBar = transform.Find("World_Health_Bar").GetComponent<WorldHealthBar>();
         entityStats.takeDamageCallback += healthBar.UpdateHealthBar;
+
+        RefreshStats();
+    }
+
+    private void RefreshStats()
+    {
+        EnemyData enemyData = DataManager.Instance.LoadEnemyData(enemyID);
+        entityStats.maxHealth = enemyData.maxHealth;
+        entityStats.currentHealth = entityStats.maxHealth.GetValue();
+        entityStats.attackPower = enemyData.attackPower;
+        entityStats.magicPower = enemyData.magicPower;
+        entityStats.armor = enemyData.armor;
+        entityStats.magicResistance = enemyData.magicResistance;
+        if (entityStats is AlmightyStats almightyStats)
+        {
+            almightyStats.agility = enemyData.agility;
+            almightyStats.intelligence = enemyData.intelligence;
+            almightyStats.strength = enemyData.strength;
+            almightyStats.vitality = enemyData.vitality;
+            almightyStats.criticalPower = enemyData.criticalPower;
+            almightyStats.criticalChance = enemyData.criticalChance;
+            almightyStats.evasion = enemyData.evasion;
+            almightyStats.lighting = enemyData.lighting;
+            almightyStats.chill = enemyData.chill;
+            almightyStats.ignite = enemyData.ignite;
+        }
+        else if (entityStats is WarriorStats warriorStats)
+        {
+            warriorStats.agility = enemyData.agility;
+            warriorStats.intelligence = enemyData.intelligence;
+            warriorStats.strength = enemyData.strength;
+            warriorStats.vitality = enemyData.vitality;
+            warriorStats.criticalPower = enemyData.criticalPower;
+            warriorStats.criticalChance = enemyData.criticalChance;
+        }
+        else if (entityStats is MageStats mageStats)
+        {
+            mageStats.evasion = enemyData.evasion;
+            mageStats.lighting = enemyData.lighting;
+            mageStats.chill = enemyData.chill;
+            mageStats.ignite = enemyData.ignite;
+        }
     }
 
     public bool CanAttack()

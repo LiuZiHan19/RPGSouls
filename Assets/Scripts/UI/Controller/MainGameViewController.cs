@@ -71,7 +71,6 @@ public class MainGameViewController : UIController
     private void OnClickInventory()
     {
         TimeManager.Instance.PauseTime();
-
         ShowInventoryView();
     }
 

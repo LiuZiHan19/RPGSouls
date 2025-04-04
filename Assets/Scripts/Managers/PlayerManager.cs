@@ -11,10 +11,10 @@ public class PlayerManager
     public void Initialize()
     {
         player = GameObject.FindObjectOfType<Player>();
-        DataManager.Instance.PlayerDataModel.ParseJSONData(UpdateOnParseDataCompleted);
+        DataManager.Instance.PlayerDataModel.ParseJSONData(UpdateByPersistentData);
     }
 
-    private void UpdateOnParseDataCompleted()
+    public void UpdateByPersistentData()
     {
         if (GameManager.Instance.ResetPlayerHealth)
         {

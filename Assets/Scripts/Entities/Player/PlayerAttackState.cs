@@ -8,7 +8,7 @@ public class PlayerAttackState : PlayerState
     public override void Enter()
     {
         player.SetAttackAnim();
-        player.PlayAttackSfx();
+        SoundManager.Instance.PlaySwordSfx();
         base.Enter();
     }
 

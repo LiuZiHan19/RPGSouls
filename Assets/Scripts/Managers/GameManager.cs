@@ -74,6 +74,14 @@ public class GameManager : MonoBehaviour, IDisposable, IGrimReaperProvider, IDat
         CreateGameWorld();
     }
 
+    public void ClearCacheData()
+    {
+        DataManager.Instance.GameDataModel.ResetCoin();
+        InventoryManager.Instance.UpdateByPersistentData();
+        SkillManager.Instance.UpdateByPersistentData();
+        PlayerManager.Instance.UpdateByPersistentData();
+    }
+
     private void CreateGameWorld()
     {
 #if UNITY_EDITOR
@@ -81,7 +89,7 @@ public class GameManager : MonoBehaviour, IDisposable, IGrimReaperProvider, IDat
 #endif
         DataManager.Instance.LoadData(() =>
         {
-            SoundManager.Instance.PlayBGM(AudioID.MenuBGM, ref m_menuBgm);
+            SoundManager.Instance.PlayBGM(AudioID.BGMMenu, ref m_menuBgm);
             UIManager.Instance.CreateGameUI();
         });
     }
@@ -114,7 +122,7 @@ public class GameManager : MonoBehaviour, IDisposable, IGrimReaperProvider, IDat
 
         SceneLoader.Instance.LoadSceneAsync(SceneID.MainMenuScene, () =>
         {
-            SoundManager.Instance.PlayBGM(AudioID.MenuBGM, ref m_menuBgm);
+            SoundManager.Instance.PlayBGM(AudioID.BGMMenu, ref m_menuBgm);
             UIManager.Instance.HideLoadingView();
         });
     }
@@ -145,7 +153,7 @@ public class GameManager : MonoBehaviour, IDisposable, IGrimReaperProvider, IDat
     {
         SceneLoader.Instance.LoadSceneAsync(SceneID.MainGameScene, () =>
         {
-            SoundManager.Instance.PlayBGM(AudioID.GameBGM, ref m_gameBgm);
+            SoundManager.Instance.PlayBGM(AudioID.BGMGame, ref m_gameBgm);
             UIManager.Instance.HideLoadingView();
         });
     }
@@ -156,16 +164,16 @@ public class GameManager : MonoBehaviour, IDisposable, IGrimReaperProvider, IDat
         {
             m_grimReaper = FindObjectOfType<EnemyGrimReaper>();
             SoundManager.Instance.StopBGM(m_gameBgm);
-            SoundManager.Instance.PlayBGM(AudioID.BossBGM, ref m_bossBgm);
-            SoundManager.Instance.PlaySfx(AudioID.EvilVoiceSfx, ref m_evilVoiceSfx);
+            SoundManager.Instance.PlayBGM(AudioID.BGMBoss, ref m_bossBgm);
+            SoundManager.Instance.PlaySfx(AudioID.SfxGrimReaperVoice, ref m_evilVoiceSfx);
             if (m_grimReaper != null)
                 m_grimReaper.stateMachine.ChangeState(m_grimReaper.BattleState);
         }
         else
         {
             SoundManager.Instance.StopBGM(m_bossBgm);
-            SoundManager.Instance.StopSfx(m_evilVoiceSfx);
-            SoundManager.Instance.PlayBGM(AudioID.GameBGM, ref m_gameBgm);
+            SoundManager.Instance.PlayBGM(AudioID.BGMGame, ref m_gameBgm);
+            SoundManager.Instance.StopSfx(m_evilVoiceSfx); // todo null ref
             if (m_grimReaper != null && IsGrimReaperDead == false)
                 m_grimReaper.stateMachine.ChangeState(m_grimReaper.IdleState);
         }

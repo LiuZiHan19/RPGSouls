@@ -26,9 +26,9 @@ public class SkillManager : MonoBehaviour
         SkillIdleBlock = GetComponent<Skill_IdleBlock>();
         SkillMagicOrb = GetComponent<Skill_MagicOrb>();
 
-         DataManager.Instance.SkillDataModel.ParseJSONData(UpdateOnParseDataCompleted);
+        DataManager.Instance.SkillDataModel.ParseJSONData(UpdateByPersistentData);
     }
- 
+
     public bool GetSkillIsUnlocked(SkillID id)
     {
         Skill skill;
@@ -71,38 +71,9 @@ public class SkillManager : MonoBehaviour
         return skill;
     }
 
-    public SkillData GetSkillData(SkillID skillID)
-    {
-        foreach (var skillData in GameResources.Instance.SkillDataManifest.SkillDataList)
-        {
-            if (skillID == skillData.skillID)
-            {
-                return skillData;
-            }
-        }
-
-        Debugger.Warning(
-            $"[GameDataManager] SkillData not found in {nameof(GetSkillData)} | Class: {GetType().Name}");
-        return null;
-    }
-
-    private SkillData GetSkillData(string guid)
-    {
-        var skillData = GameResources.Instance.SkillDataManifest.SkillDataList;
-        for (int i = 0; i < skillData.Count; i++)
-        {
-            if (guid == skillData[i].id)
-            {
-                return skillData[i];
-            }
-        }
-
-        return null;
-    }
-
     public bool CanUnlockSkill(SkillID skillID)
     {
-        SkillData skillData = GetSkillData(skillID);
+        SkillData skillData = DataManager.Instance.LoadSkillData(skillID);
         SkillID[] skillIds = skillData.unlockCondition;
         foreach (var skillId in skillIds)
         {
@@ -135,15 +106,17 @@ public class SkillManager : MonoBehaviour
         return true;
     }
 
-    private void UpdateOnParseDataCompleted()
+    public void UpdateByPersistentData()
     {
         SkillDataModel skillDataModel = DataManager.Instance.SkillDataModel;
         var skillItemDataList = skillDataModel.itemDataList;
         for (int i = 0; i < skillItemDataList.Count; i++)
         {
-            var itemData = skillItemDataList[i];
-            var id = GetSkillData(itemData.id).skillID;
-            GetSKill(id).isUnlocked = itemData.isUnlocked;
+            var itemDataModel = skillItemDataList[i];
+            var skillData = DataManager.Instance.LoadSkillData(itemDataModel.id);
+            Skill skill = GetSKill(skillData.skillID);
+            skill.isUnlocked = itemDataModel.isUnlocked;
+            skill.price = skillData.price;
         }
     }
 }

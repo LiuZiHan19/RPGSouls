@@ -35,7 +35,7 @@ public class InventoryManager : MonoBehaviour
         EventSubscriber.Equip += Equip;
         EventSubscriber.UnEquip += UnEquip;
 
-        DataManager.Instance.InventoryDataModel.ParseJSONData(UpdateOnParseDataCompleted);
+        DataManager.Instance.InventoryDataModel.ParseJSONData(UpdateByPersistentData);
     }
 
     public void AddItemByItemData(InventoryItemBaseData itemData)
@@ -170,22 +170,6 @@ public class InventoryManager : MonoBehaviour
         RemoveFromList(itemData);
     }
 
-    public InventoryItemBaseData LoadDataByGUID(string guid)
-    {
-        List<InventoryItemBaseData> configurationData = GameResources.Instance.InventoryDataManifest.equipmentDataList;
-
-        foreach (var itemData in configurationData)
-        {
-            if (guid == itemData.id)
-            {
-                return itemData;
-            }
-        }
-
-        Debugger.Error($"[Inventory Load Data Error] 无法找到物品: {guid}");
-        return null;
-    }
-
     private void Equip(InventoryItemBaseData itemData)
     {
         switch (itemData.itemBaseType)
@@ -240,17 +224,18 @@ public class InventoryManager : MonoBehaviour
         }
     }
 
-    private void UpdateOnParseDataCompleted()
+    public void UpdateByPersistentData()
     {
         InventoryDataModel inventoryDataModel = DataManager.Instance.InventoryDataModel;
         if (inventoryDataModel.currentWeaponID != null)
-            currentWeaponData = LoadDataByGUID(inventoryDataModel.currentWeaponID) as InventoryEquipmentData;
+            currentWeaponData =
+                DataManager.Instance.LoadInventoryItemData(inventoryDataModel.currentWeaponID) as InventoryEquipmentData;
 
         var equipmentDataList = inventoryDataModel.equipmentDataList;
         for (int i = 0; i < equipmentDataList.Count; i++)
         {
             InventoryItemDataModel itemDataModel = equipmentDataList[i];
-            var itemData = LoadDataByGUID(equipmentDataList[i].id);
+            var itemData = DataManager.Instance.LoadInventoryItemData(equipmentDataList[i].id);
             for (int j = 0; j < itemDataModel.number; j++)
             {
                 AddItemByItemData(itemData);

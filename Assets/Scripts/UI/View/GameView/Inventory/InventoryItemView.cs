@@ -31,6 +31,7 @@ public class InventoryItemView : UIBehaviour
     {
         if (itemData.itemBaseType == InventoryItemBaseType.Equipment)
         {
+             SoundManager.Instance.PlaySharedSfx(AudioID.SfxEquip);
             EventSubscriber.Equip?.Invoke(itemData);
         }
     }

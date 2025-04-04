@@ -6,11 +6,11 @@ public abstract class Entity : MonoBehaviour
     public bool isFacingRight = true;
     public float facingDir = 1;
     public float knockbackForce;
-    [HideInInspector]  public StateMachine stateMachine;
-    [HideInInspector]  public Animator animator;
+    [HideInInspector] public StateMachine stateMachine;
+    [HideInInspector] public Animator animator;
     [HideInInspector] public EntityStats entityStats;
-    [HideInInspector]  public EntityAnimationEvent animEvent;
-    [HideInInspector]  public EntityFX entityFX;
+    [HideInInspector] public EntityAnimationEvent animEvent;
+    [HideInInspector] public EntityFX entityFX;
     protected Collider collider;
     protected Rigidbody2D rb;
 
@@ -79,7 +79,6 @@ public abstract class Entity : MonoBehaviour
 
     public virtual void Die()
     {
-
     }
 
     public bool IsTriggered()

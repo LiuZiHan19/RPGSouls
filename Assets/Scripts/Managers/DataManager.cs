@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -108,5 +110,77 @@ public class DataManager : MonoBehaviour
     public void SaveSkillData(UnityAction callback = null)
     {
         JSONManager.Instance.SaveJsonDataAsync(SkillDataModel.GetJSONData().ToJson(), "SkillData", callback);
+    }
+
+    public SkillData LoadSkillData(SkillID skillID)
+    {
+        foreach (var skillData in GameResources.Instance.SkillDataManifest.SkillDataList)
+        {
+            if (skillID == skillData.skillID)
+            {
+                return skillData;
+            }
+        }
+
+        Debugger.Warning(
+            $"[GameDataManager] SkillData not found in {nameof(LoadSkillData)} | Class: {GetType().Name}");
+        return null;
+    }
+
+    public SkillData LoadSkillData(string guid)
+    {
+        var skillData = GameResources.Instance.SkillDataManifest.SkillDataList;
+        for (int i = 0; i < skillData.Count; i++)
+        {
+            if (guid == skillData[i].id)
+            {
+                return skillData[i];
+            }
+        }
+
+        return null;
+    }
+
+    public AudioData LoadAudioData(AudioID audioID)
+    {
+        AudioData audioData = GameResources.Instance.AudioDataManifest.audioDataList.Find(x => x.audioID == audioID);
+        if (audioData == null)
+        {
+            Debugger.Error($"AudioData not found for audioID: {audioID}. " +
+                           $"Available audioIDs: {string.Join(", ", GameResources.Instance.AudioDataManifest.audioDataList.Select(x => x.audioID))}");
+        }
+
+        return audioData;
+    }
+
+    public InventoryItemBaseData LoadInventoryItemData(string guid)
+    {
+        List<InventoryItemBaseData> configurationData = GameResources.Instance.InventoryDataManifest.equipmentDataList;
+
+        foreach (var itemData in configurationData)
+        {
+            if (guid == itemData.id)
+            {
+                return itemData;
+            }
+        }
+
+        Debugger.Error($"[Inventory Load Data Error] 无法找到物品: {guid}");
+        return null;
+    }
+
+    public EnemyData LoadEnemyData(EnemyID enemyID)
+    {
+        EnemyDataManifest enemyDataManifest = GameResources.Instance.EnemyDataManifest;
+        EnemyData enemyData = enemyDataManifest.enemyDataList.Find(x => x.enemyID == enemyID);
+
+        if (enemyData == null)
+        {
+            string availableIDs = string.Join(", ", enemyDataManifest.enemyDataList.Select(x => x.enemyID.ToString()));
+            Debugger.Error($"EnemyData not found for enemyID: {enemyID}. Available enemyIDs: {availableIDs}");
+            return null;
+        }
+
+        return enemyData;
     }
 }

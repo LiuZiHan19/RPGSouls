@@ -32,16 +32,19 @@ public class MainGameView : UIBehaviour
     private void OnClickInventoryBtn()
     {
         NotifyViewEvent(EventConst.OnClickInventory);
+        SoundManager.Instance.PlaySharedSfx(AudioID.SfxButtonClick);
     }
 
     private void OnClickSkillBtn()
     {
         NotifyViewEvent(EventConst.OnClickSkill);
+        SoundManager.Instance.PlaySharedSfx(AudioID.SfxButtonClick);
     }
 
     private void OnClickSettingBtn()
     {
         NotifyViewEvent(EventConst.OnClickGameSetting);
+        SoundManager.Instance.PlaySharedSfx(AudioID.SfxButtonClick);
     }
 
     public override void Dispose()

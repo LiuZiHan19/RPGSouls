@@ -79,7 +79,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u6682\u505C"
+  m_Text: Pause
 --- !u!114 &5419051561015383514
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -481,7 +481,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u5B58\u50A8\u6E38\u620F"
+  m_Text: Save Game
 --- !u!114 &5358034426141813148
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -600,7 +600,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u7EE7\u7EED\u6E38\u620F"
+  m_Text: Continue
 --- !u!114 &1034121797613229918
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -794,7 +794,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u8FD4\u56DE\u5927\u5385"
+  m_Text: Return to Lobby
 --- !u!114 &8892607985494409593
 MonoBehaviour:
   m_ObjectHideFlags: 0

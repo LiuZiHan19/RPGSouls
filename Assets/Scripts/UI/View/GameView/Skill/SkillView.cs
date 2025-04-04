@@ -12,6 +12,7 @@ public class SkillView : UIBehaviour
     public SkillView(IDataProvider dataProvider)
     {
         _dataProvider = dataProvider;
+        EventSubscriber.OnCoinChange += RefreshCoin;
     }
 
     protected override void ParseComponent()
@@ -36,21 +37,9 @@ public class SkillView : UIBehaviour
     public override void Show()
     {
         base.Show();
-        if (SkillManager.Instance.SkillRoll.isUnlocked)
-        {
-            _skill_RollView.Unlock();
-        }
-
-        if (SkillManager.Instance.SkillClone.isUnlocked)
-        {
-            _skill_CloneView.Unlock();
-        }
-
-        if (SkillManager.Instance.SkillIdleBlock.isUnlocked)
-        {
-            _skill_IdleBlockView.Unlock();
-        }
-
+        _skill_RollView.SetUnlock(SkillManager.Instance.SkillRoll.isUnlocked);
+        _skill_CloneView.SetUnlock(SkillManager.Instance.SkillClone.isUnlocked);
+        _skill_IdleBlockView.SetUnlock(SkillManager.Instance.SkillIdleBlock.isUnlocked);
         RefreshCoin();
     }
 
@@ -62,12 +51,14 @@ public class SkillView : UIBehaviour
     private void OnClickCloseBtn()
     {
         TimeManager.Instance.ResumeTime();
+        SoundManager.Instance.PlaySharedSfx(AudioID.SfxButtonClick);
         Hide();
     }
 
     protected override void RemoveEvent()
     {
         base.RemoveEvent();
+        EventSubscriber.OnCoinChange -= RefreshCoin;
         EventSubscriber.OnCoinChange -= RefreshCoin;
         UnRegisterButtonEvent(_closeBtn, OnClickCloseBtn);
     }

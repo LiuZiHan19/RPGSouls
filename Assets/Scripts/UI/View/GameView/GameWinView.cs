@@ -31,16 +31,19 @@ public class GameWinView : UIBehaviour
     {
         Hide();
         EventSubscriber.FromGameSceneToMenuScene?.Invoke();
+        SoundManager.Instance.PlaySharedSfx(AudioID.SfxButtonClick);
     }
 
     private void OnClickPlayAgainBtn()
     {
         EventSubscriber.ReloadGameScene?.Invoke();
+        SoundManager.Instance.PlaySharedSfx(AudioID.SfxButtonClick);
     }
 
     private void OnClickSaveBtn()
     {
         _dataProvider.SaveGameData();
+        SoundManager.Instance.PlaySharedSfx(AudioID.SfxButtonClick);
         GameManager.Instance.ReloadData = true;
     }
 

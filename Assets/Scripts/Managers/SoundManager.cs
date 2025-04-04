@@ -87,8 +87,7 @@ public class SoundManager : MonoBehaviour
         m_bgmHolder.name = audioID.ToString();
 #endif
         AudioSource audioSource = m_bgmHolder.AddComponent<AudioSource>();
-        audioSource.clip = GameResources.Instance.AudioDataManifest.audioDataList.Find(x => x.AudioID == audioID)
-            .audioClip;
+        audioSource.clip = DataManager.Instance.LoadAudioData(audioID).audioClip;
         audioSource.loop = isLoop;
         audioSource.volume = m_musicVolume;
         audioSource.Play();
@@ -97,11 +96,12 @@ public class SoundManager : MonoBehaviour
         id = m_bgmID;
     }
 
-    public void PlaySfx(AudioID audioID, ref ulong id, bool isLoop = false)
+    public void PlaySfx(AudioID audioID, ref ulong id, bool isLoop = false, float volume = 1)
     {
         if (m_sfxDict.ContainsKey(id))
         {
             m_sfxDict[id].loop = isLoop;
+            m_sfxDict[id].volume = volume;
             m_sfxDict[id].Play();
             return;
         }
@@ -113,9 +113,9 @@ public class SoundManager : MonoBehaviour
 #endif
         DontDestroyOnLoad(sfxHolder);
         AudioSource audioSource = sfxHolder.AddComponent<AudioSource>();
-        audioSource.clip = GameResources.Instance.AudioDataManifest.audioDataList.Find(x => x.AudioID == audioID)
-            .audioClip;
+        audioSource.clip = DataManager.Instance.LoadAudioData(audioID).audioClip;
         audioSource.loop = isLoop;
+        audioSource.volume = volume;
         audioSource.volume = m_sfxVolume;
         audioSource.Play();
         m_sfxID++;
@@ -159,24 +159,85 @@ public class SoundManager : MonoBehaviour
 
         m_sfxDict[id].Stop();
     }
+
+    private ulong m_sfxSword1;
+    private ulong m_sfxSword2;
+    private ulong m_sfxSword3;
+    private ulong m_sfxSword4;
+    private ulong m_sfxSword5;
+
+    public void PlaySwordSfx()
+    {
+        int number = Random.Range(1, 6);
+        switch (number)
+        {
+            case 1:
+                PlaySfx(AudioID.SfxSword1, ref m_sfxSword1, false, 0.5f);
+                break;
+            case 2:
+                PlaySfx(AudioID.SfxSword2, ref m_sfxSword2, false, 0.5f);
+                break;
+            case 3:
+                PlaySfx(AudioID.SfxSword3, ref m_sfxSword3, false, 0.5f);
+                break;
+            case 4:
+                PlaySfx(AudioID.SfxSword4, ref m_sfxSword4, false, 0.5f);
+                break;
+            case 5:
+                PlaySfx(AudioID.SfxSword5, ref m_sfxSword5, false, 0.5f);
+                break;
+        }
+    }
+
+    private ulong m_sfxFlesh1;
+    private ulong m_sfxFlesh2;
+    private ulong m_sfxFlesh3;
+
+    public void PlaySwordFleshSfx()
+    {
+        int number = Random.Range(1, 4);
+        switch (number)
+        {
+            case 1:
+                PlaySfx(AudioID.SfxFlesh1, ref m_sfxFlesh1);
+                break;
+            case 2:
+                PlaySfx(AudioID.SfxFlesh2, ref m_sfxFlesh2);
+                break;
+            case 3:
+                PlaySfx(AudioID.SfxFlesh3, ref m_sfxFlesh3);
+                break;
+        }
+    }
 }
 
 public enum AudioID
 {
-    MenuBGM,
-    GameBGM,
-    BossBGM,
-    AttackSfx1,
-    AttackSfx2,
-    AttackSfx3,
-    EvilVoiceSfx,
-    PlayerSelfDeathSfx,
-    PlayerStepSfx,
-    PlayerDeathSfx,
-    TeleportSfx,
-    OrcAttackSfx,
-    GrimRepearDeathSfx,
-    SkillUnlockSfx,
-    ButtonHoverSfx,
-    ButtonClickSfx
+    BGMMenu,
+    BGMGame,
+    BGMBoss,
+
+    SfxSword1,
+    SfxSword2,
+    SfxSword3,
+    SfxSword4,
+    SfxSword5,
+
+    SfxPlayerSelfDeath,
+    SfxGrassStep,
+    SfxPlayerDeath,
+
+    SfxTeleport,
+
+    SfxOrcRoar,
+    SfxGrimRepearDeath,
+    SfxGrimReaperVoice,
+
+    SfxUnlockSkill,
+    SfxEquip,
+    SfxButtonClick,
+
+    SfxFlesh1,
+    SfxFlesh2,
+    SfxFlesh3,
 }

@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 217a927b7abf49fd8143137340971a2a, type: 3}
   m_Name: Skill_Roll
   m_EditorClassIdentifier: 
-  SkillID: 0
-  price: 50
+  id: 2891df01-1185-4822-9811-a75ef5fc2153
+  price: 150
+  skillID: 0
   unlockCondition: 

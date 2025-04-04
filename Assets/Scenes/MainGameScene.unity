@@ -21397,6 +21397,30 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 332360610201723896, guid: e8cb30ad2aac0ff4ca57a6fef43b8f1e, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 1.56
+      objectReference: {fileID: 0}
+    - target: {fileID: 959392307979914859, guid: e8cb30ad2aac0ff4ca57a6fef43b8f1e, type: 3}
+      propertyPath: m_Offset.y
+      value: 0.03
+      objectReference: {fileID: 0}
+    - target: {fileID: 969043892736729624, guid: e8cb30ad2aac0ff4ca57a6fef43b8f1e, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.28
+      objectReference: {fileID: 0}
+    - target: {fileID: 3255177712388472812, guid: e8cb30ad2aac0ff4ca57a6fef43b8f1e, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.38
+      objectReference: {fileID: 0}
+    - target: {fileID: 3872442155681136903, guid: e8cb30ad2aac0ff4ca57a6fef43b8f1e, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -1.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 3962645678221160584, guid: e8cb30ad2aac0ff4ca57a6fef43b8f1e, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -1.51
+      objectReference: {fileID: 0}
     - target: {fileID: 4001555494028963339, guid: e8cb30ad2aac0ff4ca57a6fef43b8f1e, type: 3}
       propertyPath: m_Name
       value: Enemy_Light Orc
@@ -21407,7 +21431,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8112482508467555511, guid: e8cb30ad2aac0ff4ca57a6fef43b8f1e, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.21
+      value: 1.05
       objectReference: {fileID: 0}
     - target: {fileID: 8112482508467555511, guid: e8cb30ad2aac0ff4ca57a6fef43b8f1e, type: 3}
       propertyPath: m_LocalPosition.z
@@ -21440,6 +21464,10 @@ PrefabInstance:
     - target: {fileID: 8112482508467555511, guid: e8cb30ad2aac0ff4ca57a6fef43b8f1e, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8664066492361525999, guid: e8cb30ad2aac0ff4ca57a6fef43b8f1e, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

@@ -41,12 +41,21 @@ public class MainMenuView : UIBehaviour
             case "English":
                 _languageDropdown.value = 1;
                 break;
+            case "Chinese (Traditional)":
+                _languageDropdown.value = 2;
+                break;
+            case "Japanese":
+                _languageDropdown.value = 3;
+                break;
+            case "Korean":
+                _languageDropdown.value = 4;
+                break;
         }
     }
 
     private void OnClickExitBtn()
     {
-        SoundManager.Instance.PlaySharedSfx(AudioID.ButtonClickSfx);
+        SoundManager.Instance.PlaySharedSfx(AudioID.SfxButtonClick);
         GameManager.Instance.Dispose();
         Application.Quit();
     }
@@ -54,16 +63,16 @@ public class MainMenuView : UIBehaviour
     private void OnClickPlayBtn()
     {
         EventSubscriber.FromMenuSceneToGameScene?.Invoke();
-        SoundManager.Instance.PlaySharedSfx(AudioID.ButtonClickSfx);
+        SoundManager.Instance.PlaySharedSfx(AudioID.SfxButtonClick);
     }
 
     private void OnClickSettingBtn()
     {
         NotifyViewEvent(EventConst.OnClickMenuSetting);
-        SoundManager.Instance.PlaySharedSfx(AudioID.ButtonClickSfx);
+        SoundManager.Instance.PlaySharedSfx(AudioID.SfxButtonClick);
     }
 
-    public void OnSelectValueChanged(int index)
+    private void OnSelectValueChanged(int index)
     {
         switch (index)
         {
@@ -72,6 +81,15 @@ public class MainMenuView : UIBehaviour
                 break;
             case 1:
                 LocalizationManager.CurrentLanguage = "English";
+                break;
+            case 2:
+                LocalizationManager.CurrentLanguage = "Chinese (Traditional)";
+                break;
+            case 3:
+                LocalizationManager.CurrentLanguage = "Japanese";
+                break;
+            case 4:
+                LocalizationManager.CurrentLanguage = "Korean";
                 break;
         }
     }

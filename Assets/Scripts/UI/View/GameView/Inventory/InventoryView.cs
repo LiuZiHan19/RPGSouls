@@ -211,6 +211,7 @@ public class InventoryView : UIBehaviour
     private void OnClickCloseBtn()
     {
         TimeManager.Instance.ResumeTime();
+        SoundManager.Instance.PlaySharedSfx(AudioID.SfxButtonClick);
         Hide();
     }
 

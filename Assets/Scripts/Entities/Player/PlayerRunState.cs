@@ -10,7 +10,7 @@ public class PlayerRunState : PlayerGroundState
     public override void Enter()
     {
         base.Enter();
-        SoundManager.Instance.PlaySfx(AudioID.PlayerStepSfx, ref _runSfx, true);
+        SoundManager.Instance.PlaySfx(AudioID.SfxGrassStep, ref _runSfx, true);
     }
 
     public override void Update()

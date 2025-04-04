@@ -33,11 +33,8 @@ public class Player : Entity
     private Vector2 _input = new Vector2();
     private Vector2 _move = new Vector2();
     private Vector2 _jump = new Vector2();
-    private ulong _attackSfx1;
-    private ulong _attackSfx2;
-    private ulong _attackSfx3;
     private ulong _deathSfx;
-    private ulong _selfDeadthSfx;
+    private ulong _selfDeathSfx;
 
     protected override void Awake()
     {
@@ -130,28 +127,12 @@ public class Player : Entity
         }
     }
 
-    public void PlayAttackSfx()
-    {
-        switch (_attackCounter)
-        {
-            case 1:
-                SoundManager.Instance.PlaySfx(AudioID.AttackSfx1, ref _attackSfx1);
-                break;
-            case 2:
-                SoundManager.Instance.PlaySfx(AudioID.AttackSfx2, ref _attackSfx2);
-                break;
-            case 3:
-                SoundManager.Instance.PlaySfx(AudioID.AttackSfx3, ref _attackSfx3);
-                break;
-        }
-    }
-
     public override void Die()
     {
         PlayerManager.Instance.IsPlayerDead = true;
         base.Die();
-        SoundManager.Instance.PlaySfx(AudioID.PlayerDeathSfx, ref _deathSfx);
-        SoundManager.Instance.PlaySfx(AudioID.PlayerSelfDeathSfx, ref _selfDeadthSfx);
+        SoundManager.Instance.PlaySfx(AudioID.SfxPlayerDeath, ref _deathSfx);
+        SoundManager.Instance.PlaySfx(AudioID.SfxPlayerSelfDeath, ref _selfDeathSfx);
         stateMachine.ChangeState(DeathState);
         GameManager.Instance.IsGrimReaperDead = false;
     }
