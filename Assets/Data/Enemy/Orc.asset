@@ -17,7 +17,7 @@ MonoBehaviour:
     baseValue: 4000
     modifiers: 
   attackPower:
-    baseValue: 25
+    baseValue: 125
     modifiers: 
   magicPower:
     baseValue: 0

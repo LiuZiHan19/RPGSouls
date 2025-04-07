@@ -1,16 +1,29 @@
 using UnityEngine;
 
-public class PlayerManager
+public class PlayerManager : MonoBehaviour
 {
     private static PlayerManager m_instance;
-    public static PlayerManager Instance => m_instance ?? (m_instance = new PlayerManager());
+    public static PlayerManager Instance => m_instance;
 
     public Player player;
     public bool IsPlayerDead { get; set; }
 
+    private void Awake()
+    {
+        if (m_instance == null)
+        {
+            m_instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+            return;
+        }
+    }
+
     public void Initialize()
     {
-        player = GameObject.FindObjectOfType<Player>();
+        player = FindObjectOfType<Player>();
         DataManager.Instance.PlayerDataModel.ParseJSONData(UpdateByPersistentData);
     }
 

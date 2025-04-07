@@ -182,6 +182,17 @@ MonoBehaviour:
       - "\uB85C\uB529 \uC911"
       Flags: 0000000000
       Languages_Touch: []
+    - Term: Delete Game
+      TermType: 0
+      Description: 
+      Languages:
+      - Delete Game
+      - "\u5220\u9664\u6E38\u620F"
+      - "\u522A\u9664\u904A\u6232"
+      - "\u524A\u9664\u3059\u308B"
+      - "\uAC8C\uC784 \uC0AD\uC81C"
+      Flags: 0000000000
+      Languages_Touch: []
     CaseInsensitiveTerms: 0
     OnMissingTranslation: 1
     mTerm_AppName: 

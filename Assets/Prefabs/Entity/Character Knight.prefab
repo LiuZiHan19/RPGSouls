@@ -123,6 +123,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 32768
   attackPoint: {fileID: 1444514938501622063}
+  hitFxPrefab: {fileID: 541754483157454197, guid: 452d62e221508d84eb345e9f04197ebd, type: 3}
 --- !u!1 &5316396864654202074
 GameObject:
   m_ObjectHideFlags: 0
@@ -138,7 +139,7 @@ GameObject:
   - component: {fileID: 87875002659583521}
   - component: {fileID: 8803776265334262747}
   m_Layer: 10
-  m_Name: Character_Knight
+  m_Name: Character Knight
   m_TagString: player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

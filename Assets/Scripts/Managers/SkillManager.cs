@@ -19,6 +19,7 @@ public class SkillManager : MonoBehaviour
         else
         {
             Destroy(gameObject);
+            return;
         }
 
         SkillRoll = GetComponent<Skill_Roll>();

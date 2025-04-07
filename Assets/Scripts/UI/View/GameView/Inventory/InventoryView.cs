@@ -57,10 +57,10 @@ public class InventoryView : UIBehaviour
     public override void Show()
     {
         base.Show();
-        RefresView();
+        RefreshView();
     }
 
-    private void RefresView()
+    private void RefreshView()
     {
         InventoryManager inventory = InventoryManager.Instance;
 
@@ -101,17 +101,17 @@ public class InventoryView : UIBehaviour
 
     #region 装备 卸下 武器
 
-    private void Equip(InventoryItemBaseData itemSO)
+    private void Equip(InventoryItemBaseData itemData)
     {
-        switch (itemSO.itemBaseType)
+        switch (itemData.itemBaseType)
         {
             case InventoryItemBaseType.Equipment:
-                RemoveInventoryItemViewByItemSO(itemSO);
-                _weaponSlotImage.sprite = itemSO.sprite;
-                RefreshStatView();
+                RemoveInventoryItemViewByItemSO(itemData);
+                _weaponSlotImage.sprite = itemData.sprite;
+                CoroutineManager.Instance.StartWaitForFrame(RefreshStatView);
                 break;
             default:
-                Debugger.Warning($"点击了未处理的物品类型：[{itemSO.itemBaseType}]，物品名称：{itemSO.name}");
+                Debugger.Warning($"点击了未处理的物品类型：[{itemData.itemBaseType}]，物品名称：{itemData.name}");
                 break;
         }
     }

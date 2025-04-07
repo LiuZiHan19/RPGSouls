@@ -5,4 +5,5 @@ using UnityEngine;
 /// </summary>
 public class Ability : MonoBehaviour
 {
+    
 }

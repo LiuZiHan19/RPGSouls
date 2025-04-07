@@ -197,7 +197,7 @@ GameObject:
   - component: {fileID: 6695931571874647739}
   - component: {fileID: 4083189290861505916}
   m_Layer: 15
-  m_Name: Boss_Grim Reaper
+  m_Name: Boss Grim Reaper
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

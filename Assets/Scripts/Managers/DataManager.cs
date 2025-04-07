@@ -3,7 +3,7 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class DataManager : MonoBehaviour
+public class DataManager : MonoBehaviour, IDataProvider
 {
     private static DataManager instance;
     public static DataManager Instance => instance;
@@ -24,6 +24,31 @@ public class DataManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+    }
+
+    public void SetJSONData()
+    {
+        PlayerDataModel.SetJSONData(PlayerDataModel.GetJSONData());
+        InventoryDataModel.SetJSONData(InventoryDataModel.GetJSONData());
+        SkillDataModel.SetJSONData(SkillDataModel.GetJSONData());
+    }
+
+    public int Coin
+    {
+        get => GameDataModel.coin;
+        set => GameDataModel.coin = value;
+    }
+
+    public float SoundVolume
+    {
+        get => GameDataModel.soundVolume;
+        set => GameDataModel.soundVolume = value;
+    }
+
+    public float MusicVolume
+    {
+        get => GameDataModel.musicVolume;
+        set => GameDataModel.musicVolume = value;
     }
 
     public void SaveGameData(UnityAction callback = null)
@@ -48,7 +73,38 @@ public class DataManager : MonoBehaviour
         GameDataModel.Save();
     }
 
-    public void LoadData(UnityAction callback = null)
+    public void ClearJSONData()
+    {
+        SkillDataModel.SetJSONData(null);
+        InventoryDataModel.SetJSONData(null);
+        PlayerDataModel.SetJSONData(null);
+        GameDataModel.coin = 0;
+    }
+
+    public void DeleteJSONFile()
+    {
+        string playerDataPath = Application.persistentDataPath + "/" + "PlayerData" + ".json";
+        if (System.IO.File.Exists(playerDataPath))
+        {
+            System.IO.File.Delete(playerDataPath);
+        }
+
+        string inventoryDataPath = Application.persistentDataPath + "/" + "InventoryData" + ".json";
+        if (System.IO.File.Exists(inventoryDataPath))
+        {
+            System.IO.File.Delete(inventoryDataPath);
+        }
+
+        string skillDataPath = Application.persistentDataPath + "/" + "SkillData" + ".json";
+        if (System.IO.File.Exists(skillDataPath))
+        {
+            System.IO.File.Delete(skillDataPath);
+        }
+
+        GameDataModel.DeleteCoin();
+    }
+
+    public void LoadGameData(UnityAction callback = null)
     {
         LoadPlayerData(() =>
         {
@@ -81,7 +137,7 @@ public class DataManager : MonoBehaviour
 
     public void SavePlayerData(UnityAction callback = null)
     {
-        JSONManager.Instance.SaveJsonDataAsync(PlayerDataModel.GetJSONData().ToJson(), "PlayerData", callback);
+        JSONManager.Instance.SaveJsonDataAsync(PlayerDataModel.JSONData.ToJson(), "PlayerData", callback);
     }
 
     public void LoadInventoryData(UnityAction callback = null)
@@ -95,7 +151,7 @@ public class DataManager : MonoBehaviour
 
     public void SaveInventoryData(UnityAction callback = null)
     {
-        JSONManager.Instance.SaveJsonDataAsync(InventoryDataModel.GetJSONData().ToJson(), "InventoryData", callback);
+        JSONManager.Instance.SaveJsonDataAsync(InventoryDataModel.JSONData.ToJson(), "InventoryData", callback);
     }
 
     public void LoadSkillData(UnityAction callback = null)
@@ -109,7 +165,7 @@ public class DataManager : MonoBehaviour
 
     public void SaveSkillData(UnityAction callback = null)
     {
-        JSONManager.Instance.SaveJsonDataAsync(SkillDataModel.GetJSONData().ToJson(), "SkillData", callback);
+        JSONManager.Instance.SaveJsonDataAsync(SkillDataModel.JSONData.ToJson(), "SkillData", callback);
     }
 
     public SkillData LoadSkillData(SkillID skillID)

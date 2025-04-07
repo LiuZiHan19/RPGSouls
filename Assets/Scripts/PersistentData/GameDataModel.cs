@@ -31,4 +31,9 @@ public class GameDataModel
     {
         coin = PlayerPrefs.GetInt("Coin", 0);
     }
+
+    public void DeleteCoin()
+    {
+        PlayerPrefs.SetInt("Coin", 0);
+    }
 }

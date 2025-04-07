@@ -713,7 +713,7 @@ GameObject:
   - component: {fileID: 959392307979914859}
   - component: {fileID: 8609709173662749660}
   m_Layer: 15
-  m_Name: Enemy_Light Orc
+  m_Name: Enemy Light Orc
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

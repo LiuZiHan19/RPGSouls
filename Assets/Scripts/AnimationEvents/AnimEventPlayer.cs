@@ -5,6 +5,9 @@ public class AnimEventPlayer : EntityAnimationEvent
 {
     public LayerMask attackLayer;
     public Transform attackPoint;
+
+    [SerializeField] private GameObject hitFxPrefab;
+
     private Player _player;
     private ObjectPool<GameObject> _hitFxPool = new ObjectPool<GameObject>();
     private WaitForSeconds _waitForSeconds = new WaitForSeconds(0.44f);
@@ -59,7 +62,7 @@ public class AnimEventPlayer : EntityAnimationEvent
         GameObject hitFx = _hitFxPool.Get();
         if (hitFx == null)
         {
-            hitFx = ResourceLoader.Instance.LoadObjFromResources("HitFX");
+            hitFx = Instantiate(hitFxPrefab);
         }
 
         hitFx.transform.rotation = Mathf.Approximately(_player.facingDir, 1)

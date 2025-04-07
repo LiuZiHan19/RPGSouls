@@ -81,6 +81,7 @@ public class SoundManager : MonoBehaviour
             DontDestroyOnLoad(m_bgmHolder);
 #if UNITY_EDITOR
             m_bgmHolder.transform.SetParent(m_bgmParent);
+            DontDestroyOnLoad(m_bgmParent);
 #endif
         }
 #if UNITY_EDITOR
@@ -110,6 +111,7 @@ public class SoundManager : MonoBehaviour
 #if UNITY_EDITOR
         sfxHolder.name = audioID.ToString();
         sfxHolder.transform.SetParent(m_sfxParent);
+        DontDestroyOnLoad(m_sfxParent);
 #endif
         DontDestroyOnLoad(sfxHolder);
         AudioSource audioSource = sfxHolder.AddComponent<AudioSource>();

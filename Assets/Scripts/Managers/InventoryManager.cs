@@ -24,6 +24,7 @@ public class InventoryManager : MonoBehaviour
         else
         {
             Destroy(gameObject);
+            return;
         }
 
         equipmentDict = new Dictionary<InventoryEquipmentID, InventoryItem>();
@@ -229,7 +230,8 @@ public class InventoryManager : MonoBehaviour
         InventoryDataModel inventoryDataModel = DataManager.Instance.InventoryDataModel;
         if (inventoryDataModel.currentWeaponID != null)
             currentWeaponData =
-                DataManager.Instance.LoadInventoryItemData(inventoryDataModel.currentWeaponID) as InventoryEquipmentData;
+                DataManager.Instance.LoadInventoryItemData(inventoryDataModel
+                    .currentWeaponID) as InventoryEquipmentData;
 
         var equipmentDataList = inventoryDataModel.equipmentDataList;
         for (int i = 0; i < equipmentDataList.Count; i++)

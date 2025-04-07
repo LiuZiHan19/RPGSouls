@@ -1,41 +1,13 @@
 using System;
 using UnityEngine;
-using UnityEngine.Events;
 
-public class GameManager : MonoBehaviour, IDisposable, IGrimReaperProvider, IDataProvider
+public class GameManager : MonoBehaviour, IDisposable, IGrimReaperProvider
 {
     private static GameManager instance;
     public static GameManager Instance => instance;
 
     public bool ResetPlayerHealth { get; set; }
     public bool ReloadData { get; set; }
-
-    #region IDataProvider
-
-    public int Coin
-    {
-        get => DataManager.Instance.GameDataModel.coin;
-        set => DataManager.Instance.GameDataModel.coin = value;
-    }
-
-    public float SoundVolume
-    {
-        get => DataManager.Instance.GameDataModel.soundVolume;
-        set => DataManager.Instance.GameDataModel.soundVolume = value;
-    }
-
-    public float MusicVolume
-    {
-        get => DataManager.Instance.GameDataModel.musicVolume;
-        set => DataManager.Instance.GameDataModel.musicVolume = value;
-    }
-
-    public void SaveGameData(UnityAction callback = null)
-    {
-        DataManager.Instance.SaveGameData(callback);
-    }
-
-    #endregion
 
     #region IGrimReaperProvider
 
@@ -87,7 +59,7 @@ public class GameManager : MonoBehaviour, IDisposable, IGrimReaperProvider, IDat
 #if UNITY_EDITOR
         SoundManager.Instance.InitialiseHierarchyWindow();
 #endif
-        DataManager.Instance.LoadData(() =>
+        DataManager.Instance.LoadGameData(() =>
         {
             SoundManager.Instance.PlayBGM(AudioID.BGMMenu, ref m_menuBgm);
             UIManager.Instance.CreateGameUI();
@@ -141,7 +113,7 @@ public class GameManager : MonoBehaviour, IDisposable, IGrimReaperProvider, IDat
         if (ReloadData)
         {
             ReloadData = false;
-            DataManager.Instance.LoadData(() => { LoadGameScene(); });
+            DataManager.Instance.LoadGameData(LoadGameScene);
         }
         else
         {

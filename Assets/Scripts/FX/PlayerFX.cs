@@ -61,21 +61,27 @@ public class PlayerFX : EntityFX
     {
         while (_fireFxPool.pool.Count > 0)
         {
-            Destroy(_fireFxPool.pool.Dequeue().gameObject);
+            var fx = _fireFxPool.pool.Dequeue();
+            fx.StopFxCoroutine();
+            Destroy(fx.gameObject);
         }
 
         _fireFxPool.pool.Clear();
 
         while (_iceFxPool.pool.Count > 0)
         {
-            Destroy(_iceFxPool.pool.Dequeue().gameObject);
+            var fx = _iceFxPool.pool.Dequeue();
+            fx.StopFxCoroutine();
+            Destroy(fx.gameObject);
         }
 
         _iceFxPool.pool.Clear();
 
         while (_lightingFxPool.pool.Count > 0)
         {
-            Destroy(_lightingFxPool.pool.Dequeue().gameObject);
+            var fx = _lightingFxPool.pool.Dequeue();
+            fx.StopFxCoroutine();
+            Destroy(fx.gameObject);
         }
 
         _lightingFxPool.pool.Clear();

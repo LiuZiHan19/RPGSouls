@@ -60,7 +60,7 @@ public class MainMenuViewController : UIController
     private void CreateMenuSettingView()
     {
         if (_menuSettingView != null) return;
-        _menuSettingView = new MenuSettingView(GameManager.Instance);
+        _menuSettingView = new MenuSettingView(DataManager.Instance);
         GameObject menuSetting = ResourceLoader.Instance.LoadObjFromResources("UI/MenuSettingView");
         _menuSettingView.SetDisplayObject(menuSetting);
         UIManager.Instance.SetObjectToLayer(menuSetting.transform, UILayer.Top);

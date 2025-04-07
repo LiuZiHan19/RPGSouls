@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Text;
+using I2.Loc;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -25,6 +26,7 @@ public class LoadingView : UIBehaviour
     {
         base.Show();
         _progressSlider.value = 0;
+        _progressText.GetComponent<Localize>().SetTerm("Loading");
         _currentText = _progressText.text;
         CoroutineManager.Instance.StartCoroutine(FillProgress());
     }

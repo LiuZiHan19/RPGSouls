@@ -4,7 +4,6 @@ public class GameSettingView : UIBehaviour
 {
     private Button _resumeBtn;
     private Button _returnBtn;
-    private Button _saveBtn;
     private IDataProvider _dataProvider;
 
     public GameSettingView(IDataProvider dataProvider)
@@ -16,7 +15,6 @@ public class GameSettingView : UIBehaviour
     {
         _resumeBtn = FindComponent<Button>("Middle/Resume");
         _returnBtn = FindComponent<Button>("Middle/Return");
-        _saveBtn = FindComponent<Button>("Middle/Save");
     }
 
     protected override void AddEvent()
@@ -24,12 +22,12 @@ public class GameSettingView : UIBehaviour
         base.AddEvent();
         RegisterButtonEvent(_resumeBtn, OnClickResumeBtn);
         RegisterButtonEvent(_returnBtn, OnClickReturnBtn);
-        RegisterButtonEvent(_saveBtn, OnClickSaveBtn);
     }
 
     private void OnClickReturnBtn()
     {
         Hide();
+        _dataProvider.SetJSONData();
         TimeManager.Instance.ResumeTime();
         SoundManager.Instance.PlaySharedSfx(AudioID.SfxButtonClick);
         EventSubscriber.FromGameSceneToMenuScene?.Invoke();
@@ -42,18 +40,10 @@ public class GameSettingView : UIBehaviour
         Hide();
     }
 
-    private void OnClickSaveBtn()
-    {
-        _dataProvider.SaveGameData();
-        SoundManager.Instance.PlaySharedSfx(AudioID.SfxButtonClick);
-        GameManager.Instance.ReloadData = true;
-    }
-
     protected override void RemoveEvent()
     {
         base.RemoveEvent();
         UnRegisterButtonEvent(_resumeBtn, OnClickResumeBtn);
         UnRegisterButtonEvent(_returnBtn, OnClickReturnBtn);
-        UnRegisterButtonEvent(_saveBtn, OnClickSaveBtn);
     }
 }

@@ -18,11 +18,11 @@ public class SkillView : UIBehaviour
     protected override void ParseComponent()
     {
         _closeBtn = FindComponent<Button>("Top/Button_Back");
-        _skill_RollView = new SkillItemView(GameManager.Instance, SkillID.Roll);
+        _skill_RollView = new SkillItemView(DataManager.Instance, SkillID.Roll);
         _skill_RollView.SetDisplayObject(FindGameObject("Middle/Skill_Roll"));
-        _skill_CloneView = new SkillItemView(GameManager.Instance, SkillID.Clone);
+        _skill_CloneView = new SkillItemView(DataManager.Instance, SkillID.Clone);
         _skill_CloneView.SetDisplayObject(FindGameObject("Middle/Skill_Clone"));
-        _skill_IdleBlockView = new SkillItemView(GameManager.Instance, SkillID.IdleBlock);
+        _skill_IdleBlockView = new SkillItemView(DataManager.Instance, SkillID.IdleBlock);
         _skill_IdleBlockView.SetDisplayObject(FindGameObject("Middle/Skill_IdleBlock"));
         _coinText = FindComponent<Text>("Top/TopBar/Status_All/StatusGold/Text");
         EventSubscriber.OnCoinChange += RefreshCoin;

@@ -130,7 +130,7 @@ public class MainGameViewController : UIController
     private void CreateSkillView()
     {
         if (_skillView != null) return;
-        _skillView = new SkillView(GameManager.Instance);
+        _skillView = new SkillView(DataManager.Instance);
         GameObject obj = ResourceLoader.Instance.LoadObjFromResources("UI/SkillView");
         _skillView.SetDisplayObject(obj);
         UIManager.Instance.SetObjectToLayer(obj.transform, UILayer.Middle);
@@ -155,7 +155,7 @@ public class MainGameViewController : UIController
     private void CreateGameSettingView()
     {
         if (_gameSettingView != null) return;
-        _gameSettingView = new GameSettingView(GameManager.Instance);
+        _gameSettingView = new GameSettingView(DataManager.Instance);
         GameObject obj = ResourceLoader.Instance.LoadObjFromResources("UI/GameSettingView");
         _gameSettingView.SetDisplayObject(obj);
         UIManager.Instance.SetObjectToLayer(obj.transform, UILayer.Middle);
@@ -180,7 +180,7 @@ public class MainGameViewController : UIController
     private void CreateGameWinView()
     {
         if (_gameWinView != null) return;
-        _gameWinView = new GameWinView(GameManager.Instance);
+        _gameWinView = new GameWinView(DataManager.Instance);
         GameObject obj = ResourceLoader.Instance.LoadObjFromResources("UI/GameWinView");
         _gameWinView.SetDisplayObject(obj);
         UIManager.Instance.SetObjectToLayer(obj.transform, UILayer.Middle);

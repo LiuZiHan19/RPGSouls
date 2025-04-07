@@ -16,7 +16,6 @@ public class GameWinView : UIBehaviour
     {
         _playAgainBtn = FindComponent<Button>("Middle/PlayAgain");
         _returnBtn = FindComponent<Button>("Middle/Return");
-        _saveBtn = FindComponent<Button>("Middle/Save");
     }
 
     protected override void AddEvent()
@@ -24,12 +23,12 @@ public class GameWinView : UIBehaviour
         base.AddEvent();
         RegisterButtonEvent(_playAgainBtn, OnClickPlayAgainBtn);
         RegisterButtonEvent(_returnBtn, OnClickReturnBtn);
-        RegisterButtonEvent(_saveBtn, OnClickSaveBtn);
     }
 
     private void OnClickReturnBtn()
     {
         Hide();
+        _dataProvider.SetJSONData();
         EventSubscriber.FromGameSceneToMenuScene?.Invoke();
         SoundManager.Instance.PlaySharedSfx(AudioID.SfxButtonClick);
     }
@@ -40,18 +39,10 @@ public class GameWinView : UIBehaviour
         SoundManager.Instance.PlaySharedSfx(AudioID.SfxButtonClick);
     }
 
-    private void OnClickSaveBtn()
-    {
-        _dataProvider.SaveGameData();
-        SoundManager.Instance.PlaySharedSfx(AudioID.SfxButtonClick);
-        GameManager.Instance.ReloadData = true;
-    }
-
     protected override void RemoveEvent()
     {
         base.RemoveEvent();
         UnRegisterButtonEvent(_playAgainBtn, OnClickPlayAgainBtn);
         UnRegisterButtonEvent(_returnBtn, OnClickReturnBtn);
-        UnRegisterButtonEvent(_saveBtn, OnClickSaveBtn);
     }
 }
