@@ -952,7 +952,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7738550098484418730, guid: 2efb4ee23c895419c8d88632a25e3289, type: 3}
       propertyPath: m_Text
-      value: Skill Tree
+      value: "\uC2A4\uD0AC \uD2B8\uB9AC"
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1002,7 +1002,7 @@ MonoBehaviour:
     Target: {fileID: 0}
     MethodName: 
   mGUI_ShowReferences: 0
-  mGUI_ShowTems: 1
+  mGUI_ShowTems: 0
   mGUI_ShowCallback: 0
   mLocalizeTarget: {fileID: 0}
   mLocalizeTargetName: I2.Loc.LocalizeTarget_UnityUI_Text

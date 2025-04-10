@@ -46,6 +46,11 @@ public class GameManager : MonoBehaviour, IDisposable, IGrimReaperProvider
         CreateGameWorld();
     }
 
+    private void Update()
+    {
+        HandleDebugControls();
+    }
+
     public void ClearCacheData()
     {
         DataManager.Instance.GameDataModel.ResetCoin();
@@ -156,5 +161,10 @@ public class GameManager : MonoBehaviour, IDisposable, IGrimReaperProvider
         EventSubscriber.FromMenuSceneToGameScene -= FromMenuSceneToGameScene;
         EventSubscriber.ReloadGameScene -= ReloadGameScene;
         EventSubscriber.FromGameSceneToMenuScene -= FromGameSceneToMenuScene;
+    }
+
+    private void HandleDebugControls()
+    {
+        if (!DataManager.Instance.GetGameConfigData().isDebugMode) return;
     }
 }

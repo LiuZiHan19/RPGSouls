@@ -32,8 +32,10 @@ public class GameDataModel
         coin = PlayerPrefs.GetInt("Coin", 0);
     }
 
-    public void DeleteCoin()
+    public void ResetData()
     {
         PlayerPrefs.SetInt("Coin", 0);
+        PlayerPrefs.SetFloat("SoundVolume", 1);
+        PlayerPrefs.SetFloat("MusicVolume", 1);
     }
 }

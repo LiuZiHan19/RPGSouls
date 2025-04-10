@@ -1,3 +1,4 @@
+using UnityEngine;
 using UnityEngine.UI;
 
 public class MenuSettingView : UIBehaviour
@@ -11,7 +12,7 @@ public class MenuSettingView : UIBehaviour
 
     public MenuSettingView(IDataProvider dataProvider)
     {
-         _dataProvider = dataProvider;
+        _dataProvider = dataProvider;
     }
 
     protected override void ParseComponent()
@@ -36,7 +37,7 @@ public class MenuSettingView : UIBehaviour
     private void OnClickClearBtn()
     {
         _dataProvider.ClearJSONData();
-        _dataProvider.DeleteJSONFile();
+        _dataProvider.DeleteFile();
     }
 
     private void OnClickSaveBtn()

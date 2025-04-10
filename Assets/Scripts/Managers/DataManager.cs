@@ -51,28 +51,6 @@ public class DataManager : MonoBehaviour, IDataProvider
         set => GameDataModel.musicVolume = value;
     }
 
-    public void SaveGameData(UnityAction callback = null)
-    {
-        SavePlayerData(() =>
-        {
-            Debugger.Info(
-                $"[GameDataManager] Save Player Data Successfully | Class: {GetType().Name}");
-            SaveInventoryData(() =>
-            {
-                Debugger.Info(
-                    $"[GameDataManager] Save Inventory Data Successfully | Class: {GetType().Name}");
-                SaveSkillData(() =>
-                {
-                    Debugger.Info(
-                        $"[GameDataManager] Save Skill Data Successfully | Class: {GetType().Name}");
-                    callback?.Invoke();
-                });
-            });
-        });
-
-        GameDataModel.Save();
-    }
-
     public void ClearJSONData()
     {
         SkillDataModel.SetJSONData(null);
@@ -81,8 +59,15 @@ public class DataManager : MonoBehaviour, IDataProvider
         GameDataModel.coin = 0;
     }
 
-    public void DeleteJSONFile()
+    public void DeleteFile()
     {
+        GameDataModel.ResetData();
+
+        if (Application.platform == RuntimePlatform.WebGLPlayer)
+        {
+            return;
+        }
+
         string playerDataPath = Application.persistentDataPath + "/" + "PlayerData" + ".json";
         if (System.IO.File.Exists(playerDataPath))
         {
@@ -100,12 +85,46 @@ public class DataManager : MonoBehaviour, IDataProvider
         {
             System.IO.File.Delete(skillDataPath);
         }
+    }
 
-        GameDataModel.DeleteCoin();
+    public void SaveGameData(UnityAction callback = null)
+    {
+        GameDataModel.Save();
+
+        if (Application.platform == RuntimePlatform.WebGLPlayer)
+        {
+            callback?.Invoke();
+            return;
+        }
+
+        SavePlayerData(() =>
+        {
+            Debugger.Info(
+                $"[GameDataManager] Save Player Data Successfully | Class: {GetType().Name}");
+            SaveInventoryData(() =>
+            {
+                Debugger.Info(
+                    $"[GameDataManager] Save Inventory Data Successfully | Class: {GetType().Name}");
+                SaveSkillData(() =>
+                {
+                    Debugger.Info(
+                        $"[GameDataManager] Save Skill Data Successfully | Class: {GetType().Name}");
+                    callback?.Invoke();
+                });
+            });
+        });
     }
 
     public void LoadGameData(UnityAction callback = null)
     {
+        GameDataModel.Load();
+
+        if (Application.platform == RuntimePlatform.WebGLPlayer)
+        {
+            callback?.Invoke();
+            return;
+        }
+
         LoadPlayerData(() =>
         {
             Debugger.Info(
@@ -122,8 +141,6 @@ public class DataManager : MonoBehaviour, IDataProvider
                 });
             });
         });
-
-        GameDataModel.Load();
     }
 
     public void LoadPlayerData(UnityAction callback = null)
@@ -238,5 +255,10 @@ public class DataManager : MonoBehaviour, IDataProvider
         }
 
         return enemyData;
+    }
+
+    public GameConfigData GetGameConfigData()
+    {
+        return GameResources.Instance.GameConfigData;
     }
 }

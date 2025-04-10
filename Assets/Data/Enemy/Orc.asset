@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyID: 0
   maxHealth:
-    baseValue: 4000
+    baseValue: 2000
     modifiers: 
   attackPower:
     baseValue: 125

@@ -17,8 +17,9 @@ public class MainMenuView : UIBehaviour
         _playBtn = FindComponent<Button>("Middle/Play");
         _settingBtn = FindComponent<Button>("Middle/Setting");
         _exitBtn = FindComponent<Button>("Middle/Exit");
-        _languageDropdown = FindComponent<TMP_Dropdown>("Middle/LanguageDropdown");
+        _languageDropdown = FindComponent<TMP_Dropdown>("Middle/Status/LanguageDropdown");
         _languageDropdown.onValueChanged.AddListener(OnSelectValueChanged);
+        HandleUIOnWebGL();
     }
 
     protected override void AddEvent()
@@ -32,25 +33,7 @@ public class MainMenuView : UIBehaviour
     public override void Show()
     {
         base.Show();
-        _coinText.text = DataManager.Instance.GameDataModel.coin.ToString();
-        switch (LocalizationManager.CurrentLanguage)
-        {
-            case "Chinese (Simplified)":
-                _languageDropdown.value = 0;
-                break;
-            case "English":
-                _languageDropdown.value = 1;
-                break;
-            case "Chinese (Traditional)":
-                _languageDropdown.value = 2;
-                break;
-            case "Japanese":
-                _languageDropdown.value = 3;
-                break;
-            case "Korean":
-                _languageDropdown.value = 4;
-                break;
-        }
+        SetLanguage();
     }
 
     private void OnClickExitBtn()
@@ -90,6 +73,35 @@ public class MainMenuView : UIBehaviour
                 break;
             case 4:
                 LocalizationManager.CurrentLanguage = "Korean";
+                break;
+        }
+    }
+
+    private void HandleUIOnWebGL()
+    {
+        if (Application.platform == RuntimePlatform.WebGLPlayer)
+            _exitBtn.gameObject.SetActive(false);
+    }
+
+    private void SetLanguage()
+    {
+        _coinText.text = DataManager.Instance.GameDataModel.coin.ToString();
+        switch (LocalizationManager.CurrentLanguage)
+        {
+            case "Chinese (Simplified)":
+                _languageDropdown.value = 0;
+                break;
+            case "English":
+                _languageDropdown.value = 1;
+                break;
+            case "Chinese (Traditional)":
+                _languageDropdown.value = 2;
+                break;
+            case "Japanese":
+                _languageDropdown.value = 3;
+                break;
+            case "Korean":
+                _languageDropdown.value = 4;
                 break;
         }
     }

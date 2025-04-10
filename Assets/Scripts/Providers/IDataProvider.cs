@@ -8,5 +8,5 @@ public interface IDataProvider
     public void SetJSONData();
     public void SaveGameData(UnityAction callback = null);
     public void ClearJSONData();
-    public void DeleteJSONFile();
+    public void DeleteFile();
 }

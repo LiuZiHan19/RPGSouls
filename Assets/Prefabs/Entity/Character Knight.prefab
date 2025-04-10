@@ -272,10 +272,10 @@ MonoBehaviour:
   statsType: 0
   currentHealth: 0
   maxHealth:
-    baseValue: 7000
+    baseValue: 4000
     modifiers: 
   attackPower:
-    baseValue: 100
+    baseValue: 250
     modifiers: 
   magicPower:
     baseValue: 0
