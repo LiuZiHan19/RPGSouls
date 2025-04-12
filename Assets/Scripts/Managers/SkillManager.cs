@@ -44,6 +44,9 @@ public class SkillManager : MonoBehaviour
             case SkillID.Clone:
                 skill = SkillClone;
                 break;
+            case SkillID.MagicOrb:
+                skill = SkillMagicOrb;
+                break;
             default:
                 throw new ArgumentOutOfRangeException(nameof(id), id, null);
         }
@@ -64,6 +67,9 @@ public class SkillManager : MonoBehaviour
                 break;
             case SkillID.Clone:
                 skill = SkillClone;
+                break;
+            case SkillID.MagicOrb:
+                skill = SkillMagicOrb;
                 break;
             default:
                 throw new ArgumentOutOfRangeException(nameof(id), id, null);
@@ -101,6 +107,13 @@ public class SkillManager : MonoBehaviour
                     }
 
                     break;
+                case SkillID.MagicOrb:
+                    if (SkillMagicOrb.isUnlocked == false)
+                    {
+                        return false;
+                    }
+
+                    break;
             }
         }
 
@@ -117,7 +130,28 @@ public class SkillManager : MonoBehaviour
             var skillData = DataManager.Instance.LoadSkillData(itemDataModel.id);
             Skill skill = GetSKill(skillData.skillID);
             skill.isUnlocked = itemDataModel.isUnlocked;
-            skill.price = skillData.price;
+        }
+
+        var skillDataManifest = GameResources.Instance.SkillDataManifest.SkillDataList;
+        for (int i = 0; i < skillDataManifest.Count; i++)
+        {
+            switch (skillDataManifest[i].skillID)
+            {
+                case SkillID.Roll:
+                    SkillRoll.price = skillDataManifest[i].price;
+                    break;
+                case SkillID.IdleBlock:
+                    SkillIdleBlock.price = skillDataManifest[i].price;
+                    break;
+                case SkillID.Clone:
+                    SkillClone.price = skillDataManifest[i].price;
+                    break;
+                case SkillID.MagicOrb:
+                    SkillMagicOrb.price = skillDataManifest[i].price;
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
         }
     }
 }

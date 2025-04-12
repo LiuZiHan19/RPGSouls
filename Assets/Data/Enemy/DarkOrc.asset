@@ -10,14 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1ae9bb57c4e444dc8883c65d85cb6ce0, type: 3}
-  m_Name: Orc
+  m_Name: DarkOrc
   m_EditorClassIdentifier: 
-  enemyID: 0
+  enemyID: 1
+  coin: 600
   maxHealth:
-    baseValue: 2000
+    baseValue: 4000
     modifiers: 
   attackPower:
-    baseValue: 125
+    baseValue: 150
     modifiers: 
   magicPower:
     baseValue: 0
@@ -29,22 +30,22 @@ MonoBehaviour:
     baseValue: 5
     modifiers: 
   agility:
-    baseValue: 2
+    baseValue: 0
     modifiers: 
   intelligence:
-    baseValue: 2
+    baseValue: 0
     modifiers: 
   strength:
-    baseValue: 2
+    baseValue: 0
     modifiers: 
   vitality:
-    baseValue: 2
+    baseValue: 0
     modifiers: 
   criticalPower:
-    baseValue: 2
+    baseValue: 0
     modifiers: 
   criticalChance:
-    baseValue: 2
+    baseValue: 0
     modifiers: 
   evasion:
     baseValue: 0

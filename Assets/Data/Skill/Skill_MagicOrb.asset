@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 217a927b7abf49fd8143137340971a2a, type: 3}
-  m_Name: Skill_Clone
+  m_Name: Skill_MagicOrb
   m_EditorClassIdentifier: 
-  id: 36117b23-e024-42f4-942c-406fa01f3a72
-  price: 150
-  skillID: 2
-  unlockCondition: 0000000001000000
+  id: d92b0f08-4ba2-47c1-aba4-b0cb9e088c6c
+  price: 200
+  skillID: 3
+  unlockCondition: 000000000100000002000000

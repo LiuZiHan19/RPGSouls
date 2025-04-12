@@ -4,7 +4,7 @@ using UnityEngine;
 /// 游戏全局配置文件（ScriptableObject 数据容器）
 /// 功能：集中管理游戏版本、构建类型、难度等核心参数
 /// </summary>
-[CreateAssetMenu(fileName = "GameConfigData", menuName = "Scriptable Object/GameConfigData")]
+[CreateAssetMenu(fileName = "GameConfigData", menuName = "Database/GameConfigData")]
 public class GameConfigData : ScriptableObject
 {
     [Header("Version Settings")] 

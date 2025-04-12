@@ -79,7 +79,7 @@ public class MainMenuView : UIBehaviour
 
     private void HandleUIOnWebGL()
     {
-        if (Application.platform == RuntimePlatform.WebGLPlayer)
+        if (UnityHelper.IsWebGL())
             _exitBtn.gameObject.SetActive(false);
     }
 

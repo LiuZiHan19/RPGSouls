@@ -14693,6 +14693,120 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   teleportPosition1: {fileID: 647922047}
   teleportPosition2: {fileID: 203752554}
+--- !u!1001 &950588546
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 6479412119921697841, guid: 83714386b790d4725b56627a827be494, type: 3}
+      propertyPath: m_Name
+      value: Enemy_Dark Orc
+      objectReference: {fileID: 0}
+    - target: {fileID: 8340735384590173780, guid: 83714386b790d4725b56627a827be494, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 21.17
+      objectReference: {fileID: 0}
+    - target: {fileID: 8340735384590173780, guid: 83714386b790d4725b56627a827be494, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -5.02
+      objectReference: {fileID: 0}
+    - target: {fileID: 8340735384590173780, guid: 83714386b790d4725b56627a827be494, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8340735384590173780, guid: 83714386b790d4725b56627a827be494, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8340735384590173780, guid: 83714386b790d4725b56627a827be494, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8340735384590173780, guid: 83714386b790d4725b56627a827be494, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8340735384590173780, guid: 83714386b790d4725b56627a827be494, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8340735384590173780, guid: 83714386b790d4725b56627a827be494, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8340735384590173780, guid: 83714386b790d4725b56627a827be494, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8340735384590173780, guid: 83714386b790d4725b56627a827be494, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 83714386b790d4725b56627a827be494, type: 3}
+--- !u!1001 &989129393
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 6479412119921697841, guid: 83714386b790d4725b56627a827be494, type: 3}
+      propertyPath: m_Name
+      value: Enemy_Dark Orc (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8340735384590173780, guid: 83714386b790d4725b56627a827be494, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 29.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 8340735384590173780, guid: 83714386b790d4725b56627a827be494, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -1.92
+      objectReference: {fileID: 0}
+    - target: {fileID: 8340735384590173780, guid: 83714386b790d4725b56627a827be494, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8340735384590173780, guid: 83714386b790d4725b56627a827be494, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8340735384590173780, guid: 83714386b790d4725b56627a827be494, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8340735384590173780, guid: 83714386b790d4725b56627a827be494, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8340735384590173780, guid: 83714386b790d4725b56627a827be494, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8340735384590173780, guid: 83714386b790d4725b56627a827be494, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8340735384590173780, guid: 83714386b790d4725b56627a827be494, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8340735384590173780, guid: 83714386b790d4725b56627a827be494, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 83714386b790d4725b56627a827be494, type: 3}
 --- !u!1 &1007959682
 GameObject:
   m_ObjectHideFlags: 0
@@ -21106,13 +21220,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   price: 0
   isUnlocked: 0
-  cooldown: 0
+  cooldown: 10
   cooldownTimer: 0
   magicOrbPrefab: {fileID: 4811177537217749416, guid: e04e61cfca9ad47c3b1a733eaad9835f, type: 3}
-  orbitSpeed: 360
-  orbitRadius: 2
-  duration: 7.5
   amount: 5
+  generateInterval: 0.2
+  atkCooldown: 0.4
+  orbitSpeed: 360
+  orbitRadius: 3
+  duration: 3
 --- !u!1 &2129733019
 GameObject:
   m_ObjectHideFlags: 0
@@ -21442,30 +21558,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 332360610201723896, guid: e8cb30ad2aac0ff4ca57a6fef43b8f1e, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 1.56
-      objectReference: {fileID: 0}
-    - target: {fileID: 959392307979914859, guid: e8cb30ad2aac0ff4ca57a6fef43b8f1e, type: 3}
-      propertyPath: m_Offset.y
-      value: 0.03
-      objectReference: {fileID: 0}
-    - target: {fileID: 969043892736729624, guid: e8cb30ad2aac0ff4ca57a6fef43b8f1e, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.28
-      objectReference: {fileID: 0}
-    - target: {fileID: 3255177712388472812, guid: e8cb30ad2aac0ff4ca57a6fef43b8f1e, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.38
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872442155681136903, guid: e8cb30ad2aac0ff4ca57a6fef43b8f1e, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -1.25
-      objectReference: {fileID: 0}
-    - target: {fileID: 3962645678221160584, guid: e8cb30ad2aac0ff4ca57a6fef43b8f1e, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -1.51
-      objectReference: {fileID: 0}
     - target: {fileID: 4001555494028963339, guid: e8cb30ad2aac0ff4ca57a6fef43b8f1e, type: 3}
       propertyPath: m_Name
       value: Enemy_Light Orc
@@ -21509,10 +21601,6 @@ PrefabInstance:
     - target: {fileID: 8112482508467555511, guid: e8cb30ad2aac0ff4ca57a6fef43b8f1e, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8664066492361525999, guid: e8cb30ad2aac0ff4ca57a6fef43b8f1e, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -24783,4 +24871,6 @@ SceneRoots:
   - {fileID: 1149962038}
   - {fileID: 1776546436}
   - {fileID: 2248598057240488025}
+  - {fileID: 950588546}
+  - {fileID: 989129393}
   - {fileID: 1377553336}

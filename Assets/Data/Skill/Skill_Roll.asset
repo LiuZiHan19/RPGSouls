@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Skill_Roll
   m_EditorClassIdentifier: 
   id: 2891df01-1185-4822-9811-a75ef5fc2153
-  price: 150
+  price: 50
   skillID: 0
   unlockCondition: 

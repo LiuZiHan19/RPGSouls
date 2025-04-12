@@ -1,7 +1,7 @@
 using UnityEditor;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "InventoryEquipmentData", menuName = "Scriptable Object/Inventory/InventoryEquipmentData")]
+[CreateAssetMenu(fileName = "InventoryEquipmentData", menuName = "Database/Inventory/InventoryEquipmentData")]
 public class InventoryEquipmentData : InventoryItemStatData
 {
     public InventoryEquipmentID equipmentID;

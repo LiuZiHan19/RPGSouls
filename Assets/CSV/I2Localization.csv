@@ -15,5 +15,7 @@ Skill Tree,Skill Tree,技能树,技能樹,スキルツリー,스킬 트리
 Player,Player,玩家,玩家,プレイヤー,플레이어
 Loading,Loading,加载中,載入中,ロード中,로딩 중
 Delete Game,Delete Game,删除游戏,刪除遊戲,削除する,게임 삭제
-,,,,,
-,,,,,
+ExclusiveFullScreen,ExclusiveFullScreen,独占式全屏,,,
+FullScreenWindow,FullScreenWindow,无边框全屏,,,
+MaximizedWindow,MaximizedWindow,最大化窗口,,,
+Windowed,Windowed,窗口化模式,,,

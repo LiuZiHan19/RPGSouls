@@ -1,7 +1,7 @@
 using UnityEditor;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "AudioData", menuName = "Scriptable Object/Audio/AudioData")]
+[CreateAssetMenu(fileName = "AudioData", menuName = "Database/Audio/AudioData")]
 public class AudioData : ScriptableObject
 {
     public AudioID audioID;

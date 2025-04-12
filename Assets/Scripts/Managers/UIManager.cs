@@ -14,6 +14,7 @@ public class UIManager
     private MainMenuViewController _mainMenuViewController;
     private MainGameViewController _mainGameViewController;
     private LoadingView _loadingView;
+    private NoticeBoardView _noticeBoardView;
 
     public void CreateGameUI()
     {
@@ -81,6 +82,30 @@ public class UIManager
         GameObject loadingViewObj = ResourceLoader.Instance.LoadObjFromResources("UI/LoadingView");
         _loadingView.SetDisplayObject(loadingViewObj);
         SetObjectToLayer(loadingViewObj.transform, UILayer.Top);
+    }
+
+    #endregion
+
+    #region Notice Board View
+
+    public void ShowNoticeBoardView(string notice)
+    {
+        CreateNoticeBoardView();
+        _noticeBoardView.Show();
+    }
+
+    public void HideNoticeBoardView()
+    {
+        _noticeBoardView.Hide();
+    }
+
+    private void CreateNoticeBoardView()
+    {
+        if (_noticeBoardView != null) return;
+        _noticeBoardView = new NoticeBoardView();
+        GameObject noticeView = ResourceLoader.Instance.LoadObjFromResources("UI/NoticeBoardView");
+        _noticeBoardView.SetDisplayObject(noticeView);
+        SetObjectToLayer(noticeView.transform, UILayer.Top);
     }
 
     #endregion

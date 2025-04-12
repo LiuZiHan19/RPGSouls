@@ -193,6 +193,50 @@ MonoBehaviour:
       - "\uAC8C\uC784 \uC0AD\uC81C"
       Flags: 0000000000
       Languages_Touch: []
+    - Term: ExclusiveFullScreen
+      TermType: 0
+      Description: 
+      Languages:
+      - ExclusiveFullScreen
+      - "\u72EC\u5360\u5F0F\u5168\u5C4F"
+      - 
+      - 
+      - 
+      Flags: 0000000000
+      Languages_Touch: []
+    - Term: FullScreenWindow
+      TermType: 0
+      Description: 
+      Languages:
+      - FullScreenWindow
+      - "\u65E0\u8FB9\u6846\u5168\u5C4F"
+      - 
+      - 
+      - 
+      Flags: 0000000000
+      Languages_Touch: []
+    - Term: MaximizedWindow
+      TermType: 0
+      Description: 
+      Languages:
+      - MaximizedWindow
+      - "\u6700\u5927\u5316\u7A97\u53E3"
+      - 
+      - 
+      - 
+      Flags: 0000000000
+      Languages_Touch: []
+    - Term: Windowed
+      TermType: 0
+      Description: 
+      Languages:
+      - Windowed
+      - "\u7A97\u53E3\u5316\u6A21\u5F0F"
+      - 
+      - 
+      - 
+      Flags: 0000000000
+      Languages_Touch: []
     CaseInsensitiveTerms: 0
     OnMissingTranslation: 1
     mTerm_AppName: 

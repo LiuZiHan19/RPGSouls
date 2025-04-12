@@ -6,6 +6,7 @@ public class SkillView : UIBehaviour
     private SkillItemView _skill_RollView;
     private SkillItemView _skill_CloneView;
     private SkillItemView _skill_IdleBlockView;
+    private SkillItemView _skill_MagicOrbView;
     private Text _coinText;
     private IDataProvider _dataProvider;
 
@@ -24,6 +25,8 @@ public class SkillView : UIBehaviour
         _skill_CloneView.SetDisplayObject(FindGameObject("Middle/Skill_Clone"));
         _skill_IdleBlockView = new SkillItemView(DataManager.Instance, SkillID.IdleBlock);
         _skill_IdleBlockView.SetDisplayObject(FindGameObject("Middle/Skill_IdleBlock"));
+        _skill_MagicOrbView = new SkillItemView(DataManager.Instance, SkillID.MagicOrb);
+        _skill_MagicOrbView.SetDisplayObject(FindGameObject("Middle/Skill_MagicOrb"));
         _coinText = FindComponent<Text>("Top/TopBar/Status_All/StatusGold/Text");
         EventSubscriber.OnCoinChange += RefreshCoin;
     }
@@ -40,6 +43,7 @@ public class SkillView : UIBehaviour
         _skill_RollView.SetUnlock(SkillManager.Instance.SkillRoll.isUnlocked);
         _skill_CloneView.SetUnlock(SkillManager.Instance.SkillClone.isUnlocked);
         _skill_IdleBlockView.SetUnlock(SkillManager.Instance.SkillIdleBlock.isUnlocked);
+        _skill_MagicOrbView.SetUnlock(SkillManager.Instance.SkillMagicOrb.isUnlocked);
         RefreshCoin();
     }
 

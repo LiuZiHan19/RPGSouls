@@ -30,12 +30,13 @@ public class Enemy : Entity
         healthBar = transform.Find("World_Health_Bar").GetComponent<WorldHealthBar>();
         entityStats.takeDamageCallback += healthBar.UpdateHealthBar;
 
-        RefreshStats();
+        UpdateByEnemyData();
     }
 
-    private void RefreshStats()
+    private void UpdateByEnemyData()
     {
         EnemyData enemyData = DataManager.Instance.LoadEnemyData(enemyID);
+        coin = enemyData.coin;
         entityStats.maxHealth = enemyData.maxHealth;
         entityStats.currentHealth = entityStats.maxHealth.GetValue();
         entityStats.attackPower = enemyData.attackPower;
@@ -128,6 +129,7 @@ public class Enemy : Entity
 
 public enum EnemyID
 {
-    Orc,
+    LightOrc,
+    DarkOrc,
     GrimReaper
 }

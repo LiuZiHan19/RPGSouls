@@ -67,6 +67,16 @@ public class Player : Entity
         _input.y = Input.GetAxisRaw("Vertical");
 
         UpdateAttackTimer();
+
+        CheckAndReleaseMagicOrbSkill();
+    }
+
+    private void CheckAndReleaseMagicOrbSkill()
+    {
+        if (Input.GetKeyDown(KeyCode.G) && skill.SkillMagicOrb.CanRelease() && skill.SkillMagicOrb.isUnlocked)
+        {
+            skill.SkillMagicOrb.Release();
+        }
     }
 
     #region Attack

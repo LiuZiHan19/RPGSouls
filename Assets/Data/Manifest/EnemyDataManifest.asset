@@ -13,5 +13,6 @@ MonoBehaviour:
   m_Name: EnemyDataManifest
   m_EditorClassIdentifier: 
   enemyDataList:
-  - {fileID: 11400000, guid: 50032c3f67509e84898d82e4e6b87e9a, type: 2}
+  - {fileID: 11400000, guid: aff9bcc625fc844a081a5022895770f0, type: 2}
   - {fileID: 11400000, guid: e573d74954feb8b4dacf8be184dc75ca, type: 2}
+  - {fileID: 11400000, guid: 50032c3f67509e84898d82e4e6b87e9a, type: 2}

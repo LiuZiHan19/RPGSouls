@@ -2,5 +2,6 @@ public enum SkillID
 {
     Roll,
     IdleBlock,
-    Clone
+    Clone,
+    MagicOrb
 }

@@ -150,7 +150,7 @@ public class GameManager : MonoBehaviour, IDisposable, IGrimReaperProvider
         {
             SoundManager.Instance.StopBGM(m_bossBgm);
             SoundManager.Instance.PlayBGM(AudioID.BGMGame, ref m_gameBgm);
-            SoundManager.Instance.StopSfx(m_evilVoiceSfx); // todo null ref
+            SoundManager.Instance.StopSfx(m_evilVoiceSfx);
             if (m_grimReaper != null && IsGrimReaperDead == false)
                 m_grimReaper.stateMachine.ChangeState(m_grimReaper.IdleState);
         }

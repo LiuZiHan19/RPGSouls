@@ -47,6 +47,9 @@ public class SkillItemView : UIBehaviour
             case SkillID.Clone:
                 skill = SkillManager.Instance.SkillClone;
                 break;
+            case SkillID.MagicOrb:
+                skill = SkillManager.Instance.SkillMagicOrb;
+                break;
             default:
                 throw new ArgumentOutOfRangeException();
         }

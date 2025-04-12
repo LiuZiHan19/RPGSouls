@@ -63,7 +63,7 @@ public class DataManager : MonoBehaviour, IDataProvider
     {
         GameDataModel.ResetData();
 
-        if (Application.platform == RuntimePlatform.WebGLPlayer)
+        if (UnityHelper.IsWebGL())
         {
             return;
         }
@@ -91,7 +91,7 @@ public class DataManager : MonoBehaviour, IDataProvider
     {
         GameDataModel.Save();
 
-        if (Application.platform == RuntimePlatform.WebGLPlayer)
+        if (UnityHelper.IsWebGL())
         {
             callback?.Invoke();
             return;
@@ -119,7 +119,7 @@ public class DataManager : MonoBehaviour, IDataProvider
     {
         GameDataModel.Load();
 
-        if (Application.platform == RuntimePlatform.WebGLPlayer)
+        if (UnityHelper.IsWebGL())
         {
             callback?.Invoke();
             return;
@@ -154,6 +154,14 @@ public class DataManager : MonoBehaviour, IDataProvider
 
     public void SavePlayerData(UnityAction callback = null)
     {
+        if (PlayerDataModel.JSONData == null)
+        {
+            callback?.Invoke();
+            Debugger.Warning(
+                "PlayerDataModel.JSONData is null. Please check if the JSON file is loaded correctly or if the data model is initialized.");
+            return;
+        }
+
         JSONManager.Instance.SaveJsonDataAsync(PlayerDataModel.JSONData.ToJson(), "PlayerData", callback);
     }
 
@@ -168,6 +176,14 @@ public class DataManager : MonoBehaviour, IDataProvider
 
     public void SaveInventoryData(UnityAction callback = null)
     {
+        if (InventoryDataModel.JSONData == null)
+        {
+            callback?.Invoke();
+            Debugger.Warning(
+                "InventoryDataModel.JSONData is null. Please check if the JSON file is loaded correctly or if the data model is initialized.");
+            return;
+        }
+
         JSONManager.Instance.SaveJsonDataAsync(InventoryDataModel.JSONData.ToJson(), "InventoryData", callback);
     }
 
@@ -182,6 +198,14 @@ public class DataManager : MonoBehaviour, IDataProvider
 
     public void SaveSkillData(UnityAction callback = null)
     {
+        if (SkillDataModel.JSONData == null)
+        {
+            callback?.Invoke();
+            Debugger.Warning(
+                "SkillDataModel.JSONData is null. Please check if the JSON file is loaded correctly or if the data model is initialized.");
+            return;
+        }
+
         JSONManager.Instance.SaveJsonDataAsync(SkillDataModel.JSONData.ToJson(), "SkillData", callback);
     }
 

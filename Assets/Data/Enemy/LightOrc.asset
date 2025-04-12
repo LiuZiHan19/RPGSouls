@@ -10,52 +10,52 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1ae9bb57c4e444dc8883c65d85cb6ce0, type: 3}
-  m_Name: GrimReaper
+  m_Name: LightOrc
   m_EditorClassIdentifier: 
-  enemyID: 2
-  coin: 1999
+  enemyID: 0
+  coin: 400
   maxHealth:
-    baseValue: 10000
+    baseValue: 2000
     modifiers: 
   attackPower:
-    baseValue: 25
+    baseValue: 125
     modifiers: 
   magicPower:
-    baseValue: 25
+    baseValue: 0
     modifiers: 
   armor:
-    baseValue: 10
+    baseValue: 5
     modifiers: 
   magicResistance:
-    baseValue: 10
+    baseValue: 5
     modifiers: 
   agility:
-    baseValue: 0
+    baseValue: 2
     modifiers: 
   intelligence:
-    baseValue: 0
+    baseValue: 2
     modifiers: 
   strength:
-    baseValue: 0
+    baseValue: 2
     modifiers: 
   vitality:
-    baseValue: 0
+    baseValue: 2
     modifiers: 
   criticalPower:
-    baseValue: 0
+    baseValue: 2
     modifiers: 
   criticalChance:
-    baseValue: 0
+    baseValue: 2
     modifiers: 
   evasion:
-    baseValue: 25
+    baseValue: 0
     modifiers: 
   lighting:
-    baseValue: 25
+    baseValue: 0
     modifiers: 
   chill:
-    baseValue: 25
+    baseValue: 0
     modifiers: 
   ignite:
-    baseValue: 25
+    baseValue: 0
     modifiers: 

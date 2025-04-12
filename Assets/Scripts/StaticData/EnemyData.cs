@@ -1,10 +1,13 @@
 using UnityEditor;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "EnemyData", menuName = "Scriptable Object/Enemy/EnemyData")]
+[CreateAssetMenu(fileName = "EnemyData", menuName = "Database/Enemy/EnemyData")]
 public class EnemyData : ScriptableObject
 {
     public EnemyID enemyID;
+
+    public int coin;
+    
     [Header("Shared")] public Stat maxHealth;
     public Stat attackPower;
     public Stat magicPower;

@@ -159,7 +159,7 @@ public class SoundManager : MonoBehaviour
             return;
         }
 
-        m_sfxDict[id].Stop();
+        m_sfxDict[id]?.Stop();
     }
 
     private ulong m_sfxSword1;

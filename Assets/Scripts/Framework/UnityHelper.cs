@@ -6,4 +6,9 @@ public static class UnityHelper
     {
         child.SetParent(parent, isStay);
     }
+
+    public static bool IsWebGL()
+    {
+        return Application.platform == RuntimePlatform.WebGLPlayer;
+    }
 }

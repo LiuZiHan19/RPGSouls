@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6328983813115910518}
   - component: {fileID: 448335070879568273}
+  - component: {fileID: 8315268485981738298}
   m_Layer: 0
   m_Name: Magic Orb
   m_TagString: Untagged
@@ -47,6 +48,41 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   orbitSpeed: 360
   orbitRadius: 2
+--- !u!58 &8315268485981738298
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4811177537217749416}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 6
 --- !u!1 &6846571265106770421
 GameObject:
   m_ObjectHideFlags: 0
