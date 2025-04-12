@@ -35,6 +35,7 @@ public class GameWinView : UIBehaviour
 
     private void OnClickPlayAgainBtn()
     {
+        Hide();
         EventSubscriber.ReloadGameScene?.Invoke();
         SoundManager.Instance.PlaySharedSfx(AudioID.SfxButtonClick);
     }
