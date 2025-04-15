@@ -90,6 +90,7 @@ public class MainGameViewController : UIController
     private void ShowDeadView()
     {
         CreateDeadView();
+        _gameWinView?.Hide();
         _deadView.Show();
     }
 
