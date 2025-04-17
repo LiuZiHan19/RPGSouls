@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
@@ -37,8 +38,14 @@ public class ElementAttackFX : MonoBehaviour
     private IEnumerator WaitForSet()
     {
         yield return new WaitForSeconds(waitForSetTime);
-        _animator.SetBool("Fx", false);
+        _animator?.SetBool("Fx", false);
         callback?.Invoke(this);
         _coroutine = null;
+    }
+
+    private void OnDestroy()
+    {
+        if (_coroutine != null)
+            StopCoroutine(_coroutine);
     }
 }

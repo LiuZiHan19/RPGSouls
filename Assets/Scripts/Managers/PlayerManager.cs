@@ -32,7 +32,7 @@ public class PlayerManager : MonoBehaviour
         if (GameManager.Instance.ResetPlayerHealth)
         {
             GameManager.Instance.ResetPlayerHealth = false;
-            player.playerStats.currentHealth = 200;
+            player.playerStats.currentHealth = GameResources.Instance.CharacterData.maxHealth;
             EventSubscriber.OnPlayerHealthChange?.Invoke(1);
         }
         else

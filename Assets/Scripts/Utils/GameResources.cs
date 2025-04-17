@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.Serialization;
 
 public class GameResources : MonoBehaviour
 {
@@ -24,4 +23,5 @@ public class GameResources : MonoBehaviour
     [Header("Skill")] public SkillDataManifest SkillDataManifest;
     [Header("Enemy")] public EnemyDataManifest EnemyDataManifest;
     [Header("Game Config")] public GameConfigData GameConfigData;
+    [Header("Character Data")] public CharacterData CharacterData;
 }

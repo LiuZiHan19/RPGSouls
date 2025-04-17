@@ -49,3 +49,4 @@ MonoBehaviour:
   SkillDataManifest: {fileID: 11400000, guid: 534c2f8b5c30f46609a5b91b1c4abafe, type: 2}
   EnemyDataManifest: {fileID: 11400000, guid: ac408844e70904841b80cd04110e74b5, type: 2}
   GameConfigData: {fileID: 11400000, guid: 48ea4571ceabed347bac38a20f08f1a8, type: 2}
+  CharacterData: {fileID: 11400000, guid: 4735919c1c0e81443ac18c84ab5af77d, type: 2}
