@@ -138,6 +138,7 @@ GameObject:
   - component: {fileID: 6415397159839206981}
   - component: {fileID: 87875002659583521}
   - component: {fileID: 8803776265334262747}
+  - component: {fileID: -5599679858433753404}
   m_Layer: 10
   m_Name: Character Knight
   m_TagString: player
@@ -336,6 +337,59 @@ MonoBehaviour:
   fireFxPrefab: {fileID: 5704432894850068444, guid: 3bf76cbebd88551458ce9913bc1956c4, type: 3}
   iceFxPrefab: {fileID: 6749142080594411639, guid: 0408e5421100d36469d15c0e08db86b4, type: 3}
   lightingFxPrefab: {fileID: 1184944266205169312, guid: 513582240ead77d4da0534f9f30eaa2b, type: 3}
+--- !u!114 &-5599679858433753404
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5316396864654202074}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 180ecf9b41d478f468eb3e9083753217, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ImpulseDefinition:
+    m_ImpulseChannel: 1
+    m_ImpulseShape: 2
+    m_CustomImpulseShape:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    m_ImpulseDuration: 0.1
+    m_ImpulseType: 0
+    m_DissipationRate: 0.25
+    m_RawSignal: {fileID: 0}
+    m_AmplitudeGain: 1
+    m_FrequencyGain: 1
+    m_RepeatMode: 0
+    m_Randomize: 1
+    m_TimeEnvelope:
+      m_AttackShape:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      m_DecayShape:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      m_AttackTime: 0
+      m_SustainTime: 0.2
+      m_DecayTime: 0.7
+      m_ScaleWithImpact: 1
+      m_HoldForever: 0
+    m_ImpactRadius: 100
+    m_DirectionMode: 0
+    m_DissipationMode: 2
+    m_DissipationDistance: 100
+    m_PropagationSpeed: 343
+  m_DefaultVelocity: {x: -0.1, y: -0.1, z: 0}
 --- !u!1 &6887327075725101876
 GameObject:
   m_ObjectHideFlags: 0

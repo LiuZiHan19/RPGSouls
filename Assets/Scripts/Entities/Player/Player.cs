@@ -1,3 +1,4 @@
+using Cinemachine;
 using UnityEngine;
 
 public class Player : Entity
@@ -27,6 +28,8 @@ public class Player : Entity
 
     private Rigidbody2D _rb;
     private ColliderChecker _groundedChecker;
+    private CinemachineImpulseSource _cinemachineImpulseSource;
+    public CinemachineImpulseSource CinemachineImpulseSource => _cinemachineImpulseSource;
 
     private int _attackCounter = 0;
     private float _attackTimer = 0;
@@ -41,6 +44,7 @@ public class Player : Entity
         base.Awake();
         _rb = GetComponent<Rigidbody2D>();
         _groundedChecker = GetComponentInChildren<ColliderChecker>();
+        _cinemachineImpulseSource = GetComponent<CinemachineImpulseSource>();
 
         IdleState = new PlayerIdleState(stateMachine, "Idle", this);
         RunState = new PlayerRunState(stateMachine, "Run", this);

@@ -49,6 +49,7 @@ public class AnimEventPlayer : EntityAnimationEvent
             Entity target = cd.GetComponent<Entity>();
             if (target == null) continue;
 
+            _player.CinemachineImpulseSource.GenerateImpulse();
             PlayHitVFX(target);
 
             SoundManager.Instance.PlaySwordFleshSfx();
