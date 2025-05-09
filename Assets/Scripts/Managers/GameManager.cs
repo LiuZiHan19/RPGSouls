@@ -51,13 +51,6 @@ public class GameManager : MonoBehaviour, IDisposable, IGrimReaperProvider
         HandleDebugControls();
     }
 
-    public void ClearCacheData()
-    {
-        DataManager.Instance.GameDataModel.ResetCoin();
-        InventoryManager.Instance.UpdateByPersistentData();
-        SkillManager.Instance.UpdateByPersistentData();
-        PlayerManager.Instance.UpdateByPersistentData();
-    }
 
     private void CreateGameWorld()
     {

@@ -59,6 +59,15 @@ public class DataManager : MonoBehaviour, IDataProvider
         GameDataModel.coin = 0;
     }
 
+    public void ClearCacheData()
+    {
+        GameDataModel.ResetCoin();
+        ClearJSONData();
+        InventoryManager.Instance.UpdateByPersistentData();
+        SkillManager.Instance.UpdateByPersistentData();
+        PlayerManager.Instance.UpdateByPersistentData();
+    }
+
     public void DeleteFile()
     {
         GameDataModel.ResetData();

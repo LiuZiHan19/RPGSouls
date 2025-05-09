@@ -28,6 +28,7 @@ public class MainMenuView : UIBehaviour
         RegisterButtonEvent(_playBtn, OnClickPlayBtn);
         RegisterButtonEvent(_settingBtn, OnClickSettingBtn);
         RegisterButtonEvent(_exitBtn, OnClickExitBtn);
+        EventSubscriber.OnDeleteGameData += RefreshCoin;
     }
 
     public override void Show()
@@ -85,7 +86,7 @@ public class MainMenuView : UIBehaviour
 
     private void SetLanguage()
     {
-        _coinText.text = DataManager.Instance.GameDataModel.coin.ToString();
+        RefreshCoin();
         switch (LocalizationManager.CurrentLanguage)
         {
             case "Chinese (Simplified)":
@@ -106,9 +107,15 @@ public class MainMenuView : UIBehaviour
         }
     }
 
+    private void RefreshCoin()
+    {
+        _coinText.text = DataManager.Instance.GameDataModel.coin.ToString();
+    }
+
     protected override void RemoveEvent()
     {
         base.RemoveEvent();
+        EventSubscriber.OnDeleteGameData -= RefreshCoin;
         _languageDropdown.onValueChanged.RemoveListener(OnSelectValueChanged);
         UnRegisterButtonEvent(_playBtn, OnClickPlayBtn);
         UnRegisterButtonEvent(_settingBtn, OnClickSettingBtn);

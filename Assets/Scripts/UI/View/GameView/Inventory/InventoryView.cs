@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using UnityEngine;
 using UnityEngine.UI;
 
 public class InventoryView : UIBehaviour
@@ -22,6 +23,7 @@ public class InventoryView : UIBehaviour
     private Text _vitalityStatText;
     private Text _criticalStatText;
     private Text evasionStatText;
+    private Sprite _currentWeaponSprite;
 
     protected override void ParseComponent()
     {
@@ -44,6 +46,7 @@ public class InventoryView : UIBehaviour
         _inventoryScrollRect = FindComponent<ScrollRect>("Middle/Right_Panel/ScrollRect");
 
         _weaponSlotImage = FindComponent<Image>("Middle/Left_Panel/Character/EquipSlot_L/EquipFrameEmpty/Icon");
+        _currentWeaponSprite = _weaponSlotImage.sprite;
     }
 
     protected override void AddEvent()
@@ -67,6 +70,8 @@ public class InventoryView : UIBehaviour
         // 装备栏
         if (inventory.currentWeaponData != null)
             _weaponSlotImage.sprite = inventory.currentWeaponData.sprite;
+        else
+            _weaponSlotImage.sprite = _currentWeaponSprite;
 
         // 属性
         RefreshStatView();

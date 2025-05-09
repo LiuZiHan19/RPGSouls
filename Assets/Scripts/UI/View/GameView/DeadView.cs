@@ -21,6 +21,8 @@ public class DeadView : UIBehaviour
     private void OnClickReturnBtn()
     {
         Hide();
+        DataManager.Instance.ClearCacheData();
+        GameManager.Instance.ResetPlayerHealth = true;
         SoundManager.Instance.PlaySharedSfx(AudioID.SfxButtonClick);
         EventSubscriber.FromGameSceneToMenuScene?.Invoke();
     }
@@ -28,7 +30,7 @@ public class DeadView : UIBehaviour
     private void OnClickPlayAgainBtn()
     {
         Hide();
-        GameManager.Instance.ClearCacheData();
+        DataManager.Instance.ClearCacheData();
         SoundManager.Instance.PlaySharedSfx(AudioID.SfxButtonClick);
         GameManager.Instance.ResetPlayerHealth = true;
         EventSubscriber.ReloadGameScene?.Invoke();

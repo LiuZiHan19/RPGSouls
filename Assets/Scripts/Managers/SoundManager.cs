@@ -97,12 +97,12 @@ public class SoundManager : MonoBehaviour
         id = m_bgmID;
     }
 
-    public void PlaySfx(AudioID audioID, ref ulong id, bool isLoop = false, float volume = 1)
+    public void PlaySfx(AudioID audioID, ref ulong id, bool isLoop = false)
     {
         if (m_sfxDict.ContainsKey(id))
         {
             m_sfxDict[id].loop = isLoop;
-            m_sfxDict[id].volume = volume;
+            m_sfxDict[id].volume = m_sfxVolume;
             m_sfxDict[id].Play();
             return;
         }
@@ -117,7 +117,6 @@ public class SoundManager : MonoBehaviour
         AudioSource audioSource = sfxHolder.AddComponent<AudioSource>();
         audioSource.clip = DataManager.Instance.LoadAudioData(audioID).audioClip;
         audioSource.loop = isLoop;
-        audioSource.volume = volume;
         audioSource.volume = m_sfxVolume;
         audioSource.Play();
         m_sfxID++;
@@ -174,19 +173,19 @@ public class SoundManager : MonoBehaviour
         switch (number)
         {
             case 1:
-                PlaySfx(AudioID.SfxSword1, ref m_sfxSword1, false, 0.5f);
+                PlaySfx(AudioID.SfxSword1, ref m_sfxSword1, false);
                 break;
             case 2:
-                PlaySfx(AudioID.SfxSword2, ref m_sfxSword2, false, 0.5f);
+                PlaySfx(AudioID.SfxSword2, ref m_sfxSword2, false);
                 break;
             case 3:
-                PlaySfx(AudioID.SfxSword3, ref m_sfxSword3, false, 0.5f);
+                PlaySfx(AudioID.SfxSword3, ref m_sfxSword3, false);
                 break;
             case 4:
-                PlaySfx(AudioID.SfxSword4, ref m_sfxSword4, false, 0.5f);
+                PlaySfx(AudioID.SfxSword4, ref m_sfxSword4, false);
                 break;
             case 5:
-                PlaySfx(AudioID.SfxSword5, ref m_sfxSword5, false, 0.5f);
+                PlaySfx(AudioID.SfxSword5, ref m_sfxSword5, false);
                 break;
         }
     }

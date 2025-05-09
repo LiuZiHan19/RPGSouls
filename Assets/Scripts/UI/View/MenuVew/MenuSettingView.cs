@@ -147,6 +147,7 @@ public class MenuSettingView : UIBehaviour
     {
         _dataProvider.ClearJSONData();
         _dataProvider.DeleteFile();
+        EventSubscriber.OnDeleteGameData?.Invoke();
     }
 
     private void OnClickSaveBtn()

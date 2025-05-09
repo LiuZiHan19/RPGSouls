@@ -15,7 +15,7 @@ MonoBehaviour:
   enemyID: 2
   coin: 1999
   maxHealth:
-    baseValue: 10000
+    baseValue: 2000
     modifiers: 
   attackPower:
     baseValue: 25

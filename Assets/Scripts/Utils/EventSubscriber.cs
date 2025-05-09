@@ -74,4 +74,10 @@ public class EventSubscriber
         get;
         set;
     }
+
+    public static Action OnDeleteGameData
+    {
+        get;
+        set;
+    }
 }

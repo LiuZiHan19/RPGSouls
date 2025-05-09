@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.Serialization;
+using UnityEngine.UI;
 
 public class InventoryManager : MonoBehaviour
 {
@@ -229,9 +231,15 @@ public class InventoryManager : MonoBehaviour
     {
         InventoryDataModel inventoryDataModel = DataManager.Instance.InventoryDataModel;
         if (inventoryDataModel.currentWeaponID != null)
+        {
             currentWeaponData =
                 DataManager.Instance.LoadInventoryItemData(inventoryDataModel
                     .currentWeaponID) as InventoryEquipmentData;
+        }
+        else
+        {
+            currentWeaponData = null;
+        }
 
         var equipmentDataList = inventoryDataModel.equipmentDataList;
         for (int i = 0; i < equipmentDataList.Count; i++)
